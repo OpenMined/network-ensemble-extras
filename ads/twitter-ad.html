@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenMined Twitter Ad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #BB86FC;
+            --primary-dark: #f2bb5d;
+            --secondary: #32d5e8;
+            --dark: #2E2B3B;
+            --darker: #17161D;
+            --light: #F3F4F6;
+            --gray: #6B7280;
+            --gray-light: #9CA3AF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .ad-container {
+            width: 1200px;
+            height: 628px;
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+        }
+
+        .ad-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-text {
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+
+        .cta {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: var(--gray-light);
+        }
+
+        .hashtags {
+            margin-top: 1rem;
+            color: var(--secondary);
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <div class="ad-content">
+            <img src="../src/assets/openmined.png" alt="OpenMined Logo" class="logo">
+            <h1 class="title">Network Sourced AI</h1>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">Stay in control of your data</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-text">Outperform centralized models</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-text">Get rewarded for contributions</div>
+                </div>
+            </div>
+            <div class="cta">Try it out: openmined.org</div>
+            <div class="hashtags">#NetworkSourcedAI #OpenSource #DistributedAI</div>
+        </div>
+    </div>
+</body>
+</html> 
