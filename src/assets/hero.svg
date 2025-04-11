@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#ffffff" rx="10" ry="10"/>
+  
+  <!-- User Layer (Top) -->
+  <rect x="350" y="30" width="100" height="60" rx="8" ry="8" fill="#e8eaf6" stroke="#3949ab" stroke-width="2"/>
+  <text x="400" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3949ab">User</text>
+  
+  <!-- User Prompt -->
+  <rect x="230" y="110" width="340" height="40" rx="20" ry="20" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="400" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#1565c0">Unified Prompt to Public + Private Models</text>
+  
+  <!-- AI Models Layer -->
+  <rect x="100" y="220" width="600" height="80" rx="8" ry="8" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+  <text x="400" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565c0">AI Models</text>
+  
+  <!-- Public Models Section -->
+  <rect x="120" y="227" width="240" height="66" rx="5" ry="5" fill="#bbdefb" stroke="#64b5f6" stroke-width="1" opacity="0.4"/>
+  <text x="240" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#0d47a1">Public Models</text>
+  
+  <!-- Private Models Section -->
+  <rect x="380" y="227" width="240" height="66" rx="5" ry="5" fill="#ffccbc" stroke="#ff8a65" stroke-width="1" opacity="0.4"/>
+  <text x="500" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#bf360c">Private Models</text>
+  
+  <!-- Public AI Model Icons -->
+  <rect x="150" y="235" width="50" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#64b5f6" stroke-width="1"/>
+  <text x="175" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#0d47a1">GPT-4</text>
+  
+  <rect x="230" y="235" width="50" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#64b5f6" stroke-width="1"/>
+  <text x="255" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#0d47a1">Claude 3</text>
+  
+  <rect x="310" y="235" width="50" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#64b5f6" stroke-width="1"/>
+  <text x="335" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#0d47a1">DALL-E</text>
+  
+  <!-- Private AI Model Icons -->
+  <rect x="390" y="235" width="50" height="50" rx="8" ry="8" fill="#ffccbc" stroke="#ff8a65" stroke-width="1"/>
+  <text x="415" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#bf360c">Custom 1</text>
+  
+  <rect x="470" y="235" width="50" height="50" rx="8" ry="8" fill="#ffccbc" stroke="#ff8a65" stroke-width="1"/>
+  <text x="495" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#bf360c">Custom 2</text>
+  
+  <rect x="550" y="235" width="50" height="50" rx="8" ry="8" fill="#ffccbc" stroke="#ff8a65" stroke-width="1"/>
+  <text x="575" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#bf360c">Custom 3</text>
+  
+  <!-- Individual Model Responses -->
+  <rect x="140" y="320" width="70" height="50" rx="5" ry="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="175" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2e7d32">Response A</text>
+  
+  <rect x="220" y="320" width="70" height="50" rx="5" ry="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="255" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2e7d32">Response B</text>
+  
+  <rect x="300" y="320" width="70" height="50" rx="5" ry="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="335" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2e7d32">Response C</text>
+  
+  <rect x="380" y="320" width="70" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="415" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ff6f00">Response D</text>
+  
+  <rect x="460" y="320" width="70" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="495" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ff6f00">Response E</text>
+  
+  <rect x="540" y="320" width="70" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="575" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ff6f00">Response F</text>
+  
+  <!-- Ensemble Layer (Bottom) -->
+  <rect x="200" y="400" width="400" height="80" rx="8" ry="8" fill="#ffecb3" stroke="#ffa000" stroke-width="2"/>
+  <text x="400" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#e65100">Ensemble / Aggregation Layer</text>
+  <text x="400" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#e65100">Combining Public + Private Models</text>
+  
+  <!-- Aggregated Response -->
+  <rect x="250" y="500" width="300" height="60" rx="8" ry="8" fill="#d1c4e9" stroke="#673ab7" stroke-width="2"/>
+  <text x="400" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4527a0">Aggregated Response</text>
+  
+  <!-- Connection Lines - Down Path -->
+  <!-- User to Prompt -->
+  <line x1="400" y1="90" x2="400" y2="110" stroke="#3949ab" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Prompt to Models (distributed requests) -->
+  <path d="M 400 150 L 400 190 L 175 190 L 175 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 400 150 L 400 190 L 255 190 L 255 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 400 150 L 400 190 L 335 190 L 335 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 400 150 L 400 190 L 415 190 L 415 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 400 150 L 400 190 L 495 190 L 495 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 400 150 L 400 190 L 575 190 L 575 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  
+  <!-- Models to Individual Responses -->
+  <line x1="175" y1="285" x2="175" y2="320" stroke="#64b5f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="255" y1="285" x2="255" y2="320" stroke="#64b5f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="335" y1="285" x2="335" y2="320" stroke="#64b5f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="415" y1="285" x2="415" y2="320" stroke="#ff8a65" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="495" y1="285" x2="495" y2="320" stroke="#ff8a65" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="575" y1="285" x2="575" y2="320" stroke="#ff8a65" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Responses to Ensemble/Aggregation Layer -->
+  <path d="M 175 370 L 175 380 L 400 380 L 400 400" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 255 370 L 255 380 L 400 380 L 400 400" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 335 370 L 335 380 L 400 380 L 400 400" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 415 370 L 415 380 L 400 380 L 400 400" stroke="#ffc107" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 495 370 L 495 380 L 400 380 L 400 400" stroke="#ffc107" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <path d="M 575 370 L 575 380 L 400 380 L 400 400" stroke="#ffc107" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  
+  <!-- Ensemble to Aggregated Response -->
+  <line x1="400" y1="480" x2="400" y2="500" stroke="#ffa000" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Back to User (completed circle) -->
+  <!-- <path d="M 400 620 C 650 620, 650 60, 450 60" stroke="#673ab7" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)" fill="none"/> -->
+  
+  <!-- Data Flow Indicators - Prompt Distribution -->
+  <circle cx="400" cy="150" r="5" fill="#1565c0">
+    <animate attributeName="cy" from="90" to="190" dur="2s" begin="0s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="2s" begin="0s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Data packets to each model -->
+  <circle cx="175" cy="210" r="4" fill="#1565c0">
+    <animate attributeName="cy" from="190" to="235" dur="1s" begin="2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="255" cy="210" r="4" fill="#1565c0">
+    <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.1s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.1s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="335" cy="210" r="4" fill="#1565c0">
+    <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.2s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="415" cy="210" r="4" fill="#1565c0">
+    <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.3s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.3s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="495" cy="210" r="4" fill="#1565c0">
+    <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.4s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.4s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="575" cy="210" r="4" fill="#1565c0">
+    <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.5s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.5s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Response packets from models -->
+  <circle cx="175" cy="290" r="4" fill="#4caf50">
+    <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.5s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.5s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="255" cy="290" r="4" fill="#4caf50">
+    <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.2s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="335" cy="290" r="4" fill="#4caf50">
+    <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.8s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.8s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="415" cy="290" r="4" fill="#ffc107">
+    <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.3s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.3s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="495" cy="290" r="4" fill="#ffc107">
+    <animate attributeName="cy" from="285" to="320" dur="1s" begin="4.1s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="4.1s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="575" cy="290" r="4" fill="#ffc107">
+    <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.6s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.6s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Aggregation data flow -->
+  <circle cx="400" cy="400" r="5" fill="#ffa000">
+    <animate attributeName="cy" from="380" to="480" dur="2s" begin="5s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="1" to="0" dur="2s" begin="5s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Return flow to user -->
+  <!-- Return arrow to user removed as requested -->
+  
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+  </defs>
+</svg>
