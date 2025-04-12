@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenMined Reddit Ad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #BB86FC;
+            --secondary: #32d5e8;
+            --dark: #2E2B3B;
+            --darker: #17161D;
+            --white: #FFFFFF;
+            --gray-light: #9CA3AF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker);
+            color: var(--white);
+        }
+
+        .ad-container {
+            width: 1200px;
+            height: 1000px;
+            background: var(--darker);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 80px;
+            font-weight: 700;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 40px;
+            color: var(--primary);
+            text-align: center;
+            max-width: 90%;
+            line-height: 1.3;
+        }
+
+        .features {
+            width: 90%;
+            margin: 40px 0 60px 0;
+        }
+
+        .feature {
+            font-size: 36px;
+            color: var(--white);
+            padding: 20px 0;
+            position: relative;
+            padding-left: 60px;
+            line-height: 1.3;
+        }
+
+        .feature::before {
+            content: '•';
+            color: var(--primary);
+            font-size: 60px;
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+
+        .cta {
+            font-size: 40px;
+            color: var(--gray-light);
+            text-align: center;
+            margin-top: 40px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .subreddits {
+            font-size: 32px;
+            color: var(--secondary);
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <div class="header">
+            <img src="../src/assets/openmined.png" alt="OpenMined Logo" class="logo">
+            <h1 class="title">[OpenMined] Network Sourced AI</h1>
+            <p class="subtitle">An open-source protocol for combining private and public models into powerful ensembles</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">Bring your local LLM, RAG or data to the network & control who can use it</div>
+            <div class="feature">Keep full ownership over your assets while collaborating</div>
+            <div class="feature">Get rewarded for contributions to the network</div>
+            <div class="feature">Outperform centralized models with distributed intelligence</div>
+        </div>
+        
+        <div class="cta">Join our early access program and help shape the future of distributed AI</div>
+        
+        <div class="subreddits">r/MachineLearning • r/OpenSource • r/SelfHosted</div>
+    </div>
+</body>
+</html> 

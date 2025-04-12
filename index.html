@@ -1,556 +1,1002 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenMined | Network Ensemble</title>
-  <link rel="stylesheet" href="./src/index.css">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenMined | Network Sourced AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #BB86FC;
+            --primary-dark: #f2bb5d;
+            --secondary: #32d5e8;
+            --dark: #2E2B3B;
+            --darker: #17161D;
+            --light: #F3F4F6;
+            --gray: #6B7280;
+            --gray-light: #9CA3AF;
+            --white: #FFFFFF;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-left h1 {
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            color: var(--gray-light);
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--primary);
+        }
+
+        .logo {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: var(--white);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass);
+            transform: translateY(-2px);
+        }
+
+        /* Protocol Section */
+        .protocol {
+            padding: 6rem 0;
+            background: var(--dark);
+        }
+
+        .protocol-content {
+            display: grid;
+            grid-template-columns: 0.8fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .protocol-image {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .protocol-subtitle {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .protocol-description {
+            font-size: 1.125rem;
+            color: var(--gray-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .protocol-description + .protocol-description {
+            margin-top: -1rem;
+        }
+
+        .protocol-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .protocol-features li {
+            color: var(--gray-light);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .protocol-features li::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 2rem 0 4rem 0;
+            background: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-image {
+            width: 100%;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin: 0;
+        }
+
+        .feature-description {
+            color: var(--gray-light);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* How to Section */
+        .how-to {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: var(--white);
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin: 0;
+        }
+
+        .step-subtitle {
+            font-size: 0.875rem;
+            color: var(--gray-light);
+            margin: 0;
+        }
+
+        .step-description {
+            color: var(--gray-light);
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+        }
+
+        .contact-content {
+            max-width: 32rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .contact-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-light);
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.5rem;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 3rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .copyright {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .features-grid,
+            .steps-grid,
+            .protocol-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-diagram {
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .hero-diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .model-node {
+            transition: opacity 0.3s ease;
+        }
+
+        .model-node:hover {
+            opacity: 1;
+        }
+
+        .protocol-hub {
+            filter: drop-shadow(0 0 10px var(--secondary));
+        }
+
+        .output-node {
+            filter: drop-shadow(0 0 15px var(--secondary));
+        }
+
+        @media (max-width: 1024px) {
+            .hero-diagram {
+                min-height: 500px;
+            }
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: var(--gray-light);
+            font-size: 0.875rem;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checkbox-label:hover {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <header class="container py-2">
-    <nav>
-      <div class="flex items-center gap-1">
-        <img src="./src/assets/openmined.png" alt="OpenMined Logo" srcset="" class="w-[4rem]">
-        <p class="text-2xl">OpenMined</p>
-      </div>
-    </nav>
-  </header>
-  <main id="main" class="bg-[#FCFCFD]">
-    <div class="bg-gradient-to-br from-[#E9E1EA] to-[#E9E1EA] text-black">
-      <div class="container mx-auto px-4 py-6 md:py-10 grid grid-cols-2 gap-3">
-        <div class="max-w-4xl mx-auto text-center">
-          <p class="text-4xl md:text-5xl font-bold mb-6">
-            Unlock top performance through dynamic ensembles of private and remote models
-          </p>
-          <p class="text-xl mb-8 text-[#2E2B3B]">
-            The co-op power grid for AI - bring your own intelligence or combine it with others’ to power the next state
-            of the art models in an open, yet controlled way.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button type="button"
-              class="shadow-lg bg-[#2E2B3B] border border-[#DEE1ED] hover:bg-white hover:text-[#2E2B3B] text-white py-3 px-6 rounded-lg font-medium transition-colors">
-              Try it out
-            </button>
-          </div>
-        </div>
-        <div>
-          <?xml version="1.0" encoding="UTF-8"?>
-          <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background -->
-            <rect width="800" height="600" fill="#ffffff" rx="10" ry="10" />
-
-            <!-- User Layer (Top) -->
-            <rect x="350" y="30" width="100" height="60" rx="8" ry="8" fill="#e8eaf6" stroke="#3949ab"
-              stroke-width="2" />
-            <text x="400" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold"
-              fill="#3949ab">User</text>
-
-            <!-- User Prompt -->
-            <rect x="230" y="110" width="340" height="40" rx="20" ry="20" fill="#e3f2fd" stroke="#1565c0"
-              stroke-width="1.5" />
-            <text x="400" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="14"
-              fill="#1565c0">Unified Prompt to Public + Private Models</text>
-
-            <!-- AI Models Layer -->
-            <rect x="65" y="220" width="600" height="80" rx="8" ry="8" fill="#e3f2fd" stroke="#2196f3"
-              stroke-width="2" />
-
-            <!-- Public Models Section -->
-            <rect x="120" y="227" width="220" height="66" rx="5" ry="5" fill="#bbdefb" stroke="#64b5f6" stroke-width="1" opacity="0.4"/>
-            <text x="255" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#0d47a1" font-weight="bold">Public Models</text>
-            
-            <!-- Private Models Section -->
-            <rect x="380" y="227" width="220" height="66" rx="5" ry="5" fill="#ffccbc" stroke="#ff8a65" stroke-width="1" opacity="0.4"/>
-            <text x="490" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#bf360c" font-weight="bold">Private Models</text>
-
-            <!-- Public AI Model Icons -->
-            <rect x="150" y="235" width="50" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#64b5f6"
-              stroke-width="1" />
-            <text x="175" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#0d47a1">GPT-4</text>
-
-            <rect x="230" y="235" width="50" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#64b5f6"
-              stroke-width="1" />
-            <text x="255" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#0d47a1">Claude 3</text>
-
-            <rect x="310" y="235" width="50" height="50" rx="8" ry="8" fill="#bbdefb" stroke="#64b5f6"
-              stroke-width="1" />
-            <text x="335" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#0d47a1">DALL-E</text>
-
-            <!-- Private AI Model Icons -->
-            <rect x="390" y="235" width="50" height="50" rx="8" ry="8" fill="#ffccbc" stroke="#ff8a65"
-              stroke-width="1" />
-            <text x="415" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#bf360c">Custom 1</text>
-
-            <rect x="470" y="235" width="50" height="50" rx="8" ry="8" fill="#ffccbc" stroke="#ff8a65"
-              stroke-width="1" />
-            <text x="495" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#bf360c">Custom 2</text>
-
-            <rect x="550" y="235" width="50" height="50" rx="8" ry="8" fill="#ffccbc" stroke="#ff8a65"
-              stroke-width="1" />
-            <text x="575" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#bf360c">Custom 3</text>
-
-            <!-- Individual Model Responses -->
-            <rect x="140" y="320" width="70" height="50" rx="5" ry="5" fill="#e8f5e9" stroke="#4caf50"
-              stroke-width="1.5" />
-            <text x="175" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#2e7d32">Response A</text>
-
-            <rect x="220" y="320" width="70" height="50" rx="5" ry="5" fill="#e8f5e9" stroke="#4caf50"
-              stroke-width="1.5" />
-            <text x="255" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#2e7d32">Response B</text>
-
-            <rect x="300" y="320" width="70" height="50" rx="5" ry="5" fill="#e8f5e9" stroke="#4caf50"
-              stroke-width="1.5" />
-            <text x="335" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#2e7d32">Response C</text>
-
-            <rect x="380" y="320" width="70" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#ffc107"
-              stroke-width="1.5" />
-            <text x="415" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#ff6f00">Response D</text>
-
-            <rect x="460" y="320" width="70" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#ffc107"
-              stroke-width="1.5" />
-            <text x="495" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#ff6f00">Response E</text>
-
-            <rect x="540" y="320" width="70" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#ffc107"
-              stroke-width="1.5" />
-            <text x="575" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12"
-              fill="#ff6f00">Response F</text>
-
-            <!-- Ensemble Layer (Bottom) -->
-            <rect x="200" y="400" width="400" height="80" rx="8" ry="8" fill="#ffecb3" stroke="#ffa000"
-              stroke-width="2" />
-            <text x="400" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold"
-              fill="#e65100">Ensemble / Aggregation Layer</text>
-            <text x="400" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="14"
-              fill="#e65100">Combining Public + Private Models</text>
-
-            <!-- Aggregated Response -->
-            <rect x="250" y="500" width="300" height="60" rx="8" ry="8" fill="#d1c4e9" stroke="#673ab7"
-              stroke-width="2" />
-            <text x="400" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold"
-              fill="#4527a0">Aggregated Response</text>
-
-            <!-- Connection Lines - Down Path -->
-            <!-- User to Prompt -->
-            <line x1="400" y1="90" x2="400" y2="110" stroke="#3949ab" stroke-width="2" marker-end="url(#arrow)" />
-
-            <!-- Prompt to Models (distributed requests) -->
-            <path d="M 400 150 L 400 190 L 175 190 L 175 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 400 150 L 400 190 L 255 190 L 255 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 400 150 L 400 190 L 335 190 L 335 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 400 150 L 400 190 L 415 190 L 415 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 400 150 L 400 190 L 495 190 L 495 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 400 150 L 400 190 L 575 190 L 575 235" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-
-            <!-- Models to Individual Responses -->
-            <line x1="175" y1="285" x2="175" y2="320" stroke="#64b5f6" stroke-width="2" marker-end="url(#arrow)" />
-            <line x1="255" y1="285" x2="255" y2="320" stroke="#64b5f6" stroke-width="2" marker-end="url(#arrow)" />
-            <line x1="335" y1="285" x2="335" y2="320" stroke="#64b5f6" stroke-width="2" marker-end="url(#arrow)" />
-            <line x1="415" y1="285" x2="415" y2="320" stroke="#ff8a65" stroke-width="2" marker-end="url(#arrow)" />
-            <line x1="495" y1="285" x2="495" y2="320" stroke="#ff8a65" stroke-width="2" marker-end="url(#arrow)" />
-            <line x1="575" y1="285" x2="575" y2="320" stroke="#ff8a65" stroke-width="2" marker-end="url(#arrow)" />
-
-            <!-- Responses to Ensemble/Aggregation Layer -->
-            <path d="M 175 370 L 175 380 L 400 380 L 400 400" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 255 370 L 255 380 L 400 380 L 400 400" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 335 370 L 335 380 L 400 380 L 400 400" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 415 370 L 415 380 L 400 380 L 400 400" stroke="#ffc107" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 495 370 L 495 380 L 400 380 L 400 400" stroke="#ffc107" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-            <path d="M 575 370 L 575 380 L 400 380 L 400 400" stroke="#ffc107" stroke-width="2" marker-end="url(#arrow)"
-              fill="none" />
-
-            <!-- Ensemble to Aggregated Response -->
-            <line x1="400" y1="480" x2="400" y2="500" stroke="#ffa000" stroke-width="2" marker-end="url(#arrow)" />
-
-            <!-- Data Flow Indicators - Prompt Distribution -->
-            <circle cx="400" cy="150" r="5" fill="#1565c0">
-              <animate attributeName="cy" from="90" to="190" dur="2s" begin="0s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="2s" begin="0s" repeatCount="indefinite" />
-            </circle>
-
-            <!-- Data packets to each model -->
-            <circle cx="175" cy="210" r="4" fill="#1565c0">
-              <animate attributeName="cy" from="190" to="235" dur="1s" begin="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="255" cy="210" r="4" fill="#1565c0">
-              <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.1s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.1s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="335" cy="210" r="4" fill="#1565c0">
-              <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.2s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="415" cy="210" r="4" fill="#1565c0">
-              <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.3s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.3s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="495" cy="210" r="4" fill="#1565c0">
-              <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.4s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.4s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="575" cy="210" r="4" fill="#1565c0">
-              <animate attributeName="cy" from="190" to="235" dur="1s" begin="2.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="2.5s" repeatCount="indefinite" />
-            </circle>
-
-            <!-- Response packets from models -->
-            <circle cx="175" cy="290" r="4" fill="#4caf50">
-              <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.5s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="255" cy="290" r="4" fill="#4caf50">
-              <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.2s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="335" cy="290" r="4" fill="#4caf50">
-              <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.8s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.8s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="415" cy="290" r="4" fill="#ffc107">
-              <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.3s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.3s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="495" cy="290" r="4" fill="#ffc107">
-              <animate attributeName="cy" from="285" to="320" dur="1s" begin="4.1s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="4.1s" repeatCount="indefinite" />
-            </circle>
-
-            <circle cx="575" cy="290" r="4" fill="#ffc107">
-              <animate attributeName="cy" from="285" to="320" dur="1s" begin="3.6s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="1s" begin="3.6s" repeatCount="indefinite" />
-            </circle>
-
-            <!-- Aggregation data flow -->
-            <circle cx="400" cy="400" r="5" fill="#ffa000">
-              <animate attributeName="cy" from="380" to="480" dur="2s" begin="5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="2s" begin="5s" repeatCount="indefinite" />
-            </circle>
-
-            <!-- Return flow to user -->
-            <!-- Return arrow to user removed as requested -->
-
-            <!-- Arrowhead definition -->
-            <defs>
-              <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#555" />
-              </marker>
-            </defs>
-          </svg>
-        </div>
-      </div>
-
-      <div class="h-16 bg-[#FCFCFD] relative">
-        <svg class="absolute -top-1 left-0 w-full" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0 48H1440V0C1440 0 1320 32 1200 32C1080 32 1020 16 900 16C780 16 720 32 600 32C480 32 420 16 300 16C180 16 120 32 0 32V48Z"
-            fill="#FCFCFD" />
-        </svg>
-      </div>
-    </div>
-
-    <div class="container mx-auto -mt-8 px-4 py-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-[#17161D] mb-12">
-        Why Choose Our Model Ensembles
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="w-12 h-12 bg-[#FCE9CF] rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="#B8520A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-[#17161D]">Superior Performance</h3>
-          <p class="text-[#464158]">Our ensembles outperform individual models by 15-30% across standard benchmarks</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="w-12 h-12 bg-[#F2D9DE] rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="#9B2737" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-              <polyline points="2 17 12 22 22 17"></polyline>
-              <polyline points="2 12 12 17 22 12"></polyline>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-[#17161D]">Ready to Deploy</h3>
-          <p class="text-[#464158]">Pre-optimized packages with one-line integration for all major ML frameworks</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="w-12 h-12 bg-[#C2DEF0] rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="#1F567A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-              <line x1="12" y1="20" x2="12" y2="20"></line>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-[#17161D]">Community Verified</h3>
-          <p class="text-[#464158]">All models undergo rigorous testing and peer reviews from our expert community</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mx-auto px-4 mb-12 relative z-10">
-      <div class="bg-white rounded-xl shadow-lg p-4">
-        <div class="flex flex-col md:flex-row items-center gap-4">
-          <div class="relative flex-grow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="#464158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="absolute left-3 top-3">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" placeholder="Search for models..."
-              class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#E9E1EA] focus:outline-none focus:ring-2 focus:ring-[#4392C5]" />
-          </div>
-          <div class="flex gap-2">
-            <button type="button" class="flex items-center gap-2 bg-[#F4F3F6] text-[#2E2B3B] py-2 px-4 rounded-lg hover:bg-[#DEE1ED] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-funnel w-4 h-4">
-                <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path>
-              </svg>
-              Filters
-            </button>
-            <button class="flex items-center gap-2 bg-[#2E2B3B] text-white py-2 px-4 rounded-lg hover:bg-[#DEE1ED] hover:text-[#2E2B3B] transition-colors" type="button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search w-4 h-4">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </svg>
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mx-auto px-4 py-12">
-      <div class="flex justify-between items-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-[#17161D]">
-          Featured Model Ensembles
-        </h2>
-        <div class="flex divide-x-1 border border-[#E9E1EA] rounded-lg overflow-hidden">
-          <button type="button" id="trendingTab" class="px-4 py-2 text-sm bg-[#4392C5] text-white" onclick="selectTab('trending')">
-            Trending
-          </button>
-          <button type="button" id="newestTab" class="px-4 py-2 text-sm bg-white text-[#464158]" onclick="selectTab('newest')">
-            Newest
-          </button>
-          <button type="button" id="topTab" class="px-4 py-2 text-sm bg-white text-[#464158]" onclick="selectTab('top')">
-            Top Rated
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="modelCards">
-      </div>
-
-      <div class="text-center mt-10">
-        <button
-          type="button"
-          class="bg-[#F4F3F6] text-[#2E2B3B] hover:bg-[#DEE1ED] py-3 px-8 rounded-lg font-medium transition-colors">
-          View All Models
-        </button>
-      </div>
-    </div>
-
-    <div class="bg-[#17161D] text-white mt-16 py-16">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div>
-            <h3 class="text-4xl font-bold mb-2 text-[#F79763]">450+</h3>
-            <p class="text-[#FCFCFD]">Pre-trained Ensembles</p>
-          </div>
-          <div>
-            <h3 class="text-4xl font-bold mb-2 text-[#53BEA9]">12K+</h3>
-            <p class="text-[#FCFCFD]">Active Developers</p>
-          </div>
-          <div>
-            <h3 class="text-4xl font-bold mb-2 text-[#6976AE]">98%</h3>
-            <p class="text-[#FCFCFD]">Deployment Success Rate</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mx-auto px-4 py-16">
-      <h2 class="text-2xl md:text-3xl font-bold text-center text-[#17161D] mb-12">
-        Success Stories
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-xl overflow-hidden shadow-md">
-          <div class="h-4 bg-gradient-to-r from-[#937098] to-[#6976AE]"></div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-[#DEE1ED] rounded-full flex items-center justify-center mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="#373B7B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="20" x2="12" y2="10"></line>
-                  <line x1="18" y1="20" x2="18" y2="4"></line>
-                  <line x1="6" y1="20" x2="6" y2="16"></line>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-[#17161D]">QuantumHealth AI</h3>
-                <p class="text-sm text-[#464158]">Medical Diagnostics</p>
-              </div>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <img src="./src/assets/openmined.png" alt="OpenMined Logo" class="logo">
+                    <h1>OpenMined</h1>
+                </div>
+                <div class="social-icons">
+                    <a href="https://slack.openmined.org" target="_blank" class="social-icon">
+                        <i class="fab fa-slack"></i>
+                    </a>
+                    <a href="https://openmined.org" target="_blank" class="social-icon">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="https://twitter.com/openminedorg" target="_blank" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
             </div>
-            <p class="text-[#464158] mb-4">
-              "The NeuroDiagnostic ensemble improved our detection accuracy by 23% while reducing false positives by
-              48%. Integration took less than a day."
-            </p>
-            <p class="text-sm text-[#2E2B3B] font-medium">Dr. Sarah Chen, CTO</p>
-          </div>
         </div>
+    </header>
 
-        <div class="bg-white rounded-xl overflow-hidden shadow-md">
-          <div class="h-4 bg-gradient-to-r from-[#F8C073] to-[#F79763]"></div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-[#FCE9CF] rounded-full flex items-center justify-center mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="#B8520A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                  <line x1="7" y1="11" x2="7" y2="7"></line>
-                  <line x1="7" y1="7" x2="17" y2="7"></line>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-[#17161D]">SecureFinance</h3>
-                <p class="text-sm text-[#464158]">Fraud Detection</p>
-              </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Unlock the world's distributed intelligence</h1>
+                        <p>An open-source protocol for combining private and public models into powerful ensembles - while keeping you in control.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'})">Try it out</button>
+                            <button class="btn btn-secondary" onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'})">Learn more</button>
+                        </div>
+                    </div>
+                        
+                </div>
             </div>
-            <p class="text-[#464158] mb-4">
-              "The TransFraud ensemble helped us identify $2.7M in potential fraud within the first month, with a 94%
-              accuracy rate."
-            </p>
-            <p class="text-sm text-[#2E2B3B] font-medium">James Wilson, Head of Security</p>
-          </div>
+        </section>
+
+        <section class="protocol">
+            <div class="container">
+                <div class="protocol-content">
+                    <div class="protocol-image">
+                        <!-- Placeholder for API/Screenshots image -->
+                        <div class="image-placeholder">
+                                <svg width="100%" height="100%" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Enhanced Output Box -->
+                                    <g transform="translate(492,-48)">
+                                        <rect width="288" height="144" rx="10" fill="var(--secondary)" opacity="0.9"/>
+                                        <text x="144" y="54" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Inter" font-size="29" font-weight="bold">Ensemble Output</text>
+                                        <text x="144" y="102" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22" opacity="0.8">Combined Intelligence</text>
+                                    </g>
+
+                                    <!-- Center Protocol Hub -->
+                                    <g class="protocol-hub">
+                                        <circle cx="600" cy="300" r="72" fill="var(--secondary)" opacity="0.9"/>
+                                        <text x="600" y="288" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22">llm-protocol</text>
+                                        <text x="600" y="324" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Inter" font-size="19">SyftBox</text>
+                                    </g>
+
+                                    <!-- ChatGPT O1 Model -->
+                                    <g class="model-node" transform="translate(144,72)">
+                                        <rect width="264" height="120" rx="10" fill="var(--primary)" opacity="0.8"/>
+                                        <g transform="translate(30,30)">
+                                            <path d="M 0 0 h 30 v 30 h -30 z" fill="var(--secondary)" opacity="0.6"/>
+                                            <path d="M 7 14 h 16 v 8 h -16 z" fill="white"/>
+                                        </g>
+                                        <text x="84" y="42" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22">ChatGPT O1</text>
+                                        <text x="84" y="78" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="19" opacity="0.7">OpenAI Infra</text>
+                                    </g>
+
+                                    <!-- Company VM Model -->
+                                    <g class="model-node" transform="translate(900,72)">
+                                        <rect width="264" height="120" rx="10" fill="var(--primary)" opacity="0.8"/>
+                                        <g transform="translate(30,30)">
+                                            <path d="M 0 0 h 30 v 30 h -30 z M 5 7 h 20 v 16 h -20 z" fill="var(--secondary)" opacity="0.6" stroke="white" stroke-width="1"/>
+                                        </g>
+                                        <text x="84" y="42" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22">Finetuned LLM</text>
+                                        <text x="84" y="78" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="19" opacity="0.7">Company VM</text>
+                                    </g>
+
+                                    <!-- Local Model -->
+                                    <g class="model-node" transform="translate(144,252)">
+                                        <rect width="264" height="120" rx="10" fill="var(--primary)" opacity="0.8"/>
+                                        <g transform="translate(30,30)">
+                                            <path d="M 0 0 h 30 v 24 h -30 z" fill="var(--secondary)" opacity="0.6"/>
+                                            <path d="M -5 24 h 40 v 4 h -40 z" fill="white"/>
+                                        </g>
+                                        <text x="84" y="42" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22">Local Model</text>
+                                        <text x="84" y="78" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="19" opacity="0.7">John's Computer</text>
+                                    </g>
+
+                                    <!-- Open Source Model -->
+                                    <g class="model-node" transform="translate(900,252)">
+                                        <rect width="264" height="120" rx="10" fill="var(--primary)" opacity="0.8"/>
+                                        <g transform="translate(30,30)">
+                                            <path d="M 0 0 h 30 v 7 h -30 z M 0 16 h 30 v 7 h -30 z" fill="white" opacity="0.8"/>
+                                            <path d="M 7 7 l 7 -7 l 7 7 M 7 23 l 7 -7 l 7 7" fill="none" stroke="var(--secondary)" stroke-width="1.8"/>
+                                        </g>
+                                        <text x="84" y="42" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22">Open Source</text>
+                                        <text x="84" y="78" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="19" opacity="0.7">Llama/Mistral</text>
+                                    </g>
+
+                                    <!-- RAG Model -->
+                                    <g class="model-node" transform="translate(528,444)">
+                                        <rect width="264" height="120" rx="10" fill="var(--primary)" opacity="0.8"/>
+                                        <g transform="translate(30,30)">
+                                            <path d="M 0 0 h 30 v 30 h -30 z M 5 7 h 20 v 16 h -20 z" fill="var(--secondary)" opacity="0.6" stroke="white" stroke-width="1"/>
+                                            <path d="M 0 0 h 10 v 24 h 10 v -24 h 10" fill="none" stroke="white" stroke-width="2.4"/>
+                                        </g>
+                                        <text x="84" y="42" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="22">RAG Model</text>
+                                        <text x="84" y="78" text-anchor="start" dominant-baseline="middle" fill="white" font-family="Inter" font-size="19" opacity="0.7">Company VM</text>
+                                    </g>
+
+                                    <!-- Connection Lines to Protocol -->
+                                    <path d="M360 126 L600 300" stroke="var(--secondary)" stroke-width="2.4" opacity="0.6">
+                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite"/>
+                                    </path>
+                                    <path d="M900 126 L600 300" stroke="var(--secondary)" stroke-width="2.4" opacity="0.6">
+                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+                                    </path>
+                                    <path d="M360 306 L600 300" stroke="var(--secondary)" stroke-width="2.4" opacity="0.6">
+                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+                                    </path>
+                                    <path d="M900 306 L600 300" stroke="var(--secondary)" stroke-width="2.4" opacity="0.6">
+                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" begin="1.8s"/>
+                                    </path>
+                                    <path d="M630 444 L600 300" stroke="var(--secondary)" stroke-width="2.4" opacity="0.6">
+                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" begin="2.4s"/>
+                                    </path>
+
+                                    <!-- Connection Line from Protocol to Enhanced Output -->
+                                    <path d="M600 228 L624 0" stroke="var(--secondary)" stroke-width="3.6" opacity="0.8">
+                                        <animate attributeName="stroke-dasharray" values="6,6" dur="0.5s" repeatCount="indefinite"/>
+                                    </path>
+
+                                    <!-- Flow Particles to Protocol -->
+                                    <circle class="particle" r="6" fill="var(--secondary)">
+                                        <animateMotion path="M360 126 L600 300" dur="2s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle class="particle" r="6" fill="var(--secondary)">
+                                        <animateMotion path="M900 126 L600 300" dur="2s" repeatCount="indefinite" begin="0.4s"/>
+                                    </circle>
+                                    <circle class="particle" r="6" fill="var(--secondary)">
+                                        <animateMotion path="M360 306 L600 300" dur="2s" repeatCount="indefinite" begin="0.8s"/>
+                                    </circle>
+                                    <circle class="particle" r="6" fill="var(--secondary)">
+                                        <animateMotion path="M900 306 L600 300" dur="2s" repeatCount="indefinite" begin="1.2s"/>
+                                    </circle>
+                                    <circle class="particle" r="6" fill="var(--secondary)">
+                                        <animateMotion path="M630 444 L600 300" dur="2s" repeatCount="indefinite" begin="1.6s"/>
+                                    </circle>
+
+                                    <!-- Flow Particles to Enhanced Output -->
+                                    <circle class="particle" r="7.2" fill="var(--secondary)">
+                                        <animateMotion path="M600 228 L624 0" dur="1.5s" repeatCount="indefinite" begin="2s"/>
+                                    </circle>
+                                    <circle class="particle" r="7.2" fill="var(--secondary)">
+                                        <animateMotion path="M600 228 L624 0" dur="1.5s" repeatCount="indefinite" begin="2.5s"/>
+                                    </circle>
+                                </svg>
+                        </div>
+                    </div>
+                    <div class="protocol-text">
+                        <h2 class="protocol-subtitle">The protocol for Network Sourced AI</h2>
+                        <p class="protocol-description">
+                            Most of the world's intelligence is locked away—in private datasets, proprietary models, local envs, and individual expertise. Centralizing it isn't just hard — it doesn't scale. Intelligence is inherently distributed, and thus, developing AI must be collaborative.
+                        </p>
+                        <br>
+                        <p class="protocol-description">
+                            This open-source protocol makes it simple to combine all of these models into powerful, permissioned ensembles.
+                        </p>
+
+                        <p class="protocol-description">
+                            It respects ownership, rewards contributions, and enables scale without sacrificing control.
+                        </p>
+                        <p>
+                            <a href="https://github.com/OpenMined/llm-protocol" onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'}); return false;">Learn more about the protocol</a>
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <!-- <h2 class="section-title">Key Features & Capabilities</h2> -->
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-image">
+                            <svg width="100%" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="var(--glass)" rx="8"/>
+                                
+                                <!-- Access Control Header -->
+                                <text x="20" y="35" fill="var(--white)" font-family="Inter" font-size="16" font-weight="600">Access Control</text>
+                                
+                                <!-- General Access Dropdown -->
+                                <g transform="translate(20, 50)">
+                                    <rect width="360" height="36" rx="6" fill="var(--glass)" stroke="var(--glass-border)"/>
+                                    <text x="16" y="23" fill="var(--gray-light)" font-family="Inter" font-size="13">General access</text>
+                                    <text x="340" y="23" fill="var(--gray-light)" font-family="Inter" font-size="13">▼</text>
+                                    <text x="120" y="23" fill="var(--white)" font-family="Inter" font-size="13">Restricted</text>
+                                </g>
+
+                                <!-- Add Users Search -->
+                                <g transform="translate(20, 95)">
+                                    <rect width="360" height="36" rx="6" fill="var(--glass)" stroke="var(--glass-border)"/>
+                                    <text x="40" y="23" fill="var(--gray-light)" font-family="Inter" font-size="13">Add users</text>
+                                    <path d="M16 18 h6 v6 h6 v-6 h6 v6 h-6 v6 h-6 v-6 h-6 z" fill="var(--gray-light)"/>
+                                </g>
+
+                                <!-- User Entry 1 -->
+                                <g transform="translate(20, 140)">
+                                    <rect width="360" height="32" rx="6" fill="var(--glass)" stroke="var(--glass-border)"/>
+                                    <circle cx="20" cy="16" r="10" fill="var(--primary)"/>
+                                    <text x="20" y="20" fill="var(--white)" font-family="Inter" font-size="13" text-anchor="middle">J</text>
+                                    <text x="45" y="20" fill="var(--white)" font-family="Inter" font-size="13">john.doe@company.com</text>
+                                    <text x="240" y="20" fill="var(--white)" font-family="Inter" font-size="13">Query Access</text>
+                                    <text x="340" y="20" fill="var(--gray-light)" font-family="Inter" font-size="13">▼</text>
+                                </g>
+
+                                <!-- User Entry 2 -->
+                                <g transform="translate(20, 175)">
+                                    <rect width="360" height="32" rx="6" fill="var(--glass)" stroke="var(--glass-border)" opacity="0.6"/>
+                                    <circle cx="20" cy="16" r="10" fill="var(--primary)"/>
+                                    <text x="20" y="20" fill="var(--white)" font-family="Inter" font-size="13" text-anchor="middle">S</text>
+                                    <text x="45" y="20" fill="var(--white)" font-family="Inter" font-size="13">sarah@startup.io</text>
+                                    <text x="240" y="20" fill="var(--white)" font-family="Inter" font-size="13">View only</text>
+                                    <text x="340" y="20" fill="var(--gray-light)" font-family="Inter" font-size="13">▼</text>
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Stay in control</h3>
+                        <p class="feature-description">Bring your local LLM, RAG or data to the network & control who can see or use it. You keep full ownership over your assets.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image">
+                            <svg width="100%" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="var(--glass)" rx="8"/>
+                                
+                                <!-- Chart Title -->
+                                <text x="20" y="35" fill="var(--white)" font-family="Inter" font-size="16" font-weight="600">MMLU Benchmark Score</text>
+
+                                <!-- Bar Chart -->
+                                <g transform="translate(20, 60)">
+                                    <!-- DeepSeek v3 -->
+                                    <rect x="0" y="0" width="360" height="24" rx="4" fill="var(--glass)" opacity="0.3"/>
+                                    <rect x="0" y="0" width="306" height="24" rx="4" fill="var(--primary)" opacity="0.6"/>
+                                    <text x="10" y="16" fill="var(--white)" font-family="Inter" font-size="13">DeepSeek v3</text>
+                                    <text x="340" y="16" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="13">85.2%</text>
+
+                                    <!-- ChatGPT O1 -->
+                                    <rect x="0" y="34" width="360" height="24" rx="4" fill="var(--glass)" opacity="0.3"/>
+                                    <rect x="0" y="34" width="299" height="24" rx="4" fill="var(--primary)" opacity="0.6"/>
+                                    <text x="10" y="50" fill="var(--white)" font-family="Inter" font-size="13">ChatGPT O1</text>
+                                    <text x="340" y="50" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="13">83.1%</text>
+
+                                    <!-- Grok -->
+                                    <rect x="0" y="68" width="360" height="24" rx="4" fill="var(--glass)" opacity="0.3"/>
+                                    <rect x="0" y="68" width="293" height="24" rx="4" fill="var(--primary)" opacity="0.6"/>
+                                    <text x="10" y="84" fill="var(--white)" font-family="Inter" font-size="13">Grok</text>
+                                    <text x="340" y="84" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="13">81.5%</text>
+
+                                    <!-- Private LLM -->
+                                    <rect x="0" y="100" width="360" height="24" rx="4" fill="var(--glass)" opacity="0.3"/>
+                                    <rect x="0" y="100" width="299" height="24" rx="4" fill="var(--primary)" opacity="0.6"/><text x="10" y="116" fill="var(--white)" font-family="Inter" font-size="13">Private LLM</text>
+                                    <text x="340" y="116" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="13">83.4%</text>
+
+                                   <!-- Ensemble -->
+                                    <rect x="0" y="132" width="360" height="24" rx="4" fill="var(--glass)" opacity="0.3"/>
+                                    <rect x="0" y="132" width="314" height="24" rx="4" fill="var(--secondary)" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
+                                    </rect>
+                                    <text x="10" y="150" fill="var(--white)" font-family="Inter" font-size="13" font-weight="600">Your Ensemble</text>
+                                    <text x="340" y="150" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="13" font-weight="600">85.8%</text>
+                                </g>
+
+                                <!-- Footnote -->
+                                <text x="20" y="285" fill="var(--gray-light)" font-family="Inter" font-size="11">* Results on MMLU (Massive Multitask Language Understanding) benchmark</text>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Outperform centralised models</h3>
+                        <p class="feature-description">Use our unified API Spec to easily ensemble public and private models and share it with others.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-image">
+                            <svg width="100%" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="300" fill="var(--glass)" rx="8"/>
+                                
+                                <!-- Network Stats Header -->
+                                <text x="20" y="35" fill="var(--white)" font-family="Inter" font-size="20" font-weight="600">Your Monthly Stats</text>
+
+                                <!-- Queries -->
+                                <g transform="translate(20, 70)">
+                                    <text x="0" y="0" fill="var(--gray-light)" font-family="Inter" font-size="16">Queries</text>
+                                    <text x="360" y="0" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="16" font-family="monospace">25K+</text>
+                                </g>
+
+                                <!-- Total Rewards -->
+                                <g transform="translate(20, 110)">
+                                    <text x="0" y="0" fill="var(--gray-light)" font-family="Inter" font-size="16">Total Rewards</text>
+                                    <text x="360" y="0" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="16" font-family="monospace">$2.5K+</text>
+                                </g>
+
+                                <!-- Tokens Generated -->
+                                <g transform="translate(20, 150)">
+                                    <text x="0" y="0" fill="var(--gray-light)" font-family="Inter" font-size="16">Tokens Generated</text>
+                                    <text x="360" y="0" text-anchor="end" fill="var(--white)" font-family="Inter" font-size="16" font-family="monospace">15M+</text>
+                                </g>
+
+                                <!-- Animated Gradient -->
+                                <defs>
+                                    <linearGradient id="statsGradient" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.1">
+                                            <animate attributeName="stop-opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite"/>
+                                        </stop>
+                                        <stop offset="100%" stop-color="var(--secondary)" stop-opacity="0.1">
+                                            <animate attributeName="stop-opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+                                        </stop>
+                                    </linearGradient>
+                                </defs>
+                                <rect width="400" height="300" fill="url(#statsGradient)" rx="8"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Get rewarded</h3>
+                        <p class="feature-description">Set your own pricing and control how your assets are used and compensated.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-to">
+            <div class="container">
+                <h2 class="section-title">Steps to join the network</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon" style="background: var(--primary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="step-title">Installation</h3>
+                                <p class="step-subtitle">Get Started in Minutes</p>
+                            </div>
+                        </div>
+                        <p class="step-description">Install SyftBox and llm-protocol. Initiate your first model project with our CLI helper.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon" style="background: var(--secondary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="step-title">Model Linking</h3>
+                                <p class="step-subtitle">Unified API Spec</p>
+                            </div>
+                        </div>
+                        <p class="step-description">Implement our unified API spec to link your model to the network.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon" style="background: #FF6B6B;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="step-title">Publish</h3>
+                                <p class="step-subtitle">Set Your Terms</p>
+                            </div>
+                        </div>
+                        <p class="step-description">Choose your pricing model and set access controls. </p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon" style="background: #4ECDC4;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="step-title">Build Ensemble</h3>
+                                <p class="step-subtitle">Reach SOTA</p>
+                            </div>
+                        </div>
+                        <p class="step-description">Discover and ensemble various models on the network with yours.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="contact-title">Want to try it out?</h2>
+                    <p class="contact-subtitle">Join our early access program and help shape the future of distributed AI</p>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">I am a:</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="user_type" value="data_owner">
+                                    <span>Data Owner</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="user_type" value="model_owner">
+                                    <span>Model Owner</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="user_type" value="hosting_service">
+                                    <span>Hosting Service</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="user_type" value="researcher">
+                                    <span>Researcher</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Get Early Access</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright">&copy; 2025 OpenMined. All rights reserved.</p>
+            </div>
         </div>
-      </div>
-    </div>
-
-    <div class="bg-gradient-to-r from-[#E9E1EA] to-[#563B59] py-16 mt-12">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">
-          Ready to supercharge your AI capabilities?
-        </h2>
-        <p class="text-[#17161D] text-xl mb-8 max-w-2xl mx-auto">
-          Join thousands of developers and organizations building the next generation of intelligent applications
-        </p>
-        <div class="max-w-md mx-auto mt-8">
-          <form class="bg-[#FFFFFF] p-6 rounded shadow-sm" method="POST" id="contact-form">
-            <h2 class="text-[#17161D] text-xl font-medium mb-6">Contact Information</h2>
-
-            <div class="mb-4">
-              <label for="name" class="block text-[#464158] text-left text-sm font-medium mb-2">Name</label>
-              <input type="text" id="name" name="name"
-                class="w-full p-2 border border-[#DEE1ED] rounded focus:outline-none focus:border-[#563B59]"
-                placeholder="Enter your name">
-            </div>
-
-            <div class="mb-4">
-              <label for="email" class="block text-[#464158] text-left text-sm font-medium mb-2">Email</label>
-              <input type="email" id="email" name="email"
-                class="w-full p-2 border border-[#DEE1ED] rounded focus:outline-none focus:border-[#563B59]"
-                placeholder="Enter your email">
-            </div>
-
-            <div class="mb-6">
-              <label for="location" class="block text-[#464158] text-left text-sm font-medium mb-2">Location</label>
-              <input type="text" id="location" name="location"
-                class="w-full p-2 border border-[#DEE1ED] rounded focus:outline-none focus:border-[#563B59]"
-                placeholder="Enter your location">
-            </div>
-            <button type="submit"
-              class="bg-[#2E2B3B] border border-[#C2DEF0] text-white py-3 px-8 rounded-lg font-medium hover:bg-transparent hover:text-[#2E2B3B] transition-colors">
-              Schedule a Demo
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <template id="modelCardTemplate">
-      <div
-        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-        <div class="h-3 w-full" data-gradient></div>
-        <div class="p-5 flex flex-col flex-grow">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-semibold text-lg text-[#17161D]" data-title></h3>
-            <span class="bg-[#E9E1EA] text-[#563B59] text-xs py-1 px-2 rounded-full" data-rating></span>
-          </div>
-          <p class="text-[#464158] text-sm mb-3" data-author></p>
-          <div class="flex flex-wrap gap-2 mb-4" data-tags>
-          </div>
-          <div class="mt-auto">
-            <div class="flex justify-between items-center text-sm text-[#464158]">
-              <span data-downloads></span>
-              <button class="text-[#4392C5] hover:text-[#1F567A] transition-colors">
-                Details →
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-  </main>
-
-  <footer class="container w-full bg-[#17161D] text-[#FCFCFD] pt-16 pb-8">
-    <div class="container mx-auto px-4">
-      <div class="grid justify-center items-center justify-items-center grid-cols-1 gap-2 mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">How to guide</h2>
-        <ul class="space -y-2 text-[#DEE1ED] list-decimal">
-          <li>Install SyftBox & llm-protocol: Create a model project using llm-protocol.</li>
-          <li>Wrap your model: Implement our unified API and provide model metadata</li>
-          <li>Publish: Configure control & payment</li>
-          <li>Build your ensemble:</li>
-        </ul>
-      </div>
-      <div class="border-t border-[#2E2B3B] pt-8 text-center text-[#DEE1ED] text-sm">
-        <p>&copy; 2025 Model Marketplace. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script type="module" src="./src/index.js"></script>
+    </footer>
 </body>
-
-</html>
+</html> 
