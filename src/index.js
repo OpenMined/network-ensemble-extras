@@ -1,4 +1,4 @@
-// Handle page rendering
+// Handle page rendering [Wait for the DOM to be fully loaded]
 document.addEventListener("DOMContentLoaded", function () {
   const featuredModelsData = [
     {
@@ -140,86 +140,113 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Handle form submission
-// Wait for the DOM to be fully loaded
+// Handle form submission [Wait for the DOM to be fully loaded]
 document.addEventListener("DOMContentLoaded", () => {
-  // Get the form element
-  const form = document.querySelector("form");
-
-  // Add event listener for form submission
+  const form = document.querySelector("#contact-form");
+  
   form.addEventListener("submit", async (event) => {
-    // Prevent the default form submission behavior
     event.preventDefault();
-
+    
     // Get form data
     const formData = new FormData(form);
-
-    // Convert FormData to JSON object
-    const formDataObj = Object.fromEntries(formData.entries());
-
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.textContent = "Submitting...";
+    submitButton.disabled = true;
+    
     try {
-      // Define the URL to submit to - replace with your actual endpoint
-      const submitUrl = "https://api.example.com/submit";
+      // Get the HubSpot cookie
+      const getCookie = name => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      };
 
-      // Show loading state
-      const submitButton = form.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.textContent;
-      submitButton.textContent = "Submitting...";
-      submitButton.disabled = true;
-
-      // Send the data to the server
-      const response = await fetch(submitUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const hsFields = Array.from(formData).map(([name, value]) => ({ name, value }));
+      const hsSubmissionData = {
+        fields: hsFields,
+        context: {
+          hutk: getCookie('hubspotutk'),
+          pageUri: window.location.href,
+          pageName: document.title
         },
-        body: JSON.stringify(formDataObj),
+        submittedAt: Date.now()
+      };
+
+      // Submit to HubSpot
+      const portalId = 'YOUR_PORTAL_ID';
+      const formGuid = 'YOUR_FORM_GUID';
+      const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
+      const hubspotResponse = await fetch(hubspotUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(hsSubmissionData)
       });
-
-      // Check if the request was successful
-      if (response.ok) {
-        const result = await response.json();
-
-        // Display success message
-        form.innerHTML = `
-            <div class="text-center p-4">
-              <h3 class="text-xl font-medium text-green-700 mb-2">Success!</h3>
-              <p class="text-gray-700">Thank you for your submission. We'll be in touch soon.</p>
-            </div>
-          `;
+      
+      if (hubspotResponse.ok) {
+        const result = await hubspotResponse.json();
+        const existingSuccess = document.getElementById("success-message");
+        if (existingSuccess) {
+          existingSuccess.remove();
+        }
+        const successContainer = document.createElement('div');
+        successContainer.id = "success-message";
+        successContainer.className = "mt-4";
+        const successMessage = result.inlineMessage || `
+          <div class="text-center p-4 bg-green-50 border border-green-100 rounded-lg">
+            <h3 class="text-xl font-medium text-green-700 mb-2">Success!</h3>
+            <p class="text-gray-700">Thank you for your submission. We'll be in touch soon.</p>
+          </div>
+        `;
+        successContainer.innerHTML = successMessage;
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.parentNode.insertBefore(successContainer, submitButton.nextSibling);
+        
+        // Reset the form fields but keep the success message visible
+        form.reset();
+        submitButton.textContent = originalButtonText;
+        submitButton.disabled = false;
+        
+        // Automatically dismiss the success message after 30 seconds
+        setTimeout(() => {
+          successContainer.style.transition = "opacity 1s ease-out";
+          successContainer.style.opacity = "0";
+          
+          // Remove the element after the animation completes
+          setTimeout(() => {
+            if (successContainer.parentNode) {
+              successContainer.remove();
+            }
+          }, 1000);
+        }, 3000);
       } else {
-        // Handle error response
-        throw new Error("Server responded with an error");
+        console.error('HubSpot submission failed:', await hubspotResponse.json());
+        throw new Error("HubSpot submission failed");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-
+      
       // Display error message below the form
       const errorDiv = document.createElement("div");
       errorDiv.className = "mt-4 p-3 bg-red-100 text-red-700 rounded";
-      errorDiv.textContent =
-        "There was an error submitting your request. Please try again.";
-
-      // Remove any existing error messages
+      errorDiv.textContent = "There was an error submitting your request. Please try again.";
       const existingError = form.querySelector(".bg-red-100");
       if (existingError) {
         existingError.remove();
       }
-
+      
       form.appendChild(errorDiv);
-
+      
       // Reset button state
-      const submitButton = form.querySelector('button[type="submit"]');
       submitButton.textContent = originalButtonText;
       submitButton.disabled = false;
     }
   });
-
+  
   // Optional: Add form validation
   const inputs = form.querySelectorAll("input");
   inputs.forEach((input) => {
     input.addEventListener("input", () => {
-      // Simple validation - check if required fields are filled
       if (input.hasAttribute("required") && !input.value.trim()) {
         input.classList.add("border-red-500");
       } else {
