@@ -49,6 +49,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
         }
@@ -126,6 +127,7 @@
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -565,13 +567,13 @@
                     <h1>OpenMined</h1>
                 </div>
                 <div class="social-icons">
-                    <a href="https://slack.openmined.org" target="_blank" class="social-icon">
+                    <a href="https://slack.openmined.org" title="Slack" target="_blank" rel="noopener" class="social-icon">
                         <i class="fab fa-slack"></i>
                     </a>
-                    <a href="https://openmined.org" target="_blank" class="social-icon">
+                    <a href="https://openmined.org" title="OpenMined" target="_blank" rel="noopener" class="social-icon">
                         <i class="fas fa-globe"></i>
                     </a>
-                    <a href="https://twitter.com/openminedorg" target="_blank" class="social-icon">
+                    <a href="https://twitter.com/openminedorg" title="Twitter" target="_blank" rel="noopener" class="social-icon">
                         <i class="fab fa-twitter"></i>
                     </a>
                 </div>
