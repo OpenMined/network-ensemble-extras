@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       // Submit to HubSpot
+      const hubspotFormURL = 'https://share.hsforms.com/2pFATp7yYRy-JbdaxRh9hfA3v1pm';
       const portalId = '6487402';
       const formGuid = 'a45013a7-bc98-472f-896d-d6b1461f617c';
       const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
@@ -50,10 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const successContainer = document.createElement('div');
         successContainer.id = "success-message";
-        successContainer.className = "mt-3"; // Font Awesome/Bootstrap margin-top
+        successContainer.className = "mt-3";
         const successMessage = result.inlineMessage || `<div class="alert alert-success text-center"> 
           <h3 class="fw-medium text-success mb-2">Success!</h3> 
-          <p class="text-muted">Thank you for your submission. We'll be in touch soon.</p> 
+          <p class="text-muted">Your information has been saved. You'll be redirected to the next form automatically.</p> 
         </div>`;
         successContainer.innerHTML = successMessage;
         const submitButton = form.querySelector('button[type="submit"]');
@@ -64,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.textContent = originalButtonText;
         submitButton.disabled = false;
         
-        // Automatically dismiss the success message after 30 seconds
         setTimeout(() => {
           successContainer.style.transition = "opacity 1s ease-out";
           successContainer.style.opacity = "0";
@@ -74,6 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (successContainer.parentNode) {
               successContainer.remove();
             }
+            
+            window.open(hubspotFormURL, "_blank", "noopener,noreferrer");
           }, 1000);
         }, 3000);
       } else {
