@@ -1011,5 +1011,23 @@
     <!-- <script src="https://js.hsforms.net/forms/embed/6487402.js" defer></script> -->
     <script type="text/javascript" id="hs-script-loader" async defer src="https://js.hs-scripts.com/6487402.js"></script>
     <script type="module" src="./src/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            
+            form.addEventListener('submit', function(e) {
+                // Store the redirect URL
+                const redirectUrl = 'https://form.asana.com/?k=oqCO1GBqyQ2bUi4pZ7xP_g&d=1185126988600652';
+                
+                // If using standard form submission
+                if (form.method === 'POST') {
+                    // Allow form to submit normally to current processor
+                    setTimeout(function() {
+                        window.location.href = redirectUrl;
+                    }, 500); // Small delay to allow form submission
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
