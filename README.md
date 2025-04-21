@@ -1,1 +1,1 @@
-# network-ensemble-extras
+# Repo landing page for Network of Ensembles App
