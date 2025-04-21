@@ -66,17 +66,20 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.disabled = false;
         
         setTimeout(() => {
-          successContainer.style.transition = "opacity 1s ease-out";
+          successContainer.style.transition = "opacity 0.3s ease-out";
           successContainer.style.opacity = "0";
           
           // Remove the element after the animation completes
           setTimeout(() => {
+
+            const redirectUrl = 'https://form.asana.com/?k=oqCO1GBqyQ2bUi4pZ7xP_g&d=1185126988600652';
+
             if (successContainer.parentNode) {
               successContainer.remove();
             }
             
-            window.open(hubspotFormURL, "_blank", "noopener,noreferrer");
-          }, 1000);
+            window.open(redirectUrl, "_blank", "noopener,noreferrer");
+          }, 300);
         }, 3000);
       } else {
         console.error('HubSpot submission failed:', await hubspotResponse.json());
