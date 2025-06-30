@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
     <title>OpenMined | Docs for Network Sourced AI.</title>
-    <link rel="stylesheet" href="./src/docs.css" />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="./src/styles/docs.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,6 +17,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <script src="./src/components/site-header.js"></script>
+    <script src="./src/components/site-footer.js"></script>
+    <!-- <script src="./src/components/site-spinner.js"></script> -->
+    <script src="./src/components/back-to-top.js"></script>
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -30,157 +35,19 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "r4hjqoa5tp");
     </script>
-    <style>
-      :root {
-        --primary: #bb86fc;
-        --primary-dark: #f2bb5d;
-        --secondary: #32d5e8;
-        --dark: #2e2b3b;
-        --darker: #17161d;
-        --light: #f3f4f6;
-        --gray: #6b7280;
-        --gray-light: #9ca3af;
-        --white: #ffffff;
-        --glass: rgba(255, 255, 255, 0.1);
-        --glass-border: rgba(255, 255, 255, 0.2);
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: var(--darker);
-        color: var(--light);
-        line-height: 1.6;
-      }
-      /* Header */
-      header {
-        background: linear-gradient(135deg, var(--dark), var(--darker));
-        padding: 1.5rem 0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--glass-border);
-      }
-
-      .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      .header-left {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .header-left h1 {
-        font-weight: 400;
-        font-size: 1.5rem;
-      }
-
-      .social-icons {
-        display: flex;
-        gap: 1rem;
-      }
-
-      .social-icon {
-        color: var(--gray-light);
-        font-size: 1.25rem;
-        transition: color 0.3s ease;
-      }
-
-      .social-icon:hover {
-        color: var(--primary);
-      }
-
-      .logo {
-        width: 3rem;
-        height: 3rem;
-      }
-
-      .logo-text > * {
-        color: inherit;
-        text-decoration: none;
-      }
-      /* Footer */
-      footer {
-        background: var(--darker);
-        padding: 3rem 0;
-        border-top: 1px solid var(--glass-border);
-      }
-
-      .footer-content {
-        text-align: center;
-      }
-
-      .copyright {
-        color: var(--gray);
-        font-size: 0.875rem;
-      }
-    </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <div class="header-content">
-          <div class="header-left">
-            <img
-              src="./src/assets/openmined.png"
-              alt="OpenMined Logo"
-              class="logo"
-            />
-            <h1 class="logo-text"><a href="/">OpenMined</a></h1>
-            <!-- <h1>OpenMined</h1> -->
-          </div>
-          <div class="social-icons">
-            <a
-              href="https://slack.openmined.org"
-              title="Slack"
-              target="_blank"
-              rel="noopener"
-              class="social-icon"
-            >
-              <i class="fab fa-slack"></i>
-            </a>
-            <a
-              href="https://openmined.org"
-              title="OpenMined"
-              target="_blank"
-              rel="noopener"
-              class="social-icon"
-            >
-              <i class="fas fa-globe"></i>
-            </a>
-            <a
-              href="https://twitter.com/openminedorg"
-              title="Twitter"
-              target="_blank"
-              rel="noopener"
-              class="social-icon"
-            >
-              <i class="fab fa-twitter"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="doc-container">
-      <div class="overviews">
+    <site-header
+      logo-src="./src/assets/openmined.png"
+      logo-text="OpenMined"
+      current-page="docs"
+    >
+    </site-header>
+
+    <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
+
+    <main class="container">
+      <section class="overviews">
         <h2 class="overview">Overview</h2>
         <p class="overview-paragraph">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
@@ -191,32 +58,33 @@
             <h2 class="overview-title">NSAI Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Curabitur non nulla sit amet nisl tempus convallis quis ac
-                lectus. Nulla porttitor accumsan tincidunt. Vivamus magna justo,
-                lacinia eget consectetur sed, convallis at tellus. Donec
-                sollicitudin molestie malesuada. Proin eget tortor risus. Nulla
-                quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id
-                orci porta dapibus. Vivamus suscipit tortor eget felis porttitor
-                volutpat. Cras ultricies ligula sed magna dictum porta. Mauris
-                blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum
-                ac diam sit amet quam vehicula elementum sed sit amet dui. Sed
-                porttitor lectus nibh. Nulla quis lorem ut libero malesuada
-                feugiat. Curabitur aliquet quam id dui posuere blandit.
-                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
-                tortor eget felis porttitor volutpat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Curabitur non nulla sit amet nisl
+                tempus convallis quis ac lectus. Nulla porttitor accumsan
+                tincidunt. Vivamus magna justo, lacinia eget consectetur sed,
+                convallis at tellus. Donec sollicitudin molestie malesuada.
+                Proin eget tortor risus. Nulla quis lorem ut libero malesuada
+                feugiat. Pellentesque in ipsum id orci porta dapibus. Vivamus
+                suscipit tortor eget felis porttitor volutpat. Cras ultricies
+                ligula sed magna dictum porta. Mauris blandit aliquet elit,
+                eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet
+                quam vehicula elementum sed sit amet dui. Sed porttitor lectus
+                nibh. Nulla quis lorem ut libero malesuada feugiat. Curabitur
+                aliquet quam id dui posuere blandit. Pellentesque in ipsum id
+                orci porta dapibus. Vivamus suscipit tortor eget felis
+                porttitor volutpat.
               </p>
             </div>
           </div>
@@ -224,10 +92,10 @@
             <h2 class="overview-title">SyftBox Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
@@ -235,10 +103,10 @@
             <h2 class="overview-title">SyftUI Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
@@ -246,32 +114,33 @@
             <h2 class="overview-title">Syft Apps Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Curabitur non nulla sit amet nisl tempus convallis quis ac
-                lectus. Nulla porttitor accumsan tincidunt. Vivamus magna justo,
-                lacinia eget consectetur sed, convallis at tellus. Donec
-                sollicitudin molestie malesuada. Proin eget tortor risus. Nulla
-                quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id
-                orci porta dapibus. Vivamus suscipit tortor eget felis porttitor
-                volutpat. Cras ultricies ligula sed magna dictum porta. Mauris
-                blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum
-                ac diam sit amet quam vehicula elementum sed sit amet dui. Sed
-                porttitor lectus nibh. Nulla quis lorem ut libero malesuada
-                feugiat. Curabitur aliquet quam id dui posuere blandit.
-                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
-                tortor eget felis porttitor volutpat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Curabitur non nulla sit amet nisl
+                tempus convallis quis ac lectus. Nulla porttitor accumsan
+                tincidunt. Vivamus magna justo, lacinia eget consectetur sed,
+                convallis at tellus. Donec sollicitudin molestie malesuada.
+                Proin eget tortor risus. Nulla quis lorem ut libero malesuada
+                feugiat. Pellentesque in ipsum id orci porta dapibus. Vivamus
+                suscipit tortor eget felis porttitor volutpat. Cras ultricies
+                ligula sed magna dictum porta. Mauris blandit aliquet elit,
+                eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet
+                quam vehicula elementum sed sit amet dui. Sed porttitor lectus
+                nibh. Nulla quis lorem ut libero malesuada feugiat. Curabitur
+                aliquet quam id dui posuere blandit. Pellentesque in ipsum id
+                orci porta dapibus. Vivamus suscipit tortor eget felis
+                porttitor volutpat.
               </p>
             </div>
           </div>
@@ -279,16 +148,16 @@
             <h2 class="overview-title">The router concept Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="tab-container">
+      </section>
+      <section class="tab-container">
         <div class="tab-headers">
           <div class="tab-header active" data-tab="0">Local data</div>
           <div class="tab-header" data-tab="1">Remote data</div>
@@ -301,17 +170,17 @@
             <h2 class="option-title">Local data</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada feugiat.
-                Curabitur aliquet quam id dui posuere blandit. Pellentesque in
-                ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis
-                porttitor volutpat.
+                eget tortor risus. Nulla quis lorem ut libero malesuada
+                feugiat. Curabitur aliquet quam id dui posuere blandit.
+                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
+                tortor eget felis porttitor volutpat.
               </p>
               <ol>
                 <li>Install or create a router app</li>
@@ -336,17 +205,17 @@
             <h2 class="option-title">Remote data</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada feugiat.
-                Curabitur aliquet quam id dui posuere blandit. Pellentesque in
-                ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis
-                porttitor volutpat.
+                eget tortor risus. Nulla quis lorem ut libero malesuada
+                feugiat. Curabitur aliquet quam id dui posuere blandit.
+                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
+                tortor eget felis porttitor volutpat.
               </p>
               <ol>
                 <li>Install or create a router app</li>
@@ -371,17 +240,17 @@
             <h2 class="option-title">Local model</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada feugiat.
-                Curabitur aliquet quam id dui posuere blandit. Pellentesque in
-                ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis
-                porttitor volutpat.
+                eget tortor risus. Nulla quis lorem ut libero malesuada
+                feugiat. Curabitur aliquet quam id dui posuere blandit.
+                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
+                tortor eget felis porttitor volutpat.
               </p>
               <ol>
                 <li>Install or create a router app</li>
@@ -406,17 +275,17 @@
             <h2 class="option-title">Remote model</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada feugiat.
-                Curabitur aliquet quam id dui posuere blandit. Pellentesque in
-                ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis
-                porttitor volutpat.
+                eget tortor risus. Nulla quis lorem ut libero malesuada
+                feugiat. Curabitur aliquet quam id dui posuere blandit.
+                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
+                tortor eget felis porttitor volutpat.
               </p>
               <ol>
                 <li>Install or create a router app</li>
@@ -438,15 +307,11 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <p class="copyright">&copy; 2025 OpenMined. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+
     <script
       type="text/javascript"
       id="hs-script-loader"
@@ -454,7 +319,27 @@
       defer
       src="https://js.hs-scripts.com/6487402.js"
     ></script>
-    <script type="module" src="./src/docs.js"></script>
-    <script></script>
+    <script type="module" src="./src/scripts/docs.js"></script>
+    <!-- <script>
+      // Show spinner while page loads
+      window.addEventListener('beforeunload', function() {
+        document.body.innerHTML += `
+          <div style="
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: var(--darker); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 9999;"
+            >
+            <site-spinner size="60px"></site-spinner>
+          </div>
+        `;
+      });
+    </script> -->
   </body>
 </html>

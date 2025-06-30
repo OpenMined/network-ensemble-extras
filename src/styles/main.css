@@ -1,0 +1,33 @@
+/* main.css */
+:root {
+  --primary: #bb86fc;
+  --primary-dark: #f2bb5d;
+  --secondary: #32d5e8;
+  --dark: #2e2b3b;
+  --darker: #17161d;
+  --light: #f3f4f6;
+  --gray: #6b7280;
+  --gray-light: #9ca3af;
+  --white: #ffffff;
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--darker);
+  color: var(--light);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
