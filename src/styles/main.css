@@ -31,3 +31,44 @@ body {
   margin: 0 auto;
   padding: 0 1.5rem;
 }
+
+/* code {
+  background-color: #30373d;
+  padding: 2px 8px;
+  border-radius: 3px;
+} */
+
+pre {
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+pre {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  border: 1px solid #333;
+  text-align: left;
+}
+
+pre {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  border: 1px solid #333;
+  text-align: left;
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+
+pre code {
+  background-color: transparent;
+}

@@ -44,47 +44,51 @@
     >
     </site-header>
 
-    <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
+    <back-to-top
+      theme="secondary"
+      position="bottom-right"
+      show-after="200"
+    ></back-to-top>
 
     <main class="container">
       <section class="overviews">
         <h2 class="overview">Overview</h2>
         <p class="overview-paragraph">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          lacinia odio vitae vestibulum vestibulum.
+          SyftBox is an open-source protocol that enables privacy-preserving
+          computations across distributed networks, powering NSAI (Network
+          Sourced AI) - a revolutionary system that unlocks the world's
+          distributed intelligence by combining private and public models into
+          powerful ensembles. Through its ecosystem of SyftUI, Syft LLM Router,
+          and Syft Apps, SyftBox creates a decentralized marketplace where model
+          providers can monetize their capabilities while developers access
+          unique AI ensembles without sacrificing data ownership or privacy.
         </p>
         <div class="overview-items">
           <div class="overview-item active">
             <h2 class="overview-title">NSAI Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                NSAI (Network Sourced AI) is an open-source protocol that
+                combines private and public models into powerful ensembles while
+                keeping users in control. It addresses the problem that most of
+                the world's intelligence is locked away in private datasets,
+                proprietary models, and local environments, where centralization
+                isn't feasible or scalable. Instead of centralizing
+                intelligence, NSAI builds infrastructure for distributed,
+                collaborative AI development through permissioned ensembles that
+                respect ownership and reward contributions.
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum. Curabitur non nulla sit amet nisl
-                tempus convallis quis ac lectus. Nulla porttitor accumsan
-                tincidunt. Vivamus magna justo, lacinia eget consectetur sed,
-                convallis at tellus. Donec sollicitudin molestie malesuada.
-                Proin eget tortor risus. Nulla quis lorem ut libero malesuada
-                feugiat. Pellentesque in ipsum id orci porta dapibus. Vivamus
-                suscipit tortor eget felis porttitor volutpat. Cras ultricies
-                ligula sed magna dictum porta. Mauris blandit aliquet elit,
-                eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet
-                quam vehicula elementum sed sit amet dui. Sed porttitor lectus
-                nibh. Nulla quis lorem ut libero malesuada feugiat. Curabitur
-                aliquet quam id dui posuere blandit. Pellentesque in ipsum id
-                orci porta dapibus. Vivamus suscipit tortor eget felis
-                porttitor volutpat.
+                The protocol creates an open marketplace connecting three key
+                participants: Private Model Providers who serve private data or
+                models while maintaining privacy for monetization; Model Users
+                including companies and developers who consume these models for
+                superior results, particularly through ensemble capabilities;
+                and Model Hosts who provide infrastructure to serve models for
+                compensation. This decentralized architecture functions like a
+                distributed version of OpenRouter, enabling collaborative AI
+                while preserving privacy, ownership rights, and individual
+                control over computational resources.
               </p>
             </div>
           </div>
@@ -92,10 +96,31 @@
             <h2 class="overview-title">SyftBox Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                SyftBox is an open-source protocol that enables
+                privacy-preserving computations across distributed datasets
+                without requiring data centralization. It allows developers and
+                organizations to run analyses on data that remains securely with
+                its original owners, never being copied or moved.
+              </p>
+              <p>
+                The platform operates by creating a network of "datasites"
+                similar to how the internet connects websites. Each datasite is
+                essentially a folder on someone's computer that they maintain
+                full control over, with Unix-like permissions governing access.
+                SyftBox acts as a lightweight orchestrator that enables approved
+                applications to run computations directly on the data owner's
+                system.
+              </p>
+              <p>
+                The key advantages include simplified development across
+                different programming languages and environments, secure
+                collaboration between partners and researchers while maintaining
+                privacy, enhanced trust through auditable frameworks, and true
+                privacy by design where data owners retain complete control.
+                This approach enables valuable insights and collaboration at
+                scale while breaking down the barriers that typically keep
+                non-public data siloed, allowing selective participation in
+                computations with minimal information disclosure.
               </p>
             </div>
           </div>
@@ -103,10 +128,38 @@
             <h2 class="overview-title">SyftUI Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Syft UI is a sleek user interface for SyftBox that provides an
+                intuitive gateway to federated data science. It comes in two
+                versions:
+              </p>
+              <ul>
+                <li>
+                  Desktop App (Recommended): An all-in-one bundle that includes
+                  the SyftBox daemon, requiring no additional setup. Simply
+                  download and run the application, with versions available for
+                  Windows, Linux, and Mac (both Apple Silicon and Intel).
+                </li>
+                <li>
+                  Web App: A lightweight option that connects to any SyftBox
+                  daemon (local or remote), ideal for headless setups or
+                  low-resource environments. Users can access it through a web
+                  link and connect using their SyftBox client URL and token.
+                </li>
+              </ul>
+              <p>
+                The platform is designed for ease of use - the desktop version
+                offers a one-click installation experience, while the web
+                version provides flexibility for different deployment scenarios.
+                For developers, SyftUI includes development tools with hot
+                reload capabilities and simple build commands for packaging
+                applications across different operating systems.
+              </p>
+              <p>
+                SyftUI essentially makes SyftBox's privacy-preserving federated
+                computing capabilities accessible through an intuitive
+                interface, allowing users to participate in distributed data
+                science without needing deep technical knowledge of the
+                underlying protocol.
               </p>
             </div>
           </div>
@@ -114,33 +167,32 @@
             <h2 class="overview-title">Syft Apps Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Syft Apps are applications designed to interact with data across
+                the SyftBox distributed network, capable of processing both
+                private data confined to individual datasites and data synced
+                from other datasites while maintaining established privacy
+                constraints. These applications are language-agnostic, allowing
+                developers to use their preferred programming language, with
+                Python developers benefiting from a dedicated SDK for
+                streamlined development.
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum. Curabitur non nulla sit amet nisl
-                tempus convallis quis ac lectus. Nulla porttitor accumsan
-                tincidunt. Vivamus magna justo, lacinia eget consectetur sed,
-                convallis at tellus. Donec sollicitudin molestie malesuada.
-                Proin eget tortor risus. Nulla quis lorem ut libero malesuada
-                feugiat. Pellentesque in ipsum id orci porta dapibus. Vivamus
-                suscipit tortor eget felis porttitor volutpat. Cras ultricies
-                ligula sed magna dictum porta. Mauris blandit aliquet elit,
-                eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet
-                quam vehicula elementum sed sit amet dui. Sed porttitor lectus
-                nibh. Nulla quis lorem ut libero malesuada feugiat. Curabitur
-                aliquet quam id dui posuere blandit. Pellentesque in ipsum id
-                orci porta dapibus. Vivamus suscipit tortor eget felis
-                porttitor volutpat.
+                The essential structure consists of a directory placed under the
+                "apps" folder containing a mandatory "run.sh" file that serves
+                as the application runner script. For Python-based applications,
+                the typical structure includes both the "run.sh" script for
+                environment setup and execution alongside a "main.py" file
+                containing the actual implementation code. The SyftBox client
+                provides seamless integration by automatically scanning for new
+                applications every 10 seconds and executing them without
+                requiring user intervention. Installation is straightforward -
+                users simply copy files from a repository or local directory
+                into their "apps" folder. This elegant design enables
+                applications to become core components of the network,
+                facilitating various operations including data analysis, machine
+                learning, and visualization while maintaining established
+                permission boundaries and privacy constraints across the
+                federated ecosystem.
               </p>
             </div>
           </div>
@@ -148,16 +200,130 @@
             <h2 class="overview-title">The router concept Overview</h2>
             <div class="overview-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                The Syft LLM Router is a framework for creating and deploying
+                Language Model applications built on top of SyftBox. It provides
+                a standardized way to create, deploy, and share LLM routers that
+                can be accessed through the SyftBox federated computing network.
+                The system enables developers to build privacy-preserving LLM
+                applications that can run across distributed environments while
+                maintaining data control and security.
+              </p>
+              <h3>Core Data Models and API Structure</h3>
+              <p>
+                The router system uses well-defined Pydantic models to ensure
+                consistent API interactions. The core message structure includes
+                role-based conversation handling with system, user, and
+                assistant roles. The system supports both chat completions and
+                text completions through dedicated response models, each
+                containing essential fields like model name, generated content,
+                usage statistics, and finish reasons. Generation options are
+                controlled through configurable parameters including
+                temperature, top-p sampling, maximum tokens, and stop sequences.
+              </p>
+              <h3>Quick Start and Router Development</h3>
+              <p>
+                Creating a new router application is straightforward with the
+                provided CLI tools:
+              </p>
+              <pre><code>$ uv run syftllm create-router-app -n my-llm-router<br>$ cd my-llm-router</code></pre>
+              <p>
+                This creates a directory with essential files including
+                router.py for implementing LLM provider logic, server.py for
+                configuring the SyftEvents server, and pyproject.toml for
+                dependency management. The router implementation involves
+                defining LLM providers, implementing chat and completion
+                endpoints, and adding custom functionality as needed. Starting
+                the router server creates an RPC server over SyftBox that
+                handles LLM requests in a federated manner.
+              </p>
+              <h3>Publishing and Metadata Management</h3>
+              <p>
+                The publishing system uses a sophisticated metadata management
+                approach through the PublishHandler class. This system validates
+                project structure, generates code hashes for integrity, and
+                processes project metadata from configuration files. The
+                publishing configuration includes three pricing models:
+              </p>
+              <div>
+                <ul>
+                  <li>per-request</li>
+                  <li>per-tokens</li>
+                  <li>free usage</li>
+                </ul>
+              </div>
+              <p>
+                The system ensures all required files are present before
+                allowing publication and handles comprehensive metadata
+                including project name, description, tags, dependencies, and
+                documented endpoints.
+              </p>
+              <h3>RPC Servers and SyftBox Integration</h3>
+              <p>
+                The core of the system lies in creating RPC servers over SyftBox
+                that enable distributed LLM services across the federated
+                network. The RPC server architecture facilitates seamless
+                communication between different datasites while maintaining
+                privacy and control over computational resources. The server
+                acts as a bridge between the SyftBox network and the actual LLM
+                implementation, processing requests and routing them to
+                appropriate language model endpoints. The system automatically
+                generates RPC schemas that document available endpoints and
+                their specifications, serving as contracts between clients and
+                servers. When a router is published, its metadata and
+                accessibility information are stored in the datasite's public
+                folder structure, creating a federated marketplace where users
+                can discover and access LLM routers hosted on different
+                datasites across the network.
+              </p>
+              <h3>Document Embedding and Network Architecture</h3>
+              <p>
+                The system includes advanced document processing capabilities
+                with configurable chunk sizes, batch processing, and similarity
+                thresholds for document retrieval. The distributed architecture
+                enables several key capabilities: users can access LLM services
+                without centralizing data, providers can monetize their models
+                through different pricing schemes, and the network can scale
+                horizontally as more datasites contribute computational
+                resources.
+              </p>
+              <h3>Security and Privacy Features</h3>
+              <p>
+                The RPC server implementation maintains SyftBox's core privacy
+                principles by ensuring that data processing occurs locally on
+                the datasite hosting the LLM router. Requests are processed
+                without exposing sensitive information to other network
+                participants, and the standardized API ensures that only
+                authorized operations can be performed. The system supports
+                authentication and authorization mechanisms to control access to
+                specific LLM services based on user permissions and pricing
+                models.
+              </p>
+              <h3>Examples and Use Cases</h3>
+              <p>
+                The framework includes complete implementations for different
+                LLM providers, such as Phi-4 and Mixtral routers found in the
+                examples folder. Each example demonstrates the full lifecycle
+                from router implementation to server configuration, including
+                test scripts and documentation. This creates a robust ecosystem
+                where developers can build, deploy, and share LLM capabilities
+                across the SyftBox federated network while maintaining complete
+                control over their data and computational resources.
               </p>
             </div>
           </div>
         </div>
       </section>
       <section class="tab-container">
+        <h2 class="tab-title">
+          Bringing Data and Models to the SyftBox Network
+        </h2>
+        <p class="tab-paragraph">
+          The Syft LLM Router system provides flexible options for integrating
+          various data sources and models into the SyftBox federated network.
+          These options accommodate different deployment scenarios and technical
+          requirements.
+        </p>
+
         <div class="tab-headers">
           <div class="tab-header active" data-tab="0">Local data</div>
           <div class="tab-header" data-tab="1">Remote data</div>
@@ -167,143 +333,214 @@
 
         <div class="option-items">
           <div class="option-item active">
-            <h2 class="option-title">Local data</h2>
+            <h2 class="option-title">Local Data Integration</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Integrate data available locally on your datasite. This option
+                provides direct access to datasets stored on your local system
+                while maintaining complete control over data access and
+                permissions.
               </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada
-                feugiat. Curabitur aliquet quam id dui posuere blandit.
-                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
-                tortor eget felis porttitor volutpat.
-              </p>
-              <ol>
-                <li>Install or create a router app</li>
+              <h3>Implementation Options</h3>
+              <ul>
                 <li>
-                  For some, the router app requires no change, for some it
-                  requires some technical implementation
+                  <strong>Install the router-dashboard</strong> to provide a
+                  user-friendly interface for managing and monitoring your LLM
+                  router deployments across the network.
                 </li>
+
                 <li>
-                  Install the router-dashboard
+                  <strong>Install or create a router app</strong> tailored to
+                  your specific use case. Local hosted implementations benefit
+                  from default settings with minimal setup required through
+                  prebaked implementations, while remote setups require custom
+                  implementation by the user to handle API connections and
+                  authentication.
+                </li>
+
+                <li>
+                  <strong>Try things out</strong> through multiple interfaces:
                   <ul>
-                    <li>Try things out</li>
-                    <li>Via Python</li>
-                    <li>Via HTTP</li>
-                    <li>Via the router-dashboard</li>
+                    <li>
+                      Via Python: Direct integration using the Python SDK for
+                      programmatic access
+                    </li>
+                    <li>
+                      Via HTTP: RESTful API access for web-based applications
+                      and services
+                    </li>
+                    <li>
+                      Via the router-dashboard: Visual interface for interactive
+                      testing and monitoring
+                    </li>
                   </ul>
                 </li>
-                <li>Publish your thing to the network</li>
-              </ol>
+
+                <li>
+                  <strong>Publish your router to the network</strong> to make it
+                  available to other users in the SyftBox ecosystem, enabling
+                  federated access to your data and model capabilities while
+                  maintaining privacy and security constraints.
+                </li>
+              </ul>
             </div>
           </div>
           <div class="option-item">
-            <h2 class="option-title">Remote data</h2>
+            <h2 class="option-title">Remote Data Integration</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Connect data from any remote server, including cloud storage
+                services like Amazon S3, Azure Blob Storage, or other external
+                data sources. This enables federated access to distributed
+                datasets without requiring data centralization.
               </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada
-                feugiat. Curabitur aliquet quam id dui posuere blandit.
-                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
-                tortor eget felis porttitor volutpat.
-              </p>
-              <ol>
-                <li>Install or create a router app</li>
+              <h3>Implementation Options</h3>
+              <ul>
                 <li>
-                  For some, the router app requires no change, for some it
-                  requires some technical implementation
+                  <strong>Install the router-dashboard</strong> to provide a
+                  user-friendly interface for managing and monitoring your LLM
+                  router deployments across the network.
                 </li>
+
                 <li>
-                  Install the router-dashboard
+                  <strong>Install or create a router app</strong> tailored to
+                  your specific use case. Local hosted implementations benefit
+                  from default settings with minimal setup required through
+                  prebaked implementations, while remote setups require custom
+                  implementation by the user to handle API connections and
+                  authentication.
+                </li>
+
+                <li>
+                  <strong>Try things out</strong> through multiple interfaces:
                   <ul>
-                    <li>Try things out</li>
-                    <li>Via Python</li>
-                    <li>Via HTTP</li>
-                    <li>Via the router-dashboard</li>
+                    <li>
+                      Via Python: Direct integration using the Python SDK for
+                      programmatic access
+                    </li>
+                    <li>
+                      Via HTTP: RESTful API access for web-based applications
+                      and services
+                    </li>
+                    <li>
+                      Via the router-dashboard: Visual interface for interactive
+                      testing and monitoring
+                    </li>
                   </ul>
                 </li>
-                <li>Publish your thing to the network</li>
-              </ol>
+
+                <li>
+                  <strong>Publish your router to the network</strong> to make it
+                  available to other users in the SyftBox ecosystem, enabling
+                  federated access to your data and model capabilities while
+                  maintaining privacy and security constraints.
+                </li>
+              </ul>
             </div>
           </div>
           <div class="option-item">
-            <h2 class="option-title">Local model</h2>
+            <h2 class="option-title">Local Model Integration</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Deploy locally hosted models such as those running on Ollama or
+                other local inference servers. This option provides low-latency
+                access to models while maintaining complete computational
+                control.
               </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada
-                feugiat. Curabitur aliquet quam id dui posuere blandit.
-                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
-                tortor eget felis porttitor volutpat.
-              </p>
-              <ol>
-                <li>Install or create a router app</li>
+              <h3>Implementation Options</h3>
+              <ul>
                 <li>
-                  For some, the router app requires no change, for some it
-                  requires some technical implementation
+                  <strong>Install the router-dashboard</strong> to provide a
+                  user-friendly interface for managing and monitoring your LLM
+                  router deployments across the network.
                 </li>
+
                 <li>
-                  Install the router-dashboard
+                  <strong>Install or create a router app</strong> tailored to
+                  your specific use case. Local hosted implementations benefit
+                  from default settings with minimal setup required through
+                  prebaked implementations, while remote setups require custom
+                  implementation by the user to handle API connections and
+                  authentication.
+                </li>
+
+                <li>
+                  <strong>Try things out</strong> through multiple interfaces:
                   <ul>
-                    <li>Try things out</li>
-                    <li>Via Python</li>
-                    <li>Via HTTP</li>
-                    <li>Via the router-dashboard</li>
+                    <li>
+                      Via Python: Direct integration using the Python SDK for
+                      programmatic access
+                    </li>
+                    <li>
+                      Via HTTP: RESTful API access for web-based applications
+                      and services
+                    </li>
+                    <li>
+                      Via the router-dashboard: Visual interface for interactive
+                      testing and monitoring
+                    </li>
                   </ul>
                 </li>
-                <li>Publish your thing to the network</li>
-              </ol>
+
+                <li>
+                  <strong>Publish your router to the network</strong> to make it
+                  available to other users in the SyftBox ecosystem, enabling
+                  federated access to your data and model capabilities while
+                  maintaining privacy and security constraints.
+                </li>
+              </ul>
             </div>
           </div>
           <div class="option-item">
-            <h2 class="option-title">Remote model</h2>
+            <h2 class="option-title">Remote Model Integration</h2>
             <div class="option-content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                Connect remotely hosted models such as ChatGPT, Claude, or other
+                cloud-based language model APIs. This enables access to powerful
+                commercial models through the federated network.
               </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eget tortor risus. Nulla quis lorem ut libero malesuada
-                feugiat. Curabitur aliquet quam id dui posuere blandit.
-                Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit
-                tortor eget felis porttitor volutpat.
-              </p>
-              <ol>
-                <li>Install or create a router app</li>
+              <h3>Implementation Options</h3>
+              <ul>
                 <li>
-                  For some, the router app requires no change, for some it
-                  requires some technical implementation
+                  <strong>Install the router-dashboard</strong> to provide a
+                  user-friendly interface for managing and monitoring your LLM
+                  router deployments across the network.
                 </li>
+
                 <li>
-                  Install the router-dashboard
+                  <strong>Install or create a router app</strong> tailored to
+                  your specific use case. Local hosted implementations benefit
+                  from default settings with minimal setup required through
+                  prebaked implementations, while remote setups require custom
+                  implementation by the user to handle API connections and
+                  authentication.
+                </li>
+
+                <li>
+                  <strong>Try things out</strong> through multiple interfaces:
                   <ul>
-                    <li>Try things out</li>
-                    <li>Via Python</li>
-                    <li>Via HTTP</li>
-                    <li>Via the router-dashboard</li>
+                    <li>
+                      Via Python: Direct integration using the Python SDK for
+                      programmatic access
+                    </li>
+                    <li>
+                      Via HTTP: RESTful API access for web-based applications
+                      and services
+                    </li>
+                    <li>
+                      Via the router-dashboard: Visual interface for interactive
+                      testing and monitoring
+                    </li>
                   </ul>
                 </li>
-                <li>Publish your thing to the network</li>
-              </ol>
+
+                <li>
+                  <strong>Publish your router to the network</strong> to make it
+                  available to other users in the SyftBox ecosystem, enabling
+                  federated access to your data and model capabilities while
+                  maintaining privacy and security constraints.
+                </li>
+              </ul>
             </div>
           </div>
         </div>
