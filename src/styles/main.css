@@ -1,5 +1,49 @@
 /* main.css */
 :root {
+    /* Main palette */
+  --bg-main: #FCFCFD;
+  --bg-card: #FFFFFF;
+  --bg-light: #F4F3F6;
+  --bg-accent-light: #FCE9CF;
+  --bg-accent-warm: #FCDFCF;
+  --bg-accent-soft: #F2D9DE;
+  
+  /* Text colors */
+  --text-dark: #17161D;
+  --text-medium: #2E2B3B;
+  --text-light: #464158;
+  
+  /* Primary colors */
+  --primary: #6976AE;
+  --primary-light: #DEE1ED;
+  --primary-dark: #373B7B;
+  
+  /* Secondary colors */
+  --secondary: #937098;
+  --secondary-light: #E9E1EA;
+  --secondary-dark: #563B59;
+  
+  /* Success colors */
+  --success: #53BEA9;
+  --success-light: #DAF1ED;
+  --success-dark: #155548;
+  
+  /* Info colors */
+  --info: #4392C5;
+  --info-light: #C2DEF0;
+  --info-dark: #1F567A;
+  
+  /* Warning colors */
+  --warning: #F8C073;
+  --warning-light: #FCE9CF;
+  --warning-dark: #B8520A;
+  
+  /* Danger colors */
+  --danger: #CC677B;
+  --danger-light: #F2D9DE;
+  --danger-dark: #9B2737;
+
+  /* Default colors */
   --primary: #bb86fc;
   --primary-dark: #f2bb5d;
   --secondary: #32d5e8;
@@ -11,6 +55,8 @@
   --white: #ffffff;
   --glass: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
+  --text-light: #464158;
+  --bg-light: #F4F3F6;
 }
 
 * {
@@ -71,4 +117,24 @@ pre {
 
 pre code {
   background-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-medium);
 }
