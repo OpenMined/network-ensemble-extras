@@ -1,765 +1,618 @@
-// Application State
-let state = {
-  currentView: "chat",
-  activeTab: "current",
-  messages: [
-    {
-      id: 1,
-      role: "system",
-      content:
-        "Welcome to the chat! Choose any model or create your own ensemble on the fly and try it out.",
-    },
-  ],
-  inputValue: "",
-  selectedModels: [],
-  weights: [],
-  ensembleMethod: "logprob_average",
-  ensembleName: "Untitled",
-  isConfigPanelOpen: false,
-  isResponding: false,
-  modelCounts: {},
-  totalPrice: 0,
-  availableModels: [],
-  modelSearchTerm: "",
-  isLoading: false,
-};
+// Configuration
+const API_BASE_URL = "http://localhost:8080";
 
-// Sample model data
-const sampleModels = [
-  { id: "gpt-4", name: "GPT-4", provider: "OpenAI", inputTokenPrice: 0.03 },
-  {
-    id: "gpt-3.5-turbo",
-    name: "GPT-3.5 Turbo",
-    provider: "OpenAI",
-    inputTokenPrice: 0.002,
-  },
-  {
-    id: "claude-3-opus",
-    name: "Claude 3 Opus",
-    provider: "Anthropic",
-    inputTokenPrice: 0.015,
-  },
-  {
-    id: "claude-3-sonnet",
-    name: "Claude 3 Sonnet",
-    provider: "Anthropic",
-    inputTokenPrice: 0.003,
-  },
-  {
-    id: "claude-3-haiku",
-    name: "Claude 3 Haiku",
-    provider: "Anthropic",
-    inputTokenPrice: 0.00025,
-  },
-  {
-    id: "llama-2-70b",
-    name: "Llama 2 70B",
-    provider: "Meta",
-    inputTokenPrice: 0.0007,
-  },
-  {
-    id: "mistral-large",
-    name: "Mistral Large",
-    provider: "Mistral AI",
-    inputTokenPrice: 0.008,
-  },
-  {
-    id: "gemini-pro",
-    name: "Gemini Pro",
-    provider: "Google",
-    inputTokenPrice: 0.0005,
-  },
-];
+// Global state
+let chatHistory = [];
+let routers = [];
+let searchRouters = [];
+let chatRouters = [];
+let selectedDataSources = [];
+let selectedChatSource = "";
+let lastSearchResults = [];
+let isLoading = false;
+let syftboxBaseUrl = null;
 
-const previousChats = [
-  {
-    id: 1,
-    name: "Coding Assistant",
-    lastMessage: "Here's the solution to your React problem...",
-    date: "2 hours ago",
-    models: ["GPT-4", "Claude 3"],
-  },
-  {
-    id: 2,
-    name: "Math Solver",
-    lastMessage: "The integral of x^2 sin(x) can be solved using...",
-    date: "Yesterday",
-    models: ["GPT-4", "Llama 3", "Mistral"],
-  },
-  {
-    id: 3,
-    name: "Creative Writing",
-    lastMessage: "Here's a story about a space explorer who...",
-    date: "3 days ago",
-    models: ["Claude 3", "GPT-4"],
-  },
-  {
-    id: 4,
-    name: "Research Helper",
-    lastMessage: "Based on recent papers in quantum computing...",
-    date: "1 week ago",
-    models: ["GPT-4", "PaLM 2"],
-  },
-];
-
-// DOM Elements
-const elements = {
-  chatTitle: document.getElementById("chatTitle"),
-  modelsBadge: document.getElementById("modelsBadge"),
-  priceBadge: document.getElementById("priceBadge"),
-  messagesContainer: document.getElementById("messagesContainer"),
-  chatInput: document.getElementById("chatInput"),
-  sendBtn: document.getElementById("sendBtn"),
-  settingsBtn: document.getElementById("settingsBtn"),
-  configPanel: document.getElementById("configPanel"),
-  configCloseBtn: document.getElementById("configCloseBtn"),
-  ensembleName: document.getElementById("ensembleName"),
-  ensembleMethod: document.getElementById("ensembleMethod"),
-  methodHelpText: document.getElementById("methodHelpText"),
-  modelCount: document.getElementById("modelCount"),
-  addModelBtn: document.getElementById("addModelBtn"),
-  modelSelector: document.getElementById("modelSelector"),
-  modelSearch: document.getElementById("modelSearch"),
-  modelList: document.getElementById("modelList"),
-  modelsContainer: document.getElementById("modelsContainer"),
-  normalizeBtn: document.getElementById("normalizeBtn"),
-  saveBtn: document.getElementById("saveBtn"),
-  publishBtn: document.getElementById("publishBtn"),
-  resetBtn: document.getElementById("resetBtn"),
-  currentChatTab: document.getElementById("currentChatTab"),
-  previousChatsTab: document.getElementById("previousChatsTab"),
-  currentChatView: document.getElementById("currentChatView"),
-  previousChatsView: document.getElementById("previousChatsView"),
-  previousChatsList: document.getElementById("previousChatsList"),
-  newChatBtn: document.getElementById("newChatBtn"),
-  saveModal: document.getElementById("saveModal"),
-  publishModal: document.getElementById("publishModal"),
-};
-
-// Initialize application
-function init() {
-  state.availableModels = sampleModels;
-  setupEventListeners();
-  updateUI();
-  renderPreviousChats();
-  renderModelList();
-}
-
-// Setup event listeners
-function setupEventListeners() {
-  // Chat tabs
-  elements.currentChatTab.addEventListener("click", () => switchTab("current"));
-  elements.previousChatsTab.addEventListener("click", () =>
-    switchTab("previous")
-  );
-
-  // Config panel
-  elements.settingsBtn.addEventListener("click", () => toggleConfigPanel());
-  elements.configCloseBtn.addEventListener("click", () => toggleConfigPanel());
-
-  // Chat input
-  elements.chatInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
-  });
-  elements.sendBtn.addEventListener("click", sendMessage);
-
-  // Ensemble config
-  elements.ensembleName.addEventListener("input", (e) => {
-    state.ensembleName = e.target.value;
-    updateUI();
-  });
-
-  elements.ensembleMethod.addEventListener("change", (e) => {
-    state.ensembleMethod = e.target.value;
-    updateMethodHelpText();
-    updateUI();
-  });
-
-  // Model selection
-  elements.addModelBtn.addEventListener("click", () => toggleModelSelector());
-  elements.modelSearch.addEventListener("input", (e) => {
-    state.modelSearchTerm = e.target.value;
-    renderModelList();
-  });
-
-  // Actions
-  elements.saveBtn.addEventListener("click", () => showSaveModal());
-  elements.publishBtn.addEventListener("click", () => showPublishModal());
-  elements.resetBtn.addEventListener("click", resetEnsemble);
-  elements.normalizeBtn.addEventListener("click", normalizeWeights);
-  elements.newChatBtn.addEventListener("click", () => {
-    resetEnsemble();
-    switchTab("current");
-  });
-
-  // Modal events
-  setupModalEvents();
-
-  // Close dropdowns when clicking outside
-  document.addEventListener("click", (e) => {
-    if (
-      !elements.modelSelector.contains(e.target) &&
-      !elements.addModelBtn.contains(e.target)
-    ) {
-      elements.modelSelector.classList.add("hidden");
-    }
-  });
-}
-
-function setupModalEvents() {
-  // Save modal
-  document
-    .getElementById("saveModalClose")
-    .addEventListener("click", () => hideModal("saveModal"));
-  document
-    .getElementById("saveCancelBtn")
-    .addEventListener("click", () => hideModal("saveModal"));
-  document
-    .getElementById("saveConfirmBtn")
-    .addEventListener("click", saveEnsemble);
-
-  // Publish modal
-  document
-    .getElementById("publishModalClose")
-    .addEventListener("click", () => hideModal("publishModal"));
-  document
-    .getElementById("publishCancelBtn")
-    .addEventListener("click", () => hideModal("publishModal"));
-  document
-    .getElementById("publishConfirmBtn")
-    .addEventListener("click", publishEnsemble);
-}
-
-// UI Update functions
-function updateUI() {
-  elements.chatTitle.textContent = state.ensembleName;
-  elements.modelsBadge.textContent = `${state.selectedModels.length} Models`;
-  elements.priceBadge.textContent = `$${state.totalPrice.toFixed(3)}/1K Tokens`;
-  elements.modelCount.textContent = state.selectedModels.length;
-
-  // Update input state
-  const hasModels = state.selectedModels.length > 0;
-  elements.chatInput.disabled = !hasModels;
-  elements.sendBtn.disabled =
-    !hasModels || state.inputValue.trim() === "" || state.isResponding;
-  elements.saveBtn.disabled = !hasModels;
-  elements.publishBtn.disabled = !hasModels;
-
-  elements.chatInput.placeholder = hasModels
-    ? "Message your ensemble..."
-    : "Add models to start chatting...";
-
-  // Update config panel state
-  if (state.isConfigPanelOpen) {
-    elements.configPanel.classList.add("open");
-  } else {
-    elements.configPanel.classList.remove("open");
-  }
-
-  // Update normalize button visibility
-  if (
-    state.ensembleMethod === "weighted_logprob" &&
-    state.selectedModels.length > 0
-  ) {
-    elements.normalizeBtn.classList.remove("hidden");
-  } else {
-    elements.normalizeBtn.classList.add("hidden");
-  }
-
-  updateTotalPrice();
-  renderSelectedModels();
-}
-
-function updateTotalPrice() {
-  let price = 0;
-  state.selectedModels.forEach((model, index) => {
-    const modelPrice = model.inputTokenPrice || 0;
-    if (state.ensembleMethod === "weighted_logprob") {
-      const modelWeight = state.weights[index] || 1;
-      price += modelPrice * modelWeight;
-    } else {
-      price += modelPrice * (1 / Math.max(1, state.selectedModels.length));
-    }
-  });
-  state.totalPrice = price;
-}
-
-function updateMethodHelpText() {
-  const helpTexts = {
-    logprob_average: "Simple averaging of scores from all models",
-    weighted_logprob: "Weighted average based on model confidence",
-    majority_voting: "Choose the most common answer across models",
-  };
-  elements.methodHelpText.textContent = helpTexts[state.ensembleMethod] || "";
-}
-
-function switchTab(tab) {
-  state.activeTab = tab;
-
-  if (tab === "current") {
-    elements.currentChatTab.classList.add("active");
-    elements.previousChatsTab.classList.remove("active");
-    elements.currentChatView.classList.remove("hidden");
-    elements.previousChatsView.classList.add("hidden");
-  } else {
-    elements.currentChatTab.classList.remove("active");
-    elements.previousChatsTab.classList.add("active");
-    elements.currentChatView.classList.add("hidden");
-    elements.previousChatsView.classList.remove("hidden");
-  }
-}
-
-function toggleConfigPanel() {
-  state.isConfigPanelOpen = !state.isConfigPanelOpen;
-  updateUI();
-}
-
-function toggleModelSelector() {
-  elements.modelSelector.classList.toggle("hidden");
-}
-
-// Model management
-function addModel(model) {
-  const existingIndex = state.selectedModels.findIndex(
-    (m) => m.id === model.id
-  );
-
-  if (existingIndex >= 0) {
-    state.modelCounts[model.id] = (state.modelCounts[model.id] || 1) + 1;
-    return;
-  }
-
-  const newModel = {
-    ...model,
-    inputTokenPrice: model.inputTokenPrice || 0,
-    weight: state.ensembleMethod === "weighted_logprob" ? 1 : 1,
-  };
-
-  state.selectedModels.push(newModel);
-  state.weights.push(1);
-  state.modelCounts[model.id] = 1;
-
-  elements.modelSelector.classList.add("hidden");
-  state.modelSearchTerm = "";
-  elements.modelSearch.value = "";
-
-  updateUI();
-  renderModelList();
-}
-
-function removeModel(index) {
-  const removedModel = state.selectedModels[index];
-  state.selectedModels.splice(index, 1);
-  state.weights.splice(index, 1);
-
-  if (
-    state.selectedModels.filter((m) => m.id === removedModel.id).length === 0
-  ) {
-    delete state.modelCounts[removedModel.id];
-  }
-
-  updateUI();
-}
-
-function updateModelWeight(index, weight) {
-  const numWeight = parseFloat(weight) || 0;
-  state.selectedModels[index].weight = numWeight;
-  state.weights[index] = numWeight;
-  updateUI();
-}
-
-function normalizeWeights() {
-  if (
-    state.ensembleMethod !== "weighted_logprob" ||
-    state.selectedModels.length === 0
-  )
-    return;
-
-  const totalWeight = state.weights.reduce(
-    (sum, weight) => sum + (weight || 0),
-    0
-  );
-  if (totalWeight === 0) return;
-
-  state.weights = state.weights.map((weight) => (weight || 0) / totalWeight);
-  state.selectedModels.forEach((model, index) => {
-    model.weight = state.weights[index];
-  });
-
-  updateUI();
-}
-
-function resetEnsemble() {
-  state.selectedModels = [];
-  state.weights = [];
-  state.ensembleMethod = "logprob_average";
-  state.ensembleName = "Untitled";
-  state.messages = [
-    {
-      id: 1,
-      role: "system",
-      content:
-        "Welcome to the chat! Choose any model or create your own ensemble on the fly and try it out.",
-    },
-  ];
-  state.modelCounts = {};
-  state.isConfigPanelOpen = true;
-
-  elements.ensembleName.value = "Untitled";
-  elements.ensembleMethod.value = "logprob_average";
-
-  updateMethodHelpText();
-  updateUI();
-  renderMessages();
-}
-
-// Rendering functions
-function renderModelList() {
-  const filteredModels = state.availableModels.filter(
-    (model) =>
-      model.name.toLowerCase().includes(state.modelSearchTerm.toLowerCase()) ||
-      model.provider.toLowerCase().includes(state.modelSearchTerm.toLowerCase())
-  );
-
-  elements.modelList.innerHTML = filteredModels
-    .map(
-      (model) => `
-                <div class="model-selector-item" data-model-id="${model.id}">
-                    <div class="model-selector-info">
-                        <div class="model-selector-name">${model.name}</div>
-                        <div class="model-selector-provider">
-                            ${model.provider} • $${(
-        model.inputTokenPrice || 0
-      ).toFixed(3)}/1K tokens
-                        </div>
-                    </div>
-                </div>
-            `
-    )
-    .join("");
-
-  // Add click handlers
-  elements.modelList
-    .querySelectorAll(".model-selector-item")
-    .forEach((item) => {
-      item.addEventListener("click", () => {
-        const modelId = item.dataset.modelId;
-        const model = state.availableModels.find((m) => m.id === modelId);
-        if (model) addModel(model);
+// API Service Classes
+class RouterService {
+  async request(endpoint, options = {}) {
+    try {
+      const response = await fetch(API_BASE_URL + endpoint, {
+        headers: {
+          "Content-Type": "application/json",
+          ...options.headers,
+        },
+        ...options,
       });
-    });
-}
 
-function renderSelectedModels() {
-  if (state.selectedModels.length === 0) {
-    elements.modelsContainer.innerHTML =
-      '<div class="empty-models">No models added yet</div>';
-    return;
+      const data = await response.json();
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error:
+            data.message || `HTTP ${response.status}: ${response.statusText}`,
+        };
+      }
+
+      return {
+        success: true,
+        data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error:
+          error instanceof Error ? error.message : "Unknown error occurred",
+      };
+    }
   }
 
-  elements.modelsContainer.innerHTML = `
-                <div class="models-list">
-                    ${state.selectedModels
-                      .map(
-                        (model, index) => `
-                        <div class="model-item">
-                            <div class="model-item-header">
-                                <div class="model-item-info">
-                                    <div class="model-number">${index + 1}</div>
-                                    <div class="model-details">
-                                        <div class="model-name">${
-                                          model.name
-                                        }</div>
-                                        <div class="model-provider">${
-                                          model.provider
-                                        }</div>
-                                    </div>
-                                </div>
-                                <button class="remove-model" data-index="${index}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x "><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
-                                </button>
-                            </div>
-                            
-                            ${
-                              state.ensembleMethod === "weighted_logprob"
-                                ? `
-                                <div class="weight-control">
-                                    <div class="weight-label">
-                                        <span class="weight-text">Weight</span>
-                                        <span class="weight-value">${(
-                                          state.weights[index] || 0
-                                        ).toFixed(2)}</span>
-                                    </div>
-                                    <div class="weight-slider-container">
-                                        <input type="range" class="weight-slider" min="0" max="10" step="0.1" 
-                                               value="${
-                                                 state.weights[index] || 0
-                                               }" data-index="${index}">
-                                        <input type="number" class="weight-input" min="0" max="10" step="0.1"
-                                               value="${
-                                                 state.weights[index] || 0
-                                               }" data-index="${index}">
-                                    </div>
-                                </div>
-                            `
-                                : ""
-                            }
-                        </div>
-                    `
-                      )
-                      .join("")}
+  async listRouters() {
+    const response = await this.request("/router/list");
+    if (response.success && response.data) {
+      return {
+        success: true,
+        data: response.data.routers,
+      };
+    }
+    return {
+      success: false,
+      error: response.error || "Failed to fetch routers",
+    };
+  }
+
+  async getUsername() {
+    return this.request("/username");
+  }
+
+  async getSyftBoxUrl() {
+    return this.request("/sburl");
+  }
+}
+
+class ChatService {
+  joinUrls(baseUrl, endpoint) {
+    const cleanBase = baseUrl.replace(/\/$/, "");
+    const cleanEndpoint = endpoint.replace(/^\//, "");
+    return `${cleanBase}/${cleanEndpoint}`;
+  }
+
+  async getServerUrl() {
+    if (syftboxBaseUrl) {
+      return syftboxBaseUrl;
+    }
+
+    try {
+      const response = await fetch(API_BASE_URL + "/sburl");
+      if (!response.ok) {
+        throw new Error(`Failed to fetch server URL: ${response.status}`);
+      }
+
+      const data = await response.json();
+      syftboxBaseUrl = data.url.replace(/\/$/, "");
+      return syftboxBaseUrl;
+    } catch (error) {
+      console.error("Failed to fetch server URL, using fallback:", error);
+      syftboxBaseUrl = "https://dev.syftbox.net";
+      return syftboxBaseUrl;
+    }
+  }
+
+  async request(endpoint, options = {}) {
+    try {
+      const serverUrl = await this.getServerUrl();
+      const fullUrl = this.joinUrls(serverUrl, endpoint);
+      const response = await fetch(fullUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          ...options.headers,
+        },
+        ...options,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error:
+            data.message || `HTTP ${response.status}: ${response.statusText}`,
+        };
+      }
+
+      return {
+        success: true,
+        data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error:
+          error instanceof Error ? error.message : "Unknown error occurred",
+      };
+    }
+  }
+
+  async pollForResponse(pollUrl, maxAttempts = 20) {
+    const serverUrl = await this.getServerUrl();
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      try {
+        const fullUrl = this.joinUrls(serverUrl, pollUrl);
+        const response = await fetch(fullUrl);
+        const data = await response.json();
+
+        if (
+          response.status === 200 &&
+          data?.data?.message?.status_code === 200
+        ) {
+          return {
+            success: true,
+            data,
+          };
+        } else if (
+          response.status === 202 ||
+          data?.data?.message?.status_code !== 200
+        ) {
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          continue;
+        } else {
+          return {
+            success: false,
+            error:
+              data.message || `HTTP ${response.status}: ${response.statusText}`,
+          };
+        }
+      } catch (error) {
+        return {
+          success: false,
+          error:
+            error instanceof Error ? error.message : "Unknown error occurred",
+        };
+      }
+    }
+
+    return {
+      success: false,
+      error: "Request timed out after maximum attempts",
+    };
+  }
+
+  async search(routerName, author, query) {
+    const encodedQuery = encodeURIComponent(query);
+    const syftUrl = `syft://${author}/app_data/${routerName}/rpc/search?query="${encodedQuery}"`;
+    const encodedSyftUrl = encodeURIComponent(syftUrl);
+
+    const endpoint = `/api/v1/send/msg?x-syft-url=${encodedSyftUrl}&x-syft-from=guest@syft.org`;
+
+    const response = await this.request(endpoint, {
+      method: "POST",
+    });
+
+    if (response.success && response.data?.data?.poll_url) {
+      return this.pollForResponse(response.data.data.poll_url);
+    }
+
+    return response;
+  }
+
+  async chat(routerName, author, messages) {
+    const syftUrl = `syft://${author}/app_data/${routerName}/rpc/chat`;
+    const encodedSyftUrl = encodeURIComponent(syftUrl);
+
+    const endpoint = `/api/v1/send/msg?x-syft-url=${encodedSyftUrl}&x-syft-from=guest@syft.org`;
+
+    const payload = {
+      model: "tinyllama:latest",
+      messages,
+    };
+
+    const response = await this.request(endpoint, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+
+    if (response.success && response.data?.data?.poll_url) {
+      return this.pollForResponse(response.data.data.poll_url);
+    }
+
+    return response;
+  }
+}
+
+// Initialize services
+const routerService = new RouterService();
+const chatService = new ChatService();
+
+// Helper functions
+function extractFilenames(text) {
+  const matches = text.match(/\[([^\]]+)\]/g);
+  if (!matches) return [];
+  return Array.from(new Set(matches.map((m) => m.slice(1, -1))));
+}
+
+function showError(message) {
+  const errorDisplay = document.getElementById("errorDisplay");
+  const errorText = document.getElementById("errorText");
+  errorText.textContent = message;
+  errorDisplay.classList.remove("hidden");
+}
+
+function hideError() {
+  const errorDisplay = document.getElementById("errorDisplay");
+  errorDisplay.classList.add("hidden");
+}
+
+function setLoading(loading) {
+  isLoading = loading;
+  const sendButton = document.getElementById("sendButton");
+  const messageInput = document.getElementById("messageInput");
+
+  sendButton.disabled = loading;
+  messageInput.disabled = loading;
+
+  if (loading) {
+    sendButton.textContent = "Sending...";
+    showLoadingMessage();
+  } else {
+    sendButton.textContent = "Send";
+    hideLoadingMessage();
+  }
+}
+
+function showLoadingMessage() {
+  const chatMessages = document.getElementById("chatMessages");
+  const emptyState = document.getElementById("emptyState");
+
+  if (emptyState) {
+    emptyState.style.display = "none";
+  }
+
+  const loadingDiv = document.createElement("div");
+  loadingDiv.id = "loadingMessage";
+  loadingDiv.className = "flex justify-start";
+  loadingDiv.innerHTML = `
+                <div class="bg-gray-100 text-gray-900 max-w-xs lg:max-w-md px-4 py-2 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
+                        <span class="text-sm">Thinking...</span>
+                    </div>
                 </div>
             `;
 
-  // Add event listeners for remove buttons
-  elements.modelsContainer.querySelectorAll(".remove-model").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const index = parseInt(btn.dataset.index);
-      removeModel(index);
-    });
+  chatMessages.appendChild(loadingDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function hideLoadingMessage() {
+  const loadingMessage = document.getElementById("loadingMessage");
+  if (loadingMessage) {
+    loadingMessage.remove();
+  }
+}
+
+function addMessageToChat(message, role) {
+  const chatMessages = document.getElementById("chatMessages");
+  const emptyState = document.getElementById("emptyState");
+
+  if (emptyState) {
+    emptyState.style.display = "none";
+  }
+
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `flex ${
+    role === "user" ? "justify-end" : "justify-start"
+  }`;
+
+  const isAssistant = role === "assistant";
+  let sourcesHtml = "";
+
+  if (isAssistant && lastSearchResults.length > 0) {
+    const uniqueFilenames = Array.from(
+      new Set(lastSearchResults.map((r) => r.metadata?.filename))
+    );
+    const sourcesLinks = uniqueFilenames
+      .map((filename, i) => {
+        const source = lastSearchResults.find(
+          (r) => r.metadata?.filename === filename
+        );
+        return `
+                        <span class="tooltip mr-2">
+                            <span class="underline cursor-pointer">${filename}</span>
+                            <span class="tooltiptext">${
+                              source ? source.content : "No content found"
+                            }</span>
+                        </span>
+                        ${i < uniqueFilenames.length - 1 ? "," : ""}
+                    `;
+      })
+      .join("");
+
+    sourcesHtml = `
+                    <div class="mt-2 text-xs text-gray-500">
+                        <span class="font-semibold">Sources used: </span>
+                        ${sourcesLinks}
+                    </div>
+                `;
+  }
+
+  messageDiv.innerHTML = `
+                <div class="max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                  role === "user"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-100 text-gray-900"
+                }">
+                    <p class="text-sm whitespace-pre-wrap">${message}</p>
+                    ${sourcesHtml}
+                </div>
+            `;
+
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function updateRouterSelects() {
+  const dataSourcesSelect = document.getElementById("dataSources");
+  const chatSourceSelect = document.getElementById("chatSource");
+
+  // Clear existing options
+  dataSourcesSelect.innerHTML = "";
+  chatSourceSelect.innerHTML = '<option value="">Select a chat source</option>';
+
+  // Populate data sources (search routers)
+  searchRouters.forEach((router) => {
+    const option = document.createElement("option");
+    option.value = router.name;
+    option.textContent = `${router.name} (${router.author})`;
+    dataSourcesSelect.appendChild(option);
   });
 
-  // Add event listeners for weight controls
-  elements.modelsContainer
-    .querySelectorAll(".weight-slider, .weight-input")
-    .forEach((input) => {
-      input.addEventListener("input", (e) => {
-        const index = parseInt(e.target.dataset.index);
-        updateModelWeight(index, e.target.value);
-      });
-    });
+  // Populate chat sources
+  chatRouters.forEach((router) => {
+    const option = document.createElement("option");
+    option.value = router.name;
+    option.textContent = `${router.name} (${router.author})`;
+    chatSourceSelect.appendChild(option);
+  });
 }
 
-function renderMessages() {
-  elements.messagesContainer.innerHTML = state.messages
-    .map(
-      (message) => `
-                <div class="message ${
-                  message.role === "user" ? "user-message" : "assistant-message"
-                }">
-                    <div class="message-content">
-                        ${
-                          message.role === "assistant" ||
-                          message.role === "system"
-                            ? `<div class="markdown-content">${marked.parse(
-                                message.content
-                              )}</div>`
-                            : `<p>${message.content}</p>`
-                        }
-                        ${
-                          message.models
-                            ? `
-                            <div class="message-models">
-                                <span>Models: ${message.models.join(
-                                  ", "
-                                )}</span>
-                            </div>
-                        `
-                            : ""
-                        }
-                    </div>
-                </div>
-            `
-    )
-    .join("");
+async function loadRouters() {
+  try {
+    const response = await routerService.listRouters();
+    if (response.success && response.data) {
+      routers = response.data;
 
-  // Scroll to bottom
-  elements.messagesContainer.scrollTop =
-    elements.messagesContainer.scrollHeight;
+      // Filter routers with search service
+      searchRouters = routers.filter(
+        (router) =>
+          router.published &&
+          router.services.some(
+            (service) => service.type === "search" && service.enabled
+          )
+      );
+
+      // Filter routers with chat service
+      chatRouters = routers.filter(
+        (router) =>
+          router.published &&
+          router.services.some(
+            (service) => service.type === "chat" && service.enabled
+          )
+      );
+
+      updateRouterSelects();
+    }
+  } catch (error) {
+    console.error("Error loading routers:", error);
+  }
 }
 
-function renderPreviousChats() {
-  elements.previousChatsList.innerHTML = previousChats
-    .map(
-      (chat) => `
-                <div class="previous-chat-item" data-chat-id="${chat.id}">
-                    <div class="previous-chat-content">
-                        <h3 class="previous-chat-name">${chat.name}</h3>
-                        <p class="previous-chat-message">${chat.lastMessage}</p>
-                        <div class="previous-chat-meta">
-                            <span class="previous-chat-date">${chat.date}</span>
-                            <div class="previous-chat-models">
-                                ${chat.models
-                                  .map(
-                                    (model) =>
-                                      `<span class="previous-chat-model">${model}</span>`
-                                  )
-                                  .join(", ")}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `
-    )
-    .join("");
+async function loadUserInfo() {
+  try {
+    const usernameResponse = await routerService.getUsername();
+    if (usernameResponse.success && usernameResponse.data?.username) {
+      document.getElementById("username").textContent =
+        usernameResponse.data.username;
+    } else {
+      document.getElementById("username").textContent = "Unknown User";
+    }
+  } catch (error) {
+    document.getElementById("username").textContent = "Unknown User";
+  }
 
-  // Add click handlers
-  elements.previousChatsList
-    .querySelectorAll(".previous-chat-item")
-    .forEach((item) => {
-      item.addEventListener("click", () => {
-        // Load selected chat logic would go here
-        switchTab("current");
-      });
-    });
+  try {
+    const urlResponse = await routerService.getSyftBoxUrl();
+    if (urlResponse.success && urlResponse.data) {
+      const syftboxUrl = document.getElementById("syftboxUrl");
+      const syftboxUrlLink = document.getElementById("syftboxUrlLink");
+
+      syftboxUrlLink.href = urlResponse.data.url;
+      syftboxUrlLink.textContent = urlResponse.data.url
+        .replace(/^https?:\/\//, "")
+        .replace(/\/$/, "");
+      syftboxUrl.classList.remove("hidden");
+      syftboxUrl.classList.add("flex");
+    }
+  } catch (error) {
+    // Silently fail, URL won't be shown
+  }
 }
 
-// Chat functionality
-function sendMessage() {
-  const inputValue = elements.chatInput.value.trim();
-  if (
-    inputValue === "" ||
-    state.selectedModels.length === 0 ||
-    state.isResponding
-  )
+async function handleSendMessage() {
+  const messageInput = document.getElementById("messageInput");
+  const message = messageInput.value.trim();
+
+  if (!message || !selectedChatSource) {
+    showError("Please enter a message and select a chat source");
     return;
+  }
 
-  // Add user message
-  const userMessage = {
-    id: Date.now(),
-    role: "user",
-    content: inputValue,
-  };
+  // Add user message to chat history
+  const userMessage = { role: "user", content: message };
+  chatHistory.push(userMessage);
+  addMessageToChat(message, "user");
+  // Clear the input
+  messageInput.value = "";
 
-  state.messages.push(userMessage);
-  elements.chatInput.value = "";
-  state.inputValue = "";
-  state.isResponding = true;
+  setLoading(true);
+  hideError();
 
-  renderMessages();
-  showTypingIndicator();
-  updateUI();
+  try {
+    let enhancedMessage = message;
+    const uniqueFiles = new Set();
+    let searchResults = [];
 
-  // Simulate API response
-  setTimeout(() => {
-    const response = generateFallbackResponse(
-      inputValue,
-      state.selectedModels,
-      state.ensembleMethod
+    // If data sources are selected, search them first
+    if (selectedDataSources.length > 0) {
+      for (const routerName of selectedDataSources) {
+        const router = searchRouters.find((r) => r.name === routerName);
+        if (router) {
+          try {
+            const searchResponse = await chatService.search(
+              router.name,
+              router.author,
+              message
+            );
+            if (searchResponse.success && searchResponse.data) {
+              const results = searchResponse.data.data.message.body.results;
+              searchResults.push(...results);
+
+              // Collect unique filenames
+              results.forEach((result) => {
+                if (result.metadata?.filename) {
+                  uniqueFiles.add(result.metadata.filename);
+                }
+              });
+            }
+          } catch (error) {
+            console.error(`Error searching router ${routerName}:`, error);
+          }
+        }
+      }
+
+      // Collect search results for context
+      if (searchResults.length > 0) {
+        const sourceContent = searchResults
+          .map((result) => result.content)
+          .join("\n\n");
+        enhancedMessage = sourceContent;
+      }
+
+      // Update lastSearchResults for tooltips
+      lastSearchResults = searchResults;
+    }
+
+    // Add user message to chat history
+    // const userMessage = { role: "user", content: message };
+    // chatHistory.push(userMessage);
+    // addMessageToChat(message, "user");
+
+    // Find the selected chat router
+    const chatRouter = chatRouters.find((r) => r.name === selectedChatSource);
+    if (!chatRouter) {
+      throw new Error("Selected chat source not found");
+    }
+
+    // Prepare messages for chat
+    const messages = [
+      {
+        role: "system",
+        content: `You are a helpful AI assistant that answers questions based on the provided source context.
+
+Use the provided sources to answer the user's question accurately and comprehensively. If you do not know the answer from the sources, say so.`,
+      },
+      ...chatHistory,
+      { role: "user", content: message },
+    ];
+
+    // If we have search results, add them as a separate system message for context
+    if (selectedDataSources.length > 0 && searchResults.length > 0) {
+      const formattedContext = searchResults
+        .map(
+          (result) =>
+            `[${result.metadata?.filename || "unknown"}]\n${result.content}`
+        )
+        .join("\n\n");
+
+      messages.splice(-1, 0, {
+        role: "system",
+        content: `Here is relevant source context to help answer the user's question:\n\n${formattedContext}`,
+      });
+    }
+
+    // Send chat request
+    const chatResponse = await chatService.chat(
+      chatRouter.name,
+      chatRouter.author,
+      messages
     );
 
-    const assistantMessage = {
-      id: Date.now() + 1,
-      role: "assistant",
-      content: response,
-      models: state.selectedModels.map((model) => model.name),
-    };
+    if (chatResponse.success && chatResponse.data) {
+      const assistantMessage = {
+        role: "assistant",
+        content: chatResponse.data.data.message.body.message.content,
+      };
+      chatHistory.push(assistantMessage);
+      addMessageToChat(assistantMessage.content, "assistant");
+    } else {
+      throw new Error(chatResponse.error || "Failed to get chat response");
+    }
 
-    state.messages.push(assistantMessage);
-    state.isResponding = false;
-
-    hideTypingIndicator();
-    renderMessages();
-    updateUI();
-  }, 1500);
-}
-
-function generateFallbackResponse(prompt, models, method) {
-  const responseOptions = [
-    "Based on the ensemble's combined knowledge, I can provide a comprehensive answer to your question.",
-    "The models in this ensemble have different strengths, which allows me to give you a well-rounded response.",
-    "By leveraging multiple models, I can offer a more reliable answer than any single model could provide.",
-  ];
-
-  let response =
-    responseOptions[Math.floor(Math.random() * responseOptions.length)];
-
-  if (prompt.includes("hello") || prompt.includes("hi")) {
-    response += " Hello! How can I assist you today?";
-  } else if (prompt.includes("?")) {
-    response +=
-      " To answer your question, I'd need more context, but I can provide some general guidance...";
-  } else if (
-    prompt.toLowerCase().includes("what") ||
-    prompt.toLowerCase().includes("how")
-  ) {
-    response += " I can help with that question. Here's some information...";
-  } else {
-    response += " I understand your request. Here's what I can offer...";
-  }
-
-  return (
-    response +
-    ` [Note: This is a simulated response. In a real implementation, this would connect to actual model APIs]`
-  );
-}
-
-function showTypingIndicator() {
-  const indicator = document.createElement("div");
-  indicator.className = "typing-indicator";
-  indicator.id = "typingIndicator";
-  indicator.innerHTML =
-    '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-  elements.messagesContainer.appendChild(indicator);
-  elements.messagesContainer.scrollTop =
-    elements.messagesContainer.scrollHeight;
-}
-
-function hideTypingIndicator() {
-  const indicator = document.getElementById("typingIndicator");
-  if (indicator) {
-    indicator.remove();
+    // Clear the input
+    // messageInput.value = "";
+  } catch (error) {
+    console.error("Error in chat:", error);
+    showError(error instanceof Error ? error.message : "An error occurred");
+  } finally {
+    setLoading(false);
   }
 }
 
-// Modal functions
-function showSaveModal() {
-  document.getElementById("saveEnsembleName").value = state.ensembleName;
-  elements.saveModal.classList.remove("hidden");
-}
+// Event listeners
+document
+  .getElementById("sendButton")
+  .addEventListener("click", handleSendMessage);
 
-function showPublishModal() {
-  elements.publishModal.classList.remove("hidden");
-}
-
-function hideModal(modalId) {
-  document.getElementById(modalId).classList.add("hidden");
-}
-
-function saveEnsemble() {
-  console.log("Saving ensemble:", {
-    name: state.ensembleName,
-    method: state.ensembleMethod,
-    models: state.selectedModels,
-  });
-
-  hideModal("saveModal");
-
-  const systemMessage = {
-    id: Date.now(),
-    role: "system",
-    content: `Ensemble "${state.ensembleName}" has been saved successfully.`,
-  };
-
-  state.messages.push(systemMessage);
-  renderMessages();
-}
-
-function publishEnsemble() {
-  console.log("Publishing to leaderboard:", {
-    name: state.ensembleName,
-    method: state.ensembleMethod,
-    models: state.selectedModels,
-  });
-
-  hideModal("publishModal");
-
-  const systemMessage = {
-    id: Date.now(),
-    role: "system",
-    content: `Ensemble "${state.ensembleName}" has been submitted for benchmark evaluation. Results will be available in a few hours.`,
-  };
-
-  state.messages.push(systemMessage);
-  renderMessages();
-}
-
-// Update input value tracking
-elements.chatInput.addEventListener("input", (e) => {
-  state.inputValue = e.target.value;
-  updateUI();
+document.getElementById("messageInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    handleSendMessage();
+  }
 });
 
+document.getElementById("dataSources").addEventListener("change", (e) => {
+  selectedDataSources = Array.from(
+    e.target.selectedOptions,
+    (option) => option.value
+  );
+});
+
+document.getElementById("chatSource").addEventListener("change", (e) => {
+  selectedChatSource = e.target.value;
+});
+
+// Tab functionality
+// document.getElementById("routersTab").addEventListener("click", () => {
+//   // Switch to routers tab (placeholder)
+//   document.getElementById("routersTab").className =
+//     "px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-700 bg-blue-50";
+//   document.getElementById("chatTab").className =
+//     "px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 hover:bg-gray-100";
+// });
+
+// document.getElementById("chatTab").addEventListener("click", () => {
+//   // Switch to chat tab (current)
+//   document.getElementById("chatTab").className =
+//     "px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-700 bg-blue-50";
+//   document.getElementById("routersTab").className =
+//     "px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 hover:bg-gray-100";
+// });
+
 // Initialize the application
-updateMethodHelpText();
-init();
+async function init() {
+  await loadUserInfo();
+  await loadRouters();
+}
+
+// Start the application when DOM is loaded
+document.addEventListener("DOMContentLoaded", init);

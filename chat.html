@@ -17,6 +17,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
     <script src="./src/components/site-header.js"></script>
     <script src="./src/components/site-footer.js"></script>
     <!-- <script src="./src/components/site-spinner.js"></script> -->
@@ -35,7 +37,7 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "r4hjqoa5tp");
     </script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script> -->
   </head>
   <body>
     <site-header
@@ -52,341 +54,169 @@
     ></back-to-top>
 
     <main class="container">
-      <div class="chat-container">
-        <div class="chat-interface">
-          <div class="chat-tabs">
-            <button id="currentChatTab" class="chat-tab active">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
+      <div class="max-w-4xl mx-auto bg-white mt-8 rounded-lg shadow-sm border border-b border-gray-200">
+        <div
+          class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16"
+        >
+
+          <!-- SyftBox Server URL -->
+          <div
+            id="syftboxUrl"
+            class="hidden bg-blue-50 px-3 py-1 rounded-md border border-blue-200"
+          >
+            <svg
+              class="h-4 w-4 text-blue-500 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-message-square"
-              >
-                <path
-                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                ></path>
-              </svg>
-              Current Chat
-            </button>
-            <button id="previousChatsTab" class="chat-tab">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
                 stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-history"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              />
+            </svg>
+            <a
+              id="syftboxUrlLink"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-blue-600 hover:text-blue-800 hover:underline font-mono truncate max-w-32"
+              title="SyftBox Server URL"
+            >
+            </a>
+          </div>
+
+          <!-- User Info -->
+          <div class="flex items-center space-x-4">
+            <div
+              class="flex items-center space-x-3 bg-gray-50 px-3 py-1 rounded-md border border-gray-200"
+            >
+              <svg
+                class="h-4 w-4 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
                 <path
-                  d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-                ></path>
-                <path d="M3 3v5h5"></path>
-                <path d="M12 7v5l4 2"></path>
-              </svg>
-              Previous Chats
-            </button>
-          </div>
-
-          <div id="currentChatView">
-            <div class="chat-header">
-              <div class="chat-header-left">
-                <div class="chat-icon-container">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-message-square chat-icon"
-                  >
-                    <path
-                      d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 id="chatTitle" class="chat-title">Untitled</h2>
-              </div>
-              <div class="chat-header-right">
-                <div id="modelsBadge" class="chat-badge badge-models">
-                  0 Models
-                </div>
-                <div id="priceBadge" class="chat-badge badge-price">
-                  $0.000/1K Tokens
-                </div>
-                <button id="settingsBtn" class="settings-button">
-                  <svg class="icon" viewBox="0 0 24 24">
-                    <path
-                      d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
-                    />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="chat-layout">
-              <div class="messages-container" id="messagesContainer">
-                <div class="message assistant-message">
-                  <div class="message-content">
-                    <p>
-                      Welcome to the chat! Choose any model or create your own
-                      ensemble on the fly and try it out.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div id="configPanel" class="config-panel">
-                <div class="config-header">
-                  <div class="config-header-content">
-                    <h2 class="config-title">Chat Config</h2>
-                    <button id="configCloseBtn" class="config-close">
-                      <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M18 6 6 18M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="config-section">
-                  <label class="config-label">Name</label>
-                  <input
-                    type="text"
-                    id="ensembleName"
-                    class="config-input"
-                    placeholder="Enter ensemble name..."
-                    value="Untitled"
-                  />
-                </div>
-
-                <div class="config-section">
-                  <label class="config-label">Ensemble Method</label>
-                  <select id="ensembleMethod" class="config-select">
-                    <option value="logprob_average">Logprob Average</option>
-                    <option value="weighted_logprob">Weighted Logprob</option>
-                    <option value="majority_voting">Majority Voting</option>
-                  </select>
-                  <p id="methodHelpText" class="config-help-text">
-                    Simple averaging of scores from all models
-                  </p>
-                </div>
-
-                <div class="config-section">
-                  <div class="config-label">
-                    <div class="flex items-center justify-between">
-                      <span>Models (<span id="modelCount">0</span>)</span>
-                      <div class="relative">
-                        <button id="addModelBtn" class="add-model-button">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle "><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
-                          Add Model
-                        </button>
-                        <div
-                          id="modelSelector"
-                          class="model-selector-dropdown hidden"
-                        >
-                          <div class="model-search-container">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search model-search-icon"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                            <input
-                              type="text"
-                              id="modelSearch"
-                              class="model-search-input"
-                              placeholder="Search models..."
-                            />
-                          </div>
-                          <div
-                            id="modelList"
-                            class="model-list-container"
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div id="modelsContainer">
-                    <div class="empty-models">No models added yet</div>
-                  </div>
-
-                  <button id="normalizeBtn" class="normalize-weights hidden">
-                    Normalize Weights
-                  </button>
-                </div>
-
-                <div class="config-actions">
-                  <button
-                    id="saveBtn"
-                    class="action-button action-button-save"
-                    disabled
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save "><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                    Save
-                  </button>
-                  <button
-                    id="publishBtn"
-                    class="action-button action-button-publish"
-                    disabled
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award "><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
-                    Publish
-                  </button>
-                  <button
-                    id="resetBtn"
-                    class="action-button action-button-reset"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw "><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
-                    Reset config
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="input-container">
-              <div class="input-wrapper">
-                <input
-                  type="text"
-                  id="chatInput"
-                  class="chat-input"
-                  placeholder="Add models to start chatting..."
-                  disabled
-                />
-                <button id="sendBtn" class="send-button" disabled>
-                  <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div id="previousChatsView" class="previous-chats-container hidden">
-            <div class="previous-chats-header">
-              <h2>Previous Chats</h2>
-              <div class="previous-chats-search">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="lucide lucide-search"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.3-4.3"></path>
-                </svg>
-                <input type="text" placeholder="Search past conversations..." />
-              </div>
+                  stroke-width="2"
+                  d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <span class="text-xs text-gray-700"
+                >User:
+                <span id="username" class="font-medium">Loading...</span></span
+              >
             </div>
-
-            <div class="previous-chats-list" id="previousChatsList"></div>
-
-            <div class="new-chat-button-container">
-              <button id="newChatBtn" class="new-chat-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle "><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
-                New Chat
-              </button>
+            <div
+              class="flex items-center space-x-2 bg-gray-50 px-3 py-1 rounded-md border border-gray-200"
+            >
+              <span class="text-xs text-gray-700">Balance:</span>
+              <span class="text-xs text-gray-500">$20</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Save Modal -->
-      <div id="saveModal" class="modal-overlay hidden">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title">Save Ensemble</h2>
-            <button id="saveModalClose" class="modal-close">
-              <svg class="icon" viewBox="0 0 24 24">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <div class="modal-form-group">
-            <label class="modal-label">Ensemble Name</label>
-            <input
-              type="text"
-              id="saveEnsembleName"
-              class="modal-input"
-              placeholder="Enter a name for your ensemble..."
-            />
-          </div>
-
-          <div class="modal-form-group">
-            <label class="modal-label">Description</label>
-            <textarea
-              id="saveDescription"
-              rows="3"
-              class="modal-textarea"
-              placeholder="Enter a description for your ensemble..."
-            ></textarea>
-          </div>
-
-          <div class="modal-actions">
-            <button
-              id="saveCancelBtn"
-              class="modal-button modal-button-secondary"
-            >
-              Cancel
-            </button>
-            <button
-              id="saveConfirmBtn"
-              class="modal-button modal-button-primary"
-            >
-              Save Ensemble
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Publish Modal -->
-      <div id="publishModal" class="modal-overlay hidden">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title">Publish to Leaderboard</h2>
-            <button id="publishModalClose" class="modal-close">
-              <svg class="icon" viewBox="0 0 24 24">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <div class="modal-form-group">
-            <p>
-              Your ensemble will be evaluated on selected benchmarks and added
-              to the public leaderboard if it performs well.
+      <!-- Main Content -->
+      <div class="max-w-4xl mx-auto py-8">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <!-- Header -->
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h1 class="text-2xl font-bold text-gray-900">Chat</h1>
+            <p class="text-gray-600 mt-1">
+              Ask questions and get answers from your data sources
             </p>
           </div>
 
-          <div class="modal-actions">
-            <button
-              id="publishCancelBtn"
-              class="modal-button modal-button-secondary"
-            >
-              Cancel
-            </button>
-            <button
-              id="publishConfirmBtn"
-              class="modal-button modal-button-publish"
-            >
-              Publish
-            </button>
+          <!-- Configuration -->
+          <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Data Sources -->
+              <div>
+                <label for="dataSources" class="block text-sm font-medium text-gray-700 mb-2">
+                  Data Sources (Search)
+                </label>
+                <select
+                  id="dataSources"
+                  multiple
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  size="3"
+                ></select>
+                <p class="text-xs text-gray-500 mt-1">
+                  Select one or more data sources to search (optional)
+                </p>
+              </div>
+
+              <!-- Chat Source -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Chat Source *
+                </label>
+                <select
+                  id="chatSource"
+                  aria-label="Chat Source"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select a chat source</option>
+                </select>
+                <p class="text-xs text-gray-500 mt-1">
+                  Select a chat model to generate responses
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Messages -->
+          <div class="px-6 py-4 h-96 overflow-y-auto">
+            <div id="chatMessages" class="space-y-4">
+              <!-- Empty state -->
+              <div id="emptyState" class="text-center text-gray-500 py-8">
+                <svg
+                  class="mx-auto h-12 w-12 text-gray-400 mb-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
+                </svg>
+                <p>Start a conversation by typing a message below</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Error Display -->
+          <div
+            id="errorDisplay"
+            class="hidden px-6 py-3 bg-red-50 border-t border-red-200"
+          >
+            <div id="errorText" class="text-red-700 text-sm"></div>
+          </div>
+
+          <!-- Input -->
+          <div class="px-6 py-4 border-t border-gray-200">
+            <div class="flex space-x-3">
+              <textarea
+                id="messageInput"
+                placeholder="Type your message here..."
+                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                rows="3"
+              ></textarea>
+              <button
+                id="sendButton"
+                class="self-end px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Send
+              </button>
+            </div>
           </div>
         </div>
       </div>
