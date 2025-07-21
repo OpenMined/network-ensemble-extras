@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Researchers | OpenMined - Unlock Data for Research, Safely</title>
+    <link rel="icon" href="./src/assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <style>
+      .hero-content {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+      }
+
+      .hero-text {
+        width: 100% !important;
+        max-width: none !important;
+      }
+    </style>
+    <script src="./src/components/site-header.js"></script>
+    <script src="./src/components/site-footer.js"></script>
+    <script src="./src/components/back-to-top.js"></script>
+  </head>
+  <body>
+    <site-header logo-src="./src/assets/openmined.png" logo-text="OpenMined" current-page="researchers"></site-header>
+    <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Contribute to the Questions That Matter — Without Losing Control</h1>
+                        
+            <p class="hero-subtitle">
+              Your work could help answer critical questions — about disease, misinformation, economic resilience, and climate risk. But if the data or models behind it can’t be used safely, they remain siloed. And often, rightfully so — due to real IP, legal, and privacy concerns.
+            </p>
+
+            <p class="hero-subtitle">
+              But that also means breakthroughs never happen. Insights are missed. AI systems communicate what’s available — not what matters most.
+            </p>
+
+
+            <div class="hero-buttons">
+              <button class="btn btn-primary" onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'})">
+                Join Research Beta
+              </button>
+              <button class="btn btn-secondary" onclick="document.querySelector('.vision').scrollIntoView({behavior: 'smooth'})">
+                See the Solution
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision">
+      <div class="container">
+        <div class="vision-content">
+          <h2>Rethinking Data Access</h2>
+          <p class="vision-intro">
+
+            Using PETs and attribution-based control, NSAI enables secure, privacy-preserving inference directly on remote data and models — with no handoffs, no copies. <br><br>
+            Your data is protected, your terms enforced, and every use is tracked, credited, and compensated.
+
+          </p>
+
+          <div class="principles-section">
+            <div class="container">
+              <div class="principles-groups">
+                <div class="principles-group">
+                  <h3 class="principles-group-title">Address the Risks
+                  <br><br><span class="principles-group-underline"></span></h3>
+                  <div class="principle-card">
+                    <div class="principle-header">
+                      <span class="principle-icon-circle" aria-label="Privacy"><i class="fas fa-user-shield"></i></span>
+                      <h4 class="principle-title">Privacy-First Architecture</h4>
+                    </div>
+                    <p>Your data and models stay in place, protected by PETs like differential privacy and TEEs — full privacy without handoffs or copies.</p>
+                  </div>
+                  <div class="principle-card">
+                    <div class="principle-header">
+                      <span class="principle-icon-circle" aria-label="Access Control"><i class="fas fa-key"></i></span>
+                      <h4 class="principle-title">Custom Access Control</h4>
+                    </div>
+                    <p>Decide who can access your data or model: peers, academic institutions, or a single verified partner at a time.</p>
+                  </div>
+                  <div class="principle-card">
+                    <div class="principle-header">
+                      <span class="principle-icon-circle" aria-label="Compliance"><i class="fas fa-balance-scale"></i></span>
+                      <h4 class="principle-title">Compliant by Default</h4>
+                    </div>
+                    <p>Built to meet GDPR, HIPAA. Data stays in its jurisdiction, with you in control.</p>
+                  </div>
+                </div>
+                <div class="principles-group">
+                  <h3 class="principles-group-title">Create a Sustainable,<br>Mutually Beneficial Outcome<span class="principles-group-underline"></span></h3>
+                  <div class="principle-card">
+                    <div class="principle-header">
+                      <span class="principle-icon-circle" aria-label="Incentives"><i class="fas fa-handshake"></i></span>
+                      <h4 class="principle-title">Sustainable Incentives</h4>
+                    </div>
+                    <p>Creditation and compensation reward data providers, enabling sustainable, long-term collaboration.
+                      <br><br>
+
+
+                    </p>
+                  </div>
+                  <div class="principle-card">
+                    <div class="principle-header">
+                      <span class="principle-icon-circle" aria-label="Science"><i class="fas fa-brain"></i></span>
+                      <h4 class="principle-title">Better Science, Safer AI</h4>
+                    </div>
+                    <p>Your AI will use trusted, attributed, and reproducible data, enabling trustworthy AI in sensitive domains.</p>
+                  </div>
+                  <div class="principle-card">
+                    <div class="principle-header">
+                      <span class="principle-icon-circle" aria-label="Collaboration"><i class="fas fa-globe"></i></span>
+                      <h4 class="principle-title">Cross-Boundary Collaboration</h4>
+                    </div>
+                    <p>Connect and build partnerships across legal and geographic borders for high quality answers.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Now Section -->
+    <section class="why-now">
+      <div class="container">
+        <div class="why-now-content">
+          <h2>Why Now</h2>
+          <p class="why-now-intro">
+            For decades, access to sensitive data has blocked scientific and societal progress. Today, with mature PETs and attribution-based infrastructure, we finally have a way to solve this problem.
+          </p>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="fas fa-lock"></i></div>
+              <div class="timeline-content">
+                <h3>The Barrier Era</h3>
+                <p>Data stays siloed. Research slows. Yet, for a good reason: risks outweighed reward, from privacy, legal, IP and ethical concerns.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="fas fa-user-shield"></i></div>
+              <div class="timeline-content">
+                <h3>The Missed Opportunity</h3>
+                <p>Researchers were limited to public data — missing critical insights and slowing discovery. Now, the public faces a similar crisis: AI systems increasingly shape what people see, decide, and believe. However, when they’re wrong, no one knows it.
+                <br><br>
+                The data that could produce better answers already exists, sitting on researchers’ and institutions’ machines. </p>
+              </div>
+            </div>
+
+            <div class="timeline-item current">
+              <div class="timeline-icon"><i class="fas fa-dna"></i></div>
+              <div class="timeline-content">
+                <h3>The Unlock Moment</h3>
+                <p>
+                  <strong>Now:</strong> With PETs and attribution-based access matured, we can unlock those critical datasets.
+                  This isn’t just more data — it’s orders of magnitudes more <u>better data</u>. Real-world, permissioned sources that were never shareable before can now inform AI.  
+                  <br><br>
+                  The result? <strong>More accurate, state-of-the-art models, faster scientific discovery, and an economic model that rewards institutions which produced this invaluable data.</strong>
+                </p>
+                <br>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credibility / About OpenMined -->
+    <section class="about">
+      <div class="container">
+        <div class="about-content">
+          <h2>Built on a Proven Foundation</h2>
+          <p>
+            OpenMined is a global nonprofit focused on privacy-preserving AI. Since 2017, we’ve educated 20,000+ students on PETs and released open-source software contributed to by 500+ engineers, and partnered with leaders across sectors.
+          </p>
+          <p>
+            Our work appears in the White House, UN, Royal Society, and partnerships with Meta, Google, NVIDIA, Microsoft, Reddit, and more. We help unlock data safely — in healthcare, finance, social science, and beyond.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+      <div class="container">
+        <div class="contact-content">
+          <h2 class="contact-title">Join the Beta</h2>
+          <p class="contact-subtitle">
+            We’re partnering with select institutions and companies to pilot secure access infrastructure. If you’re working with sensitive or high-value data — we’d love to hear from you.
+          </p>
+
+          <form method="POST" id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" class="form-input" name="email" placeholder="Enter your email" />
+            </div>
+
+            <button type="submit" class="submit-btn">Join The Research Beta</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <site-footer></site-footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference, only set if exists
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+      
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Dispatch theme change event for components
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+      }
+    </script>
+    <script type="module" src="./src/scripts/index.js"></script>
+  </body>
+</html>
