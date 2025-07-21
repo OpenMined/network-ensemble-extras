@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
+    <title>For Publishers | OpenMined - Protect Your Content, Get Paid for AI Usage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <style>
+      /* Override hero layout to use full width */
+      .hero-content {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+      }
+      
+      .hero-text {
+        width: 100% !important;
+        max-width: none !important;
+      }
+    </style>
+    <script src="./src/components/site-header.js"></script>
+    <script src="./src/components/site-footer.js"></script>
+    <script src="./src/components/back-to-top.js"></script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "r4hjqoa5tp");
+    </script>
+  </head>
+  <body>
+    <site-header
+      logo-src="./src/assets/openmined.png"
+      logo-text="OpenMined"
+      current-page="publishers"
+    >
+    </site-header>
+    
+    <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </button>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1>A Broken Information Economy</h1>
+              <p class="hero-subtitle">
+                For centuries, publishers, authors, journalists, and educators have created the raw material 
+                for how societies learn and grow. But today, that knowledge is being quietly absorbed into 
+                AI systems — where lack of attribution creates a deep concern about the future of our information economy.
+              </p>
+              <p class="hero-subtitle">
+                This leaves compensation, control and your relationship with your audience at risk.
+              </p>
+              
+              <div class="hero-buttons">
+                <button
+                  class="btn btn-primary"
+                  onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'})"
+                >
+                  Join Publisher Beta
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  onclick="document.querySelector('.vision').scrollIntoView({behavior: 'smooth'})"
+                >
+                  See the Solution
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publisher Solution Section -->
+      <section class="vision">
+        <div class="container">
+          <div class="vision-content">
+            <h2>Attribution-Based Control for Publishers</h2>
+            <p class="vision-intro">
+              We're building attribution-based control — where you decide when, how, and if your 
+              content contributes to AI systems, and you get compensated for every use.
+            </p>
+            
+            <div class="vision-principles">
+              <div class="principle">
+                <h3>🔒 Complete Content Control</h3>
+                <p>End users' or AI systems' queries are answered only with your explicit permission.</p>
+              </div>
+              <div class="principle">
+                <h3>💰 Direct Revenue from AI</h3>
+                <p>Set your own pricing per query, per token, or per subscription. Earn immediately every time your content powers an AI response.</p>
+              </div>
+              <div class="principle">
+                <h3>📊 Guaranteed Brand Attribution</h3>
+                <p>Every AI response ships with the sources, driving traffic and recognition back to your platform.</p>
+              </div>
+              <div class="principle">
+                <h3>🎯 Audience Relationship Protection</h3>
+                <p>Maintain direct relationships with your audience while expanding your reach through AI. No middleman, no data loss.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Why This Matters Now Section -->
+      <section class="why-now">
+        <div class="container">
+          <div class="why-now-content">
+            <h2> </h2>
+            <h2> </h2>
+            <h3> <br></h3>
+            <h2>Why This Matters Now</h2>
+            <p class="why-now-intro">
+              In every information revolution, the rules are written early. Right now, companies are racing 
+              to define how AI systems access and distribute knowledge. If they succeed first, we risk 
+              building a future where a handful of players control the plumbing of intelligence.
+            </p>
+            
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-icon">
+                  <i class="fas fa-globe"></i>
+                </div>
+                <div class="timeline-content">
+                  <h3>The Web Revolution</h3>
+                  <p>We use HTTP and TCP/IP because they were there first</p>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-icon">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="timeline-content">
+                  <h3>The Mobile Revolution</h3>
+                  <p>We live with closed platforms because no open alternative was ready in time</p>
+                </div>
+              </div>
+              
+              <div class="timeline-item current">
+                <div class="timeline-icon">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <div class="timeline-content">
+                  <h3>The AI Revolution</h3>
+                  <p><strong>Now:</strong> We can define a more open, pluralistic foundation — one where publishers remain visible and valuable, AI becomes more accurate and trusted, and knowledge becomes a shared resource, not a privatized asset.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact">
+        <div class="container">
+          <div class="contact-content">
+            <h2 class="contact-title">Join the Beta</h2>
+            <p class="contact-subtitle">
+              Be among the first publishers to protect your content and earn from AI usage. 
+              We're working with select publishers to test and refine our technology.
+            </p>
+       
+            <form method="POST" id="contact-form" class="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-input"
+                  name="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <button type="submit" class="submit-btn">Join Publishers Beta</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script
+      type="text/javascript"
+      id="hs-script-loader"
+      async
+      defer
+      src="https://js.hs-scripts.com/6487402.js"
+    ></script>
+    <script type="module" src="./src/scripts/index.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference, only set if exists
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+      
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Dispatch theme change event for components
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+      }
+    </script>
+  </body>
+</html> 

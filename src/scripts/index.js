@@ -1,5 +1,31 @@
+// Performance optimizations
+let ticking = false;
+
+function updateScrollPerformance() {
+  // Use requestAnimationFrame to optimize scroll performance
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      // Any scroll-based updates can go here
+      ticking = false;
+    });
+    ticking = true;
+  }
+}
+
+// Optimize scroll performance
+document.addEventListener('scroll', updateScrollPerformance, { passive: true });
+
+// Stakeholder card hover interactions
+function initStakeholderInteractions() {
+  // The hover effects are now handled entirely by CSS
+  // This function can be used for any additional JavaScript interactions if needed
+}
+
 // Handle form submission [Wait for the DOM to be fully loaded]
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize stakeholder interactions
+  initStakeholderInteractions();
+  
   const form = document.querySelector("#contact-form");
   
   form.addEventListener("submit", async (event) => {
@@ -21,6 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       const hsFields = Array.from(formData).map(([name, value]) => ({ name, value }));
+      // Always add data_owner field
+      hsFields.push({ name: 'user_type', value: 'data_owner' });
       const hsSubmissionData = {
         fields: hsFields,
         context: {
@@ -72,13 +100,13 @@ document.addEventListener("DOMContentLoaded", () => {
           // Remove the element after the animation completes
           setTimeout(() => {
 
-            const redirectUrl = 'https://form.asana.com/?k=oqCO1GBqyQ2bUi4pZ7xP_g&d=1185126988600652';
+            // const redirectUrl = 'https://form.asana.com/?k=oqCO1GBqyQ2bUi4pZ7xP_g&d=1185126988600652';
 
             if (successContainer.parentNode) {
               successContainer.remove();
             }
             
-            window.open(redirectUrl, "_blank", "noopener,noreferrer");
+            // window.open(redirectUrl, "_blank", "noopener,noreferrer");
           }, 300);
         }, 3000);
       } else {

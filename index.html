@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
-    <title>OpenMined | Network Sourced AI</title>
+    <title>Syft NSAI Protocol</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -45,1235 +45,1542 @@
     
     <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
 
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </button>
+
     <main>
+      <!-- Hero Section -->
       <section class="hero">
         <div class="container">
           <div class="hero-content">
-            <div class="hero-text">
-              <h1>Unlock the world's distributed intelligence</h1>
-              <p>
-                An open-source protocol for combining private and public models
-                into powerful ensembles - while keeping you in control.
-              </p>
+            <div class="hero-left">
+              <h1>AI Has Hit Its Limits — Here's the Fix</h1>
+              <p class="hero-subtitle">Connect the world's distributed intelligence</p>
               <div class="hero-buttons">
                 <button
                   class="btn btn-primary"
                   onclick="window.location.href='./chat.html'"
                 >
-                  Try it out
+                  Try the Demo
                 </button>
-                <!-- <button class="btn btn-secondary" onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'})">Learn more</button> -->
                 <button
                   class="btn btn-secondary"
                   onclick="window.location.href='./docs.html'"
                 >
-                  Learn more
+                  Read About Tech
                 </button>
               </div>
             </div>
+            <div class="hero-right">
+              <p class="hero-description">
+                We are building the open infrastructure that connects independently governed data and models into more powerful AI - while <u>honoring the intentions, restrictions, and value of every asset.</u>
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="protocol">
+
+
+      <!-- AI Limits Section -->
+      <section class="problem" id="problem">
         <div class="container">
-          <div class="protocol-content">
-            <div class="protocol-image">
-              <!-- Placeholder for API/Screenshots image -->
-              <div class="image-placeholder">
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 1200 720"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <!-- Enhanced Output Box -->
-                  <g transform="translate(492,-48)">
-                    <rect
-                      width="288"
-                      height="144"
-                      rx="10"
-                      fill="var(--secondary)"
-                      opacity="0.9"
-                    />
-                    <text
-                      x="144"
-                      y="54"
-                      text-anchor="middle"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="29"
-                      font-weight="bold"
-                    >
-                      Ensemble Output
-                    </text>
-                    <text
-                      x="144"
-                      y="102"
-                      text-anchor="middle"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                      opacity="0.8"
-                    >
-                      Combined Intelligence
-                    </text>
-                  </g>
+          <div class="problem-content">
+            <h2>What is the limit of AI?</h2>
+                          <p class="problem-intro">
+                The internet's data is running out. Data access is collapsing behind paywalls, legal constraints, or shifting policies. Alongside it, a vast majority of valuable information — medical, financial, scientific, cultural — remains distributed, siloed, and likewise, out of reach for AI systems to access.
+              </p>
+            
+            
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-number">>99.99%</span>
+                <span class="stat-label">of valuable information remains untapped</span>
+              </div>
+                              <div class="stat">
+                  <span class="stat-number">&lt;0.01%</span>
+                  <span class="stat-label">of world's data accessible to AI today</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                  <!-- Center Protocol Hub -->
-                  <g class="protocol-hub">
-                    <circle
-                      cx="600"
-                      cy="300"
-                      r="72"
-                      fill="var(--secondary)"
-                      opacity="0.9"
-                    />
-                    <text
-                      x="600"
-                      y="288"
-                      text-anchor="middle"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                    >
-                      llm-protocol
-                    </text>
-                    <text
-                      x="600"
-                      y="324"
-                      text-anchor="middle"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="19"
-                    >
-                      SyftBox
-                    </text>
-                  </g>
+      <!-- Attribution-Based Control Section -->
+      <section class="vision">
+        <div class="container">
+          <div class="vision-content">
+            <h2>Missing bit: Attribution-based control</h2>
+            <p class="vision-intro align-left">
+              In today's AI workflows, contributions flow in — but intent doesn't.<br><br>
+               There's no built-in way for data or model owners to say: <i>"This is what my asset is for. This is how it should (or shouldn't) be used."</i> and for users to ask: <i>"Who contributed to this result, and do I trust them?"</i>.
+              <br>
+              <br>
 
-                  <!-- ChatGPT O1 Model -->
-                  <g class="model-node" transform="translate(144,72)">
-                    <rect
-                      width="264"
-                      height="120"
-                      rx="10"
-                      fill="var(--primary)"
-                      opacity="0.8"
-                    />
-                    <g transform="translate(30,30)">
-                      <path
-                        d="M 0 0 h 30 v 30 h -30 z"
-                        fill="var(--secondary)"
-                        opacity="0.6"
-                      />
-                      <path d="M 7 14 h 16 v 8 h -16 z" fill="white" />
+<b><a href="https://openmined.org/attribution-based-control/" target="_blank" rel="noopener noreferrer">Attribution-based control</a> is the missing, shared mechanism. </b>
+<br><br>
+Without this, we see familiar failures: biased results, misinformation, misuse — not because AI is inherently harmful, but because it lacks the ability to coordinate intent across distributed actors. This, however, is a solvable problem.
+
+            </p>
+            
+            <div class="comparison-diagrams">
+              <div class="diagram-container">
+                <h3>AI as a singular information channel</h3>
+                <div class="diagram-svg">
+                  <svg width="100%" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Publishers -->
+                    <g transform="translate(50, 80)">
+                      <!-- Document icon -->
+                      <rect x="-12" y="-15" width="24" height="20" rx="3" fill="#6366f1" opacity="0.8"/>
+                      <line x1="-8" y1="-10" x2="8" y2="-10" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="-5" x2="6" y2="-5" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="0" x2="4" y2="0" stroke="white" stroke-width="1.5"/>
+                      
+                      <!-- Document icon -->
+                      <rect x="-12" y="15" width="24" height="20" rx="3" fill="#6366f1" opacity="0.8"/>
+                      <line x1="-8" y1="20" x2="8" y2="20" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="25" x2="6" y2="25" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="30" x2="4" y2="30" stroke="white" stroke-width="1.5"/>
+                      
+                      <!-- Document icon -->
+                      <rect x="-12" y="45" width="24" height="20" rx="3" fill="#6366f1" opacity="0.8"/>
+                      <line x1="-8" y1="50" x2="8" y2="50" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="55" x2="6" y2="55" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="60" x2="4" y2="60" stroke="white" stroke-width="1.5"/>
+                      
+                      <text x="0" y="100" text-anchor="middle" fill="#374151" font-size="12" font-weight="600">Data Owners</text>
+                      <text x="0" y="115" text-anchor="middle" fill="#ef4444" font-size="10" text-decoration="line-through">No intent</text>
                     </g>
-                    <text
-                      x="84"
-                      y="42"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                    >
-                      ChatGPT O1
-                    </text>
-                    <text
-                      x="84"
-                      y="78"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="19"
-                      opacity="0.7"
-                    >
-                      OpenAI Infra
-                    </text>
-                  </g>
-
-                  <!-- Company VM Model -->
-                  <g class="model-node" transform="translate(900,72)">
-                    <rect
-                      width="264"
-                      height="120"
-                      rx="10"
-                      fill="var(--primary)"
-                      opacity="0.8"
-                    />
-                    <g transform="translate(30,30)">
-                      <path
-                        d="M 0 0 h 30 v 30 h -30 z M 5 7 h 20 v 16 h -20 z"
-                        fill="var(--secondary)"
-                        opacity="0.6"
-                        stroke="white"
-                        stroke-width="1"
-                      />
+                    
+                    <!-- AI Providers -->
+                    <g transform="translate(200, 80)">
+                      <rect x="-25" y="-20" width="50" height="40" rx="8" fill="#f59e0b" opacity="0.9"/>
+                      <text x="0" y="5" text-anchor="middle" fill="white" font-size="10" font-weight="600">AI</text>
+                     
                     </g>
-                    <text
-                      x="84"
-                      y="42"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                    >
-                      Finetuned LLM
-                    </text>
-                    <text
-                      x="84"
-                      y="78"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="19"
-                      opacity="0.7"
-                    >
-                      Company VM
-                    </text>
-                  </g>
-
-                  <!-- Local Model -->
-                  <g class="model-node" transform="translate(144,252)">
-                    <rect
-                      width="264"
-                      height="120"
-                      rx="10"
-                      fill="var(--primary)"
-                      opacity="0.8"
-                    />
-                    <g transform="translate(30,30)">
-                      <path
-                        d="M 0 0 h 30 v 24 h -30 z"
-                        fill="var(--secondary)"
-                        opacity="0.6"
-                      />
-                      <path d="M -5 24 h 40 v 4 h -40 z" fill="white" />
+                    
+                    <!-- Readers -->
+                    <g transform="translate(350, 80)">
+                      <!-- User icon -->
+                      <circle cx="0" cy="-8" r="8" fill="#10b981" opacity="0.8"/>
+                      <path d="M-12 8 Q0 -8 12 8" fill="#10b981" opacity="0.8"/>
+                      
+                      <!-- User icon -->
+                      <circle cx="0" cy="22" r="8" fill="#10b981" opacity="0.8"/>
+                      <path d="M-12 38 Q0 22 12 38" fill="#10b981" opacity="0.8"/>
+                      
+                      <!-- User icon -->
+                      <circle cx="0" cy="52" r="8" fill="#10b981" opacity="0.8"/>
+                      <path d="M-12 68 Q0 52 12 68" fill="#10b981" opacity="0.8"/>
+                      
+                      <text x="0" y="100" text-anchor="middle" fill="#374151" font-size="12" font-weight="600">Insight-seekers</text>
+                      <text x="0" y="115" text-anchor="middle" fill="#ef4444" font-size="10" text-decoration="line-through">No choice</text>
                     </g>
-                    <text
-                      x="84"
-                      y="42"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                    >
-                      Local Model
-                    </text>
-                    <text
-                      x="84"
-                      y="78"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="19"
-                      opacity="0.7"
-                    >
-                      John's Computer
-                    </text>
-                  </g>
+                    
+                    <!-- Connections to AI -->
+                    <line x1="65" y1="80" x2="175" y2="80" stroke="#6b7280" stroke-width="2" opacity="0.6"/>
+                    <line x1="65" y1="110" x2="175" y2="80" stroke="#6b7280" stroke-width="2" opacity="0.6"/>
+                    <line x1="65" y1="140" x2="175" y2="80" stroke="#6b7280" stroke-width="2" opacity="0.6"/>
+                    
+                    <!-- Connections from AI -->
+                    <line x1="225" y1="80" x2="335" y2="80" stroke="#6b7280" stroke-width="2" opacity="0.6"/>
+                    <line x1="225" y1="80" x2="335" y2="110" stroke="#6b7280" stroke-width="2" opacity="0.6"/>
+                    <line x1="225" y1="80" x2="335" y2="140" stroke="#6b7280" stroke-width="2" opacity="0.6"/>
+                    
+                  </svg>
+                </div>
+              </div>
+              
+              <div class="diagram-container">
+                <h3>AI as a communication device</h3>
+                <div class="diagram-svg">
+                  <svg width="100%" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Publishers -->
+                    <g transform="translate(50, 80)">
+                      <!-- Document icon -->
+                      <rect x="-12" y="-15" width="24" height="20" rx="3" fill="#6366f1" opacity="0.8"/>
+                      <line x1="-8" y1="-10" x2="8" y2="-10" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="-5" x2="6" y2="-5" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="0" x2="4" y2="0" stroke="white" stroke-width="1.5"/>
+                      
+                      <!-- Document icon -->
+                      <rect x="-12" y="15" width="24" height="20" rx="3" fill="#6366f1" opacity="0.8"/>
+                      <line x1="-8" y1="20" x2="8" y2="20" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="25" x2="6" y2="25" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="30" x2="4" y2="30" stroke="white" stroke-width="1.5"/>
+                      
+                      <!-- Document icon -->
+                      <rect x="-12" y="45" width="24" height="20" rx="3" fill="#6366f1" opacity="0.8"/>
+                      <line x1="-8" y1="50" x2="8" y2="50" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="55" x2="6" y2="55" stroke="white" stroke-width="1.5"/>
+                      <line x1="-8" y1="60" x2="4" y2="60" stroke="white" stroke-width="1.5"/>
+                      
+                      <text x="0" y="100" text-anchor="middle" fill="#374151" font-size="12" font-weight="600">Data Owners</text>
+                      <text x="0" y="115" text-anchor="middle" fill="#10b981" font-size="10">Full intent</text>
+                    </g>
+                    
+                    <!-- NSAI Protocol -->
+                    <g transform="translate(200, 80)">
+                      <circle cx="0" cy="0" r="25" fill="#06b6d4" opacity="0.1" stroke="#06b6d4" stroke-width="2"/>
+                      <text x="0" y="-5" text-anchor="middle" fill="#06b6d4" font-size="12" font-weight="700">NSAI</text>
+                      <text x="0" y="10" text-anchor="middle" fill="#06b6d4" font-size="8">Protocol</text>
+                 
+                    </g>
+                    
+                    <!-- Readers -->
+                    <g transform="translate(350, 80)">
+                      <!-- User icon -->
+                      <circle cx="0" cy="-8" r="8" fill="#10b981" opacity="0.8"/>
+                      <path d="M-12 8 Q0 -8 12 8" fill="#10b981" opacity="0.8"/>
+                      
+                      <!-- User icon -->
+                      <circle cx="0" cy="22" r="8" fill="#10b981" opacity="0.8"/>
+                      <path d="M-12 38 Q0 22 12 38" fill="#10b981" opacity="0.8"/>
+                      
+                      <!-- User icon -->
+                      <circle cx="0" cy="52" r="8" fill="#10b981" opacity="0.8"/>
+                      <path d="M-12 68 Q0 52 12 68" fill="#10b981" opacity="0.8"/>
+                      
+                      <text x="0" y="100" text-anchor="middle" fill="#374151" font-size="12" font-weight="600">Insight-seekers</text>
+                      <text x="0" y="115" text-anchor="middle" fill="#10b981" font-size="10">Choose sources</text>
+                    </g>
+                    
+                    <!-- Many-to-many connections -->
+                    <!-- Publisher 1 connections -->
+                    <line x1="65" y1="80" x2="175" y2="80" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="65" y1="80" x2="175" y2="60" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="65" y1="80" x2="175" y2="100" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    
+                    <!-- Publisher 2 connections -->
+                    <line x1="65" y1="110" x2="175" y2="80" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="65" y1="110" x2="175" y2="60" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="65" y1="110" x2="175" y2="100" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    
+                    <!-- Publisher 3 connections -->
+                    <line x1="65" y1="140" x2="175" y2="80" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="65" y1="140" x2="175" y2="60" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="65" y1="140" x2="175" y2="100" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    
+                    <!-- To Readers connections -->
+                    <line x1="225" y1="80" x2="335" y2="80" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="225" y1="80" x2="335" y2="110" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="225" y1="80" x2="335" y2="140" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    
+                    <line x1="225" y1="60" x2="335" y2="80" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="225" y1="60" x2="335" y2="110" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="225" y1="60" x2="335" y2="140" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    
+                    <line x1="225" y1="100" x2="335" y2="80" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="225" y1="100" x2="335" y2="110" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="225" y1="100" x2="335" y2="140" stroke="#06b6d4" stroke-width="1.5" opacity="0.7"/>
+                    
+                    <!-- Direct connections (bypassing NSAI) -->
+                    <line x1="65" y1="80" x2="335" y2="110" stroke="#10b981" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    <line x1="65" y1="110" x2="335" y2="80" stroke="#10b981" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    <line x1="65" y1="140" x2="335" y2="140" stroke="#10b981" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+                    
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            
+           
+          </div>
+          <div style="text-align: center; margin-top: 2rem;">
+            <a href="./ABC_Paper_NeurIPS.pdf" class="btn btn-secondary" download>
+              <i class="fas fa-file-pdf" style="margin-right: 0.5em;"></i>Read Position Paper
+            </a>
+            <br><br><br>
+          </div>
+        </div>
+      </section>
 
-                  <!-- Open Source Model -->
-                  <g class="model-node" transform="translate(900,252)">
-                    <rect
-                      width="264"
-                      height="120"
-                      rx="10"
-                      fill="var(--primary)"
-                      opacity="0.8"
-                    />
-                    <g transform="translate(30,30)">
+
+   
+      <!-- Technology Section -->
+      <section class="technology">
+        <div class="container">
+          <div class="technology-content">  
+            <div class="protocol-demo">
+              <div class="protocol-demo-header">
+                <h2>One modular stack: Network-Sourced AI</h2>
+                <h3>infinite ways to build equitable AI</h3>
+                <p class="protocol-demo-intro">
+                  The NSAI Protocol facilitates attribution-based control and supports a live network of data owners, model owners and an open gateway to those who seek insights.
+                </p>
+                <button class="btn btn-outline" onclick="window.location.href='./docs.html'" style="margin-top: 1rem;">
+                  Learn More About Technology
+                </button>
+              </div>
+              
+              <!-- First Row: Equal Width Cards -->
+              <div class="protocol-stack-row-equal">
+                <div class="protocol-stack-card">
+                  <div class="stack-card-header">
+                    <div class="stack-icon">
+                      <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h4>Federated RAG</h4>
+                  </div>
+                  <p>Search and combine knowedlge from multiple data owners, under their terms.</p>
+                  <div class="card-svg">
+                    <svg width="100%" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <!-- 4 Data Sources with Document Icons -->
+                      <!-- Top Left Data Source -->
+                      <g transform="translate(20, 10)">
+                        <rect x="-12" y="-8" width="24" height="16" rx="3" fill="var(--secondary)" opacity="0.7"/>
+                        <line x1="-8" y1="-4" x2="8" y2="-4" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="0" x2="6" y2="0" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="4" x2="4" y2="4" stroke="white" stroke-width="1"/>
+                      </g>
+                      
+                      <!-- Top Right Data Source -->
+                      <g transform="translate(180, 10)">
+                        <rect x="-12" y="-8" width="24" height="16" rx="3" fill="var(--secondary)" opacity="0.7"/>
+                        <line x1="-8" y1="-4" x2="8" y2="-4" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="0" x2="6" y2="0" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="4" x2="4" y2="4" stroke="white" stroke-width="1"/>
+                      </g>
+                      
+                      <!-- Bottom Left Data Source -->
+                      <g transform="translate(20, 45)">
+                        <rect x="-12" y="-8" width="24" height="16" rx="3" fill="var(--secondary)" opacity="0.7"/>
+                        <line x1="-8" y1="-4" x2="8" y2="-4" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="0" x2="6" y2="0" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="4" x2="4" y2="4" stroke="white" stroke-width="1"/>
+                      </g>
+                      
+                      <!-- Bottom Right Data Source -->
+                      <g transform="translate(180, 45)">
+                        <rect x="-12" y="-8" width="24" height="16" rx="3" fill="var(--secondary)" opacity="0.7"/>
+                        <line x1="-8" y1="-4" x2="8" y2="-4" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="0" x2="6" y2="0" stroke="white" stroke-width="1"/>
+                        <line x1="-8" y1="4" x2="4" y2="4" stroke="white" stroke-width="1"/>
+                      </g>
+                      
+                      <!-- Central Aggregator Hub -->
+                      <rect x="85" y="25" width="30" height="30" rx="6" fill="var(--secondary)" opacity="0.9"/>
+                      <text x="100" y="42" text-anchor="middle" fill="white" font-family="Inter" font-size="8" font-weight="600">Agg</text>
+                      
+                      <!-- User Node with Icon - Positioned above -->
+                      <g transform="translate(100, 8)">
+                        <!-- User Icon -->
+                        <circle cx="0" cy="-2" r="6" fill="var(--primary)" opacity="0.8"/>
+                        <path d="M-4 4 Q0 -2 4 4" fill="var(--primary)" opacity="0.8"/>
+                      </g>
+                      
+                      <!-- Connection Lines from Data Sources to Aggregator -->
+                      <line x1="32" y1="18" x2="85" y2="40" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                      <line x1="168" y1="18" x2="115" y2="40" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                      <line x1="32" y1="53" x2="85" y2="40" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                      <line x1="168" y1="53" x2="115" y2="40" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                      
+                      <!-- Connection from User to Aggregator -->
+                      <line x1="100" y1="16" x2="100" y2="25" stroke="var(--primary)" stroke-width="2" opacity="0.8"/>
+                      
+                      <!-- Data Flow Indicators -->
+                      <circle cx="58" cy="29" r="2" fill="var(--primary)" opacity="0.8"/>
+                      <circle cx="142" cy="29" r="2" fill="var(--primary)" opacity="0.8"/>
+                      <circle cx="58" cy="46" r="2" fill="var(--primary)" opacity="0.8"/>
+                      <circle cx="142" cy="46" r="2" fill="var(--primary)" opacity="0.8"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                <div class="protocol-stack-card">
+                  <div class="stack-card-header">
+                    <div class="stack-icon">
+                      <i class="fas fa-brain"></i>
+              </div>
+                    <h4>Model Ensembling & MoE</h4>
+            </div>
+                  <p>Combine insights from multiple models, under their terms.</p>
+                  <div class="card-svg">
+                    <svg width="100%" height="90" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <!-- 3 Distinct Models in Horizontal Layout -->
+                      <!-- Model 1 -->
+                      <rect x="10" y="35" width="45" height="28" rx="4" fill="var(--primary)" opacity="0.8"/>
+                      <text x="32.5" y="51" text-anchor="middle" fill="white" font-family="Inter" font-size="8" font-weight="600">GPT-4</text>
+                      
+                      <!-- Model 2 -->
+                      <rect x="77.5" y="35" width="45" height="28" rx="4" fill="var(--secondary)" opacity="0.8"/>
+                      <text x="100" y="51" text-anchor="middle" fill="white" font-family="Inter" font-size="8" font-weight="600">Claude</text>
+                      
+                      <!-- Model 3 -->
+                      <rect x="145" y="35" width="45" height="28" rx="4" fill="var(--primary)" opacity="0.8"/>
+                      <text x="167.5" y="51" text-anchor="middle" fill="white" font-family="Inter" font-size="8" font-weight="600">Gemini</text>
+                      
+                      <!-- Model Responses -->
+                      <text x="32.5" y="25" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="6">"Yes"</text>
+                      <text x="100" y="25" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="6">"No"</text>
+                      <text x="167.5" y="25" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="6">"Maybe"</text>
+                      
+                      <!-- Weights -->
+                      <text x="32.5" y="15" text-anchor="middle" fill="var(--primary)" font-family="Inter" font-size="6" font-weight="600">0.4</text>
+                      <text x="100" y="15" text-anchor="middle" fill="var(--secondary)" font-family="Inter" font-size="6" font-weight="600">0.3</text>
+                      <text x="167.5" y="15" text-anchor="middle" fill="var(--primary)" font-family="Inter" font-size="6" font-weight="600">0.3</text>
+                      
+                      <!-- Ensemble Output -->
+                      <rect x="70" y="70" width="60" height="14" rx="3" fill="var(--secondary)" opacity="0.9"/>
+                      <text x="100" y="79" text-anchor="middle" fill="white" font-family="Inter" font-size="7" font-weight="600">Ensemble</text>
+                      
+                      <!-- Response Lines -->
+                      <line x1="32.5" y1="63" x2="85" y2="70" stroke="var(--primary)" stroke-width="1" opacity="0.5"/>
+                      <line x1="100" y1="63" x2="100" y2="70" stroke="var(--secondary)" stroke-width="1" opacity="0.5"/>
+                      <line x1="167.5" y1="63" x2="115" y2="70" stroke="var(--primary)" stroke-width="1" opacity="0.5"/>
+                      
+                      <!-- Final Answer -->
+                      <text x="100" y="90" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="7" font-weight="600">"Likely Yes"</text>
+                    </svg>
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Protocol Features Section -->
+      <section class="protocol-features">
+        <div class="container">
+          <div class="protocol-features-content">
+            <div class="protocol-stack-row-equal-2">
+              <!-- Fully Distributed -->
+              <div class="protocol-stack-card protocol-visual-card">
+                <div class="stack-card-header">
+                  <div class="stack-icon">
+                    <i class="fas fa-project-diagram"></i>
+                  </div>
+                  <h4>Fully Distributed</h4>
+                </div>
+                <div class="protocol-image">
+                  <div class="image-placeholder">
+                    <svg
+                      width="100%"
+                      height="100%"
+                      viewBox="0 0 1200 800"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <!-- Multiple Users and Institutions Querying -->
+                      <g transform="translate(492,72)">
+                        <!-- Multiple User Icons - All on same Y line -->
+                        <g transform="translate(50, 25)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="28" font-weight="600">👤</text>
+                        </g>
+                        <g transform="translate(80, 25)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="24" font-weight="600">👤</text>
+                        </g>
+                        <g transform="translate(110, 25)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="26" font-weight="600">👤</text>
+                        </g>
+                        <g transform="translate(140, 25)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="22" font-weight="600">👤</text>
+                        </g>
+                        
+                        <!-- Multiple Institution Icons - All on same Y line -->
+                        <g transform="translate(50, 55)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="26" font-weight="600">🏢</text>
+                        </g>
+                        <g transform="translate(80, 55)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="24" font-weight="600">🏢</text>
+                        </g>
+                        <g transform="translate(110, 55)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="28" font-weight="600">🏢</text>
+                        </g>
+                        <g transform="translate(140, 55)">
+                          <text x="0" y="8" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="22" font-weight="600">🏢</text>
+                        </g>
+                        
+                        <!-- Query Cloud - Positioned on the dotted line from institutions to SyftBox -->
+                        <g transform="translate(112, 144)">
+                          <ellipse cx="0" cy="0" rx="40" ry="30" fill="var(--secondary)" opacity="0.8"/>
+                          <text x="0" y="5" text-anchor="middle" fill="white" font-family="Inter" font-size="12" font-weight="600">Query</text>
+                          <text x="0" y="20" text-anchor="middle" fill="white" font-family="Inter" font-size="10" opacity="0.9">Cloud</text>
+                        </g>
+                        
+                        <!-- Connection Lines to Query Cloud -->
+                        <line x1="140" y1="33" x2="112" y2="144" stroke="var(--text-secondary)" stroke-width="1" opacity="0.4"/>
+                        <line x1="140" y1="63" x2="112" y2="144" stroke="var(--text-secondary)" stroke-width="1" opacity="0.4"/>
+                        <line x1="110" y1="33" x2="112" y2="144" stroke="var(--text-secondary)" stroke-width="1" opacity="0.4"/>
+                        <line x1="80" y1="33" x2="112" y2="144" stroke="var(--text-secondary)" stroke-width="1" opacity="0.4"/>
+                      </g>
+
+                      <!-- Center Server Gateway -->
+                      <g class="protocol-hub">
+                        <circle
+                          cx="600"
+                          cy="420"
+                          r="95"
+                          fill="var(--secondary)"
+                          opacity="0.9"
+                        />
+                        <text
+                          x="600"
+                          y="408"
+                          text-anchor="middle"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="22"
+                        >
+                          Server Gateway
+                        </text>
+                        <text
+                          x="600"
+                          y="444"
+                          text-anchor="middle"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="19"
+                        >
+                          SyftBox
+                        </text>
+                      </g>
+
+                      <!-- /chat Model -->
+                      <g class="model-node" transform="translate(144,192)">
+                        <rect
+                          width="264"
+                          height="120"
+                          rx="10"
+                          fill="var(--primary)"
+                          opacity="0.8"
+                        />
+                        <g transform="translate(30,30)">
+                          <path
+                            d="M 0 0 h 30 v 30 h -30 z"
+                            fill="var(--secondary)"
+                            opacity="0.6"
+                          />
+                          <path d="M 7 14 h 16 v 8 h -16 z" fill="white" />
+                        </g>
+                        <text
+                          x="84"
+                          y="42"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="22"
+                        >
+                          /chat
+                        </text>
+                        <text
+                          x="84"
+                          y="78"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="19"
+                          opacity="0.7"
+                        >
+                          OpenAI
+                        </text>
+                      </g>
+
+                      <!-- /search Model -->
+                      <g class="model-node" transform="translate(900,192)">
+                        <rect
+                          width="264"
+                          height="120"
+                          rx="10"
+                          fill="var(--primary)"
+                          opacity="0.8"
+                        />
+                        <g transform="translate(30,30)">
+                          <path
+                            d="M 0 0 h 30 v 30 h -30 z M 5 7 h 20 v 16 h -20 z"
+                            fill="var(--secondary)"
+                            opacity="0.6"
+                            stroke="white"
+                            stroke-width="1"
+                          />
+                        </g>
+                        <text
+                          x="84"
+                          y="42"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="22"
+                        >
+                          /search
+                        </text>
+                        <text
+                          x="84"
+                          y="78"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="19"
+                          opacity="0.7"
+                        >
+                          Hospital X
+                        </text>
+                      </g>
+
+                      <!-- /chat Model -->
+                      <g class="model-node" transform="translate(144,372)">
+                        <rect
+                          width="264"
+                          height="120"
+                          rx="10"
+                          fill="var(--primary)"
+                          opacity="0.8"
+                        />
+                        <g transform="translate(30,30)">
+                          <path
+                            d="M 0 0 h 30 v 24 h -30 z"
+                            fill="var(--secondary)"
+                            opacity="0.6"
+                          />
+                          <path d="M -5 24 h 40 v 4 h -40 z" fill="white" />
+                        </g>
+                        <text
+                          x="84"
+                          y="42"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="22"
+                        >
+                          /chat
+                        </text>
+                        <text
+                          x="84"
+                          y="78"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="19"
+                          opacity="0.7"
+                        >
+                          John's Computer
+                        </text>
+                      </g>
+
+                      <!-- /search Model -->
+                      <g class="model-node" transform="translate(900,372)">
+                        <rect
+                          width="264"
+                          height="120"
+                          rx="10"
+                          fill="var(--primary)"
+                          opacity="0.8"
+                        />
+                        <g transform="translate(30,30)">
+                          <path
+                            d="M 0 0 h 30 v 7 h -30 z M 0 16 h 30 v 7 h -30 z"
+                            fill="white"
+                            opacity="0.8"
+                          />
+                          <path
+                            d="M 7 7 l 7 -7 l 7 7 M 7 23 l 7 -7 l 7 7"
+                            fill="none"
+                            stroke="var(--secondary)"
+                            stroke-width="1.8"
+                          />
+                        </g>
+                        <text
+                          x="84"
+                          y="42"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="22"
+                        >
+                          /chat
+                        </text>
+                        <text
+                          x="84"
+                          y="78"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="19"
+                          opacity="0.7"
+                        >
+                          OpenRouter
+                        </text>
+                      </g>
+
+                      <!-- /search Model -->
+                      <g class="model-node" transform="translate(528,520)">
+                        <rect
+                          width="264"
+                          height="120"
+                          rx="10"
+                          fill="var(--primary)"
+                          opacity="0.8"
+                        />
+                        <g transform="translate(30,30)">
+                          <path
+                            d="M 0 0 h 30 v 30 h -30 z M 5 7 h 20 v 16 h -20 z"
+                            fill="var(--secondary)"
+                            opacity="0.6"
+                            stroke="white"
+                            stroke-width="1"
+                          />
+                          <path
+                            d="M 0 0 h 10 v 24 h 10 v -24 h 10"
+                            fill="none"
+                            stroke="white"
+                            stroke-width="2.4"
+                          />
+                        </g>
+                        <text
+                          x="84"
+                          y="42"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="22"
+                        >
+                          /search
+                        </text>
+                        <text
+                          x="84"
+                          y="78"
+                          text-anchor="start"
+                          dominant-baseline="middle"
+                          fill="white"
+                          font-family="Inter"
+                          font-size="19"
+                          opacity="0.7"
+                        >
+                          Publishing Co.
+                        </text>
+                      </g>
+
+                      <!-- Connection Lines to Protocol -->
                       <path
-                        d="M 0 0 h 30 v 7 h -30 z M 0 16 h 30 v 7 h -30 z"
-                        fill="white"
-                        opacity="0.8"
-                      />
-                      <path
-                        d="M 7 7 l 7 -7 l 7 7 M 7 23 l 7 -7 l 7 7"
-                        fill="none"
+                        d="M360 246 L600 420"
                         stroke="var(--secondary)"
-                        stroke-width="1.8"
-                      />
-                    </g>
-                    <text
-                      x="84"
-                      y="42"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                    >
-                      Open Source
-                    </text>
-                    <text
-                      x="84"
-                      y="78"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="19"
-                      opacity="0.7"
-                    >
-                      Llama/Mistral
-                    </text>
-                  </g>
-
-                  <!-- RAG Model -->
-                  <g class="model-node" transform="translate(528,444)">
-                    <rect
-                      width="264"
-                      height="120"
-                      rx="10"
-                      fill="var(--primary)"
-                      opacity="0.8"
-                    />
-                    <g transform="translate(30,30)">
-                      <path
-                        d="M 0 0 h 30 v 30 h -30 z M 5 7 h 20 v 16 h -20 z"
-                        fill="var(--secondary)"
-                        opacity="0.6"
-                        stroke="white"
-                        stroke-width="1"
-                      />
-                      <path
-                        d="M 0 0 h 10 v 24 h 10 v -24 h 10"
-                        fill="none"
-                        stroke="white"
                         stroke-width="2.4"
+                        opacity="0.4"
                       />
+                      <path
+                        d="M900 246 L600 420"
+                        stroke="var(--secondary)"
+                        stroke-width="2.4"
+                        opacity="0.4"
+                      />
+                      <path
+                        d="M360 426 L600 420"
+                        stroke="var(--secondary)"
+                        stroke-width="2.4"
+                        opacity="0.4"
+                      />
+                      <path
+                        d="M900 426 L600 420"
+                        stroke="var(--secondary)"
+                        stroke-width="2.4"
+                        opacity="0.4"
+                      />
+                      <path
+                        d="M630 444 L600 300"
+                        stroke="var(--secondary)"
+                        stroke-width="2.4"
+                        opacity="0.4"
+                      />
+                      <path
+                        d="M660 580 L600 420"
+                        stroke="var(--secondary)"
+                        stroke-width="2.4"
+                        opacity="0.4"
+                      />
+
+                      <!-- Connection Line from Protocol to Enhanced Output -->
+                      <path
+                        d="M600 348 L624 144"
+                        stroke="var(--secondary)"
+                        stroke-width="3.6"
+                        opacity="0.6"
+                        stroke-dasharray="6,6"
+                      />
+
+
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Permissioned AI Interfaces -->
+              <div class="protocol-stack-card permissioned-card">
+                <div class="stack-card-header">
+                  <div class="stack-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <h4>Permissioned AI Interfaces</h4>
+                </div>
+                <p>Insights-seekers request permission before using knowledge, like browsers accessing websites.</p>
+                <div class="card-svg">
+                  <svg width="100%" height="90" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Query/Request - Centered at top -->
+                    <g transform="translate(100, 10)">
+                      <circle cx="0" cy="0" r="10" fill="var(--primary)" opacity="0.8"/>
+                      <text x="0" y="4" text-anchor="middle" fill="white" font-family="Inter" font-size="9" font-weight="600">Q</text>
+                      <text x="0" y="25" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="7">Query</text>
                     </g>
-                    <text
-                      x="84"
-                      y="42"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="22"
-                    >
-                      RAG Model
-                    </text>
-                    <text
-                      x="84"
-                      y="78"
-                      text-anchor="start"
-                      dominant-baseline="middle"
-                      fill="white"
-                      font-family="Inter"
-                      font-size="19"
-                      opacity="0.7"
-                    >
-                      Company VM
-                    </text>
-                  </g>
-
-                  <!-- Connection Lines to Protocol -->
-                  <path
-                    d="M360 126 L600 300"
-                    stroke="var(--secondary)"
-                    stroke-width="2.4"
-                    opacity="0.6"
-                  >
-                    <animate
-                      attributeName="opacity"
-                      values="0.2;0.6;0.2"
-                      dur="3s"
-                      repeatCount="indefinite"
-                    />
-                  </path>
-                  <path
-                    d="M900 126 L600 300"
-                    stroke="var(--secondary)"
-                    stroke-width="2.4"
-                    opacity="0.6"
-                  >
-                    <animate
-                      attributeName="opacity"
-                      values="0.2;0.6;0.2"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin="0.6s"
-                    />
-                  </path>
-                  <path
-                    d="M360 306 L600 300"
-                    stroke="var(--secondary)"
-                    stroke-width="2.4"
-                    opacity="0.6"
-                  >
-                    <animate
-                      attributeName="opacity"
-                      values="0.2;0.6;0.2"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin="1.2s"
-                    />
-                  </path>
-                  <path
-                    d="M900 306 L600 300"
-                    stroke="var(--secondary)"
-                    stroke-width="2.4"
-                    opacity="0.6"
-                  >
-                    <animate
-                      attributeName="opacity"
-                      values="0.2;0.6;0.2"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin="1.8s"
-                    />
-                  </path>
-                  <path
-                    d="M630 444 L600 300"
-                    stroke="var(--secondary)"
-                    stroke-width="2.4"
-                    opacity="0.6"
-                  >
-                    <animate
-                      attributeName="opacity"
-                      values="0.2;0.6;0.2"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin="2.4s"
-                    />
-                  </path>
-
-                  <!-- Connection Line from Protocol to Enhanced Output -->
-                  <path
-                    d="M600 228 L624 0"
-                    stroke="var(--secondary)"
-                    stroke-width="3.6"
-                    opacity="0.8"
-                  >
-                    <animate
-                      attributeName="stroke-dasharray"
-                      values="6,6"
-                      dur="0.5s"
-                      repeatCount="indefinite"
-                    />
-                  </path>
-
-                  <!-- Flow Particles to Protocol -->
-                  <circle class="particle" r="6" fill="var(--secondary)">
-                    <animateMotion
-                      path="M360 126 L600 300"
-                      dur="2s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                  <circle class="particle" r="6" fill="var(--secondary)">
-                    <animateMotion
-                      path="M900 126 L600 300"
-                      dur="2s"
-                      repeatCount="indefinite"
-                      begin="0.4s"
-                    />
-                  </circle>
-                  <circle class="particle" r="6" fill="var(--secondary)">
-                    <animateMotion
-                      path="M360 306 L600 300"
-                      dur="2s"
-                      repeatCount="indefinite"
-                      begin="0.8s"
-                    />
-                  </circle>
-                  <circle class="particle" r="6" fill="var(--secondary)">
-                    <animateMotion
-                      path="M900 306 L600 300"
-                      dur="2s"
-                      repeatCount="indefinite"
-                      begin="1.2s"
-                    />
-                  </circle>
-                  <circle class="particle" r="6" fill="var(--secondary)">
-                    <animateMotion
-                      path="M630 444 L600 300"
-                      dur="2s"
-                      repeatCount="indefinite"
-                      begin="1.6s"
-                    />
-                  </circle>
-
-                  <!-- Flow Particles to Enhanced Output -->
-                  <circle class="particle" r="7.2" fill="var(--secondary)">
-                    <animateMotion
-                      path="M600 228 L624 0"
-                      dur="1.5s"
-                      repeatCount="indefinite"
-                      begin="2s"
-                    />
-                  </circle>
-                  <circle class="particle" r="7.2" fill="var(--secondary)">
-                    <animateMotion
-                      path="M600 228 L624 0"
-                      dur="1.5s"
-                      repeatCount="indefinite"
-                      begin="2.5s"
-                    />
-                  </circle>
-                </svg>
+                    
+                    <!-- Data Owner 1 (Top) -->
+                    <g transform="translate(70, 50)">
+                      <circle cx="0" cy="-10" r="10" fill="var(--secondary)" opacity="0.8"/>
+                      <path d="M-15 10 Q0 -10 15 10" fill="var(--secondary)" opacity="0.8"/>
+                      <text x="0" y="30" text-anchor="middle" fill="#10b981" font-family="Inter" font-size="8" font-weight="600">✓ Approve</text>
+                    </g>
+                    
+                    <!-- Data Owner 2 (Bottom) -->
+                    <g transform="translate(130, 50)">
+                      <circle cx="0" cy="-10" r="10" fill="var(--secondary)" opacity="0.8"/>
+                      <path d="M-15 10 Q0 -10 15 10" fill="var(--secondary)" opacity="0.8"/>
+                      <text x="0" y="30" text-anchor="middle" fill="#ef4444" font-family="Inter" font-size="8" font-weight="600">✗ Deny</text>
+                    </g>
+                    
+                    <!-- Query Lines - Separate lines from query to each data owner -->
+                    <line x1="100" y1="20" x2="70" y2="40" stroke="var(--primary)" stroke-width="2.5" opacity="0.7"/>
+                    <line x1="100" y1="20" x2="130" y2="40" stroke="var(--primary)" stroke-width="2.5" opacity="0.7"/>
+                    
+                    <!-- Flow Indicators -->
+                    <circle cx="85" cy="30" r="2.5" fill="var(--primary)" opacity="0.8"/>
+                    <circle cx="115" cy="30" r="2.5" fill="var(--primary)" opacity="0.8"/>
+                  </svg>
+                </div>
               </div>
-            </div>
-            <div class="protocol-text">
-              <h2 class="protocol-subtitle">
-                The protocol for Network Sourced AI
-              </h2>
-              <p class="protocol-description">
-                Most of the world's intelligence is locked away—in private
-                datasets, proprietary models, local envs, and individual
-                expertise. Centralizing it isn't just hard — it doesn't scale.
-                Intelligence is inherently distributed, and thus, developing AI
-                must be collaborative.
-              </p>
-              <br />
-              <p class="protocol-description">
-                This open-source protocol makes it simple to combine all of
-                these models into powerful, permissioned ensembles.
-              </p>
-
-              <p class="protocol-description">
-                It respects ownership, rewards contributions, and enables scale
-                without sacrificing control.
-              </p>
-              <p>
-                <a
-                  href="https://github.com/OpenMined/llm-protocol"
-                  onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'}); return false;"
-                  >Learn more about the protocol</a
-                >
-              </p>
+              
             </div>
           </div>
         </div>
       </section>
 
-      <section class="features">
+      <!-- Protocol Access Section -->
+      <section class="protocol-access">
         <div class="container">
-          <!-- <h2 class="section-title">Key Features & Capabilities</h2> -->
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="feature-image">
-                <svg
-                  width="100%"
-                  height="200"
-                  viewBox="0 0 400 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="400" height="300" fill="var(--glass)" rx="8" />
+          <div class="protocol-access-content">
+            <!-- Third Row: Unified Access & Interoperable -->
+            <div class="protocol-stack-row-equal-3">
+              <!-- Unified Access -->
+              <div class="protocol-stack-card">
+                <div class="stack-card-header">
+                  <div class="stack-icon">
+                    <i class="fas fa-plug"></i>
+                  </div>
+                  <h4>Unified Access</h4>
+                </div>
+                <p>Each owner can expose either a chat and/or a search endpoints, following OpenAPI spec.</p>
+                                  <div class="card-svg">
+                    <svg width="100%" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <!-- Router on the left side -->
+                      <g transform="translate(50, 40)">
+                        <text x="0" y="0" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="10" font-weight="600">&lt;/&gt; Router</text>
+                      </g>
+                      
+                      <!-- Search RPC Endpoint - Top -->
+                      <g transform="translate(150, 20)">
+                        <text x="0" y="0" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="8" font-weight="600">🔍 Search RPC Endpoint</text>
+                        <rect x="-50" y="5" width="100" height="16" rx="4" fill="var(--glass)" stroke="var(--glass-border)" stroke-width="1"/>
+                        <text x="0" y="16" text-anchor="middle" fill="var(--text-secondary)" font-family="Inter" font-size="6" font-family="monospace">syft://admin@oreilley.org/search</text>
+                      </g>
+                      
+                      <!-- Chat RPC Endpoint - Bottom -->
+                      <g transform="translate(150, 60)">
+                        <text x="0" y="0" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="8" font-weight="600">💬 Chat RPC Endpoint</text>
+                        <rect x="-50" y="5" width="100" height="16" rx="4" fill="var(--glass)" stroke="var(--glass-border)" stroke-width="1"/>
+                        <text x="0" y="16" text-anchor="middle" fill="var(--text-secondary)" font-family="Inter" font-size="6" font-family="monospace">syft://admin@oreilley.org/chat</text>
+                      </g>
+                      
 
-                  <!-- Access Control Header -->
-                  <text
-                    x="20"
-                    y="35"
-                    fill="var(--white)"
-                    font-family="Inter"
-                    font-size="16"
-                    font-weight="600"
-                  >
-                    Access Control
-                  </text>
-
-                  <!-- General Access Dropdown -->
-                  <g transform="translate(20, 50)">
-                    <rect
-                      width="360"
-                      height="36"
-                      rx="6"
-                      fill="var(--glass)"
-                      stroke="var(--glass-border)"
-                    />
-                    <text
-                      x="16"
-                      y="23"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      General access
-                    </text>
-                    <text
-                      x="340"
-                      y="23"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      ▼
-                    </text>
-                    <text
-                      x="120"
-                      y="23"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      Restricted
-                    </text>
-                  </g>
-
-                  <!-- Add Users Search -->
-                  <g transform="translate(20, 95)">
-                    <rect
-                      width="360"
-                      height="36"
-                      rx="6"
-                      fill="var(--glass)"
-                      stroke="var(--glass-border)"
-                    />
-                    <text
-                      x="40"
-                      y="23"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      Add users
-                    </text>
-                    <path
-                      d="M16 18 h6 v6 h6 v-6 h6 v6 h-6 v6 h-6 v-6 h-6 z"
-                      fill="var(--gray-light)"
-                    />
-                  </g>
-
-                  <!-- User Entry 1 -->
-                  <g transform="translate(20, 140)">
-                    <rect
-                      width="360"
-                      height="32"
-                      rx="6"
-                      fill="var(--glass)"
-                      stroke="var(--glass-border)"
-                    />
-                    <circle cx="20" cy="16" r="10" fill="var(--primary)" />
-                    <text
-                      x="20"
-                      y="20"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                      text-anchor="middle"
-                    >
-                      J
-                    </text>
-                    <text
-                      x="45"
-                      y="20"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      john.doe@company.com
-                    </text>
-                    <text
-                      x="240"
-                      y="20"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      Query Access
-                    </text>
-                    <text
-                      x="340"
-                      y="20"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      ▼
-                    </text>
-                  </g>
-
-                  <!-- User Entry 2 -->
-                  <g transform="translate(20, 175)">
-                    <rect
-                      width="360"
-                      height="32"
-                      rx="6"
-                      fill="var(--glass)"
-                      stroke="var(--glass-border)"
-                      opacity="0.6"
-                    />
-                    <circle cx="20" cy="16" r="10" fill="var(--primary)" />
-                    <text
-                      x="20"
-                      y="20"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                      text-anchor="middle"
-                    >
-                      S
-                    </text>
-                    <text
-                      x="45"
-                      y="20"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      sarah@startup.io
-                    </text>
-                    <text
-                      x="240"
-                      y="20"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      View only
-                    </text>
-                    <text
-                      x="340"
-                      y="20"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      ▼
-                    </text>
-                  </g>
-                </svg>
+                    </svg>
+                  </div>
               </div>
-              <h3 class="feature-title">Stay in control</h3>
-              <p class="feature-description">
-                Bring your local LLM, RAG or data to the network & control who
-                can see or use it. You keep full ownership over your assets.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-image">
-                <svg
-                  width="100%"
-                  height="200"
-                  viewBox="0 0 400 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="400" height="300" fill="var(--glass)" rx="8" />
-
-                  <!-- Chart Title -->
-                  <text
-                    x="20"
-                    y="35"
-                    fill="var(--white)"
-                    font-family="Inter"
-                    font-size="16"
-                    font-weight="600"
-                  >
-                    MMLU Benchmark Score
-                  </text>
-
-                  <!-- Bar Chart -->
-                  <g transform="translate(20, 60)">
-                    <!-- DeepSeek v3 -->
-                    <rect
-                      x="0"
-                      y="0"
-                      width="360"
-                      height="24"
-                      rx="4"
-                      fill="var(--glass)"
-                      opacity="0.3"
-                    />
-                    <rect
-                      x="0"
-                      y="0"
-                      width="306"
-                      height="24"
-                      rx="4"
-                      fill="var(--primary)"
-                      opacity="0.6"
-                    />
-                    <text
-                      x="10"
-                      y="16"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      DeepSeek v3
-                    </text>
-                    <text
-                      x="340"
-                      y="16"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      85.2%
-                    </text>
-
-                    <!-- ChatGPT O1 -->
-                    <rect
-                      x="0"
-                      y="34"
-                      width="360"
-                      height="24"
-                      rx="4"
-                      fill="var(--glass)"
-                      opacity="0.3"
-                    />
-                    <rect
-                      x="0"
-                      y="34"
-                      width="299"
-                      height="24"
-                      rx="4"
-                      fill="var(--primary)"
-                      opacity="0.6"
-                    />
-                    <text
-                      x="10"
-                      y="50"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      ChatGPT O1
-                    </text>
-                    <text
-                      x="340"
-                      y="50"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      83.1%
-                    </text>
-
-                    <!-- Grok -->
-                    <rect
-                      x="0"
-                      y="68"
-                      width="360"
-                      height="24"
-                      rx="4"
-                      fill="var(--glass)"
-                      opacity="0.3"
-                    />
-                    <rect
-                      x="0"
-                      y="68"
-                      width="293"
-                      height="24"
-                      rx="4"
-                      fill="var(--primary)"
-                      opacity="0.6"
-                    />
-                    <text
-                      x="10"
-                      y="84"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      Grok
-                    </text>
-                    <text
-                      x="340"
-                      y="84"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      81.5%
-                    </text>
-
-                    <!-- Private LLM -->
-                    <rect
-                      x="0"
-                      y="100"
-                      width="360"
-                      height="24"
-                      rx="4"
-                      fill="var(--glass)"
-                      opacity="0.3"
-                    />
-                    <rect
-                      x="0"
-                      y="100"
-                      width="299"
-                      height="24"
-                      rx="4"
-                      fill="var(--primary)"
-                      opacity="0.6"
-                    />
-                    <text
-                      x="10"
-                      y="116"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      Private LLM
-                    </text>
-                    <text
-                      x="340"
-                      y="116"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                    >
-                      83.4%
-                    </text>
-
-                    <!-- Ensemble -->
-                    <rect
-                      x="0"
-                      y="132"
-                      width="360"
-                      height="24"
-                      rx="4"
-                      fill="var(--glass)"
-                      opacity="0.3"
-                    />
-                    <rect
-                      x="0"
-                      y="132"
-                      width="314"
-                      height="24"
-                      rx="4"
-                      fill="var(--secondary)"
-                      opacity="0.8"
-                    >
-                      <animate
-                        attributeName="opacity"
-                        values="0.6;0.9;0.6"
-                        dur="2s"
-                        repeatCount="indefinite"
-                      />
-                    </rect>
-                    <text
-                      x="10"
-                      y="150"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                      font-weight="600"
-                    >
-                      Your Ensemble
-                    </text>
-                    <text
-                      x="340"
-                      y="150"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="13"
-                      font-weight="600"
-                    >
-                      85.8%
-                    </text>
-                  </g>
-
-                  <!-- Footnote -->
-                  <text
-                    x="20"
-                    y="285"
-                    fill="var(--gray-light)"
-                    font-family="Inter"
-                    font-size="11"
-                  >
-                    * Results on MMLU (Massive Multitask Language Understanding)
-                    benchmark
-                  </text>
-                </svg>
+              
+              <!-- Interoperable -->
+              <div class="protocol-stack-card">
+                <div class="stack-card-header">
+                  <div class="stack-icon">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <h4>Interoperable</h4>
+                </div>
+                <p>Reachable from anywhere through HTTP or syftRPC, with data and models serveable from any local machine, cloud, third-party service or storage.</p>
               </div>
-              <h3 class="feature-title">Outperform centralised models</h3>
-              <p class="feature-description">
-                Use our unified API Spec to easily ensemble public and private
-                models and share it with others.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-image">
-                <svg
-                  width="100%"
-                  height="200"
-                  viewBox="0 0 400 200"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="400" height="300" fill="var(--glass)" rx="8" />
-
-                  <!-- Network Stats Header -->
-                  <text
-                    x="20"
-                    y="35"
-                    fill="var(--white)"
-                    font-family="Inter"
-                    font-size="20"
-                    font-weight="600"
-                  >
-                    Your Monthly Stats
-                  </text>
-
-                  <!-- Queries -->
-                  <g transform="translate(20, 70)">
-                    <text
-                      x="0"
-                      y="0"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="16"
-                    >
-                      Queries
-                    </text>
-                    <text
-                      x="360"
-                      y="0"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="16"
-                      font-family="monospace"
-                    >
-                      25K+
-                    </text>
-                  </g>
-
-                  <!-- Total Rewards -->
-                  <g transform="translate(20, 110)">
-                    <text
-                      x="0"
-                      y="0"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="16"
-                    >
-                      Total Rewards
-                    </text>
-                    <text
-                      x="360"
-                      y="0"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="16"
-                      font-family="monospace"
-                    >
-                      $2.5K+
-                    </text>
-                  </g>
-
-                  <!-- Tokens Generated -->
-                  <g transform="translate(20, 150)">
-                    <text
-                      x="0"
-                      y="0"
-                      fill="var(--gray-light)"
-                      font-family="Inter"
-                      font-size="16"
-                    >
-                      Tokens Generated
-                    </text>
-                    <text
-                      x="360"
-                      y="0"
-                      text-anchor="end"
-                      fill="var(--white)"
-                      font-family="Inter"
-                      font-size="16"
-                      font-family="monospace"
-                    >
-                      15M+
-                    </text>
-                  </g>
-
-                  <!-- Animated Gradient -->
-                  <defs>
-                    <linearGradient
-                      id="statsGradient"
-                      x1="0"
-                      y1="0"
-                      x2="1"
-                      y2="1"
-                    >
-                      <stop
-                        offset="0%"
-                        stop-color="var(--primary)"
-                        stop-opacity="0.1"
-                      >
-                        <animate
-                          attributeName="stop-opacity"
-                          values="0.1;0.3;0.1"
-                          dur="3s"
-                          repeatCount="indefinite"
-                        />
-                      </stop>
-                      <stop
-                        offset="100%"
-                        stop-color="var(--secondary)"
-                        stop-opacity="0.1"
-                      >
-                        <animate
-                          attributeName="stop-opacity"
-                          values="0.1;0.3;0.1"
-                          dur="3s"
-                          repeatCount="indefinite"
-                          begin="1.5s"
-                        />
-                      </stop>
-                    </linearGradient>
-                  </defs>
-                  <rect
-                    width="400"
-                    height="300"
-                    fill="url(#statsGradient)"
-                    rx="8"
-                  />
-                </svg>
-              </div>
-              <h3 class="feature-title">Get rewarded</h3>
-              <p class="feature-description">
-                Set your own pricing and control how your assets are used and
-                compensated.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="how-to">
+      <!-- Achieve New Goals Together Section -->
+      <section class="achieve-goals">
         <div class="container">
-          <h2 class="section-title">Steps to join the network</h2>
-          <div class="steps-grid">
-            <div class="step-card">
-              <div class="step-header">
-                <div class="step-icon install">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
+          <div class="achieve-goals-content">
+            <h2>Achieve New Goals Together</h2>
+            <p class="achieve-goals-intro">
+              When distributed knowledge can be safely connected through <a href="https://openmined.org/attribution-based-control/" target="_blank" rel="noopener noreferrer">attribution-based control</a>, AI becomes more than just a tool, it becomes a platform for collective progress in science, society, and beyond.
+            </p>
+            
+            <div class="stakeholder-grid">
+              <div class="stakeholder-card" data-stakeholder="owners">
+                <div class="stakeholder-card-header">
+                  <div class="stakeholder-icon">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <h3>Data & Model Owners</h3>
+                  <p class="stakeholder-subtitle">Control access and earn rewards</p>
                 </div>
-                <div>
-                  <h3 class="step-title">Installation</h3>
-                  <p class="step-subtitle">Get Started in Minutes</p>
+                <div class="stakeholder-benefits">
+                  <div class="benefit-row">
+                    <div class="benefit-item">
+                      <h4>Stay in control</h4>
+                      <p>Control who can see or use your assets. Keep full ownership.</p>
+                    </div>
+                    <div class="benefit-visualization">
+                      <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 230 120"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="accessGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                          >
+                            <stop
+                              offset="0%"
+                              style="stop-color:var(--primary);stop-opacity:0.1"
+                            />
+                            <stop
+                              offset="100%"
+                              style="stop-color:var(--secondary);stop-opacity:0.1"
+                            />
+                          </linearGradient>
+                        </defs>
+
+
+                        <!-- Access Control Header -->
+                        <text
+                          x="15"
+                          y="25"
+                          fill="var(--text-primary)"
+                          font-family="Inter"
+                          font-size="14"
+                          font-weight="600"
+                        >
+                          Access Control
+                        </text>
+
+                        <!-- General Access Dropdown -->
+                        <g transform="translate(15, 35)">
+                          <rect
+                            width="200"
+                            height="28"
+                            rx="6"
+                            fill="var(--glass)"
+                            stroke="var(--glass-border)"
+                            stroke-width="1"
+                          />
+                          <text
+                            x="12"
+                            y="19"
+                            fill="var(--gray-light)"
+                            font-family="Inter"
+                            font-size="11"
+                          >
+                            General access
+                          </text>
+                          <text
+                            x="185"
+                            y="19"
+                            fill="var(--gray-light)"
+                            font-family="Inter"
+                            font-size="11"
+                          >
+                            ▼
+                          </text>
+                          <text
+                            x="185"
+                            y="19"
+                            fill="var(--primary)"
+                            font-family="Inter"
+                            font-size="11"
+                            font-weight="500"
+                            text-anchor="end"
+                          >
+                            Restricted
+                          </text>
+                        </g>
+
+                        <!-- Add Users Search -->
+                        <g transform="translate(15, 70)">
+                          <rect
+                            width="200"
+                            height="28"
+                            rx="6"
+                            fill="var(--glass)"
+                            stroke="var(--glass-border)"
+                            stroke-width="1"
+                          />
+                          <text
+                            x="35"
+                            y="19"
+                            fill="var(--gray-light)"
+                            font-family="Inter"
+                            font-size="11"
+                          >
+                            Add users
+                          </text>
+                          <path
+                            d="M12 14 h4 v4 h4 v-4 h4 v4 h-4 v4 h-4 v-4 h-4 z"
+                            fill="var(--gray-light)"
+                          />
+                        </g>
+
+                        <!-- User Entry 1 -->
+                        <g transform="translate(15, 105)">
+                          <rect
+                            width="200"
+                            height="24"
+                            rx="6"
+                            fill="var(--glass)"
+                            stroke="var(--glass-border)"
+                            stroke-width="1"
+                          />
+                          <circle cx="20" cy="12" r="8" fill="var(--primary)" opacity="0.7"/>
+                          <text
+                            x="20"
+                            y="16"
+                            fill="white"
+                            font-family="Inter"
+                            font-size="10"
+                            text-anchor="middle"
+                            font-weight="600"
+                          >
+                            J
+                          </text>
+                          <text
+                            x="35"
+                            y="16"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                          >
+                            john@company.com
+                          </text>
+                          <text
+                            x="180"
+                            y="16"
+                            fill="var(--text-secondary)"
+                            font-family="Inter"
+                            font-size="9"
+                          >
+                            Query
+                          </text>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <div class="benefit-row">
+                    <div class="benefit-item">
+                      <h4>Get rewarded</h4>
+                      <p>Set your own pricing and earn from every query that uses your data.</p>
+                    </div>
+                    <div class="benefit-visualization">
+                      <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 230 120"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="statsGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                          >
+                            <stop
+                              offset="0%"
+                              style="stop-color:var(--primary);stop-opacity:0.1"
+                            />
+                            <stop
+                              offset="100%"
+                              style="stop-color:var(--secondary);stop-opacity:0.1"
+                            />
+                          </linearGradient>
+                        </defs>
+
+                        <!-- Network Stats Header -->
+                        <text
+                          x="15"
+                          y="25"
+                          fill="var(--text-primary)"
+                          font-family="Inter"
+                          font-size="14"
+                          font-weight="600"
+                        >
+                          Monthly Stats
+                        </text>
+
+                        <!-- Queries -->
+                        <g transform="translate(15, 40)">
+                          <text
+                            x="0"
+                            y="0"
+                            fill="var(--gray-light)"
+                            font-family="Inter"
+                            font-size="11"
+                          >
+                            Queries
+                          </text>
+                          <text
+                            x="200"
+                            y="0"
+                            text-anchor="end"
+                            fill="var(--primary)"
+                            font-family="Inter"
+                            font-size="12"
+                            font-family="monospace"
+                            font-weight="600"
+                          >
+                            25K+
+                          </text>
+                        </g>
+
+                        <!-- Total Rewards -->
+                        <g transform="translate(15, 60)">
+                          <text
+                            x="0"
+                            y="0"
+                            fill="var(--gray-light)"
+                            font-family="Inter"
+                            font-size="11"
+                          >
+                            Rewards
+                          </text>
+                          <text
+                            x="200"
+                            y="0"
+                            text-anchor="end"
+                            fill="var(--primary)"
+                            font-family="Inter"
+                            font-size="12"
+                            font-family="monospace"
+                            font-weight="600"
+                          >
+                            $2.5K+
+                          </text>
+                        </g>
+
+                        <!-- Tokens Generated -->
+                        <g transform="translate(15, 80)">
+                          <text
+                            x="0"
+                            y="0"
+                            fill="var(--gray-light)"
+                            font-family="Inter"
+                            font-size="11"
+                          >
+                            Tokens
+                          </text>
+                          <text
+                            x="200"
+                            y="0"
+                            text-anchor="end"
+                            fill="var(--primary)"
+                            font-family="Inter"
+                            font-size="12"
+                            font-family="monospace"
+                            font-weight="600"
+                          >
+                            1.2M+
+                          </text>
+                        </g>
+
+
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <p class="step-description">
-                Install SyftBox and llm-protocol. Initiate your first model
-                project with our CLI helper.
-              </p>
+              
+              <div class="stakeholder-card" data-stakeholder="researchers">
+                <div class="stakeholder-card-header">
+                  <div class="stakeholder-icon">
+                    <i class="fas fa-microscope"></i>
+                  </div>
+                  <h3>Researchers & End-Users</h3>
+                  <p class="stakeholder-subtitle">Access superior AI capabilities</p>
+                </div>
+                <div class="stakeholder-benefits">
+                  <div class="benefit-row">
+                    <div class="benefit-item">
+                      <h4>Outperform centralized models</h4>
+                      <p>Combine novel data sources or models, outperforming single models</p>
+                    </div>
+                    <div class="benefit-visualization">
+                      <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 230 120"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="chartGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                          >
+                            <stop
+                              offset="0%"
+                              style="stop-color:var(--primary);stop-opacity:0.1"
+                            />
+                            <stop
+                              offset="100%"
+                              style="stop-color:var(--secondary);stop-opacity:0.1"
+                            />
+                          </linearGradient>
+                        </defs>
+
+
+                        <!-- Chart Title -->
+                        <text
+                          x="15"
+                          y="25"
+                          fill="var(--text-primary)"
+                          font-family="Inter"
+                          font-size="14"
+                          font-weight="600"
+                        >
+                          MMLU Score
+                        </text>
+
+                        <!-- Bar Chart -->
+                        <g transform="translate(15, 35)">
+                          <!-- DeepSeek v3 -->
+                          <rect
+                            x="0"
+                            y="0"
+                            width="200"
+                            height="18"
+                            rx="4"
+                            fill="var(--glass)"
+                            opacity="0.3"
+                          />
+                          <rect
+                            x="0"
+                            y="0"
+                            width="171"
+                            height="18"
+                            rx="4"
+                            fill="var(--primary)"
+                            opacity="0.6"
+                          />
+                          <text
+                            x="8"
+                            y="13"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                          >
+                            DeepSeek
+                          </text>
+                          <text
+                            x="195"
+                            y="13"
+                            text-anchor="end"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                            font-weight="600"
+                          >
+                            85%
+                          </text>
+
+                          <!-- ChatGPT O1 -->
+                          <rect
+                            x="0"
+                            y="25"
+                            width="200"
+                            height="18"
+                            rx="4"
+                            fill="var(--glass)"
+                            opacity="0.3"
+                          />
+                          <rect
+                            x="0"
+                            y="25"
+                            width="166"
+                            height="18"
+                            rx="4"
+                            fill="var(--primary)"
+                            opacity="0.6"
+                          />
+                          <text
+                            x="8"
+                            y="38"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                          >
+                            ChatGPT
+                          </text>
+                          <text
+                            x="195"
+                            y="38"
+                            text-anchor="end"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                            font-weight="600"
+                          >
+                            83%
+                          </text>
+
+                          <!-- Ensemble Model (Higher) -->
+                          <rect
+                            x="0"
+                            y="50"
+                            width="200"
+                            height="18"
+                            rx="4"
+                            fill="var(--glass)"
+                            opacity="0.3"
+                          />
+                          <rect
+                            x="0"
+                            y="50"
+                            width="190"
+                            height="18"
+                            rx="4"
+                            fill="var(--secondary)"
+                            opacity="0.8"
+                          />
+                          <text
+                            x="8"
+                            y="63"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                            font-weight="600"
+                          >
+                            Ensemble
+                          </text>
+                          <text
+                            x="195"
+                            y="63"
+                            text-anchor="end"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                            font-weight="600"
+                          >
+                            95%
+                          </text>
+                        </g>
+
+                        <!-- Performance Indicator -->
+                        <g transform="translate(15, 85)">
+                          <circle cx="8" cy="8" r="6" fill="var(--secondary)" opacity="0.8"/>
+                          <text
+                            x="20"
+                            y="12"
+                            fill="var(--text-primary)"
+                            font-family="Inter"
+                            font-size="10"
+                            font-weight="500"
+                          >
+                            +10% improvement
+                          </text>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <div class="benefit-row">
+                    <div class="benefit-item">
+                      <h4>Get novel insights</h4>
+                      <p>Use novel knowledge otherwise inaccessible to get better insights</p>
+                    </div>
+                    <div class="benefit-visualization">
+                      <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 230 120"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="insightsGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                          >
+                            <stop
+                              offset="0%"
+                              style="stop-color:var(--primary);stop-opacity:0.1"
+                            />
+                            <stop
+                              offset="100%"
+                              style="stop-color:var(--secondary);stop-opacity:0.1"
+                            />
+                          </linearGradient>
+                        </defs>
+
+                        
+
+                        
+                        <!-- Lightbulb and Connections -->
+                        <g transform="translate(115, 70)">
+                          <!-- Lightbulb -->
+                          <circle cx="0" cy="0" r="25" fill="var(--secondary)" opacity="0.8"/>
+                          <path d="M-15 -15 L15 -15 L12 12 L-12 12 Z" fill="var(--secondary)" opacity="0.8"/>
+                          <text x="0" y="6" text-anchor="middle" fill="white" font-family="Inter" font-size="16" font-weight="600">💡</text>
+                        </g>
+                        
+                        <!-- Connection nodes with labels -->
+                        <circle cx="25" cy="60" r="8" fill="var(--primary)" opacity="0.7"/>
+                        <text x="25" y="75" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="8" font-weight="500">Data</text>
+                        
+                        <circle cx="205" cy="60" r="8" fill="var(--primary)" opacity="0.7"/>
+                        <text x="205" y="75" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="8" font-weight="500">Models</text>
+                        
+                        <circle cx="115" cy="25" r="8" fill="var(--primary)" opacity="0.7"/>
+                        <text x="115" y="15" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="8" font-weight="500">Research</text>
+                        
+                        <circle cx="115" cy="95" r="8" fill="var(--primary)" opacity="0.7"/>
+                        <text x="115" y="110" text-anchor="middle" fill="var(--text-primary)" font-family="Inter" font-size="8" font-weight="500">Users</text>
+                        
+                        <!-- Connection lines -->
+                        <line x1="33" y1="60" x2="100" y2="55" stroke="var(--text-secondary)" stroke-width="2.5" opacity="0.5"/>
+                        <line x1="197" y1="60" x2="130" y2="55" stroke="var(--text-secondary)" stroke-width="2.5" opacity="0.5"/>
+                        <line x1="123" y1="33" x2="109" y2="82" stroke="var(--text-secondary)" stroke-width="2.5" opacity="0.5"/>
+                        <line x1="33" y1="60" x2="100" y2="65" stroke="var(--text-secondary)" stroke-width="2.5" opacity="0.5"/>
+                        <line x1="197" y1="60" x2="130" y2="65" stroke="var(--text-secondary)" stroke-width="2.5" opacity="0.5"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="step-card">
-              <div class="step-header">
-                <div class="step-icon link">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-                    />
-                  </svg>
+            
+            <div class="goals-animation">
+              <h3>.. and across various industries</h3>
+              <div class="animated-goals">
+                <div class="goal-item" data-goal="scientific-breakthroughs" title="Discover new materials, understand quantum mechanics, and unlock the secrets of the universe.">
+                  <i class="fas fa-atom"></i>
+                  <span>Scientific Breakthroughs</span>
                 </div>
-                <div>
-                  <h3 class="step-title">Model Linking</h3>
-                  <p class="step-subtitle">Unified API Spec</p>
+                <div class="goal-item" data-goal="solve-societal-problems" title="Understand how diseases spread, and stop them sooner. Reveal how Netflix impacts the health of teenagers.">
+                  <i class="fas fa-hands-helping"></i>
+                  <span>Solve Societal Problems</span>
                 </div>
-              </div>
-              <p class="step-description">
-                Implement our unified API spec to link your model to the
-                network.
-              </p>
-            </div>
-            <div class="step-card">
-              <div class="step-header">
-                <div class="step-icon publish">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                <div class="goal-item" data-goal="advance-medicine" title="Connect medical data across hospitals to find rare disease patterns and develop personalized treatments.">
+                  <i class="fas fa-heartbeat"></i>
+                  <span>Advance Medicine</span>
                 </div>
-                <div>
-                  <h3 class="step-title">Publish</h3>
-                  <p class="step-subtitle">Set Your Terms</p>
+                <div class="goal-item" data-goal="trustworthy-information" title="Verify news sources, fact-check AI responses, and build trust in digital information.">
+                  <i class="fas fa-shield-alt"></i>
+                  <span>Trustworthy Information</span>
+                </div>
+                <div class="goal-item" data-goal="educational-access" title="Bring world-class education to remote villages and underserved communities worldwide.">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Educational Access</span>
+                </div>
+                <div class="goal-item" data-goal="economic-opportunity" title="Enable small businesses to compete with big tech using shared AI capabilities.">
+                  <i class="fas fa-chart-line"></i>
+                  <span>Economic Opportunity</span>
                 </div>
               </div>
-              <p class="step-description">
-                Choose your pricing model and set access controls.
-              </p>
-            </div>
-            <div class="step-card">
-              <div class="step-header">
-                <div class="step-icon build">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="step-title">Build Ensemble</h3>
-                  <p class="step-subtitle">Reach SOTA</p>
-                </div>
-              </div>
-              <p class="step-description">
-                Discover and ensemble various models on the network with yours.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
+
+
+      <!-- Get Involved Section -->
+      <section class="get-involved">
+        <div class="container">
+          <div class="get-involved-content">
+            <h2>Participate in the Network-Sourced AI</h2>
+            <p class="get-involved-intro">
+              We're working with publishers, creators, hospitals, researchers, and companies to build a shared foundation for the future of knowledge.
+              <a href="#contact" onclick="document.querySelector('.contact').scrollIntoView({behavior: 'smooth'})" class="join-us-link">Join the Beta Program</a>
+            </p>
+            
+            <div class="audience-grid">
+              <div class="audience-card">
+                <div class="audience-icon">
+                  <i class="fas fa-newspaper"></i>
+            </div>
+                <h3>Publishers & Media</h3>
+                <p>Protect your content, earn from AI usage, and maintain brand attribution.</p>
+                <button class="btn btn-outline" onclick="window.location.href='./for-publishers.html'">
+                  Learn More
+                </button>
+              </div>
+              
+              <div class="audience-card">
+                <div class="audience-icon">
+                  <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI Companies & Model Builders</h3>
+                <p>Access diverse, high-quality data legally and ethically. Build better models with attribution.</p>
+                <button class="btn btn-outline" onclick="window.location.href='./docs.html'">
+                  Learn More
+                </button>
+              </div>
+              
+              <div class="audience-card">
+                <div class="audience-icon">
+                  <i class="fas fa-flask"></i>
+                </div>
+                <h3>Researchers, Institutions & Companies</h3>
+                <p>Share sensitive data safely, enable global collaboration, and contribute proprietary data while maintaining control and earning value.</p>
+                <button class="btn btn-outline" onclick="window.location.href='./sensitive-assets.html'">
+                  Learn More
+                </button>
+              </div>
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
       <section class="contact">
         <div class="container">
           <div class="contact-content">
-            <h2 class="contact-title">Want to try it out?</h2>
-            <p class="contact-subtitle">
-              Join our early access program and help shape the future of
-              distributed AI
-            </p>
+            <h2 class="contact-title">Sign-up to learn more</h2>
+
             <form method="POST" id="contact-form" class="contact-form">
               <div class="form-group">
                 <label class="form-label" for="email">Email</label>
@@ -1284,44 +1591,8 @@
                   placeholder="Enter your email"
                 />
               </div>
-              <div class="form-group">
-                <label class="form-label">I am a:</label>
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="form_role"
-                      value="data_owner"
-                    />
-                    <span>Data Owner</span>
-                  </label>
-                  <label class="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="form_role"
-                      value="model_owner"
-                    />
-                    <span>Model Owner</span>
-                  </label>
-                  <label class="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="form_role"
-                      value="hosting_service"
-                    />
-                    <span>Hosting Service</span>
-                  </label>
-                  <label class="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="form_role"
-                      value="researcher"
-                    />
-                    <span>Researcher</span>
-                  </label>
-                </div>
-              </div>
-              <button type="submit" class="submit-btn">Get Early Access</button>
+
+              <button type="submit" class="submit-btn">Get Involved</button>
             </form>
           </div>
         </div>
@@ -1330,7 +1601,6 @@
 
     <site-footer></site-footer>
 
-    <!-- <script src="https://js.hsforms.net/forms/embed/6487402.js" defer></script> -->
     <script
       type="text/javascript"
       id="hs-script-loader"
@@ -1339,5 +1609,25 @@
       src="https://js.hs-scripts.com/6487402.js"
     ></script>
     <script type="module" src="./src/scripts/index.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference, only set if exists
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+      
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Dispatch theme change event for components
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+      }
+    </script>
   </body>
 </html>

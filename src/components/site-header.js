@@ -9,6 +9,10 @@ class SiteHeader extends HTMLElement {
     return ["logo-src", "logo-text", "current-page"];
   }
 
+  getTheme() {
+    return document.documentElement.getAttribute('data-theme') || 'light';
+  }
+
   connectedCallback() {
     this.render();
     this.addEventListeners();
@@ -26,6 +30,33 @@ class SiteHeader extends HTMLElement {
     const logoSrc = this.getAttribute("logo-src") || "";
     const logoText = this.getAttribute("logo-text") || "OpenMined";
     const currentPage = this.getAttribute("current-page") || "";
+    const theme = this.getTheme();
+
+    // Define theme-specific CSS variables
+    const themeVars = {
+      light: {
+        '--section-bg': '#F9FAFB',
+        '--section-bg-alt': '#F3F4F6',
+        '--card-border': '#E5E7EB',
+        '--text-primary': '#17161D',
+        '--primary': '#6976AE',
+        '--secondary': '#937098',
+        '--glass-light': 'rgba(255, 255, 255, 0.8)',
+        '--gray-light': '#9CA3AF'
+      },
+      dark: {
+        '--section-bg': '#2E2B3B',
+        '--section-bg-alt': '#17161D',
+        '--card-border': '#4B5563',
+        '--text-primary': '#ffffff',
+        '--primary': '#BB86FC',
+        '--secondary': '#32d5e8',
+        '--glass-light': 'rgba(255, 255, 255, 0.1)',
+        '--gray-light': '#9CA3AF'
+      }
+    };
+
+    const currentThemeVars = themeVars[theme] || themeVars.light;
 
     // You can customize these social links as needed
     const socialLinks = [
@@ -51,17 +82,18 @@ class SiteHeader extends HTMLElement {
       <style>
         :host {
           display: block;
+          ${Object.entries(currentThemeVars).map(([key, value]) => `${key}: ${value};`).join('\n          ')}
         }
         
         header {
-          background: linear-gradient(135deg, var(--dark), var(--darker));
+          background: linear-gradient(135deg, var(--section-bg), var(--section-bg-alt));
           padding: 1.5rem 0;
           position: sticky;
           top: 0;
           z-index: 100;
           -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
-          border-bottom: 1px solid var(--glass-border);
+          border-bottom: 1px solid var(--card-border);
           box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
@@ -119,7 +151,7 @@ class SiteHeader extends HTMLElement {
         }
         
         .nav-links a {
-          color: var(--light, white);
+          color: var(--text-primary);
           text-decoration: none;
           font-weight: 500;
           padding: 0.5rem 1rem;
@@ -128,13 +160,13 @@ class SiteHeader extends HTMLElement {
         }
         
         .nav-links a:hover {
-          background: var(--glass, rgba(255,255,255,0.1));
-          color: var(--primary, #BB86FC);
+          background: var(--glass-light);
+          color: var(--primary);
         }
         
         .nav-links a.active {
-          background: var(--glass, rgba(255,255,255,0.2));
-          color: var(--primary, #BB86FC);
+          background: var(--glass-light);
+          color: var(--primary);
         }
 
         .social-icons {
@@ -161,7 +193,7 @@ class SiteHeader extends HTMLElement {
           display: none;
           background: none;
           border: none;
-          color: var(--light, white);
+          color: var(--text-primary);
           font-size: 1.5rem;
           cursor: pointer;
           padding: 0.5rem;
@@ -169,7 +201,7 @@ class SiteHeader extends HTMLElement {
         }
 
         .mobile-toggle:hover {
-          background: var(--glass, rgba(255,255,255,0.1));
+          background: var(--glass-light);
         }
         
         @media (max-width: 968px) {
@@ -215,9 +247,11 @@ class SiteHeader extends HTMLElement {
             padding: 1rem 0;
             gap: 0.5rem;
             display: none;
-            background: rgba(0,0,0,0.2);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 8px;
             margin-top: 1rem;
+            box-shadow: var(--shadow);
           }
           
           .nav-links.open {
@@ -247,11 +281,21 @@ class SiteHeader extends HTMLElement {
                 <li><a href="/" ${
                   currentPage === "home" ? 'class="active"' : ""
                 }>Home</a></li>
+                <li><a href="/for-publishers.html" ${
+                  currentPage === "publishers"
+                    ? 'class="active"'
+                    : ""
+                }>For Publishers</a></li>
+                <li><a href="/sensitive-assets.html" ${
+                  currentPage === "sensitive-assets"
+                    ? 'class="active"'
+                    : ""
+                }>For Sensitive Assets</a></li>
                 <li><a href="/docs.html" ${
                   currentPage === "docs"
                     ? 'class="active"'
                     : ""
-                }>Docs</a></li>
+                }>About Technology</a></li>
               </ul>
             </div>
               
@@ -300,6 +344,13 @@ class SiteHeader extends HTMLElement {
         }
       });
     }
+
+    // Listen for theme changes
+    document.addEventListener('themeChanged', this.handleThemeChange.bind(this));
+  }
+
+  handleThemeChange() {
+    this.render();
   }
 
   removeEventListeners() {
@@ -307,6 +358,7 @@ class SiteHeader extends HTMLElement {
     if (toggle) {
       toggle.removeEventListener("click", this.toggleMobileMenu);
     }
+    document.removeEventListener('themeChanged', this.handleThemeChange.bind(this));
   }
 }
 
