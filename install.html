@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
+    <title>Installation Guide - Syft NSAI Protocol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <script src="./src/components/site-header.js"></script>
+    <script src="./src/components/site-footer.js"></script>
+    <script src="./src/components/back-to-top.js"></script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "r4hjqoa5tp");
+    </script>
+  </head>
+  <body>
+    <site-header
+      logo-src="./src/assets/openmined.png"
+      logo-text="OpenMined"
+      current-page="install"
+    >
+    </site-header>
+    
+    <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </button>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-left">
+              <h1>Get Started with NSAI Protocol</h1>
+              <p class="hero-subtitle">Build permissioned, modular AI routers in minutes</p>
+              <div class="hero-buttons">
+                <button
+                  class="btn btn-primary"
+                  onclick="document.querySelector('.quick-start').scrollIntoView({behavior: 'smooth'})"
+                >
+                  <i class="fas fa-rocket mr-2"></i>Quick Start
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  onclick="document.querySelector('.tutorial-series').scrollIntoView({behavior: 'smooth'})"
+                >
+                  <i class="fas fa-graduation-cap mr-2"></i>Tutorial Series
+                </button>
+              </div>
+            </div>
+            <div class="hero-right">
+              <p class="hero-description">
+                Set up your NSAI Router to participate in network sourced AI and build the future of distributed intelligence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Start Section -->
+      <section class="quick-start problem" id="quick-start">
+        <div class="container">
+          <div class="problem-content">
+            <h2>Quick Start Guide</h2>
+            <p class="problem-intro">
+              Get your first NSAI Router running in under 5 minutes.
+            </p>
+            
+            <div class="problem-grid">
+              <div class="problem-card">
+                <div class="problem-icon">
+                  <i class="fas fa-box-open"></i>
+                </div>
+                <h3>1. Install SyftBox</h3>
+                <ul>
+                  <li>Works on any machine or OS</li>
+                  <li>Available desktop installer or CLI</li>
+                </ul>
+                <div style="margin-top: 1rem;">
+                  <a href="https://www.syftbox.net/" target="_blank" class="btn btn-outline" style="text-decoration: none;">
+                    <i class="fas fa-download mr-2"></i>Get SyftBox
+                  </a>
+                </div>
+              </div>
+              
+              <div class="problem-card">
+                <div class="problem-icon">
+                  <i class="fas fa-plug"></i>
+                </div>
+                <h3>2. Install the Router Dashboard</h3>
+                <ul>
+                  <li>Go to Apps and "Add App" in SyftUI</li>
+                  <li>Paste your GitHub repository URL</li>
+                  <br style="margin: 0.5rem 0;">
+                  <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0.5rem; padding: 0.5rem; font-family: monospace; font-size: 0.875rem;">
+                    <span style="color: var(--text-primary); flex: 1;">https://github.com/OpenMined/syft-llm-router/</span>
+                    <button onclick="copyToClipboard('https://github.com/OpenMined/syft-llm-router/')" style="background: var(--primary); color: white; border: none; border-radius: 0.25rem; padding: 0.25rem 0.5rem; cursor: pointer; font-size: 0.75rem; transition: background 0.2s ease;">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </br>
+                  <li>SyftBox launches the dashboard</li>
+                </ul>
+              </div>
+              
+              <div class="problem-card">
+                <div class="problem-icon">
+                  <i class="fas fa-rocket"></i>
+                </div>
+                <h3>3. Explore and participate</h3>
+                <ul>
+                  <li>Access the router dashboard</li>
+                  <li>Explore existing routers as client</li>
+                  <li>Add your own routers as provider</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="problem-stats">
+              <div class="stat">
+                <span class="stat-number">&lt;5 min</span>
+                <span class="stat-label">setup time</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">Zero</span>
+                <span class="stat-label">manual configuration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Setup Your First Router Section -->
+      <section class="vision">
+        <div class="container">
+          <div class="vision-content">
+            <h2>Setup Your First Router</h2>
+            <p class="vision-intro">
+              Complete step-by-step guide to build, configure, and deploy your first AI router. This comprehensive tutorial will take you from zero to a fully functional router in the federated network.
+            </p>
+            
+            <div style="background: var(--glass-light); border-radius: 0.75rem; padding: 1.5rem; margin: 2rem 0; border-left: 5px solid var(--primary);">
+              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <i class="fas fa-info-circle" style="color: var(--primary); font-size: 1.25rem;"></i>
+                <h3 style="margin: 0; color: var(--primary);">What You'll Learn</h3>
+              </div>
+              <ul style="margin: 0; padding-left: 1rem; line-height: 1.6;">
+                <li>How to create and configure different types of AI routers</li>
+                <li>Setting up data indexing for search capabilities</li>
+                <li>Publishing your router to the federated marketplace</li>
+                <li>Testing, monitoring, and maintaining your router</li>
+                <li>Understanding revenue tracking and analytics</li>
+              </ul>
+            </div>
+            
+            <div class="vision-principles" style="grid-template-columns: 1fr; gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+              <div class="principle">
+                <div class="principle-header">
+                  <div class="principle-icon-circle" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">1</div>
+                  <h3 class="principle-title">Create Your Router</h3>
+                </div>
+                <p>Start by creating your first AI router through the SyftBox dashboard. This process generates a complete project structure with all necessary files and configurations. Your router will handle both chat and search requests, making your AI services accessible to the federated network.</p>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--accent-light); border-radius: 0.5rem; border-left: 4px solid var(--accent);">
+                  <h4 style="margin: 0 0 0.75rem 0; color: var(--accent); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-route"></i> Router Creation Process
+                  </h4>
+                  <ol style="margin: 0; padding-left: 1rem; line-height: 1.6;">
+                    <li>Navigate to your SyftBox dashboard</li>
+                    <li>Click <strong>"Create New Router"</strong></li>
+                    <li>Choose your router profile: <strong>Provider</strong> (to offer services)</li>
+                    <li>Select router type: <strong>Default</strong> (recommended) or <strong>Custom</strong></li>
+                    <li>Choose services: <strong>Chat</strong>, <strong>Search</strong>, or both</li>
+                    <li>Configure basic settings and click <strong>"Create"</strong></li>
+                  </ol>
+                  
+                  <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                    <h5 style="margin: 0 0 0.5rem 0; color: var(--text-primary);">✨ Example: Router Creation Dialog</h5>
+                    <img src="./images/router-creation-dialog.png" alt="Router Creation Dialog showing Project Name field with 'OpenMined Data' as example" style="width: 100%; max-width: 500px; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                    <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.875rem;">Fill in your project name and follow the 4-step wizard to create your router.</p>
+                  </div>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--primary);">Router Types Explained:</h4>
+                  <ul style="margin: 0; padding-left: 1rem;">
+                    <li><strong>Default Router:</strong> Pre-configured with Ollama for chat and local RAG for search. Perfect for beginners.</li>
+                    <li><strong>Custom Router:</strong> Empty template requiring manual implementation of endpoints and logic.</li>
+                  </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--secondary);">Generated Files:</h4>
+                  <ul style="margin: 0; padding-left: 1rem;">
+                    <li><code style="background: var(--card-bg); padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.75rem;">chat_router.py</code> - Handles chat/completion requests</li>
+                    <li><code style="background: var(--card-bg); padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.75rem;">service_router.py</code> - Manages search/retrieval requests</li>
+                    <li><code style="background: var(--card-bg); padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.75rem;">run.sh</code> - Startup script for SyftBox</li>
+                    <li><code style="background: var(--card-bg); padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.75rem;">requirements.txt</code> - Python dependencies</li>
+                  </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <h5 style="margin: 0 0 0.5rem 0; color: var(--text-primary);">🎯 Result: Router Overview Dashboard</h5>
+                  <img src="./images/router-overview-dashboard.png" alt="Router Overview showing draft status with Chat and Search endpoints at $0 per request" style="width: 100%; max-width: 600px; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.875rem;">Your router is created in "Draft" status with both Chat and Search endpoints available. Notice the "Publish Router" button to make it live.</p>
+                </div>
+              </div>
+              
+              <div class="principle">
+                <div class="principle-header">
+                  <div class="principle-icon-circle" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">2</div>
+                  <h3 class="principle-title">Configure Data Sources</h3>
+                </div>
+                <p>Transform your local data into searchable knowledge by setting up the indexing system. This crucial step enables your router's search capabilities and creates a powerful RAG (Retrieval-Augmented Generation) system that enhances chat responses with your specific data.</p>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--accent-light); border-radius: 0.5rem; border-left: 4px solid var(--accent);">
+                  <h4 style="margin: 0 0 0.75rem 0; color: var(--accent); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-cogs"></i> Setup Process
+                  </h4>
+                  <ol style="margin: 0; padding-left: 1rem; line-height: 1.6;">
+                    <li>Open your SyftBox dashboard and locate your router app</li>
+                    <li>Click <strong>"Open Website"</strong> to access the router interface</li>
+                    <li>Navigate to the <strong>"Data Sources"</strong> or <strong>"Indexing"</strong> section</li>
+                    <li>Select folders, files, or databases you want to make searchable</li>
+                    <li>Configure chunking settings (default: 1000 characters with 200 overlap)</li>
+                    <li>Click <strong>"Start Indexing"</strong> and wait for completion</li>
+                  </ol>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--primary);">Data Indexing Process:</h4>
+                  <ol style="margin: 0; padding-left: 1rem;">
+                    <li>Navigate to your router app in SyftUI dashboard</li>
+                    <li>Click the "Open Website" or dashboard link</li>
+                    <li>Look for "Data Indexing" or "RAG Configuration" section</li>
+                    <li>Select local folders or files to index</li>
+                    <li>Configure chunking settings (optional)</li>
+                    <li>Start the indexing process</li>
+                  </ol>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--secondary);">Supported Data Types:</h4>
+                  <ul style="margin: 0; padding-left: 1rem;">
+                    <li><strong>Text Files:</strong> .txt, .md, .rst, .html</li>
+                    <li><strong>Documents:</strong> .pdf, .docx, .pptx</li>
+                    <li><strong>Code:</strong> .py, .js, .java, .cpp, etc.</li>
+                    <li><strong>Data:</strong> .csv, .json, .xml</li>
+                    <li><strong>Databases:</strong> SQLite, PostgreSQL connections</li>
+                  </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <h5 style="margin: 0 0 0.5rem 0; color: var(--text-primary);">📁 Example: RAG Document Search Interface</h5>
+                  <img src="./images/rag-document-search.png" alt="RAG Document Search interface showing 0 chunks, 0 watched files, IDLE status, and file browser" style="width: 100%; max-width: 700px; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.875rem;">Use the "Manage Files" tab to select folders and files for indexing. The system shows status: chunks indexed, files watched, and indexing status.</p>
+                </div>
+              </div>
+              
+              <div class="principle">
+                <div class="principle-header">
+                  <div class="principle-icon-circle" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">3</div>
+                  <h3 class="principle-title">Publish to the Network</h3>
+                </div>
+                <p>Make your router available to the global federated network by publishing it with proper metadata and pricing. This step transforms your local router into a discoverable service that can generate revenue while maintaining data ownership and privacy.</p>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--accent-light); border-radius: 0.5rem; border-left: 4px solid var(--accent);">
+                  <h4 style="margin: 0 0 0.75rem 0; color: var(--accent); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-rocket"></i> Publishing Checklist
+                  </h4>
+                  <div style="display: grid; gap: 0.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                      <input type="checkbox" style="margin: 0;"> 
+                      <span>Router is tested and working correctly</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                      <input type="checkbox" style="margin: 0;"> 
+                      <span>Data sources are indexed and searchable</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                      <input type="checkbox" style="margin: 0;"> 
+                      <span>Metadata completed (name, description, tags)</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                      <input type="checkbox" style="margin: 0;"> 
+                      <span>Pricing model configured</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                      <input type="checkbox" style="margin: 0;"> 
+                      <span>Access permissions and rate limits set</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <h5 style="margin: 0 0 0.5rem 0; color: var(--text-primary);">📝 Example: Publish Router Form</h5>
+                  <img src="./images/publish-router-dialog.png" alt="Publish Router dialog showing completed form with router name, summary, pricing, tags, and Publish button" style="width: 100%; max-width: 600px; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.875rem;">Complete the 6-step publishing wizard with router name, summary, description, tags, and pricing. The example shows $0 for chat and $0.30 for search requests.</p>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--primary);">Publishing Steps:</h4>
+                  <ol style="margin: 0; padding-left: 1rem;">
+                    <li>Fill in router metadata (name, description, tags)</li>
+                    <li>Set pricing model (per request, subscription, etc.)</li>
+                    <li>Configure access permissions and rate limits</li>
+                    <li>Add usage examples and documentation</li>
+                    <li>Review and confirm publication</li>
+                  </ol>
+                </div>
+                
+
+              </div>
+              
+              <div class="principle">
+                <div class="principle-header">
+                  <div class="principle-icon-circle" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">4</div>
+                  <h3 class="principle-title">Test, Monitor & Optimize</h3>
+                </div>
+                <p>Ensure your router performs optimally by conducting thorough testing, setting up monitoring, and optimizing based on usage patterns. This ongoing process helps maintain service quality and maximizes your revenue potential in the federated network.</p>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--accent-light); border-radius: 0.5rem; border-left: 4px solid var(--accent);">
+                  <h4 style="margin: 0 0 0.75rem 0; color: var(--accent); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-flask"></i> Testing Protocol
+                  </h4>
+                  <ol style="margin: 0; padding-left: 1rem; line-height: 1.6;">
+                    <li><strong>Chat Testing:</strong> Use the web interface to test conversational responses</li>
+                    <li><strong>Search Testing:</strong> Query your indexed data to verify retrieval accuracy</li>
+                    <li><strong>API Testing:</strong> Test endpoints programmatically with sample requests</li>
+                    <li><strong>Load Testing:</strong> Verify performance under multiple concurrent requests</li>
+                    <li><strong>Error Handling:</strong> Test edge cases and invalid inputs</li>
+                  </ol>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--primary);">Testing Methods:</h4>
+                  <ul style="margin: 0; padding-left: 1rem;">
+                    <li><strong>Web Interface:</strong> Built-in chat UI for direct testing</li>
+                    <li><strong>cURL:</strong> Command-line API testing</li>
+                    <li><strong>Python SDK:</strong> Programmatic integration</li>
+                  </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--secondary);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--secondary);">Example API Calls:</h4>
+                  <pre style="font-size: 0.75rem; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary); margin: 0;"><code># Chat endpoint
+curl -X POST "http://localhost:8080/chat" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "llama3",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+
+# Search endpoint
+curl -X POST "http://localhost:8080/search" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "your search query",
+    "top_k": 5
+  }'</code></pre>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--glass-light); border-radius: 0.5rem; border-left: 4px solid var(--accent);">
+                  <h4 style="margin: 0 0 0.5rem 0; color: var(--accent);">Monitoring Dashboard:</h4>
+                  <ul style="margin: 0; padding-left: 1rem;">
+                    <li><strong>Usage Analytics:</strong> Track request volume and performance</li>
+                    <li><strong>Revenue Tracking:</strong> Monitor earnings from router usage</li>
+                    <li><strong>Error Logs:</strong> View and debug issues</li>
+                    <li><strong>Health Status:</strong> Real-time router status monitoring</li>
+                  </ul>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <h5 style="margin: 0 0 0.5rem 0; color: var(--text-primary);">💬 Example: Chat Interface in Action</h5>
+                  <img src="./images/chat-interface.png" alt="Chat interface showing conversation about attribution-based control with AI model selection and data sources panel" style="width: 100%; max-width: 700px; border-radius: 0.5rem; border: 1px solid var(--card-border);">
+                  <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.875rem;">Test your router's chat functionality with the built-in interface. Users can select different AI models and data sources while getting contextual responses from your indexed data.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 0.75rem; padding: 2rem; margin: 3rem 0; color: white; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                <i class="fas fa-trophy" style="font-size: 2rem;"></i>
+                <h3 style="margin: 0; font-size: 1.5rem;">Congratulations!</h3>
+              </div>
+              <p style="margin: 0 0 1.5rem 0; font-size: 1.1rem; opacity: 0.9;">
+                Your AI router is now live in the federated network! You're contributing to the future of distributed AI while maintaining data ownership and privacy.
+              </p>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div style="background: rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 1rem;">
+                  <i class="fas fa-chart-line" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                  <h4 style="margin: 0 0 0.5rem 0;">Monitor Performance</h4>
+                  <p style="margin: 0; font-size: 0.875rem; opacity: 0.8;">Track usage, revenue, and system health through your dashboard</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 1rem;">
+                  <i class="fas fa-users" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                  <h4 style="margin: 0 0 0.5rem 0;">Join Community</h4>
+                  <p style="margin: 0; font-size: 0.875rem; opacity: 0.8;">Connect with other router operators and share best practices</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 1rem;">
+                  <i class="fas fa-rocket" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                  <h4 style="margin: 0 0 0.5rem 0;">Scale Up</h4>
+                  <p style="margin: 0; font-size: 0.875rem; opacity: 0.8;">Create additional routers for different use cases and data sources</p>
+                </div>
+              </div>
+              
+              <div style="margin-top: 2rem;">
+                <a href="./docs/tutorials.html" style="background: white; color: var(--primary); padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; margin-right: 1rem; display: inline-block;">
+                  <i class="fas fa-graduation-cap mr-2"></i>Advanced Tutorials
+                </a>
+                <a href="./index.html" style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; display: inline-block;">
+                  <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Tutorial Series Section -->
+      <section class="tutorial-series achieve-goals" id="tutorial-series">
+        <div class="container">
+          <div class="achieve-goals-content">
+            <h2>Tutorial Series</h2>
+            <p class="achieve-goals-intro">
+              Learn more about the NSAI Protocol: from basic setup to advanced custom routers, build the skills to create distributed AI services that honor data ownership and enable secure collaboration.
+            </p>
+            
+            <div class="stakeholder-grid">
+              <div class="stakeholder-card" data-stakeholder="provider">
+                <div class="stakeholder-card-header">
+                  <div class="stakeholder-icon">
+                    <i class="fas fa-cogs"></i>
+                  </div>
+                  <h3>Provider Tutorials</h3>
+                  <p class="stakeholder-subtitle">Create, publish, and monetize AI routers</p>
+                </div>
+                <div class="stakeholder-benefits">
+                  <div class="benefit-row" style="grid-template-columns: 1fr; gap: 1rem;">
+                    <div class="benefit-item">
+                      <h4>1. Create Your First Router</h4>
+                      <p>Learn to create permissioned, modular routers with unified chat and search endpoints. Build from templates or start from scratch.</p>
+                    </div>
+                    <div class="benefit-item">
+                      <h4>2. Publishing and Monetization</h4>
+                      <p>Publish your router to the federated marketplace, set pricing, and make it discoverable to clients worldwide.</p>
+                    </div>
+                    <div class="benefit-item">
+                      <h4>3. Testing and Monitoring</h4>
+                      <p>Verify endpoints, monitor usage, track revenue, and maintain high service quality with built-in tools.</p>
+                    </div>
+                    <div class="benefit-item">
+                      <h4>4. Advanced Custom Routers</h4>
+                      <p>Build custom endpoints, define your own logic, and create specialized AI services beyond standard templates.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="stakeholder-card" data-stakeholder="client">
+                <div class="stakeholder-card-header">
+                  <div class="stakeholder-icon">
+                    <i class="fas fa-globe"></i>
+                  </div>
+                  <h3>Client Tutorials</h3>
+                  <p class="stakeholder-subtitle">Discover and integrate published routers</p>
+                </div>
+                <div class="stakeholder-benefits">
+                  <div class="benefit-row" style="grid-template-columns: 1fr; gap: 1rem;">
+                    <div class="benefit-item">
+                      <h4>5. Discover and Chat</h4>
+                      <p>Browse published routers, filter by service type and price, and use chat endpoints directly in the SyftBox interface.</p>
+                    </div>
+                    <div class="benefit-item">
+                      <h4>6. API Integration</h4>
+                      <p>Integrate routers into your applications using REST APIs, with comprehensive OpenAPI documentation and code examples.</p>
+                    </div>
+                    <div class="benefit-item">
+                      <h4>SDK Examples</h4>
+                      <p>Ready-to-use Python and JavaScript code snippets for quick integration into your existing applications and workflows.</p>
+                    </div>
+                    <div class="benefit-item">
+                      <h4>Community Examples</h4>
+                      <p>Explore real-world example projects and community contributions to see best practices in action.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+              <a href="./tutorials.html" class="btn btn-primary" style="text-decoration: none;">
+                <i class="fas fa-graduation-cap mr-2"></i>Start Tutorial Series
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Next Steps Section -->
+      <section class="contact">
+        <div class="container">
+          <div class="contact-content">
+            <h2 class="contact-title">Ready to Build?</h2>
+            <p class="contact-subtitle">
+              Start creating attribution-based AI services that respect data ownership and enable distributed intelligence.
+            </p>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+              <a href="https://www.syftbox.net/" target="_blank" class="btn btn-primary" style="text-decoration: none;">
+                <i class="fas fa-download mr-2"></i>Download SyftBox
+              </a>
+              <a href="./docs/tutorials.html" class="btn btn-secondary" style="text-decoration: none;">
+                <i class="fas fa-graduation-cap mr-2"></i>Start Tutorials
+              </a>
+            </div>
+            
+            <p style="margin-top: 2rem; color: var(--text-secondary); font-size: 0.875rem;">
+              Join the growing community building the future of distributed AI.
+              <br>
+              <a href="./index.html" style="color: var(--primary); text-decoration: none;">← Back to main site</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script
+      type="text/javascript"
+      id="hs-script-loader"
+      async
+      defer
+      src="https://js.hs-scripts.com/6487402.js"
+    ></script>
+    <script type="module" src="./src/scripts/index.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference, only set if exists
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+      
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Dispatch theme change event for components
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+      }
+
+             // Copy to clipboard functionality
+       function copyToClipboard(text) {
+         navigator.clipboard.writeText(text).then(() => {
+           // Find the button that was clicked and update its icon
+           const buttons = document.querySelectorAll('button[onclick*="copyToClipboard"]');
+           buttons.forEach(button => {
+             if (button.onclick.toString().includes(text)) {
+               button.innerHTML = '<i class="fas fa-check"></i>';
+               setTimeout(() => {
+                 button.innerHTML = '<i class="fas fa-copy"></i>';
+               }, 2000);
+             }
+           });
+         });
+       }
+
+       // Copy to clipboard functionality for code blocks
+       document.addEventListener('DOMContentLoaded', function() {
+         const codeBlocks = document.querySelectorAll('pre code');
+         codeBlocks.forEach(block => {
+           const pre = block.parentElement;
+           const button = document.createElement('button');
+           button.className = 'copy-btn';
+           button.innerHTML = '<i class="fas fa-copy"></i>';
+           button.style.cssText = `
+             position: absolute;
+             top: 0.5rem;
+             right: 0.5rem;
+             background: var(--glass);
+             border: 1px solid var(--glass-border);
+             border-radius: 0.25rem;
+             padding: 0.25rem 0.5rem;
+             color: var(--text-secondary);
+             cursor: pointer;
+             transition: all 0.2s ease;
+           `;
+           
+           pre.style.position = 'relative';
+           pre.appendChild(button);
+           
+           button.addEventListener('click', () => {
+             navigator.clipboard.writeText(block.textContent).then(() => {
+               button.innerHTML = '<i class="fas fa-check"></i>';
+               setTimeout(() => {
+                 button.innerHTML = '<i class="fas fa-copy"></i>';
+               }, 2000);
+             });
+           });
+         });
+       });
+    </script>
+  </body>
+</html> 
+</html> 
