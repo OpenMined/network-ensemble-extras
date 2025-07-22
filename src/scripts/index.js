@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         successContainer.className = "mt-3";
         const successMessage = result.inlineMessage || `<div class="alert alert-success text-center"> 
           <h3 class="fw-medium text-success mb-2">Success!</h3> 
-          <p class="text-muted">Your information has been saved. You'll be redirected to the next form automatically.</p> 
+          <p class="text-muted">We will reach out to you shortly.</p> 
         </div>`;
         successContainer.innerHTML = successMessage;
         const submitButton = form.querySelector('button[type="submit"]');
