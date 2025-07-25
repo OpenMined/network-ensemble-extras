@@ -79,7 +79,7 @@ class SiteHeader extends HTMLElement {
           list-style: none;
           margin: 0;
           padding: 0;
-          gap: 2rem;
+          gap: 0rem;
         }
         
         .nav-links a {
@@ -192,7 +192,7 @@ class SiteHeader extends HTMLElement {
           }
         }
         
-        @media (max-width: 1170px) {
+        @media (max-width: 1070px) {
           .mobile-toggle {
             display: block;
           }

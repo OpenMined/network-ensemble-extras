@@ -402,6 +402,7 @@ pre code {
   align-items: center !important;
   justify-content: center !important;
   pointer-events: all !important;
+  -webkit-backdrop-filter: blur(2.5px) !important;
   backdrop-filter: blur(7px) !important;
 }
 .restricted-message {
@@ -416,6 +417,7 @@ pre code {
   max-width: 90vw !important;
   line-height: 1.6 !important;
   border: 1.5px solid var(--glass-border) !important;
+  -webkit-backdrop-filter: blur(2.5px) !important;
   backdrop-filter: blur(2.5px) !important;
   transition: box-shadow 0.2s, background 0.2s;
 }

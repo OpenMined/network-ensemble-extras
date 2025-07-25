@@ -1,5 +1,5 @@
 // Configuration
-const API_BASE_URL = 'http://74.235.204.42:8080' || 'https://syftbox.net/' || "http://localhost:8080";
+const API_BASE_URL =  "http://localhost:8080";
 
 // Global state
 let chatHistory = [];

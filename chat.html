@@ -62,17 +62,15 @@
     ></back-to-top>
 
     <!-- Theme Toggle Button -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    <!-- <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
       <i class="fas fa-sun"></i>
-    </button>
+    </button> -->
 
     <main class="container">
       <div class="chat-background max-w-4xl mx-auto mt-8 rounded-lg shadow-sm border border-b border-gray-200">
-        <div
-          class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16"
-        >
-
+        <!-- class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" -->
+        <div class="chat-details">
           <!-- SyftBox Server URL -->
           <div
             id="syftboxUrl"
@@ -251,7 +249,7 @@
     <script type="module" src="./src/scripts/chat.js"></script>
     
     <!-- Theme Toggle Script -->
-    <script>
+    <!-- <script>
       // Check for saved theme preference, only set if exists
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
@@ -268,6 +266,6 @@
         // Dispatch theme change event for components
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
       }
-    </script>
+    </script> -->
   </body>
 </html>
