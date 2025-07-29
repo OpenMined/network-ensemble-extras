@@ -18,12 +18,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
     <script src="./src/components/site-header.js"></script>
     <script src="./src/components/site-footer.js"></script>
     <!-- <script src="./src/components/site-spinner.js"></script> -->
     <script src="./src/components/back-to-top.js"></script>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
           c[a] ||
@@ -36,8 +35,7 @@
         y = l.getElementsByTagName(r)[0];
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "r4hjqoa5tp");
-    </script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script> -->
+    </script>
   </head>
   <body>
     <!-- <div class="restricted-overlay">
@@ -60,12 +58,6 @@
       position="bottom-right"
       show-after="200"
     ></back-to-top>
-
-    <!-- Theme Toggle Button -->
-    <!-- <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-      <i class="fas fa-moon"></i>
-      <i class="fas fa-sun"></i>
-    </button> -->
 
     <main class="container">
       <div class="chat-background max-w-4xl mx-auto mt-8 rounded-lg shadow-sm border border-b border-gray-200">
@@ -239,33 +231,13 @@
 
     <site-footer></site-footer>
 
-    <!-- <script
+    <script
       type="text/javascript"
       id="hs-script-loader"
       async
       defer
       src="https://js.hs-scripts.com/6487402.js"
-    ></script> -->
+    ></script>
     <script type="module" src="./src/scripts/chat.js"></script>
-    
-    <!-- Theme Toggle Script -->
-    <!-- <script>
-      // Check for saved theme preference, only set if exists
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-      }
-      
-      function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        
-        // Dispatch theme change event for components
-        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
-      }
-    </script> -->
   </body>
 </html>

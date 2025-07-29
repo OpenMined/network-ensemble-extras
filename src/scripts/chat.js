@@ -448,11 +448,11 @@ async function handleSendMessage() {
   }
 
   // Add user message to chat history
-  const userMessage = { role: "user", content: message };
-  chatHistory.push(userMessage);
-  addMessageToChat(message, "user");
+  // const userMessage = { role: "user", content: message };
+  // chatHistory.push(userMessage);
+  // addMessageToChat(message, "user");
   // Clear the input
-  messageInput.value = "";
+  // messageInput.value = "";
 
   setLoading(true);
   hideError();
@@ -503,9 +503,9 @@ async function handleSendMessage() {
     }
 
     // Add user message to chat history
-    // const userMessage = { role: "user", content: message };
-    // chatHistory.push(userMessage);
-    // addMessageToChat(message, "user");
+    const userMessage = { role: "user", content: message };
+    chatHistory.push(userMessage);
+    addMessageToChat(message, "user");
 
     // Find the selected chat router
     const chatRouter = chatRouters.find((r) => r.name === selectedChatSource);
@@ -559,7 +559,7 @@ Use the provided sources to answer the user's question accurately and comprehens
     }
 
     // Clear the input
-    // messageInput.value = "";
+    messageInput.value = "";
   } catch (error) {
     console.error("Error in chat:", error);
     showError(error instanceof Error ? error.message : "An error occurred");
