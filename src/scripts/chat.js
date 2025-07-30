@@ -1,5 +1,5 @@
 // Configuration
-const API_BASE_URL =  'http://74.235.204.42:8080' || "http://localhost:8080";
+const API_BASE_URL =  "http://74.235.204.42:34141" || "http://localhost:8080";
 
 // Global state
 let chatHistory = [];
