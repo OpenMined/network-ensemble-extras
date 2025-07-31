@@ -20,7 +20,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./src/components/site-header.js"></script>
     <script src="./src/components/site-footer.js"></script>
-    <!-- <script src="./src/components/site-spinner.js"></script> -->
     <script src="./src/components/back-to-top.js"></script>
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
@@ -38,14 +37,6 @@
     </script>
   </head>
   <body>
-    <!-- <div class="restricted-overlay">
-      <div class="restricted-message">
-        <strong>Access currently restricted.</strong><br>
-        Please contact OpenMined to try it out.
-        <br><br>
-        <a href="index.html" class="btn btn-primary" style="margin-top: 0.5em; font-size: 1rem;">Go back to Home</a>
-      </div>
-    </div> -->
     <site-header
       logo-src="./src/assets/openmined.png"
       logo-text="OpenMined"
@@ -60,127 +51,46 @@
     ></back-to-top>
 
     <main class="container">
-      <div class="chat-background max-w-4xl mx-auto mt-8 rounded-lg shadow-sm border border-b border-gray-200">
-        <!-- class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" -->
-        <div class="chat-details">
-          <!-- SyftBox Server URL -->
-          <div
-            id="syftboxUrl"
-            class="hidden bg-blue-50 px-3 py-1 rounded-md border border-blue-200"
-          >
-            <svg
-              class="h-4 w-4 text-blue-500 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-              />
-            </svg>
-            <a
-              id="syftboxUrlLink"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-600 hover:text-blue-800 hover:underline font-mono truncate max-w-32"
-              title="SyftBox Server URL"
-            >
-            </a>
-          </div>
-
-          <!-- User Info -->
-          <div class="flex items-center space-x-4">
+      <div class="min-h-screen mt-8">
+        <!-- User Info Header -->
+        <div class="chat-background max-w-7xl mx-auto ml-4 mr-4 py-2 px-4 rounded-lg shadow-sm border border-b border-gray-200">
+          <div class="chat-details">
+            <!-- SyftBox Server URL -->
             <div
-              class="flex items-center space-x-3 bg-gray-50 px-3 py-1 rounded-md border border-gray-200"
+              id="syftboxUrl"
+              class="hidden bg-blue-50 px-3 py-1 rounded-md border border-blue-200"
             >
               <svg
-                class="h-4 w-4 text-gray-400"
+                class="h-4 w-4 text-blue-500 mr-2"
                 fill="none"
-                viewBox="0 0 24 24"
                 stroke="currentColor"
+                viewBox="0 0 24 24"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
                 />
               </svg>
-              <span class="text-xs text-gray-700"
-                >User:
-                <span id="username" class="font-medium">Loading...</span></span
+              <a
+                id="syftboxUrlLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-blue-600 hover:text-blue-800 hover:underline font-mono truncate max-w-32"
+                title="SyftBox Server URL"
               >
+              </a>
             </div>
-            <div
-              class="flex items-center space-x-2 bg-gray-50 px-3 py-1 rounded-md border border-gray-200"
-            >
-              <span class="text-xs text-gray-700">Balance:</span>
-              <span class="text-xs text-gray-500">$20</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Main Content -->
-      <div class="max-w-4xl mx-auto py-8">
-        <div class="chat-background rounded-lg shadow-sm border border-gray-200">
-          <!-- Header -->
-          <div class="px-6 py-4 border-b border-gray-200">
-            <h1 class="text-2xl font-bold">Chat</h1>
-            <p class="mt-1">
-              Ask questions and get answers from your data sources
-            </p>
-          </div>
-
-          <!-- Configuration -->
-          <div class="chat-background px-6 py-4 border-b border-gray-200">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Data Sources -->
-              <div>
-                <label for="dataSources" class="block text-sm font-medium mb-2">
-                  Data Sources (Search)
-                </label>
-                <select
-                  id="dataSources"
-                  multiple
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600"
-                  size="3"
-                ></select>
-                <p class="text-xs mt-1">
-                  Select one or more data sources to search (optional)
-                </p>
-              </div>
-
-              <!-- Chat Source -->
-              <div>
-                <label class="block text-sm font-medium mb-2">
-                  Chat Source *
-                </label>
-                <select
-                  id="chatSource"
-                  aria-label="Chat Source"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600"
-                >
-                  <option value="">Select a chat source</option>
-                </select>
-                <p class="text-xs mt-1">
-                  Select a chat model to generate responses
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Chat Messages -->
-          <div class="px-6 py-4 h-96 overflow-y-auto">
-            <div id="chatMessages" class="space-y-4">
-              <!-- Empty state -->
-              <div id="emptyState" class="text-center text-gray-500 py-8">
+            <!-- User Info -->
+            <div class="user-info-container flex items-center space-x-4">
+              <div
+                class="flex items-center space-x-3 bg-gray-50 px-3 py-1 rounded-md border border-gray-200"
+              >
                 <svg
-                  class="mx-auto h-12 w-12 text-gray-400 mb-4"
+                  class="h-4 w-4 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -189,40 +99,194 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                <p>Start a conversation by typing a message below</p>
+                <span class="text-xs text-gray-700"
+                  >User:
+                  <span id="username" class="font-medium">Loading...</span></span
+                >
+              </div>
+              <div
+                class="flex items-center space-x-2 bg-gray-50 px-3 py-1 rounded-md border border-gray-200"
+              >
+                <span class="text-xs text-gray-700">Balance:</span>
+                <span class="text-xs text-gray-500">$20</span>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Error Display -->
-          <div
-            id="errorDisplay"
-            class="hidden px-6 py-3 bg-red-50 border-t border-red-200"
-          >
-            <div id="errorText" class="text-red-700 text-sm"></div>
-          </div>
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto py-8 px-4">
+          <div class="chat-layout">
+            
+            <!-- Main Chat Area -->
+            <div class="chat-background rounded-lg shadow-sm border border-gray-200 flex flex-col min-h-0">
+              <!-- Header -->
+              <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h1 class="text-2xl font-bold">Chat</h1>
+                    <p class="mt-1">Discover insights from the data sources that matter to you</p>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <!-- Mobile Configuration Toggle -->
+                    <button
+                      type="button"
+                      id="configToggle"
+                      class="config-toggle px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                      title="Toggle configuration"
+                    >
+                      <i class="fas fa-cog"></i>
+                    </button>
+                    <!-- Cost Display -->
+                    <div id="costDisplay" class="text-sm text-gray-500 hidden">
+                      <div>Cost per request: <span id="costValue"></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          <!-- Input -->
-          <div class="px-6 py-4 border-t border-gray-200 text-gray-600">
-            <div class="flex space-x-3 relative">
-              <textarea
-                id="messageInput"
-                placeholder="Type your message here..."
-                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                rows="3"
-              ></textarea>
-              <button
-                type="button"
-                id="sendButton"
-                class="chat-button self-end px-4 py-2 text-white rounded-md absolute right-[10px] top-1/2 -translate-y-1/2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                title="Send message"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                <span class="sr-only">Send</span>
-              </button>
+              <!-- Chat Messages -->
+              <div class="flex-1 px-6 py-4 overflow-y-auto min-h-0" id="chatMessagesContainer">
+                <div id="chatMessages" class="space-y-4">
+                  <!-- Empty state -->
+                  <div id="emptyState" class="flex items-center justify-center h-full">
+                    <div class="text-center">
+                      <svg class="mx-auto h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                      <p class="text-lg font-medium">Start a conversation</p>
+                      <p class="text-sm mt-1">Select a chat model and optionally data sources to begin</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Error Display -->
+              <div id="errorDisplay" class="hidden px-6 py-3 bg-red-50 border-t border-red-200">
+                <div class="text-red-700 text-sm flex items-center">
+                  <svg class="w-5 h-5 text-red-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l6.518 11.59c.75 1.334-.213 2.987-1.742 2.987H3.48c-1.53 0-2.492-1.653-1.742-2.987l6.519-11.59zM11 13a1 1 0 10-2 0 1 1 0 002 0zm-1-2a1 1 0 01-1-1V7a1 1 0 112 0v3a1 1 0 01-1 1z" clip-rule="evenodd" />
+                  </svg>
+                  <span id="errorText"></span>
+                  <button type="button" id="errorDetailsToggle" class="ml-2 underline text-xs text-red-700 hover:text-red-900 hidden">
+                    See more information
+                  </button>
+                </div>
+                <pre id="errorDetails" class="hidden mt-2 bg-red-100 text-xs p-2 rounded whitespace-pre-wrap break-all"></pre>
+              </div>
+
+              <!-- Input -->
+              <div class="px-6 py-4 border-t border-gray-200 text-gray-600">
+                <div class="flex space-x-3 relative">
+                  <textarea
+                    id="messageInput"
+                    placeholder="Type your message here..."
+                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    rows="3"
+                  ></textarea>
+                  <button
+                    type="button"
+                    id="sendButton"
+                    class="chat-button self-end px-4 py-2 text-white rounded-md absolute right-[10px] top-1/2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    title="Send message"
+                  >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span class="sr-only">Send</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Configuration Panel -->
+            <div id="configPanel" class="config-panel space-y-6">
+              <!-- Chat Model Selection -->
+              <div class="chat-background rounded-lg shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center mb-4">
+                  <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold">Chat Model</h3>
+                    <p class="text-sm">Select model for final prediction</p>
+                  </div>
+                </div>
+                
+                <div class="space-y-3">
+                  <div id="chatSourceEmpty" class="text-center py-8">
+                    <svg class="mx-auto h-8 w-8 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8l-4 4-4-4m0 8l4-4 4 4" />
+                    </svg>
+                    <p class="text-sm">No chat models available</p>
+                  </div>
+                  
+                  <div id="chatSourceDropdown" class="dropdown-container hidden">
+                    <button type="button" class="dropdown-button" id="chatSourceButton">
+                      <div class="flex items-center justify-between">
+                        <span class="text-gray-500" id="chatSourcePlaceholder">Select a chat model</span>
+                        <div id="chatSourceSelected" class="hidden">
+                          <div class="font-medium text-gray-900 truncate" id="chatSourceName"></div>
+                          <div class="text-sm text-gray-500 truncate" id="chatSourceAuthor"></div>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 transition-transform" id="chatSourceIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </button>
+                    <div class="dropdown-menu" id="chatSourceMenu"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Data Sources Selection -->
+              <div class="chat-background rounded-lg shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center mb-4">
+                  <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold">Data Sources</h3>
+                    <p class="text-sm">Optional search sources</p>
+                  </div>
+                </div>
+                
+                <div class="space-y-3">
+                  <div id="dataSourcesEmpty" class="text-center py-8">
+                    <svg class="mx-auto h-8 w-8 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8l-4 4-4-4m0 8l4-4 4 4" />
+                    </svg>
+                    <p class="text-sm">No search sources available</p>
+                  </div>
+                  
+                  <div id="dataSourcesContainer" class="hidden">
+                    <div class="dropdown-container">
+                      <button type="button" class="dropdown-button" id="dataSourcesButton">
+                        <div class="flex items-center justify-between">
+                          <div id="dataSourcesDisplay">
+                            <span class="text-gray-500">Select data sources</span>
+                          </div>
+                          <svg class="w-5 h-5 text-gray-400 transition-transform" id="dataSourcesIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </button>
+                      <div class="dropdown-menu" id="dataSourcesMenu"></div>
+                    </div>
+                    
+                    <!-- Preview of available sources -->
+                    <div class="mt-4 space-y-2">
+                      <p class="text-xs font-medium uppercase tracking-wide">Check out latest sources..</p>
+                      <div class="space-y-2" id="sourcePreview"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -120,7 +120,7 @@ body {
 }
 
 /* Theme toggle button */
-.theme-toggle {
+/* .theme-toggle {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -128,6 +128,7 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 50%;
+  border-radius: 6px;
   width: 48px;
   height: 48px;
   display: flex;
@@ -147,7 +148,7 @@ body {
   font-size: 1.2rem;
   color: var(--text-primary);
   transition: color 0.3s ease;
-}
+} */
 
 /* Dark mode icon */
 [data-theme="dark"] .theme-toggle i.fa-sun {

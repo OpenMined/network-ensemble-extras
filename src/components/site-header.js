@@ -134,6 +134,7 @@ class SiteHeader extends HTMLElement {
           width: 2.5rem;
           height: 2.5rem;
           border-radius: 50%;
+          border-radius: 6px;
           overflow: hidden;
         }
 
