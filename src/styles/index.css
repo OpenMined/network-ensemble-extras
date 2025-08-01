@@ -71,12 +71,12 @@
 }
 
 .btn-primary {
-  background: var(--primary);
+  background: var(--primary-dark);
   color: var(--white);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
+  background: var(--primary);
   transform: translateY(-2px);
 }
 
@@ -482,6 +482,7 @@
   padding: 2rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   position: relative;
   overflow: hidden;

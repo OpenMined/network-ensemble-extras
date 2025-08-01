@@ -29,8 +29,8 @@
       
       /* Calming animations */
       .explanation-section, .subsection {
-        backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,10 +77,10 @@
     ></back-to-top>
 
     <!-- Theme Toggle Button -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    <!-- <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
       <i class="fas fa-sun"></i>
-    </button>
+    </button> -->
 
     <main>
       <!-- Hero Section -->
@@ -1042,7 +1042,7 @@
     <!-- Before <site-footer> -->
     <div style="text-align: center; margin: 3rem 0 2rem 0; font-size: 1.15rem; color: var(--text-primary);">
       <i class="fab fa-slack" style="color: #611f69; font-size: 1.5rem; margin-right: 0.5rem;"></i>
-      Have a specific question? <a href="https://slack.openmined.org" target="_blank" style="color: var(--primary); text-decoration: underline;">Join our Slack</a> and ping our research and engineering team through <b>#support</b>.
+      Have a specific question? <a href="https://slack.openmined.org" target="_blank" rel="noopener" class="slack-link">Join our Slack</a> and ping our research and engineering team through <b>#support</b>.
     </div>
 
     <site-footer></site-footer>
@@ -1058,7 +1058,7 @@
     <script type="module" src="./src/scripts/index.js"></script>
     
     <!-- Theme Toggle Script -->
-    <script>
+    <!-- <script>
       // Check for saved theme preference, only set if exists
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
@@ -1075,7 +1075,7 @@
         // Dispatch theme change event for components
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
       }
-    </script>
+    </script> -->
     
     <!-- <script>
       // Show spinner while page loads
