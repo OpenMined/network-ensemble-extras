@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "route": "/api/username",
+      "rewrite": "http://74.235.204.42:34141/username"
+    },
+    {
+      "route": "/api/sburl",
+      "rewrite": "http://74.235.204.42:34141/sburl"
+    },
+    {
+      "route": "/api/router/list",
+      "rewrite": "http://74.235.204.42:34141/router/list"
+    }
+  ]
+}

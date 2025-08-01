@@ -1,5 +1,9 @@
 // Configuration
-const API_BASE_URL =  "http://74.235.204.42:34141" || "http://localhost:8080";
+// const API_BASE_URL =  "/api" || "http://74.235.204.42:34141" || "http://localhost:8080";
+const API_BASE_URL = location.hostname === "localhost"
+  ? "http://74.235.204.42:34141" || "http://localhost:8080"
+  : "/api";
+
 
 // Global state
 let chatHistory = [];
