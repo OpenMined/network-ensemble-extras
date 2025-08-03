@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Azure Functions
+api/node_modules/
+api/.funcignore
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
