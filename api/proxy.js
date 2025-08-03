@@ -1,30 +1,32 @@
 const fetch = require("node-fetch");
 
 module.exports = async function (context, req) {
-  const targetPath = req.url.replace("/api/proxy", "");
-  const targetUrl = `http://74.235.204.42:34141${targetPath}`;
+  const path = req.params["*"]; // <- gets "router/list", "sburl", etc.
+  const targetUrl = `http://74.235.204.42:34141/${path}`;
+
+  context.log("Proxying to:", targetUrl);
 
   try {
     const response = await fetch(targetUrl, {
       method: req.method,
       headers: req.headers,
-      body: req.method !== "GET" && req.method !== "HEAD" ? req.body : undefined,
+      body: ["GET", "HEAD"].includes(req.method) ? undefined : req.body
     });
 
-    const buffer = await response.buffer();
+    const body = await response.text();
 
     context.res = {
       status: response.status,
-      body: buffer,
-      isRaw: true,
       headers: {
-        "Content-Type": response.headers.get("content-type") || "application/octet-stream"
-      }
+        "Content-Type": response.headers.get("content-type") || "text/plain"
+      },
+      body
     };
   } catch (error) {
+    context.log("Proxy error:", error);
     context.res = {
-      status: 500,
-      body: `Proxy error: ${error.message}`
+      status: 502,
+      body: "Proxy error: " + error.message
     };
   }
 };
