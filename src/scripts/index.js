@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const hsFields = Array.from(formData).map(([name, value]) => ({ name, value }));
       // Always add data_owner field
-      hsFields.push({ name: 'user_type', value: 'data_owner' });
+      // hsFields.push({ name: 'user_type', value: 'data_owner' });
       const hsSubmissionData = {
         fields: hsFields,
         context: {
