@@ -1,12 +1,11 @@
-const fetch = require("node-fetch");
-
 module.exports = async function (context, req) {
-  const path = req.params["*"]; // <- gets "router/list", "sburl", etc.
-  const targetUrl = `http://74.235.204.42:34141/${path}`;
+  const path = req.params.restOfPath || "";
+  const targetUrl = `http://74.235.204.42:8080/${path}`;
 
   context.log("Proxying to:", targetUrl);
 
   try {
+    const fetch = require("node-fetch");
     const response = await fetch(targetUrl, {
       method: req.method,
       headers: req.headers,
@@ -18,7 +17,7 @@ module.exports = async function (context, req) {
     context.res = {
       status: response.status,
       headers: {
-        "Content-Type": response.headers.get("content-type") || "text/plain"
+        "Content-Type": response.headers.get("content-type") || "application/json"
       },
       body
     };
