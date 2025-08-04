@@ -1,6 +1,12 @@
-// Configuration
-// const API_BASE_URL = "http://74.235.204.42:34141" || "http://localhost:8080";
-const API_BASE_URL = "/api";
+// Configuration - Environment-aware
+const SYFTBOX_SERVER = "https://syftbox.net";
+const SYFT_FROM = "guest@syft.org";
+
+// Detect environment and set API base URL
+const isLocal = window.location.hostname === 'localhost' || 
+               window.location.hostname === '127.0.0.1';
+
+const API_BASE_URL = isLocal ? "http://localhost:8080" : "/api";
 
 // Global state
 let chatHistory = [];
@@ -11,12 +17,12 @@ let selectedDataSources = [];
 let selectedChatSource = "";
 let lastSearchResults = [];
 let isLoading = false;
-let syftboxBaseUrl = null;
 
-// API Service Classes
+// Router Service - Environment-aware HTTP for UI population
 class RouterService {
   async request(endpoint, options = {}) {
     try {
+      // Use environment-aware API base URL
       const response = await fetch(API_BASE_URL + endpoint, {
         headers: {
           "Content-Type": "application/json",
@@ -69,32 +75,11 @@ class RouterService {
   }
 }
 
+// Chat Service - Always uses RPC (both local and deployed)
 class ChatService {
-  joinUrls(baseUrl, endpoint) {
-    const cleanBase = baseUrl.replace(/\/$/, "");
-    const cleanEndpoint = endpoint.replace(/^\//, "");
-    return `${cleanBase}/${cleanEndpoint}`;
-  }
-
   async getServerUrl() {
-    if (syftboxBaseUrl) {
-      return syftboxBaseUrl;
-    }
-
-    try {
-      const response = await fetch(API_BASE_URL + "/sburl");
-      if (!response.ok) {
-        throw new Error(`Failed to fetch server URL: ${response.status}`);
-      }
-
-      const data = await response.json();
-      syftboxBaseUrl = data.url.replace(/\/$/, "");
-      return syftboxBaseUrl;
-    } catch (error) {
-      console.error("Failed to fetch server URL, using fallback:", error);
-      syftboxBaseUrl = "https://dev.syftbox.net";
-      return syftboxBaseUrl;
-    }
+    // Use the configured SYFTBOX_SERVER directly
+    return SYFTBOX_SERVER;
   }
 
   async request(endpoint, options = {}) {
@@ -104,6 +89,7 @@ class ChatService {
       const response = await fetch(fullUrl, {
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json, text/plain, */*",
           ...options.headers,
         },
         ...options,
@@ -131,6 +117,12 @@ class ChatService {
     }
   }
 
+  joinUrls(baseUrl, endpoint) {
+    const cleanBase = baseUrl.replace(/\/$/, "");
+    const cleanEndpoint = endpoint.replace(/^\//, "");
+    return `${cleanBase}/${cleanEndpoint}`;
+  }
+
   async pollForResponse(pollUrl, maxAttempts = 20) {
     const serverUrl = await this.getServerUrl();
 
@@ -138,34 +130,45 @@ class ChatService {
       try {
         const fullUrl = this.joinUrls(serverUrl, pollUrl);
         const response = await fetch(fullUrl);
-        const data = await response.json();
+        
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (jsonError) {
+          return {
+            success: false,
+            error: 'Something bad happened. Please try again later.',
+          };
+        }
 
-        if (response.status === 200 && data?.data?.message?.status_code === 200) {
+        const statusCode = data?.data?.message?.status_code;
+
+        if (response.status === 200 && statusCode === 200) {
           return {
             success: true,
-            data,
+            data: data.data.message.body,
           };
-        } else if (response.status === 202 || data?.data?.message?.status_code !== 200) {
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+        } else if (response.status === 202 || statusCode === 202) {
+          await new Promise(resolve => setTimeout(resolve, 2000));
           continue;
         } else {
           return {
             success: false,
-            error: data.message || `HTTP ${response.status}: ${response.statusText}`,
-            errorDetails: JSON.stringify(data, null, 2)
+            error: 'Something bad happened. Please try again later.',
+            errorDetails: data?.data?.message?.body
           };
         }
       } catch (error) {
         return {
           success: false,
-          error: error instanceof Error ? error.message : "Unknown error occurred",
+          error: error instanceof Error ? error.message : 'Unknown error occurred',
         };
       }
     }
 
     return {
       success: false,
-      error: "Request timed out after maximum attempts",
+      error: 'Request timed out after maximum attempts',
     };
   }
 
@@ -174,7 +177,7 @@ class ChatService {
     const syftUrl = `syft://${author}/app_data/${routerName}/rpc/search?query="${encodedQuery}"`;
     const encodedSyftUrl = encodeURIComponent(syftUrl);
 
-    const endpoint = `/api/v1/send/msg?x-syft-url=${encodedSyftUrl}&x-syft-from=guest@syft.org`;
+    const endpoint = `/api/v1/send/msg?x-syft-url=${encodedSyftUrl}&x-syft-from=${SYFT_FROM}`;
 
     const response = await this.request(endpoint, {
       method: "POST",
@@ -191,7 +194,7 @@ class ChatService {
     const syftUrl = `syft://${author}/app_data/${routerName}/rpc/chat`;
     const encodedSyftUrl = encodeURIComponent(syftUrl);
 
-    const endpoint = `/api/v1/send/msg?x-syft-url=${encodedSyftUrl}&x-syft-from=guest@syft.org`;
+    const endpoint = `/api/v1/send/msg?x-syft-url=${encodedSyftUrl}&x-syft-from=${SYFT_FROM}`;
 
     const payload = {
       model: "tinyllama:latest",
@@ -818,15 +821,18 @@ async function handleSendMessage() {
               message
             );
             if (searchResponse.success && searchResponse.data) {
-              const results = searchResponse.data.data.message.body.results;
-              searchResults.push(...results);
+              // Updated to match new RPC response structure
+              const results = searchResponse.data.results || searchResponse.data;
+              if (Array.isArray(results)) {
+                searchResults.push(...results);
 
-              // Collect unique filenames
-              results.forEach((result) => {
-                if (result.metadata?.filename) {
-                  uniqueFiles.add(result.metadata.filename);
-                }
-              });
+                // Collect unique filenames
+                results.forEach((result) => {
+                  if (result.metadata?.filename) {
+                    uniqueFiles.add(result.metadata.filename);
+                  }
+                });
+              }
             }
           } catch (error) {
             console.error(`Error searching router ${routerName}:`, error);
@@ -884,9 +890,10 @@ Use the provided sources to answer the user's question accurately and comprehens
     );
 
     if (chatResponse.success && chatResponse.data) {
+      // Updated to match new RPC response structure
       const assistantMessage = {
         role: "assistant",
-        content: chatResponse.data.data.message.body.message.content,
+        content: chatResponse.data.message?.content || chatResponse.data.content || "No response",
       };
       chatHistory.push(assistantMessage);
       addMessageToChat(assistantMessage.content, "assistant");
