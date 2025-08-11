@@ -16,6 +16,8 @@ class SiteFooter extends HTMLElement {
 			<style>
 				footer {
 					background: var(--darker);
+					background: linear-gradient(135deg, var(--section-bg), var(--section-bg-alt));
+					background: var(--section-bg-alt);
 					padding: 1.5rem 0;
 					border-top: 1px solid var(--glass-border);
 				}

@@ -592,6 +592,12 @@
   font-weight: 500;
 }
 
+.slack-link {
+  color: var(--primary);
+  text-decoration: underline;
+  /* font-weight: 600; */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .content-grid {
