@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Syft NSAI Router</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .code-block { background: #1a202c; }
+        .nav-link { transition: color 0.2s ease; }
+        .nav-link:hover { color: #4f46e5; }
+        .step-number { 
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); 
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-route text-indigo-600 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Syft NSAI Router</span>
+                        <span class="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">DOCS</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="getting-started.html" class="nav-link text-indigo-600 font-medium">Getting Started</a>
+                    <a href="tutorials.html" class="nav-link text-gray-700 font-medium">Tutorials</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-indigo-600 pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-white mb-4">
+                    <i class="fas fa-rocket mr-3"></i>Getting Started
+                </h1>
+                <p class="text-xl text-indigo-100 max-w-3xl mx-auto">
+                    Set up your Syft NSAI Router in minutes and start building intelligent AI services
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prerequisites Section -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Getting Started with Syft NSAI Router</h2>
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-blue-50 rounded-xl p-6 text-center border border-blue-100">
+                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-box-open text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">1. Install SyftBox</h3>
+                    <p class="text-gray-600 text-sm mb-2">Download SyftBox for your platform or use the CLI installer.</p>
+                    <a href="https://www.syftbox.net/" class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block" target="_blank">Get SyftBox →</a>
+                    <div class="mt-4 text-left text-xs bg-gray-50 rounded p-3">
+                        <strong>CLI (macOS/Linux):</strong><br>
+                        <code>curl -fsSL https://syftbox.net/install.sh | sh</code>
+                    </div>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 text-center border border-green-100">
+                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-plug text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">2. Add Your App via GitHub URL</h3>
+                    <p class="text-gray-600 text-sm mb-2">In SyftUI, click <strong>Add App</strong> and paste your app’s GitHub URL.<br>Or use the CLI to add your app.</p>
+                    <div class="mt-4 text-left text-xs bg-gray-50 rounded p-3">
+                        <strong>SyftBox will:</strong>
+                        <ul class="list-disc ml-4 mt-2">
+                            <li>Clone your app from GitHub</li>
+                            <li>Recognize <code>run.sh</code> as the entry point</li>
+                            <li>Automatically start your app for you (no need to run <code>run.sh</code> manually)</li>
+                            <li>Show logs and dashboard location in SyftUI or CLI</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mt-8">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle text-amber-600 mr-3"></i>
+                    <div>
+                        <h4 class="font-semibold text-amber-800">Manual Setup (Advanced/Optional)</h4>
+                        <p class="text-amber-700 text-sm mt-1">
+                            You can still run your app manually for development or advanced use cases. See the README for details.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Installation Steps -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Installation & Setup</h2>
+            
+            <!-- Step 1: Clone Repository -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="step-number rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mr-4">1</div>
+                    <h3 class="text-2xl font-semibold text-gray-900">Clone the Repository</h3>
+                </div>
+                
+                <p class="text-gray-600 mb-6">Start by cloning the Syft NSAI Router repository to your local machine.</p>
+                
+                <div class="code-block rounded-lg p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-terminal text-green-400 mr-2"></i>
+                            <span class="text-green-400 font-semibold">Terminal</span>
+                        </div>
+                        <button class="copy-btn text-gray-400 hover:text-white transition-colors" data-target="clone-commands">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre id="clone-commands" class="text-green-400 font-mono text-sm"><code># Clone the repository
+git clone &lt;repository-url&gt;
+
+# Navigate to the project directory
+cd syft-llm-router
+
+# Verify the structure
+ls -la</code></pre>
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p class="text-blue-800 text-sm">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>Note:</strong> Make sure you have Git installed and configured with your credentials before cloning.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 2: Quick Start -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="step-number rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mr-4">2</div>
+                    <h3 class="text-2xl font-semibold text-gray-900">SyftBox Auto-Start</h3>
+                </div>
+                <p class="text-gray-600 mb-6">If SyftBox is running, it will automatically initiate your app when you add it. You do not need to run <code>run.sh</code> manually. You can view logs and find the dashboard location directly in SyftUI or via the CLI.</p>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p class="text-blue-800 text-sm">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>Tip:</strong> Use SyftUI to monitor your app's status, view logs, and access the dashboard URL.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 4: Verification -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="step-number rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mr-4">4</div>
+                    <h3 class="text-2xl font-semibold text-gray-900">Verify Installation</h3>
+                </div>
+                <p class="text-gray-600 mb-6">To confirm your app is running, open SyftUI or use the CLI. You will see your app listed, and the dashboard link will be displayed in the UI or logs. Click the dashboard link to access your running router.</p>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p class="text-blue-800 text-sm">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>Tip:</strong> The dashboard link is shown in the SyftUI app list and in the logs after startup. No need to manually enter a URL.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration Section -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Configuration</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Environment Variables -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-cog text-purple-600 mr-3"></i>Environment Variables
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border">
+                            <code class="text-sm font-mono text-gray-800">SYFTBOX_ASSIGNED_PORT</code>
+                            <p class="text-gray-600 text-sm mt-1">Custom port for the server (default: 8080)</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border">
+                            <code class="text-sm font-mono text-gray-800">SYFTBOX_CONFIG_PATH</code>
+                            <p class="text-gray-600 text-sm mt-1">Path to SyftBox configuration file</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border">
+                            <code class="text-sm font-mono text-gray-800">DATABASE_PATH</code>
+                            <p class="text-gray-600 text-sm mt-1">Custom database location (default: data/)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 code-block rounded-lg p-4">
+                        <pre class="text-green-400 font-mono text-sm"><code># Example .env file
+SYFTBOX_ASSIGNED_PORT=9000
+DATABASE_PATH=./custom_data
+DEBUG=true</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Custom Port -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-network-wired text-blue-600 mr-3"></i>Custom Port Setup
+                    </h3>
+                    
+                    <p class="text-gray-600 mb-4">If port 8080 is already in use, you can specify a different port:</p>
+                    
+                    <div class="code-block rounded-lg p-4 mb-4">
+                        <pre class="text-green-400 font-mono text-sm"><code># Set custom port before running
+export SYFTBOX_ASSIGNED_PORT=9000
+./run.sh
+
+# Or run with inline environment variable
+SYFTBOX_ASSIGNED_PORT=9000 ./run.sh</code></pre>
+                    </div>
+                    
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p class="text-yellow-800 text-sm">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            The system will automatically detect if the default port is in use and suggest alternatives.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-route text-indigo-400 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold">Syft NSAI Router</span>
+                    </div>
+                    <p class="text-gray-400">Building the future of distributed AI services</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Documentation</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="getting-started.html" class="hover:text-white">Getting Started</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Examples</a></li>
+                        <li><a href="#" class="hover:text-white">Community</a></li>
+                        <li><a href="#" class="hover:text-white">Support</a></li>
+                        <li><a href="#" class="hover:text-white">GitHub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">OpenMined</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="https://www.openmined.org/" class="hover:text-white">OpenMined</a></li>
+                        <li><a href="https://syftbox.net/" class="hover:text-white">SyftBox</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 OpenMined Community. Built with ❤️ for the decentralized AI future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                const text = target.textContent;
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 2000);
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function() {
+                document.querySelector('.mobile-menu').classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html> 

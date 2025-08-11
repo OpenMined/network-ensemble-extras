@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorials - Syft NSAI Router</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .code-block { background: #1a202c; }
+        .nav-link { transition: color 0.2s ease; }
+        .nav-link:hover { color: #4f46e5; }
+        .tutorial-card { transition: all 0.3s ease; }
+        .tutorial-card:hover { transform: translateY(-2px); }
+        .step-indicator { 
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); 
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-route text-indigo-600 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Syft NSAI Router</span>
+                        <span class="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">DOCS</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="getting-started.html" class="nav-link text-gray-700 font-medium">Getting Started</a>
+                    <a href="tutorials.html" class="nav-link text-indigo-600 font-medium">Tutorials</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-600 via-blue-500 to-teal-400 pt-20 pb-16 shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl font-extrabold text-white mb-4 flex items-center justify-center gap-3">
+                    <i class="fas fa-graduation-cap"></i>
+                    Syft NSAI Router Learning Series
+                </h1>
+                <p class="text-2xl text-blue-100 max-w-3xl mx-auto mb-6">
+                    Master permissioned, modular, and interoperable AI routers—step by step.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="getting-started.html" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-200 shadow">
+                        <i class="fas fa-rocket mr-2"></i>Getting Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode Selection Section -->
+    <div class="bg-white py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+                    <i class="fas fa-exchange-alt text-indigo-600"></i> Choose Your Path
+                </h2>
+                <p class="text-lg text-gray-600 mb-6">Choose your path: Are you building and publishing routers (Provider), or discovering and integrating them (Client)?</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                    <a href="#provider-tutorials" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200 shadow"><i class="fas fa-cogs mr-2"></i>Provider Tutorials</a>
+                    <a href="#client-tutorials" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-200 shadow"><i class="fas fa-globe mr-2"></i>Client Tutorials</a>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="feature-card bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-8 border border-indigo-100">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cogs text-indigo-600 text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-900">Provider Mode</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Create, manage, and monetize your own AI routers with our intuitive dashboard.</p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Web-based router creation</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Service configuration (Chat & Search)</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Pricing control & monetization</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Real-time monitoring</li>
+                    </ul>
+                </div>
+                <div class="feature-card bg-gradient-to-br from-teal-50 to-green-50 rounded-xl p-8 border border-teal-100">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-globe text-teal-600 text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-900">Client Mode</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Discover and integrate published routers into your applications seamlessly.</p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Browse published routers</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Built-in chat interface</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>API integration</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Service documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Series -->
+    <div class="bg-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+                    <i class="fas fa-cogs text-indigo-600"></i> Provider Tutorials
+                </h2>
+                <p class="text-lg text-gray-600">Everything you need to create, publish, and test your own routers.</p>
+            </div>
+
+            <!-- Provider Tutorial 1: Create Your First Router -->
+            <details open class="rounded-2xl shadow-lg p-8 mb-12 border-t-8 border-indigo-500 bg-gradient-to-br from-indigo-50 to-white">
+                <summary class="flex items-center mb-6 gap-3 cursor-pointer select-none">
+                    <div class="bg-indigo-100 rounded-full w-14 h-14 flex items-center justify-center">
+                        <i class="fas fa-rocket text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">1. Create Your First Router</h3>
+                </summary>
+                <div class="mb-4 text-gray-700">Create a permissioned, modular router with unified chat and search endpoints. This tutorial will walk you through the process from start to finish.</div>
+                <ol class="list-decimal ml-6 space-y-4 text-gray-700">
+                    <li><strong>Install SyftBox:</strong> Download from <a href="https://www.syftbox.net/" target="_blank" class="text-blue-600 underline">syftbox.net</a> (desktop or CLI). Follow the installation instructions for your platform.</li>
+                    <li><strong>Add Your App:</strong> In SyftUI, click <strong>Add App</strong> and enter your app’s GitHub URL, or use the CLI: <code>syftbox add-app &lt;github-url&gt;</code>. SyftBox will clone your app, recognize <code>run.sh</code>, and start your router automatically.</li>
+                    <li><strong>Monitor Startup:</strong> Watch the logs in SyftUI or CLI. Once started, your router will appear in the app list with a dashboard link.</li>
+                    <li><strong>Access the Dashboard:</strong> Click the dashboard link in SyftUI to open your router’s web interface. You’ll see onboarding and can start configuring endpoints.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-blue-100 rounded-lg border border-blue-200 text-sm">
+                    <strong>Tip:</strong> Use clear, kebab-case names (e.g., <code>customer-support-chat</code>) for easy identification.
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 mt-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-bug text-gray-600 mr-3"></i>Error Response Format
+                    </h3>
+                    <p class="text-gray-700 mb-4">If something goes wrong, the router will return a structured error response.</p>
+                    <div class="code-block rounded-lg p-4">
+                        <pre class="text-green-400 font-mono text-xs"><code>{
+  "error": {
+    "code": "ROUTER_NOT_FOUND",
+    "message": "Router 'my-router' not found",
+    "details": {
+      "router_name": "my-router",
+      "available_routers": ["router1", "router2"]
+    }
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Provider Tutorial 2: Publishing and Monetization -->
+            <details class="rounded-2xl shadow-lg p-8 mb-12 border-t-8 border-green-500 bg-gradient-to-br from-green-50 to-white">
+                <summary class="flex items-center mb-6 gap-3 cursor-pointer select-none">
+                    <div class="bg-green-100 rounded-full w-14 h-14 flex items-center justify-center">
+                        <i class="fas fa-dollar-sign text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">2. Publishing and Monetization</h3>
+                </summary>
+                <div class="mb-4 text-gray-700">Learn how to publish your router, set pricing, and make it discoverable to clients in the federated marketplace.</div>
+                <ol class="list-decimal ml-6 space-y-4 text-gray-700">
+                    <li><strong>Open SyftUI or CLI:</strong> Select your app in the SyftBox dashboard or use the CLI.</li>
+                    <li><strong>Publish:</strong> Click <strong>Publish</strong> in the UI or run <code>syftbox publish-app &lt;app-name&gt; --summary "..." --description "..." --tags "..." --pricing "..."</code> in the CLI.</li>
+                    <li><strong>Fill Metadata:</strong> Add a clear summary, description, and relevant tags. Set pricing for each endpoint (per request, per token, etc.).</li>
+                    <li><strong>Confirm:</strong> Complete the publish process. Your router will now be discoverable by clients.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-green-100 rounded-lg border border-green-200 text-sm">
+                    <strong>Tip:</strong> Use competitive pricing and clear descriptions to attract users. Update your metadata as your service evolves.
+                </div>
+            </details>
+
+            <!-- Provider Tutorial 3: Test your router -->
+            <details class="rounded-2xl shadow-lg p-8 mb-12 border-t-8 border-blue-400 bg-gradient-to-br from-blue-50 to-white">
+                <summary class="flex items-center mb-6 gap-3 cursor-pointer select-none">
+                    <div class="bg-blue-100 rounded-full w-14 h-14 flex items-center justify-center">
+                        <i class="fas fa-vial text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">3. Test your router</h3>
+                </summary>
+                <div class="mb-4 text-gray-700">Verify your router’s endpoints and monitor its status to ensure reliability and performance.</div>
+                <ol class="list-decimal ml-6 space-y-4 text-gray-700">
+                    <li><strong>Status & Health:</strong> In SyftBox UI or CLI, check the <strong>Status</strong> and <strong>Health</strong> indicators for your app: <code>syftbox status &lt;app-name&gt;</code>.</li>
+                    <li><strong>Monitor Usage:</strong> Track usage and revenue in SyftBox UI or via CLI analytics.</li>
+                    <li><strong>API Testing:</strong> Use the built-in OpenAPI docs, Swagger UI, cURL, or Postman to test endpoints (chat/search) and validate responses.</li>
+                    <li><strong>Troubleshooting:</strong> If you encounter issues, review logs in SyftUI or CLI and check error responses for details.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-blue-100 rounded-lg border border-blue-200 text-sm">
+                    <strong>Tip:</strong> Regularly test endpoints and monitor logs to catch issues early and maintain high service quality.
+                </div>
+            </details>
+
+            <!-- Provider Tutorial 4: Custom Routers (Advanced) -->
+            <div class="rounded-2xl shadow-lg p-8 mb-12 border-t-8 border-purple-500 bg-gradient-to-br from-purple-50 to-white">
+                <div class="flex items-center mb-6 gap-3">
+                    <div class="bg-purple-100 rounded-full w-14 h-14 flex items-center justify-center">
+                        <i class="fas fa-wrench text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">4. [Advanced] Custom Routers</h3>
+                </div>
+                <div class="mb-4 text-gray-700">
+                    <strong>What is a custom router?</strong><br>
+                    A custom router lets you define your own logic, endpoints, and data flows beyond the default templates. This is ideal for advanced use cases, integrations, or when you want to expose new types of services.
+                </div>
+                <div class="mb-4 text-gray-700">
+                    <strong>Which endpoints can I define?</strong>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li><strong>Chat Endpoint (<code>/chat</code>)</strong>: Accepts a model name and message history, returns an AI-generated response. Implement in <code>chat_service.py</code>.</li>
+                        <li><strong>Search Endpoint (<code>/search</code>)</strong>: Accepts a query and options, returns search results or RAG completions. Implement in <code>search_service.py</code>.</li>
+                        <li><strong>Health Endpoint (<code>/health</code>)</strong>: Returns status and metadata for monitoring. Implement in <code>spawn_services.py</code> or a dedicated health service.</li>
+                        <li><strong>Custom Endpoints</strong>: You can add any additional endpoints (e.g., analytics, feedback, custom data processing) by creating new service files and registering them in your router config.</li>
+                    </ul>
+                </div>
+                <div class="mb-4 text-gray-700">
+                    <strong>How to structure your service files:</strong>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Each endpoint should have a dedicated service file (e.g., <code>chat_service.py</code> for chat, <code>search_service.py</code> for search).</li>
+                        <li>Define request and response schemas using Pydantic models for type safety and OpenAPI docs.</li>
+                        <li>Implement business logic in service classes or functions, following FastAPI best practices.</li>
+                        <li>Register your endpoints in the router's main configuration (e.g., <code>config.py</code>).</li>
+                    </ul>
+                </div>
+                <div class="mb-4 text-gray-700">
+                    <strong>Best practices:</strong>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Use clear, versioned endpoint paths (e.g., <code>/v1/chat</code>).</li>
+                        <li>Document all endpoints and schemas with docstrings and OpenAPI annotations.</li>
+                        <li>Handle errors gracefully and return structured error responses (see example above).</li>
+                        <li>Validate all inputs and sanitize user data to prevent security issues.</li>
+                        <li>Keep business logic modular for easier testing and extension.</li>
+                        <li>Test endpoints using SyftBox UI, CLI, or tools like Swagger UI and Postman.</li>
+                    </ul>
+                </div>
+                <div class="mb-4 text-gray-700">
+                    <strong>Extensibility & Security Tips:</strong>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Leverage dependency injection for authentication, logging, and monitoring.</li>
+                        <li>Restrict access to sensitive endpoints using permissions and roles.</li>
+                        <li>Log important events and errors for observability.</li>
+                        <li>Keep your dependencies up to date and review third-party packages for security.</li>
+                    </ul>
+                </div>
+                <div class="mb-4 text-gray-700">
+                    <strong>Example: Minimal Custom Chat Endpoint</strong>
+                    <div class="code-block rounded-lg p-4 mt-2 mb-2">
+                        <pre class="text-green-400 font-mono text-xs"><code># chat_service.py
+from fastapi import APIRouter
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class ChatRequest(BaseModel):
+    model: str
+    messages: list[dict]
+
+class ChatResponse(BaseModel):
+    message: dict
+
+@router.post("/chat", response_model=ChatResponse)
+def chat_endpoint(request: ChatRequest):
+    # Your custom logic here
+    reply = {"role": "assistant", "content": "Hello from your custom router!"}
+    return ChatResponse(message=reply)
+</code></pre>
+                    </div>
+                    <span class="text-xs text-gray-600">This example shows a minimal FastAPI chat endpoint. You can expand the logic, add authentication, or connect to your own models as needed.</span>
+                </div>
+                <ol class="list-decimal ml-6 space-y-4 text-gray-700">
+                    <li>When creating a router, select <strong>Custom</strong> type for a template with TODOs.</li>
+                    <li>Edit the generated service files (<code>chat_service.py</code>, <code>search_service.py</code>, etc.) to implement your own logic and endpoints as described above.</li>
+                    <li>Update <code>pyproject.toml</code> and <code>config.py</code> as needed to register new endpoints and dependencies.</li>
+                    <li>Test and validate your router using OpenAPI docs, SyftBox UI, CLI, or API calls.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-purple-100 rounded-lg border border-purple-200 text-sm">
+                    <strong>Tip:</strong> Custom routers are ideal for advanced use cases, integrations, and when you want full control over your API surface.
+                </div>
+            </div>
+
+            <div class="mb-16 text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+                    <i class="fas fa-globe text-teal-600"></i> Client Tutorials
+                </h2>
+                <p class="text-lg text-gray-600">How to discover, chat, and integrate with published routers.</p>
+            </div>
+
+            <!-- Client Tutorial 1: Discover routers and chat -->
+            <details class="rounded-2xl shadow-lg p-8 mb-12 border-t-8 border-teal-500 bg-gradient-to-br from-teal-50 to-white">
+                <summary class="flex items-center mb-6 gap-3 cursor-pointer select-none">
+                    <div class="bg-teal-100 rounded-full w-14 h-14 flex items-center justify-center">
+                        <i class="fas fa-search text-teal-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">5. Discover routers and chat</h3>
+                </summary>
+                <div class="mb-4 text-gray-700">Find published routers and use chat endpoints.</div>
+                <ol class="list-decimal ml-6 space-y-4 text-gray-700">
+                    <li><strong>Switch to Client Mode:</strong> In SyftBox UI, click the <strong>Switch to Client Mode</strong> button or use the CLI command <code>syftbox client</code>.</li>
+                    <li><strong>Browse Routers:</strong> In the client dashboard, you can browse published routers, filter by service type, tags, or price.</li>
+                    <li><strong>Select and Use:</strong> Select a router and use the chat endpoint directly in the UI. You can also interact via the CLI or API.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-teal-100 rounded-lg border border-teal-200 text-sm">
+                    <strong>Tip:</strong> You can combine multiple data sources for richer context in chat.
+                </div>
+            </details>
+
+            <!-- Client Tutorial 2: Use the API -->
+            <details class="rounded-2xl shadow-lg p-8 mb-12 border-t-8 border-blue-500 bg-gradient-to-br from-blue-50 to-white">
+                <summary class="flex items-center mb-6 gap-3 cursor-pointer select-none">
+                    <div class="bg-blue-100 rounded-full w-14 h-14 flex items-center justify-center">
+                        <i class="fas fa-code text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">6. Use the API</h3>
+                </summary>
+                <div class="mb-4 text-gray-700">Integrate published routers into your applications using the REST API.</div>
+                <ol class="list-decimal ml-6 space-y-4 text-gray-700">
+                    <li><strong>Find API Docs:</strong> Access the OpenAPI documentation (Swagger UI, cURL, or directly via API endpoint) for the published router you want to integrate.</li>
+                    <li><strong>Test Endpoints:</strong> Use cURL, Python, JavaScript, or your preferred client to test endpoints (chat/search) and validate responses.</li>
+                    <li><strong>Integrate:</strong> Integrate the endpoints into your application, respecting owner-set permissions and pricing.</li>
+                </ol>
+                <div class="mt-6 p-4 bg-blue-100 rounded-lg border border-blue-200 text-sm">
+                    <strong>Tip:</strong> Always check the API docs for required parameters and authentication details.
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- SDK Integration Examples -->
+    <div class="bg-indigo-600 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">SDK Integration Examples</h2>
+            <p class="text-lg text-indigo-100 mb-10 text-center">Here are ready-to-use code snippets for integrating with published routers using Python or JavaScript.</p>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Python Example -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8">
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i class="fab fa-python text-yellow-400 mr-3"></i>Python
+                    </h3>
+                    <div class="code-block rounded-lg p-4">
+                        <pre class="text-green-400 font-mono text-xs"><code>import requests
+
+# Chat with router
+response = requests.post(
+    "http://localhost:8080/chat",
+    json={
+        "model": "llama3",
+        "messages": [
+            {"role": "user", "content": "Hello!"}
+        ]
+    }
+)
+
+result = response.json()
+print(result["data"]["message"]["content"])</code></pre>
+                    </div>
+                </div>
+                
+                <!-- JavaScript Example -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8">
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i class="fab fa-js-square text-yellow-400 mr-3"></i>JavaScript
+                    </h3>
+                    <div class="code-block rounded-lg p-4">
+                        <pre class="text-green-400 font-mono text-xs"><code>// Chat with router
+const response = await fetch(
+  "http://localhost:8080/chat",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "llama3",
+      messages: [
+        { role: "user", content: "Hello!" }
+      ]
+    })
+  }
+);
+
+const result = await response.json();
+console.log(result.data.message.content);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Continue Learning</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                Explore real-world example projects to deepen your understanding and see best practices in action.
+            </p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="#" class="block bg-green-50 rounded-xl p-6 hover:bg-green-100 transition-all duration-200">
+                    <i class="fab fa-github text-3xl text-green-600 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Example Projects</h3>
+                    <p class="text-gray-600 text-sm">Browse real-world examples and community projects</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-route text-indigo-400 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold">Syft NSAI Router</span>
+                    </div>
+                    <p class="text-gray-400">Building the future of distributed AI services</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Documentation</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="getting-started.html" class="hover:text-white">Getting Started</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Examples</a></li>
+                        <li><a href="#" class="hover:text-white">Community</a></li>
+                        <li><a href="#" class="hover:text-white">Support</a></li>
+                        <li><a href="#" class="hover:text-white">GitHub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">OpenMined</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="https://www.openmined.org/" class="hover:text-white">OpenMined</a></li>
+                        <li><a href="https://syftbox.net/" class="hover:text-white">SyftBox</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 OpenMined Community. Built with ❤️ for the decentralized AI future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function() {
+                document.querySelector('.mobile-menu').classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html> 
