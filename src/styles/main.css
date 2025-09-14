@@ -83,6 +83,7 @@
   --glass: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --body-bg: #17161d;
+  --bg-light: #464158;
   --body-text: #f3f4f6;
   --card-bg: #2e2b3b;
   --card-border: #4B5563;
@@ -119,7 +120,7 @@ body {
 }
 
 /* Theme toggle button */
-.theme-toggle {
+/* .theme-toggle {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -127,6 +128,7 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 50%;
+  border-radius: 6px;
   width: 48px;
   height: 48px;
   display: flex;
@@ -146,7 +148,7 @@ body {
   font-size: 1.2rem;
   color: var(--text-primary);
   transition: color 0.3s ease;
-}
+} */
 
 /* Dark mode icon */
 [data-theme="dark"] .theme-toggle i.fa-sun {
@@ -401,6 +403,7 @@ pre code {
   align-items: center !important;
   justify-content: center !important;
   pointer-events: all !important;
+  -webkit-backdrop-filter: blur(2.5px) !important;
   backdrop-filter: blur(7px) !important;
 }
 .restricted-message {
@@ -415,6 +418,7 @@ pre code {
   max-width: 90vw !important;
   line-height: 1.6 !important;
   border: 1.5px solid var(--glass-border) !important;
+  -webkit-backdrop-filter: blur(2.5px) !important;
   backdrop-filter: blur(2.5px) !important;
   transition: box-shadow 0.2s, background 0.2s;
 }

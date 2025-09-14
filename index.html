@@ -46,10 +46,10 @@
     <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
 
     <!-- Theme Toggle Button -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    <!-- <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
       <i class="fas fa-sun"></i>
-    </button>
+    </button> -->
 
     <main>
       <!-- Hero Section -->
@@ -120,9 +120,9 @@
               <br>
               <br>
 
-<b><a href="https://openmined.org/attribution-based-control/" target="_blank" rel="noopener noreferrer">Attribution-based control</a> is the missing, shared mechanism. </b>
-<br><br>
-Without this, we see familiar failures: biased results, misinformation, misuse â€” not because AI is inherently harmful, but because it lacks the ability to coordinate intent across distributed actors. This, however, is a solvable problem.
+              <b><a href="https://openmined.org/attribution-based-control/" target="_blank" rel="noopener noreferrer">Attribution-based control</a> is the missing, shared mechanism. </b>
+              <br><br>
+              Without this, we see familiar failures: biased results, misinformation, misuse â€” not because AI is inherently harmful, but because it lacks the ability to coordinate intent across distributed actors. This, however, is a solvable problem.
 
             </p>
             
@@ -1611,7 +1611,7 @@ Without this, we see familiar failures: biased results, misinformation, misuse â
     <script type="module" src="./src/scripts/index.js"></script>
     
     <!-- Theme Toggle Script -->
-    <script>
+    <!-- <script>
       // Check for saved theme preference, only set if exists
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
@@ -1628,6 +1628,6 @@ Without this, we see familiar failures: biased results, misinformation, misuse â
         // Dispatch theme change event for components
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
       }
-    </script>
+    </script> -->
   </body>
 </html>
