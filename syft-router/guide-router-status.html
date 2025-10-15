@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router Status Guide - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="guides.html">Guides</a>
+            <span class="separator">›</span>
+            <span>Router Status</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Router Status Guide</h1>
+            <p class="lead">Understand router availability states and how to manage your router's online presence. Learn about status monitoring, health checks, and how status changes affect request routing.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="guide-default-router.html" class="nav-pill">Default Router</a>
+            <a href="guide-custom-chat.html" class="nav-pill">Custom Chat</a>
+            <a href="guide-custom-search.html" class="nav-pill">Custom Search</a>
+            <a href="guide-router-status.html" class="nav-pill active">Router Status</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>Router Status States</h2>
+            <p>Routers can exist in four distinct states that reflect their operational health and availability to handle requests. Understanding these states helps you monitor and troubleshoot your router effectively.</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <div class="feature-icon">🟢</div>
+                    <h3>Online (Healthy)</h3>
+                    <p>Your router is fully operational and performing optimally. All services are running and accepting new requests.</p>
+                    <ul style="text-align: left; margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-secondary);">
+                        <li>Router is running and responding</li>
+                        <li>All services are operational</li>
+                        <li>Accepting new requests</li>
+                        <li>Health checks passing</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🟡</div>
+                    <h3>Online (Degraded)</h3>
+                    <p>Your router is still serving requests but experiencing performance issues or partial service failures.</p>
+                    <ul style="text-align: left; margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-secondary);">
+                        <li>Router is running but with issues</li>
+                        <li>Some services may be slow or failing</li>
+                        <li>Limited functionality available</li>
+                        <li>Performance below normal</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔴</div>
+                    <h3>Offline (Unhealthy)</h3>
+                    <p>Your router is completely unavailable and cannot serve any requests. Requires immediate attention.</p>
+                    <ul style="text-align: left; margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-secondary);">
+                        <li>Router is not responding</li>
+                        <li>Services are down or failing</li>
+                        <li>No requests being processed</li>
+                        <li>Health checks failing</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚫</div>
+                    <h3>Unknown</h3>
+                    <p>The router's status cannot be determined, typically during startup or network issues.</p>
+                    <ul style="text-align: left; margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-secondary);">
+                        <li>Status cannot be determined</li>
+                        <li>Network connectivity issues</li>
+                        <li>Router may be starting up</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Status Monitoring</h2>
+
+            <h3>Automatic Status Detection</h3>
+            <p>The SyftBox platform continuously monitors your router's health by making regular requests to its health endpoint. This automated monitoring ensures quick detection of any issues.</p>
+
+            <p>Your router must implement this endpoint to participate in the monitoring system:</p>
+            <pre><code># Health check endpoint monitoring
+@app.get("/health")
+async def health_check():
+    return {
+        "status": "healthy",
+        "timestamp": datetime.utcnow().isoformat(),
+        "services": {
+            "chat": "running",
+            "search": "running"
+        },
+        "uptime": get_uptime(),
+        "version": "1.0.0"
+    }</code></pre>
+
+            <h3>Status Check Intervals</h3>
+            <p>The monitoring system uses configurable intervals and thresholds to determine when to change a router's status. These settings balance responsiveness with system stability.</p>
+            <pre><code># Configuration for status monitoring
+MONITORING_CONFIG = {
+    "health_check_interval": 30,      # seconds
+    "timeout": 10,                    # seconds for health check
+    "max_failures": 3,               # consecutive failures before offline
+    "recovery_checks": 2,             # successful checks to go online
+    "degraded_threshold": 5000,       # ms response time for degraded
+}</code></pre>
+
+            <p>These configuration values determine how quickly the system detects issues and recovers from failures. Adjust them based on your router's expected performance characteristics.</p>
+
+            <h3>Status Transition Logic</h3>
+            <p>Routers transition between states based on their health check responses and performance metrics. The system uses hysteresis to prevent rapid state changes that could cause instability.</p>
+
+            <pre><code>[Unknown] → [Online] → [Degraded] → [Offline]
+    ↑         ↑          ↑           ↑
+Startup    Healthy    Slow/Errors   Failed
+State      Response   Response      Health
+                                    Checks</code></pre>
+
+            <p>The transition logic ensures that temporary issues don't immediately mark a router as offline, while persistent problems are quickly detected and addressed.</p>
+
+            <h2>Implications of Status Changes</h2>
+            <p>When your router's status changes, it affects how requests are routed and how usage is tracked:</p>
+
+            <div class="info-box" style="margin: 2rem 0;">
+                <h4>Status Change Effects</h4>
+                <ul>
+                    <li><strong>Online → Degraded</strong>: Router continues receiving requests but may be deprioritized</li>
+                    <li><strong>Degraded → Offline</strong>: All traffic is redirected to other available routers</li>
+                    <li><strong>Offline → Online</strong>: Router rejoins the active pool and begins receiving requests again</li>
+                </ul>
+            </div>
+
+            <p>Monitoring these transitions helps you understand your router's reliability and identify patterns that might indicate underlying issues.</p>
+
+            <h2>Monitoring Best Practices</h2>
+            
+            <h3>Health Check Implementation</h3>
+            <p>Design your health checks to be:</p>
+            <ul>
+                <li><strong>Fast</strong>: Complete within the timeout threshold (10 seconds default)</li>
+                <li><strong>Reliable</strong>: Test actual service functionality, not just server availability</li>
+                <li><strong>Informative</strong>: Return detailed status for each service component</li>
+            </ul>
+
+            <h3>Example Health Check Implementation</h3>
+            <pre><code>class HealthChecker:
+    def __init__(self, config):
+        self.config = config
+        
+    async def check_chat_service(self):
+        """Check if chat service is responsive."""
+        try:
+            # Test actual chat functionality
+            response = await self.chat_service.generate_response("health check")
+            return {"status": "healthy", "response_time": response.time}
+        except Exception as e:
+            return {"status": "unhealthy", "error": str(e)}
+    
+    async def check_search_service(self):
+        """Check if search service is responsive."""
+        try:
+            # Test actual search functionality
+            results = await self.search_service.search("test query", limit=1)
+            return {"status": "healthy", "results_count": len(results)}
+        except Exception as e:
+            return {"status": "unhealthy", "error": str(e)}
+    
+    async def get_comprehensive_health(self):
+        """Get detailed health status for all services."""
+        chat_health = await self.check_chat_service()
+        search_health = await self.check_search_service()
+        
+        overall_healthy = (
+            chat_health["status"] == "healthy" and 
+            search_health["status"] == "healthy"
+        )
+        
+        return {
+            "status": "healthy" if overall_healthy else "degraded",
+            "timestamp": datetime.utcnow().isoformat(),
+            "services": {
+                "chat": chat_health,
+                "search": search_health
+            },
+            "uptime": self.get_uptime(),
+            "version": "1.0.0"
+        }</code></pre>
+
+            <h3>Troubleshooting Status Issues</h3>
+            <p>Common status issues and their solutions:</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Router Stuck in "Unknown"</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Check network connectivity</li>
+                        <li>Verify health endpoint is responding</li>
+                        <li>Check firewall settings</li>
+                        <li>Review router startup logs</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Frequent Degraded Status</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Monitor response times</li>
+                        <li>Check resource usage (CPU, memory)</li>
+                        <li>Review service dependencies</li>
+                        <li>Optimize slow queries</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Router Going Offline</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Check service logs for errors</li>
+                        <li>Verify external API connections</li>
+                        <li>Monitor system resources</li>
+                        <li>Review configuration settings</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="api-accounting.html" class="guide-card">
+                        <h4>Accounting & Pricing</h4>
+                        <p>Learn about usage tracking during downtime and billing</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="api-code-structure.html" class="guide-card">
+                        <h4>Code Structure</h4>
+                        <p>Implementation details for health checks and monitoring</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

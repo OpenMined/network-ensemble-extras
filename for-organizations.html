@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For Researchers | OpenMined - Unlock Data for Research, Safely</title>
+    <script>
+      // Load theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      })();
+    </script>
+    <title>For Organizations | OpenMined - Unlock Data for Organizations, Safely</title>
     <link rel="icon" href="./src/assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +36,7 @@
     <script src="./src/components/back-to-top.js"></script>
   </head>
   <body>
-    <site-header logo-src="./src/assets/openmined.png" logo-text="OpenMined" current-page="researchers"></site-header>
+    <site-header logo-src="./src/assets/openmined.png" logo-text="OpenMined" current-page="organizations"></site-header>
     <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
 
     <!-- Theme Toggle Button -->
@@ -41,7 +50,7 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-text">
-            <h1>Contribute to the Questions That Matter — Without Losing Control</h1>
+    <h1>Share Data Safely, Enable Global Collaboration — Without Losing Control</h1>
                         
             <p class="hero-subtitle">
               Your work could help answer critical questions — about disease, misinformation, economic resilience, and climate risk. But if the data or models behind it can’t be used safely, they remain siloed. And often, rightfully so — due to real IP, legal, and privacy concerns.
@@ -95,7 +104,7 @@
                       <span class="principle-icon-circle" aria-label="Access Control"><i class="fas fa-key"></i></span>
                       <h4 class="principle-title">Custom Access Control</h4>
                     </div>
-                    <p>Decide who can access your data or model: peers, academic institutions, or a single verified partner at a time.</p>
+                    <p>Decide who to access your data or model: peers, academic institutions, or a single verified partner at a time.</p>
                   </div>
                   <div class="principle-card">
                     <div class="principle-header">
@@ -242,7 +251,7 @@
         localStorage.setItem('theme', newTheme);
         
         // Dispatch theme change event for components
-        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
       }
     </script>
     <script type="module" src="./src/scripts/index.js"></script>

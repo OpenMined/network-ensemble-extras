@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Load theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      })();
+    </script>
     <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
     <title>OpenMined | Chat for Network Sourced AI.</title>
     <link rel="stylesheet" href="./src/styles/main.css" />
@@ -263,7 +272,7 @@
         localStorage.setItem('theme', newTheme);
         
         // Dispatch theme change event for components
-        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
       }
     </script>
   </body>

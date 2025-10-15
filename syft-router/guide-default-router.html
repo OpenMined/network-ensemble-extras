@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Router Guide - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="guides.html">Guides</a>
+            <span class="separator">›</span>
+            <span>Default Router</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Default Router Guide</h1>
+            <p class="lead">Create a batteries-included router with pre-configured Ollama for chat and ChromaDB for search. Perfect for getting started quickly without managing external infrastructure.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="guide-default-router.html" class="nav-pill active">Default Router</a>
+            <a href="guide-custom-chat.html" class="nav-pill">Custom Chat</a>
+            <a href="guide-custom-search.html" class="nav-pill">Custom Search</a>
+            <a href="guide-router-status.html" class="nav-pill">Router Status</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>What is a Default Router?</h2>
+            <p>A Default Router comes with pre-packaged components for ease of use. It's designed to get you up and running with minimal configuration, providing everything you need to start serving AI-powered chat and search capabilities.</p>
+            
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Chat Service</h3>
+                    <p>Pre-configured with Ollama for local LLM hosting. No API keys needed, runs entirely on your infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Search Service</h3>
+                    <p>Built-in ChromaDB for vector storage and retrieval. Automatically indexes your documents for semantic search.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Monitoring</h3>
+                    <p>Health checks and status tracking built-in. Know when your services are running and track their performance.</p>
+                </div>
+            </div>
+
+            <h2>Prerequisites</h2>
+            <p>Before creating a default router, ensure you have:</p>
+            <ul>
+                <li>Installed SyftBox from <a href="https://www.syftbox.net/" target="_blank">syftbox.net</a></li>
+                <li>Added the syft-llm-router app using the URL: <code>https://github.com/OpenMined/syft-llm-router</code></li>
+            </ul>
+
+            <h2>Creating a Default Router</h2>
+            
+            <h3>Step 1: Access the Dashboard</h3>
+            <ol>
+                <li>Open <code>http://localhost:8080</code> or navigate to it within SyftUI</li>
+                <li>Choose "Provider" profile if this is your first time</li>
+                <li>Click "Create Router"</li>
+            </ol>
+
+            <h3>Step 2: Configure Router</h3>
+            <ol>
+                <li>Configure router's metadata:
+                    <ul>
+                        <li><strong>Name</strong>: Choose a descriptive name for your router</li>
+                        <li><strong>Summary</strong>: Keep it short and descriptive</li>
+                        <li><strong>Description</strong>: Use markdown for detailed information</li>
+                    </ul>
+                </li>
+                <li>For the router type, select <strong>Default</strong></li>
+                <li>Choose the services you want to support:
+                    <ul>
+                        <li><strong>Chat</strong>: For conversational AI capabilities</li>
+                        <li><strong>Search</strong>: For document search and retrieval</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="info-box">
+                <strong>💡 Tip</strong>
+                <p>If you have some data and want a lightweight setup, selecting only "Search" should suffice. You can always add chat capabilities later.</p>
+            </div>
+
+            <h3>Step 3: Router Generation</h3>
+            <p>The system automatically handles the setup for you:</p>
+            <ul>
+                <li>📁 Creates router directory under <code>SyftBox/apps</code></li>
+                <li>🐍 Generates Python service files within that directory</li>
+                <li>📦 Installs Ollama and ChromaDB dependencies</li>
+                <li>🚀 Starts the router services</li>
+            </ul>
+
+            <h2>Generated Structure</h2>
+            <p>After creation, you'll find this structure in your SyftBox apps directory:</p>
+            
+            <pre><code>my-router/
+├── server.py            # Main FastAPI server
+├── chat_service.py      # Ollama chat implementation
+├── search_service.py    # ChromaDB search
+├── spawn_services.py    # Service monitoring
+├── pyproject.toml       # Dependencies
+├── run.sh              # Startup script
+└── data/               # ChromaDB storage</code></pre>
+
+            <h2>Adding Your First Files (Search Only)</h2>
+            <p>If you enabled the Search service, you can start adding your files to index:</p>
+            
+            <ol>
+                <li>Check under <code>SyftBox/apps</code> for an app called <code>local-rag</code></li>
+                <li>Navigate to its UI once spotted</li>
+                <li>Select the file paths you want to process</li>
+                <li>The system will automatically index your documents</li>
+            </ol>
+
+            <div class="info-box">
+                <strong>Supported Formats</strong>
+                <ul>
+                    <li>.md, .pdf, .json, .yaml, .txt</li>
+                    <li>Need custom formats? Contact OpenMined for support</li>
+                    <li>For dynamic data: Create a Syft app or cronjob to fetch from WordPress, Silverchair, Ghost, Medium, Slack, Notion, or REST APIs</li>
+                </ul>
+            </div>
+
+            <h2>Testing Your Router</h2>
+            
+            <h3>Via Dashboard</h3>
+            <ol>
+                <li>Go to router list in your dashboard</li>
+                <li>Select your router from the dropdown list</li>
+                <li>Send a test message: "Hello!" or any query</li>
+                <li>Verify responses are coming from your services</li>
+            </ol>
+
+            <h3>Via API</h3>
+            <p>Test your chat endpoint:</p>
+            <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "What is machine learning?",
+    "suffix-sender": "true",
+    "timeout": "5000",
+    "x-syft-from": "guest@syftbox.net",
+    "x-syft-url": "syft://&lt;your_email&gt;/app_data/my_router/rpc/chat"
+  }'</code></pre>
+
+            <p>Test your search endpoint:</p>
+            <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "machine learning concepts",
+    "suffix-sender": "true",
+    "timeout": "5000",
+    "x-syft-from": "guest@syftbox.net",
+    "x-syft-url": "syft://&lt;your_email&gt;/app_data/my_router/rpc/search"
+  }'</code></pre>
+
+            <h2>Publishing Your Router</h2>
+            <p>Once you're happy with your router's performance, make it available to others:</p>
+            
+            <ol>
+                <li><strong>Test thoroughly</strong>: Ensure both chat and search work reliably</li>
+                <li><strong>Add metadata</strong>: Go to router details → "Publish"</li>
+                <li><strong>Set pricing</strong>: Configure per-request pricing</li>
+                <li><strong>Publish</strong>: Make available to other users</li>
+            </ol>
+
+            <pre><code>Summary: "AI assistant with document search"
+Description: "Powered by Llama2 and ChromaDB"
+Tags: ["chat", "search", "llama2"]
+Pricing:
+  Chat: $0.01 per request
+  Search: $0.005 per request</code></pre>
+
+            <h2>Monitoring & Maintenance</h2>
+            <p>The system automatically monitors your router's health and shows status in the UI. When troubleshooting:</p>
+            
+            <h3>View Logs</h3>
+            <pre><code># View router logs
+tail -f ~/SyftBox/apps/my-router/logs/app.log</code></pre>
+
+            <h3>Common Issues</h3>
+            <ul>
+                <li><strong>Ollama not running</strong>: Start with <code>ollama serve</code></li>
+                <li><strong>ChromaDB issues</strong>: Check data/ directory permissions</li>
+                <li><strong>Port conflicts</strong>: Change port in run.sh</li>
+                <li><strong>Memory issues</strong>: Ensure sufficient RAM for model loading</li>
+            </ul>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="guide-custom-chat.html" class="guide-card">
+                        <h4>Custom Chat Router</h4>
+                        <p>Connect your own language models for advanced chat features</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="guide-custom-search.html" class="guide-card">
+                        <h4>Custom Search Router</h4>
+                        <p>Integrate external vector databases for production deployments</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

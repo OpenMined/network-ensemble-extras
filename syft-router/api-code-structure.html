@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Structure - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.30 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Code Structure</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Router Code Structure</h1>
+            <p class="lead">Understand the generated router file structure and how to navigate and modify your router code. Learn about the development workflow and implementation patterns.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-endpoints.html" class="nav-pill">Endpoints</a>
+            <a href="api-authentication.html" class="nav-pill">Authentication</a>
+            <a href="api-accounting.html" class="nav-pill">Accounting</a>
+            <a href="api-code-structure.html" class="nav-pill active">Code Structure</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>Generated Router Structure</h2>
+            <p>When you create a router, the system generates this comprehensive structure designed for maintainability and extensibility:</p>
+
+            <pre><code>my-router/
+├── server.py              # Main FastAPI server
+├── chat_service.py         # Chat service implementation
+├── search_service.py       # Search service implementation
+├── spawn_services.py       # Service monitoring and health checks
+├── pyproject.toml          # Python dependencies and metadata
+├── run.sh                  # Router startup script
+├── README.md               # Router-specific documentation
+├── .env.example            # Environment variables template
+├── logs/                   # Application logs
+│   └── app.log
+└── data/                   # Local data storage
+    └── (vector database files)</code></pre>
+
+            <h2>Core Files Explained</h2>
+
+            <h3>1. server.py - Main Application Entry Point</h3>
+            <p>This file sets up the FastAPI application and coordinates all services:</p>
+
+            <pre><code>from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+# Import your services
+from chat_service import ChatService
+from search_service import SearchService
+from spawn_services import SpawnServices
+
+# Create FastAPI app
+app = FastAPI(
+    title="My Router",
+    description="AI-powered chat and search router",
+    version="1.0.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Initialize services
+config = load_config()
+chat_service = ChatService(config)
+search_service = SearchService(config)
+spawn_services = SpawnServices(config)
+
+# Define endpoints
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    return await chat_service.chat(request.message)
+
+@app.post("/search")
+async def search(request: SearchRequest):
+    return await search_service.search(request.query)
+
+@app.get("/health")
+async def health():
+    return spawn_services.get_health_status()
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)</code></pre>
+
+            <h3>2. chat_service.py - Chat Implementation</h3>
+            
+            <h4>Default Router Implementation</h4>
+            <p>For default routers, the chat service uses Ollama for local LLM hosting:</p>
+
+            <pre><code>import ollama
+from typing import Optional
+
+class ChatService:
+    def __init__(self, config: dict):
+        self.client = ollama.Client(
+            host=config.get('ollama_host', 'http://localhost:11434')
+        )
+        self.model = config.get('model', 'llama2')
+        self.conversations = {}  # Store conversation history
+    
+    async def chat(self, message: str, conversation_id: Optional[str] = None) -> str:
+        try:
+            # Get or create conversation history
+            if conversation_id:
+                messages = self.conversations.get(conversation_id, [])
+                messages.append({'role': 'user', 'content': message})
+            else:
+                messages = [{'role': 'user', 'content': message}]
+            
+            # Call Ollama
+            response = self.client.chat(
+                model=self.model,
+                messages=messages
+            )
+            
+            assistant_message = response['message']['content']
+            
+            # Store conversation history
+            if conversation_id:
+                messages.append({'role': 'assistant', 'content': assistant_message})
+                self.conversations[conversation_id] = messages
+            
+            return assistant_message
+            
+        except Exception as e:
+            return f"Error: {str(e)}"</code></pre>
+
+            <h4>Custom Router Implementation</h4>
+            <p>For custom routers, you'll implement your own chat service with external APIs. The template provides a structure for integrating with services like OpenAI, Anthropic, or local models.</p>
+
+            <h3>3. search_service.py - Search Implementation</h3>
+
+            <h4>Default Router Implementation</h4>
+            <p>Default routers use ChromaDB for vector storage and retrieval:</p>
+
+            <pre><code>import chromadb
+from chromadb.config import Settings
+from typing import List, Dict, Any
+
+class SearchService:
+    def __init__(self, config: dict):
+        # Initialize ChromaDB
+        self.client = chromadb.PersistentClient(
+            path=config.get('chroma_path', './data')
+        )
+        collection_name = config.get('collection_name', 'documents')
+        self.collection = self.client.get_or_create_collection(collection_name)
+    
+    async def search(self, query: str, limit: int = 5) -> Dict[str, Any]:
+        try:
+            # Perform vector similarity search
+            results = self.collection.query(
+                query_texts=[query],
+                n_results=limit
+            )
+            
+            # Format results
+            documents = []
+            for i, doc in enumerate(results['documents'][0]):
+                documents.append({
+                    'content': doc,
+                    'score': results['distances'][0][i] if 'distances' in results else 0.0,
+                    'metadata': results['metadatas'][0][i] if 'metadatas' in results else {},
+                    'id': results['ids'][0][i] if 'ids' in results else str(i)
+                })
+            
+            return {
+                'query': query,
+                'results': documents,
+                'total_results': len(documents)
+            }
+            
+        except Exception as e:
+            return {
+                'query': query,
+                'results': [],
+                'total_results': 0,
+                'error': str(e)
+            }
+    
+    def add_documents(self, documents: List[str], metadatas: List[Dict] = None):
+        """Add documents to the collection."""
+        ids = [f"doc_{i}" for i in range(len(documents))]
+        self.collection.add(
+            documents=documents,
+            metadatas=metadatas or [{}] * len(documents),
+            ids=ids
+        )</code></pre>
+
+            <h3>4. spawn_services.py - Service Monitoring</h3>
+            <p>This file handles health checks and service monitoring:</p>
+
+            <pre><code>import requests
+import logging
+from typing import Dict, Any
+from datetime import datetime
+
+class SpawnServices:
+    def __init__(self, config: dict):
+        self.config = config
+        self.logger = logging.getLogger(__name__)
+    
+    def get_health_status(self) -> Dict[str, Any]:
+        """Get overall router health status."""
+        return {
+            'status': 'healthy' if self.all_services_healthy() else 'unhealthy',
+            'services': {
+                'chat': 'running' if self.check_chat_health() else 'stopped',
+                'search': 'running' if self.check_search_health() else 'stopped'
+            },
+            'timestamp': datetime.utcnow().isoformat()
+        }
+    
+    def check_chat_health(self) -> bool:
+        """Check if chat service is healthy."""
+        try:
+            # Default router: Check Ollama
+            if self.config.get('router_type') == 'default':
+                response = requests.get(
+                    "http://localhost:11434/api/tags",
+                    timeout=5
+                )
+                return response.status_code == 200
+            
+            # Custom router: Implement your health check
+            else:
+                # TODO: Check your chat service health
+                # Example: Test connection to your LLM API
+                # response = requests.get(f"{self.config['llm_url']}/health")
+                # return response.status_code == 200
+                return True  # Placeholder
+                
+        except Exception as e:
+            self.logger.error(f"Chat health check failed: {e}")
+            return False
+    
+    def check_search_health(self) -> bool:
+        """Check if search service is healthy."""
+        try:
+            # Default router: Check ChromaDB
+            if self.config.get('router_type') == 'default':
+                # ChromaDB health check
+                from search_service import SearchService
+                search = SearchService(self.config)
+                search.collection.count()  # Simple operation to test
+                return True
+            
+            # Custom router: Check your vector database
+            else:
+                # TODO: Check your vector database health
+                # Example for Weaviate:
+                # response = requests.get(f"{self.config['weaviate_url']}/v1/meta")
+                # return response.status_code == 200
+                return True  # Placeholder - IMPLEMENT for custom routers
+                
+        except Exception as e:
+            self.logger.error(f"Search health check failed: {e}")
+            return False
+    
+    def all_services_healthy(self) -> bool:
+        """Check if all enabled services are healthy."""
+        services_enabled = self.config.get('services', ['chat', 'search'])
+        
+        if 'chat' in services_enabled and not self.check_chat_health():
+            return False
+        
+        if 'search' in services_enabled and not self.check_search_health():
+            return False
+        
+        return True</code></pre>
+
+            <h3>5. pyproject.toml - Dependencies and Metadata</h3>
+            <p>This file defines your router's dependencies and metadata:</p>
+
+            <pre><code>[project]
+name = "my-router"
+version = "1.0.0"
+description = "Custom AI router for chat and search"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.5.0",
+    "requests>=2.31.0",
+    
+    # Default router dependencies
+    "ollama>=0.1.7",           # For chat
+    "chromadb>=0.4.15",        # For search
+    
+    # Add your custom dependencies here
+    # "openai>=1.0.0",         # For OpenAI chat
+    # "weaviate-client>=3.24.0", # For Weaviate search
+    # "pinecone-client>=2.2.0",  # For Pinecone search
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']</code></pre>
+
+            <p>Modify the dependencies section to include packages for your specific LLM provider and vector database. The dev dependencies help maintain code quality.</p>
+
+            <h3>6. run.sh - Startup Script</h3>
+            <p>Shell script that sets up the Python environment, installs dependencies, and starts your router server:</p>
+
+            <pre><code>#!/bin/bash
+set -e
+
+echo "Starting router: my-router"
+
+# Get script directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$DIR"
+
+# Set up Python virtual environment
+if [ ! -d ".venv" ]; then
+    echo "Creating virtual environment..."
+    python -m venv .venv
+fi
+
+# Activate virtual environment
+source .venv/bin/activate
+
+# Install dependencies
+echo "Installing dependencies..."
+pip install -e .
+
+# Custom router: Add your dependencies here
+# pip install openai weaviate-client  # Example for custom dependencies
+
+# Set up environment variables
+if [ -f ".env" ]; then
+    export $(cat .env | xargs)
+fi
+
+# Default configurations
+export ROUTER_NAME="my-router"
+export ROUTER_PORT="${ROUTER_PORT:-8001}"
+export LOG_LEVEL="${LOG_LEVEL:-INFO}"
+
+# Create necessary directories
+mkdir -p logs data
+
+# Start the router
+echo "Starting router on port $ROUTER_PORT..."
+uvicorn server:app \
+    --host 0.0.0.0 \
+    --port $ROUTER_PORT \
+    --log-level ${LOG_LEVEL,,} \
+    --access-log \
+    --log-config logging.conf</code></pre>
+
+            <p>This script handles the complete startup process, from environment setup to server launch. Customize the environment variables and dependencies for your specific router.</p>
+
+            <h2>Configuration Management</h2>
+
+            <h3>Environment Variables</h3>
+            <p>Create a <code>.env</code> file for local configuration. This file stores sensitive API keys and router-specific settings:</p>
+
+            <pre><code># Router Configuration
+ROUTER_NAME=my-router
+ROUTER_PORT=8001
+LOG_LEVEL=INFO
+
+# Default Router Settings
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=llama2
+CHROMA_PATH=./data
+COLLECTION_NAME=documents
+
+# Custom Router Settings (examples)
+# OPENAI_API_KEY=sk-your-key-here
+# WEAVIATE_URL=https://your-cluster.weaviate.network
+# WEAVIATE_API_KEY=your-api-key
+# PINECONE_API_KEY=your-pinecone-key
+# PINECONE_ENVIRONMENT=us-west1-gcp</code></pre>
+
+            <div class="info-box">
+                <strong>🔒 Security Note</strong>
+                <p>Never commit this file to version control as it contains sensitive API keys. Use <code>.env.example</code> as a template for others.</p>
+            </div>
+
+            <h2>Testing Your Router</h2>
+
+            <h3>Basic Integration Tests</h3>
+            <p>Create a <code>test_router.py</code> file to verify your router's endpoints are working correctly:</p>
+
+            <pre><code>import pytest
+import requests
+from typing import Dict, Any
+
+class TestRouter:
+    base_url = "http://localhost:8001"
+    
+    def test_health_endpoint(self):
+        """Test that health endpoint is responding."""
+        response = requests.get(f"{self.base_url}/health")
+        assert response.status_code == 200
+        data = response.json()
+        assert "status" in data
+        assert "services" in data
+    
+    def test_chat_endpoint(self):
+        """Test chat functionality."""
+        response = requests.post(
+            f"{self.base_url}/chat",
+            json={"message": "Hello, world!"}
+        )
+        assert response.status_code == 200
+        data = response.json()
+        assert "response" in data
+    
+    def test_search_endpoint(self):
+        """Test search functionality."""
+        response = requests.post(
+            f"{self.base_url}/search",
+            json={"query": "test query", "limit": 3}
+        )
+        assert response.status_code == 200
+        data = response.json()
+        assert "query" in data
+        assert "results" in data
+        assert "total_results" in data
+
+if __name__ == "__main__":
+    # Run tests
+    pytest.main([__file__, "-v"])</code></pre>
+
+            <p>Run these tests after making changes to ensure your router is functioning properly. Add more specific tests for your custom implementations.</p>
+
+            <h2>Development Workflow</h2>
+            <p>Follow this systematic approach for developing and deploying your router:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Create Router</h4>
+                        <p>Use the SyftBox dashboard to generate the initial router structure</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Navigate to Directory</h4>
+                        <p>Find your router in the SyftBox apps directory</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Open in IDE</h4>
+                        <p>Use VS Code, Cursor, or your preferred development environment</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Implement Services</h4>
+                        <p>Customize chat_service.py and search_service.py for your use case</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Add Dependencies</h4>
+                        <p>Update pyproject.toml and run.sh with your specific requirements</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Configure Environment</h4>
+                        <p>Create your .env file with API keys and configuration</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Test Locally</h4>
+                        <p>Run the router and test all endpoints thoroughly</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h4>Monitor Health</h4>
+                        <p>Implement proper health checks in spawn_services.py</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">9</div>
+                    <div class="step-content">
+                        <h4>Deploy and Publish</h4>
+                        <p>Use the dashboard to publish your router to the network</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Best Practices</h2>
+
+            <h3>Code Organization</h3>
+            <ul>
+                <li><strong>Separation of concerns</strong>: Keep business logic separate from API endpoints</li>
+                <li><strong>Configuration management</strong>: Use environment variables for all configurable values</li>
+                <li><strong>Error handling</strong>: Implement comprehensive error handling and logging</li>
+                <li><strong>Testing</strong>: Write tests for all critical functionality</li>
+            </ul>
+
+            <h3>Performance Considerations</h3>
+            <ul>
+                <li><strong>Async operations</strong>: Use async/await for I/O operations</li>
+                <li><strong>Connection pooling</strong>: Reuse database and API connections</li>
+                <li><strong>Caching</strong>: Implement appropriate caching strategies</li>
+                <li><strong>Resource management</strong>: Monitor memory and CPU usage</li>
+            </ul>
+
+            <h3>Security</h3>
+            <ul>
+                <li><strong>Input validation</strong>: Validate and sanitize all user input</li>
+                <li><strong>API key management</strong>: Store secrets securely and rotate regularly</li>
+                <li><strong>Rate limiting</strong>: Implement proper rate limiting to prevent abuse</li>
+                <li><strong>Logging</strong>: Log security events but avoid logging sensitive data</li>
+            </ul>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="guide-custom-chat.html" class="guide-card">
+                        <h4>Custom Chat Router</h4>
+                        <p>Learn how to implement chat services with your preferred LLM</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="guide-custom-search.html" class="guide-card">
+                        <h4>Custom Search Router</h4>
+                        <p>Implement search services with vector databases</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

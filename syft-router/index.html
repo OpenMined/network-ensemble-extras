@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      // Load theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      })();
+    </script>
+    <title>Syft Router - Bring your data to the network</title>
+    <link rel="stylesheet" href="styles.css?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* Luxurious Typography and Spacing - Denser, More Refined */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            line-height: 1.65;
+            letter-spacing: -0.006em;
+            color: var(--color-text-light);
+        }
+
+        /* Enhanced Hero Section - More Spacious */
+        .hero {
+            padding: 5rem 1rem 4rem;
+            background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(105, 118, 174, 0.02) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .hero-container {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--color-accent-strong) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--color-text-light);
+            margin-bottom: 2rem;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+        
+        /* Refined Buttons - Smaller, More Elegant */
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            padding: 0.75rem 1.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.01em;
+            box-shadow: var(--shadow);
+        }
+        
+        .button-primary {
+            background: linear-gradient(135deg, var(--color-accent-strong) 0%, var(--color-accent) 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .button-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .button-secondary {
+            background: var(--card-bg);
+            color: var(--color-accent-strong);
+            border: 1.5px solid var(--color-border);
+        }
+        
+        .button-secondary:hover {
+            background: var(--section-bg);
+            border-color: var(--color-accent);
+            transform: translateY(-1px);
+        }
+        
+        /* Spacious Content Sections with Smaller Text */
+        .content-section {
+            padding: 6rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .section-header p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            max-width: 540px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Refined Prerequisites - Dense & Clean */
+        .prerequisites-container {
+            display: flex;
+            gap: 3.5rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+        
+        .prerequisites {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+            flex: 1;
+        }
+        
+        .prerequisites-image {
+            width: 520px;
+            flex-shrink: 0;
+        }
+        
+        .prerequisites-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-border);
+        }
+        
+        .prerequisites-image p {
+            margin-top: 0.75rem;
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+            text-align: center;
+        }
+        
+        .prerequisites h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--color-primary);
+        }
+        
+        .prerequisites ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.75rem;
+        }
+        
+        .prerequisites li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.875rem;
+            font-size: 0.9375rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+        
+        .prerequisites li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        
+        .prerequisites pre {
+            background: #0F172A;
+            color: var(--color-text-light);
+            padding: 1.25rem;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8125rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+            line-height: 1.5;
+        }
+        
+        /* Refined Info Box */
+        .info-box {
+            background: var(--section-bg-alt);
+            border-left: 3px solid var(--color-info);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box strong {
+            display: block;
+            font-size: 0.9375rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-info-strong);
+            font-weight: 600;
+        }
+        
+        .info-box p {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .info-box ul {
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            color: var(--color-text-light);
+        }
+        
+        /* Refined Steps - With Side Images */
+        .steps {
+            display: grid;
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 3.5rem;
+            align-items: center;
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+            transition: all 0.2s ease;
+        }
+        
+        .step:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+        
+        .step-left {
+            display: flex;
+            gap: 1.75rem;
+            align-items: flex-start;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(105, 118, 174, 0.25);
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .step-content p {
+            font-size: 0.9375rem;
+            color: var(--color-text-light);
+            margin-bottom: 1.25rem;
+            line-height: 1.65;
+        }
+        
+        .step-content ul,
+        .step-content ol {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        
+        .step-content ul li,
+        .step-content ol li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content ul ul {
+            margin-top: 0.5rem;
+            margin-left: 1.5rem;
+        }
+        
+        .step-content ul ul li {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+        }
+        
+        .router-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .router-type {
+            padding: 0.875rem;
+            background: var(--section-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+        }
+        
+        .router-type strong {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--color-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .router-type p {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .step-image {
+            width: 480px;
+            flex-shrink: 0;
+        }
+        
+        .step-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-border);
+        }
+        
+        .step-image p {
+            margin-top: 0.75rem;
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        /* Refined Image Containers */
+        .step-content img,
+        .prerequisites img,
+        .api-section img {
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+            transition: transform 0.2s ease;
+            border-radius: 8px;
+        }
+        
+        .step-content img:hover,
+        .prerequisites img:hover {
+            transform: scale(1.01);
+        }
+        
+        /* Refined Grid Cards - Denser */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+        
+        .docs-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+            transition: all 0.2s ease;
+        }
+        
+        .docs-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+        
+        .docs-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .docs-card p {
+            font-size: 0.9375rem;
+            color: var(--color-text-light);
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+        
+        .feature {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .feature strong {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature p {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+        }
+        
+        .api-example {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: var(--section-bg);
+            border-radius: 10px;
+        }
+        
+        .api-example h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+        
+        .api-example p {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-link {
+            font-size: 0.875rem;
+            color: var(--color-accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .feature-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Refined API Sections */
+        .api-sections {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+        
+        .api-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+        }
+        
+        .api-section h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .api-methods {
+            margin-bottom: 1.5rem;
+        }
+        
+        .api-method {
+            margin-bottom: 0.75rem;
+        }
+        
+        .api-method code {
+            background: var(--color-bg-alt);
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8125rem;
+            display: inline-block;
+            margin-bottom: 0.375rem;
+            color: var(--color-primary);
+        }
+        
+        .api-method p {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+        
+        .api-section pre {
+            background: #0F172A;
+            color: var(--color-text-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            box-shadow: var(--shadow);
+            margin-top: 1.25rem;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Enhanced focus states */
+        a:focus,
+        button:focus {
+            outline: 2px solid #6976AE;
+            outline-offset: 3px;
+        }
+        
+        /* Better image presentation */
+        .image-container {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FB 100%);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 2rem auto;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .image-container img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .image-container p {
+            margin-top: 1.25rem;
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        /* Next Steps Cards */
+        .next-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-top: 3rem;
+        }
+        
+        .next-step-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .next-step-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+            border-color: var(--color-border);
+        }
+        
+        .next-step-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .next-step-content {
+            flex: 1;
+        }
+        
+        .next-step-content h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .next-step-content p {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .next-step-arrow {
+            color: #B0B0B0;
+            font-size: 1.125rem;
+            transition: transform 0.2s;
+        }
+        
+        .next-step-card:hover .next-step-arrow {
+            transform: translateX(3px);
+            color: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Syft Router</h1>
+            <p class="hero-description">Bring your data to the network or discover AI services powered by distributed data.</p>
+            <div class="hero-actions">
+                <a href="#prerequisites" class="button button-primary">Get Started</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="button button-secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Prerequisites -->
+        <section class="content-section" id="prerequisites">
+            <div class="section-header">
+                <h2>Before you start</h2>
+            </div>
+
+            <div class="prerequisites-container">
+                <div class="prerequisites">
+                    <h3>Prerequisites</h3>
+                    <ul>
+                        <li>Install <strong>SyftBox</strong> from <a href="https://www.syftbox.net/" target="_blank">syftbox.net</a></li>
+                        <li>Add the <strong>syft-llm-router</strong> app using this URL:</li>
+                    </ul>
+                    <pre><code>https://github.com/OpenMined/syft-llm-router</code></pre>
+                    
+                    <div class="info-box">
+                        <strong>Installation Guide</strong>
+                        <p>The syft-llm-router app provides a dashboard to manage router creation, data indexing, and publication.</p>
+                    </div>
+                </div>
+                
+                <div class="prerequisites-image">
+                    <img src="../install-img/install-syft-llm-router.png" alt="Installing syft-llm-router in SyftBox">
+                    <p>Add the syft-llm-router app to your SyftBox installation</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Provider Setup -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Bring your data to the network</h2>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-left">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create router</h3>
+                            <p>Set up your router service type and configuration.</p>
+                            
+                            <ol>
+                                <li>Click <strong>New router</strong> in the dashboard</li>
+                                <li>Choose your router mode:</li>
+                            </ol>
+                            
+                            <div class="router-types">
+                                <div class="router-type">
+                                    <strong>🔋 Default Router</strong>
+                                    <p>Ready-to-use with TinyLlama and local vector database</p>
+                                </div>
+                                <div class="router-type">
+                                    <strong>⚙️ Custom Router</strong>
+                                    <p>Bring your own infrastructure and integration code</p>
+                                </div>
+                            </div>
+                            
+                            <ol start="3">
+                                <li>Select service type:
+                                    <ul>
+                                        <li><strong>Search</strong>: Returns relevant quotes from your data</li>
+                                        <li><strong>Chat</strong>: Local LLM that can speak to your data</li>
+                                    </ul>
+                                </li>
+                                <li>Router is created as a <strong>draft</strong> (not yet public)</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="../install-img/create-router-2-select-type.png" alt="Select router type">
+                        <p>Choose between Default or Custom router configuration</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-left">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Add data</h3>
+                            <p>Upload and index your documents for search and chat functionality.</p>
+                            <ol>
+                                <li>Start your draft router</li>
+                                <li>Navigate to the router URL from logs</li>
+                                <li>Upload and index your data</li>
+                            </ol>
+                            
+                            <div class="info-box">
+                                <strong>Supported formats:</strong>
+                                <ul>
+                                    <li>.md, .pdf, .json, .yaml, .txt</li>
+                                    <li>Need custom formats? Contact OpenMined</li>
+                                    <li>For dynamic data: Create Syft apps for WordPress, Ghost, Slack, Notion, REST APIs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="../install-img/rag-add-data-1.png" alt="Add data interface">
+                        <p>Upload and index your documents for search and chat</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-left">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Publish</h3>
+                            <p>Make your router discoverable to others on the network.</p>
+                            <ol>
+                                <li>Click <strong>Publish</strong> in router dashboard</li>
+                                <li>Add metadata (title, description, tags)</li>
+                                <li>Set pricing (can start free)</li>
+                                <li>Confirm publication</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="../install-img/publish-router-2-metadata.png" alt="Publish metadata">
+                        <p>Add metadata and pricing to make your router discoverable</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-left">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Try it out</h3>
+                            <p>Test your router with the built-in chat interface.</p>
+                            <ol>
+                                <li>Try it out in the chat interface</li>
+                                <li>Monitor usage metrics in the dashboard</li>
+                                <li>Your router is now live and discoverable!</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="../install-img/final-try-it-out.png" alt="Try it out interface">
+                        <p>Test your router with the built-in chat interface</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Next Steps</h2>
+            </div>
+
+            <div class="next-steps-grid">
+                <a href="guides.html" class="next-step-card">
+                    <div class="next-step-icon">📚</div>
+                    <div class="next-step-content">
+                        <h4>Router Guides</h4>
+                        <p>Step-by-step tutorials for all router types</p>
+                    </div>
+                    <div class="next-step-arrow">→</div>
+                </a>
+
+                <a href="api-endpoints.html" class="next-step-card">
+                    <div class="next-step-icon">🔗</div>
+                    <div class="next-step-content">
+                        <h4>API Endpoints</h4>
+                        <p>Complete API reference documentation</p>
+                    </div>
+                    <div class="next-step-arrow">→</div>
+                </a>
+
+                <a href="guide-custom-chat.html" class="next-step-card">
+                    <div class="next-step-icon">💬</div>
+                    <div class="next-step-content">
+                        <h4>Custom Chat Router</h4>
+                        <p>Connect your own language models</p>
+                    </div>
+                    <div class="next-step-arrow">→</div>
+                </a>
+
+                <a href="api-authentication.html" class="next-step-card">
+                    <div class="next-step-icon">🔐</div>
+                    <div class="next-step-content">
+                        <h4>Authentication</h4>
+                        <p>Secure your router endpoints</p>
+                    </div>
+                    <div class="next-step-arrow">→</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            // Inject copy icon for each pre
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; width: 3rem; height: 3rem; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun" style="display: none;"></i>
+    </button>
+    
+    <script>
+      // Load saved theme or default to light
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.querySelector('.fa-moon').style.display = 'none';
+        document.querySelector('.fa-sun').style.display = 'block';
+      }
+      
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Toggle icons
+        if (newTheme === 'dark') {
+          document.querySelector('.fa-moon').style.display = 'none';
+          document.querySelector('.fa-sun').style.display = 'block';
+        } else {
+          document.querySelector('.fa-moon').style.display = 'block';
+          document.querySelector('.fa-sun').style.display = 'none';
+        }
+        
+        // Dispatch theme change event for components
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+      }
+    </script>
+</body>
+</html>

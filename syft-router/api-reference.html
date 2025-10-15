@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html" class="active">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.30 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>API Reference</h1>
+            <p class="hero-description">Complete API documentation for Syft routers</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="content-section">
+            <div class="section-header">
+                <h2>API Documentation</h2>
+            </div>
+
+            <div class="subguides-list">
+                <a href="api-endpoints.html" class="subguide-item">
+                    <div class="subguide-content">
+                        <span class="subguide-title">Endpoints</span>
+                        <span class="subguide-description">Chat and search API endpoints with request/response examples</span>
+                    </div>
+                    <span class="subguide-arrow">→</span>
+                </a>
+                <a href="api-authentication.html" class="subguide-item">
+                    <div class="subguide-content">
+                        <span class="subguide-title">Authentication</span>
+                        <span class="subguide-description">Guest mode, token-based auth, and rate limiting documentation</span>
+                    </div>
+                    <span class="subguide-arrow">→</span>
+                </a>
+                <a href="api-accounting.html" class="subguide-item">
+                    <div class="subguide-content">
+                        <span class="subguide-title">Accounting & Pricing</span>
+                        <span class="subguide-description">Usage tracking, billing integration, and monetization strategies</span>
+                    </div>
+                    <span class="subguide-arrow">→</span>
+                </a>
+                <a href="api-code-structure.html" class="subguide-item">
+                    <div class="subguide-content">
+                        <span class="subguide-title">Code Structure</span>
+                        <span class="subguide-description">Generated router files and development workflow patterns</span>
+                    </div>
+                    <span class="subguide-arrow">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .subguides-list {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .subguide-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: var(--color-bg);
+            color: var(--color-text);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .subguide-item:hover {
+            background: var(--color-bg-light);
+        }
+        .subguide-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex: 1;
+        }
+        .subguide-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        .subguide-description {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+        .subguide-arrow {
+            color: var(--color-text-secondary);
+            transition: transform 0.2s;
+            font-size: 1.25rem;
+            margin-left: 1rem;
+        }
+        .subguide-item:hover .subguide-arrow {
+            transform: translateX(4px);
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Chat Router Guide - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="guides.html">Guides</a>
+            <span class="separator">›</span>
+            <span>Custom Chat Router</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Custom Chat Router Guide</h1>
+            <p class="lead">Connect your existing language models to your router and make powerful chat services available to users of the SyftBox network. Maintain full control over conversation flows and model behavior.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="guide-default-router.html" class="nav-pill">Default Router</a>
+            <a href="guide-custom-chat.html" class="nav-pill active">Custom Chat</a>
+            <a href="guide-custom-search.html" class="nav-pill">Custom Search</a>
+            <a href="guide-router-status.html" class="nav-pill">Router Status</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>What is a Custom Chat Router?</h2>
+            <p>A Custom Chat Router is perfect for users who already have language models deployed and want to keep using their existing infrastructure. Instead of starting fresh, you're bringing your own AI capabilities to the SyftBox network while maintaining complete control over how conversations happen.</p>
+            
+            <p>This approach is fantastic for:</p>
+            <ul>
+                <li>Creating unique chat experiences with custom conversation flows</li>
+                <li>Using specialized prompts tailored to your domain</li>
+                <li>Deploying fine-tuned models for specific use cases</li>
+                <li>Building full RAG systems that combine your documents with AI responses</li>
+            </ul>
+
+            <h2>Supported LLM Providers</h2>
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Remotely-Hosted LLMs</h3>
+                    <p>GPT-3.5, Claude, and pretty much anything accessible via a REST API.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Local LLMs</h3>
+                    <p>Self-hosted models via Ollama, vLLM, or custom inference servers</p>
+                </div>
+            </div>
+
+            <h2>Creating a Custom Chat Router</h2>
+            
+            <h3>Step 1: Generate Template</h3>
+            <p>First, create the router template through the SyftBox dashboard:</p>
+            <ol>
+                <li>Dashboard → "Create Router"</li>
+                <li>Name: <code>my-custom-chat</code> (choose a descriptive name)</li>
+                <li>Type: <strong>Custom</strong> ✓ (for full control)</li>
+                <li>Services: <strong>Chat Service</strong> ✓</li>
+                <li>Click "Create"</li>
+            </ol>
+
+            <h3>Step 2: Project Structure</h3>
+            <p>Once created, you'll find this structure in your SyftBox apps directory:</p>
+            
+            <pre><code>my-custom-chat/
+├── server.py           # Main FastAPI server (handles routing)
+├── chat_service.py     # Template for your custom chat implementation
+├── spawn_services.py   # Monitors service health and status
+├── pyproject.toml      # Where you'll add your LLM provider dependencies
+└── run.sh              # Script that starts everything up</code></pre>
+
+            <h3>Step 3: Open Your Project</h3>
+            <p>Navigate to your router directory and open it in your IDE:</p>
+            <pre><code>cd ~/SyftBox/apps/my-custom-chat
+cursor .  # or code . for VS Code</code></pre>
+
+            <h2>Implementation Example: OpenAI</h2>
+            <p>Here's a complete example showing how to integrate OpenAI's GPT models:</p>
+
+            <h3>1. Update chat_service.py</h3>
+            <pre><code>import requests
+from openai import OpenAI
+from typing import List, Optional
+from uuid import UUID
+
+class CustomChatService(ChatService):
+    def __init__(self, config: RouterConfig):
+        super().__init__(config)
+        self.accounting_client: UserClient = self.config.accounting_client()
+        logger.info(f"Initialized accounting client: {self.accounting_client}")
+        logger.info("Initialized custom chat service")
+        self.app_name = self.config.project.name
+        
+        # Initialize OpenAI client - this connects to your language model
+        self.client = OpenAI(
+            api_key=config.get('openai_api_key'),
+            base_url=config.get('base_url', 'https://api.openai.com/v1')
+        )
+        # Set a default model in case users don't specify one
+        self.default_model = config.get('model', 'gpt-3.5-turbo')
+    
+    def generate_chat(
+        self,
+        model: str,
+        messages: List[Message],
+        user_email: EmailStr,
+        transaction_token: Optional[str] = None,
+        options: Optional[GenerationOptions] = None,
+    ) -> ChatResponse:
+        # 1. Prepare the conversation for your language model
+        payload = {
+            "model": model or self.default_model,
+            "messages": [{"role": msg.role, "content": msg.content} for msg in messages],
+            "stream": False,
+        }
+        
+        # Add any generation options the user specified
+        if options:
+            if options.temperature is not None:
+                payload["temperature"] = options.temperature
+            if options.top_p is not None:
+                payload["top_p"] = options.top_p
+            if options.max_tokens is not None:
+                payload["max_tokens"] = options.max_tokens
+            if options.stop_sequences:
+                payload["stop"] = options.stop_sequences
+
+        # 2. Handle payment transaction if you've set pricing
+        query_cost = 0.0
+        if self.pricing > 0 and transaction_token:
+            with self.accounting_client.delegated_transfer(
+                user_email,
+                amount=self.pricing,
+                token=transaction_token,
+                app_name=self.app_name,
+                app_ep_path="/chat",
+            ) as payment_txn:
+                response = self.client.chat.completions.create(**payload)
+                # Only confirm payment if we got a valid response
+                if response.choices:
+                    payment_txn.confirm()
+                query_cost = self.pricing
+        else:
+            # Free service, just make the request
+            response = self.client.chat.completions.create(**payload)
+
+        # 3. Convert response to SyftBox format
+        choice = response.choices[0]
+        assistant_message = Message(
+            role="assistant",
+            content=choice.message.content,
+        )
+
+        # 4. Track token usage
+        usage_data = response.usage
+        usage = ChatUsage(
+            prompt_tokens=usage_data.prompt_tokens,
+            completion_tokens=usage_data.completion_tokens,
+            total_tokens=usage_data.total_tokens,
+        )
+
+        # 5. Return ChatResponse
+        return ChatResponse(
+            id=UUID(response.id),
+            model=response.model,
+            message=assistant_message,
+            usage=usage,
+            provider_info={"provider": "openai", "finish_reason": choice.finish_reason},
+            cost=query_cost,
+        )</code></pre>
+
+            <h3>2. Add Dependencies</h3>
+            <p>Update your <code>pyproject.toml</code>:</p>
+            <pre><code>[project]
+dependencies = [
+    "openai>=1.0.0",      # For OpenAI
+    "requests>=2.28.0",    # For HTTP requests
+    # Or for other providers:
+    # "anthropic>=0.25.0",        # Anthropic Claude
+    # "google-generativeai>=0.3.0", # Google Gemini
+]</code></pre>
+
+            <h3>3. Configure Your Service</h3>
+            <p>Set up environment variables in a <code>.env</code> file:</p>
+            <pre><code># OpenAI Configuration
+OPENAI_API_KEY=sk-your-key-here
+MODEL_NAME=gpt-4
+BASE_URL=https://api.openai.com/v1
+
+# Router Settings
+ROUTER_NAME=my-custom-chat
+ROUTER_PORT=8001
+LOG_LEVEL=INFO</code></pre>
+
+            <div class="info-box">
+                <strong>🔒 Security Note</strong>
+                <p>Never commit your <code>.env</code> file to version control. Use <code>.env.example</code> as a template for others.</p>
+            </div>
+
+            <h3>4. Implement Service Monitoring</h3>
+            <p>Update <code>spawn_services.py</code> to monitor your language model connection:</p>
+            <pre><code>def spawn_custom_chat(self):
+    """Monitor external LLM service health"""
+    logger.info("💬 Setting up custom chat service...")
+    try:
+        # Add health checks for your language model
+        # For example: test the API connection
+        import openai
+        client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        
+        # Test the connection with a simple request
+        test_response = client.models.list()
+        
+        if test_response:
+            self.custom_chat_url = "http://localhost:12345"
+            self.config.state.update_service_state(
+                "chat",
+                status=RunStatus.RUNNING,
+                started_at=datetime.now().isoformat(),
+                url=self.custom_chat_url,
+            )
+            return True
+
+    except Exception as e:
+        logger.error(f"❌ Custom chat service setup failed: {e}")
+        self.config.state.update_service_state(
+            "chat", status=RunStatus.FAILED, error=str(e)
+        )
+        return False</code></pre>
+
+            <h2>Alternative Implementations</h2>
+
+            <h3>Anthropic Claude</h3>
+            <pre><code>from anthropic import Anthropic
+
+class CustomChatService(ChatService):
+    def __init__(self, config: RouterConfig):
+        super().__init__(config)
+        self.client = Anthropic(
+            api_key=config.get('anthropic_api_key')
+        )
+        self.default_model = config.get('model', 'claude-3-sonnet')
+    
+    def generate_chat(self, ...):
+        response = self.client.messages.create(
+            model=self.default_model,
+            messages=messages,
+            max_tokens=1024
+        )
+        # Process and return response</code></pre>
+
+            <h3>Local Models (Ollama)</h3>
+            <pre><code>import ollama
+
+class CustomChatService(ChatService):
+    def __init__(self, config: RouterConfig):
+        super().__init__(config)
+        self.client = ollama.Client(
+            host=config.get('ollama_host', 'http://localhost:11434')
+        )
+        self.default_model = config.get('model', 'llama2')
+    
+    def generate_chat(self, ...):
+        response = self.client.chat(
+            model=self.default_model,
+            messages=messages
+        )
+        # Process and return response</code></pre>
+
+            <h2>Testing Your Router</h2>
+            
+            <h3>Via Dashboard</h3>
+            <ol>
+                <li>Go to router list in your dashboard</li>
+                <li>Select your router from the dropdown</li>
+                <li>Send test messages:
+                    <ul>
+                        <li>"Hello, how are you?"</li>
+                        <li>"Tell me a joke"</li>
+                        <li>"Explain quantum computing"</li>
+                    </ul>
+                </li>
+                <li>Verify responses from your language model</li>
+            </ol>
+
+            <h3>Via API</h3>
+            <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "message": "What is machine learning?",
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "suffix-sender": "true",
+    "x-syft-url": "syft://&lt;your_email&gt;/app_data/my_custom_chat/rpc/chat"
+  }'</code></pre>
+
+            <h2>Publishing Your Router</h2>
+            <p>Once your router is working perfectly:</p>
+            
+            <ol>
+                <li><strong>Test thoroughly</strong>: Ensure reliable responses across different queries</li>
+                <li><strong>Add metadata</strong>: Go to router details → "Publish"</li>
+                <li><strong>Set pricing</strong>: Configure per-conversation pricing</li>
+                <li><strong>Publish</strong>: Make available to network users</li>
+            </ol>
+
+            <pre><code>Summary: "Advanced AI chat with GPT-4"
+Description: "Powered by GPT-4 with custom prompts and RAG"
+Tags: ["chat", "ai", "gpt-4", "custom"]
+Pricing:
+  Chat: $0.02 per request</code></pre>
+
+            <h2>Monitoring & Troubleshooting</h2>
+            
+            <h3>View Logs</h3>
+            <pre><code>tail -f ~/SyftBox/apps/my-custom-chat/logs/app.log</code></pre>
+
+            <h3>Common Issues</h3>
+            <ul>
+                <li><strong>API connection problems</strong>: Double-check your API keys and endpoints</li>
+                <li><strong>Model availability issues</strong>: Ensure the requested model exists</li>
+                <li><strong>Rate limiting</strong>: Check your API provider's quotas</li>
+                <li><strong>Token limit errors</strong>: Watch max_tokens settings for longer conversations</li>
+                <li><strong>Timeout errors</strong>: Increase timeout values for complex queries</li>
+            </ul>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="guide-custom-search.html" class="guide-card">
+                        <h4>Custom Search Router</h4>
+                        <p>Add RAG capabilities with vector databases</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="api-accounting.html" class="guide-card">
+                        <h4>Accounting & Pricing</h4>
+                        <p>Optimize your pricing and track usage</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
