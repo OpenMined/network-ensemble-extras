@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client API - syft-hub SDK Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">syft-hub SDK is in beta. Payments are disabled during beta; enjoy $20 in free credits.</span>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img width="32" height="32" src="syftbox-logo.svg" alt="SyftHub Logo">
+                <span>syft-hub SDK</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="api-reference.html" class="active">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-nsai-sdk" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Client API</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Client API</h1>
+            <p class="lead">Core client for connecting to SyftBox and discovering network services</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-reference.html" class="nav-pill">API Reference</a>
+            <a href="api-client.html" class="nav-pill active">Client</a>
+            <a href="api-authentication.html" class="nav-pill">Authentication</a>
+            <a href="api-services.html" class="nav-pill">Services</a>
+            <a href="api-pipelines.html" class="nav-pill">Pipelines</a>
+        </div>
+        <!-- Document Content -->
+        <div class="doc-content">
+            <!-- Table of Contents -->
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#constructor">Constructor</a></li>
+                    <li><a href="#service-discovery">Service Discovery Methods</a></li>
+                    <li><a href="#pipeline-management">Pipeline Management</a></li>
+                    <li><a href="#accounting-integration">Accounting Integration</a></li>
+                    <li><a href="#client-status">Client Status</a></li>
+                </ul>
+            </div>
+
+            <!-- Client Class -->
+            <div class="api-class">
+                <h2 class="api-class-title">syft_hub.Client</h2>
+                <p class="api-class-description">Main client class for interacting with the SyftBox network and managing connections to distributed data and AI services.</p>
+
+                <div class="api-section">
+                    <h3 id="constructor">Constructor</h3>
+                    <div class="api-method">
+                        <div class="api-method-signature">
+                            <code>Client(syftbox_path: str = None, api_url: str = None, verbose: bool = False)</code>
+                        </div>
+                        <p class="api-method-description">Initialize a new syft-hub client to connect to the SyftBox network and discover available services. <br> The client automatically detects your SyftBox installation and configuration settings.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">syftbox_path</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Path to SyftBox directory.</div>
+                                <div class="param-default">~/SyftBox</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">api_url</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Custom API endpoint URL. Defaults to SyftBox configuration.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">verbose</span>
+                                    <span class="param-type">bool</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Enable verbose logging.</div>
+                                <div class="param-default">False</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="keyword">from</span> syft_hub <span class="keyword">import</span> Client
+
+<span class="comment"># Auto-detect SyftBox installation</span>
+client = Client()
+
+<span class="comment"># Custom SyftBox path</span>
+client = Client(syftbox_path=<span class="string">"/custom/path/SyftBox"</span>)
+
+<span class="comment"># Enable verbose mode for debugging</span>
+client = Client(verbose=<span class="keyword">True</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="service-discovery">Service Discovery Methods</h3>
+                    
+                    <div class="api-method">
+                        <h4>Show Services</h4><br>
+                        <div class="api-method-signature">
+                            <code>show_services() -> None</code>
+                        </div>
+                        <p class="api-method-description">Display all available services on the network in an interactive table that shows service details, capabilities, and costs. This method is optimized for Jupyter notebook environments where it renders as a sortable, filterable table. </p>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Show all available services in interactive table</span>
+client.show_services()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Load Service</h4><br>
+                        <div class="api-method-signature">
+                            <code>load_service(service_name: str) -> Service</code>
+                        </div>
+                        <p class="api-method-description">Get a quick handle to a specific service using its unique network identifier, returning a Service object that provides direct access to chat or search capabilities. </p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">service_name</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Service identifier in format "datasite@domain/service-name".</div>
+                            </div>
+                        </div>
+
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>Service</code> - A service object with chat/search capabilities</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Load a data service</span>
+openmined_data = client.load_service(<span class="string">"irina@openmined.org/openmined-about"</span>)
+
+<span class="comment"># Load a model service</span>
+claude_llm = client.load_service(<span class="string">"aggregator@openmined.org/claude-sonnet-3.5"</span>)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Chat Sync</h4><br>
+                        <div class="api-method-signature">
+                            <code>chat_sync(service_name: str, messages: List[Dict[str, str]], **kwargs) -> ChatResponse</code>
+                        </div>
+                        <p class="api-method-description">Send chat messages to an AI model service and receive responses synchronously, blocking until the response is complete.<br>This method is ideal for interactive applications where you need immediate responses, such as chatbots or real-time assistance features.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">service_name</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Service identifier.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">messages</span>
+                                    <span class="param-type">List[Dict]</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">List of message dictionaries with role and content keys.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">**kwargs</span>
+                                    <span class="param-type">optional</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Additional parameters like temperature, max_tokens.</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Chat with a model service</span>
+response = client.chat_sync(
+    service_name=<span class="string">"aggregator@openmined.org/claude-sonnet-3.5"</span>,
+    messages=[
+        {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"What's up bro?"</span>}
+    ]
+)
+<span class="keyword">print</span>(response.content)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Search Sync</h4><br>
+                        <div class="api-method-signature">
+                            <code>search_sync(service_name: str, message: str, **kwargs) -> SearchResponse</code>
+                        </div>
+                        <p class="api-method-description">Perform a search against a data service's knowledge base and receive results synchronously. This method queries the service's indexed documents and returns N (limit=N) most relevant matches based on similarity scoring. </p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">service_name</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Service identifier.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">message</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Search query.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">**kwargs</span>
+                                    <span class="param-type">optional</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Additional parameters like limit, similarity_threshold.</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Search a data service</span>
+results = client.search_sync(
+    service_name=<span class="string">"irina@openmined.org/openmined-about"</span>,
+    message=<span class="string">"attribution-based control"</span>,
+    limit=<span class="number">10</span>
+)
+<span class="keyword">for</span> result <span class="keyword">in</span> results.results:
+    <span class="keyword">print</span>(result.content, result.score)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="pipeline-management">Pipeline Management</h3>
+                    
+                    <div class="api-method">
+                        <h4>Pipeline</h4><br>
+                        <div class="api-method-signature">
+                            <code>pipeline(data_sources: List[Service], synthesizer: Service, context_format: str = "simple") -> Pipeline</code>
+                        </div>
+                        <p class="api-method-description">Create your first Federated Retrieval-Augmented Generation (RAG) pipeline that combines multiple data sources with a synthesizer model wih ease. This method initiates the search in parallel across sources and aggregates them in the context of the model. </p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">data_sources</span>
+                                    <span class="param-type">List[Service]</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">List of data services for search/retrieval.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">synthesizer</span>
+                                    <span class="param-type">Service</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Chat service for response generation.</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">context_format</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Format for search context.</div>
+                                <div class="param-default">"simple"</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Create pipeline with data sources and synthesizer</span>
+openmined_data = client.load_service(<span class="string">"irina@openmined.org/openmined-about"</span>)
+claude_llm = client.load_service(<span class="string">"aggregator@openmined.org/claude-sonnet-3.5"</span>)
+
+pipeline = client.pipeline(
+    data_sources=[openmined_data],
+    synthesizer=claude_llm
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="accounting-integration">Accounting Integration</h3>
+                    
+                    <div class="api-method">
+                        <div class="api-method-signature">
+                            <code>accounting_client: AccountingClient</code>
+                        </div>
+                        <p class="api-method-description">Accounting Client is important to authenticate and use paid services on the network. As of today, everyone receives $20 in free credits upon login and automatically registered for accounting. To disable, use <code>Client(set_accounting=False)</code></p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Access accounting features</span>
+<span class="keyword">print</span>(client.accounting_client)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="client-status">Client Info</h3>
+                    
+                    <div class="api-method">
+                        <div class="api-method-signature">
+                            <code>__repr__() -> str</code>
+                        </div>
+                        <p class="api-method-description">Display comprehensive client status and configuration information in an interactive widget for Jupyter notebooks or formatted text for terminal environments. This method shows your SyftBox path, connected services, account status, and network health. Use this for debugging connection issues or verifying your setup.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Display client status</span>
+client  <span class="comment"># Shows SyftBox path, cache server, account, services found</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Pages -->
+            <div class="related-pages">
+                <h3>Related Documentation</h3>
+                <div class="related-grid">
+                    <a href="api-services.html" class="related-link">
+                        <span class="related-icon">🌐</span>
+                        <div>
+                            <strong>Service API</strong>
+                            <p>Working with data sources and models</p>
+                        </div>
+                    </a>
+                    <a href="api-pipelines.html" class="related-link">
+                        <span class="related-icon">⚡</span>
+                        <div>
+                            <strong>Pipeline API</strong>
+                            <p>Building data processing pipelines</p>
+                        </div>
+                    </a>
+                    <a href="authentication.html" class="related-link">
+                        <span class="related-icon">🔐</span>
+                        <div>
+                            <strong>Authentication</strong>
+                            <p>Authentication and authorization</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>syft-hub SDK</strong>
+                    <p>Run decentralised AI on private data</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="quickstart.html">Quickstart</a>
+                    <a href="ai-services.html">Concepts</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="authentication.html">Authentication</a>
+                    <a href="https://github.com/OpenMined/syft-nsai-sdk">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

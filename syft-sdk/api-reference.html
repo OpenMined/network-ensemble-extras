@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference - syft-hub SDK Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">syft-hub SDK is in beta. Payments are disabled during beta; enjoy $20 in free credits.</span>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img width="32" height="32" src="syftbox-logo.svg" alt="SyftHub Logo">
+                <span>syft-hub SDK</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="api-reference.html" class="active">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-nsai-sdk" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>API Reference</h1>
+            <p class="lead">Complete API documentation for syft-hub SDK</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-reference.html" class="nav-pill active">API Reference</a>
+            <a href="api-client.html" class="nav-pill">Client</a>
+            <a href="api-authentication.html" class="nav-pill">Authentication</a>
+            <a href="api-services.html" class="nav-pill">Services</a>
+            <a href="api-pipelines.html" class="nav-pill">Pipelines</a>
+        </div>
+        <!-- Document Content -->
+        <div class="doc-content">
+            <div class="section-header">
+                <h2>API Documentation</h2>
+                <p>Comprehensive reference for all syft-hub SDK classes and methods</p>
+            </div>
+
+            <div class="api-categories">
+                <a href="api-client.html" class="api-category-card">
+                    <div class="api-category-icon">🔧</div>
+                    <div class="api-category-content">
+                        <h3>Client API</h3>
+                        <p>Core client initialization, configuration, and service discovery methods</p>
+                        <div class="api-category-examples">
+                            <code>Client()</code>
+                            <code>client.show_services()</code>
+                            <code>client.load_service()</code>
+                            <code>client.pipeline()</code>
+                        </div>
+                    </div>
+                    <span class="api-category-arrow">→</span>
+                </a>
+
+                <a href="api-authentication.html" class="api-category-card">
+                    <div class="api-category-icon">🔐</div>
+                    <div class="api-category-content">
+                        <h3>Authentication API</h3>
+                        <p>Account management, authentication, and payment system</p>
+                        <div class="api-category-examples">
+                            <code>client.accounting_client</code>
+                            <code>register_accounting()</code>
+                            <code>get_account_balance()</code>
+                            <code>create_transaction_token()</code>
+                        </div>
+                    </div>
+                    <span class="api-category-arrow">→</span>
+                </a>
+
+                <a href="api-services.html" class="api-category-card">
+                    <div class="api-category-icon">🌐</div>
+                    <div class="api-category-content">
+                        <h3>Service API</h3>
+                        <p>Data sources, model endpoints, and service management</p>
+                        <div class="api-category-examples">
+                            <code>Service</code>
+                            <code>service.chat()</code>
+                            <code>service.search()</code>
+                            <code>service.show()</code>
+                        </div>
+                    </div>
+                    <span class="api-category-arrow">→</span>
+                </a>
+
+                <a href="api-pipelines.html" class="api-category-card">
+                    <div class="api-category-icon">⚡</div>
+                    <div class="api-category-content">
+                        <h3>Pipeline API</h3>
+                        <p>Build and execute federated queries via FedRAG</p>
+                        <div class="api-category-examples">
+                            <code>client.pipeline()</code>  
+                            <code>pipeline.run()</code>
+                            <code>PipelineResult</code>
+                        </div>
+                    </div>
+                    <span class="api-category-arrow">→</span>
+                </a>
+
+            </div>
+
+            <div class="quick-reference">
+                <h3>Quick Reference</h3>
+                <div class="quick-ref-grid">
+                    <div class="quick-ref-section">
+                        <h4>Installation</h4>
+                        <pre><code>pip install syft-hub</code></pre>
+                    </div>
+                    <div class="quick-ref-section">
+                        <h4>Basic Import</h4>
+                        <pre><code>from syft_hub import Client</code></pre>
+                    </div>
+                    <div class="quick-ref-section">
+                        <h4>Initialize Client</h4>
+                        <pre><code>client = Client()  # Auto-detects SyftBox</code></pre>
+                    </div>
+                    <div class="quick-ref-section">
+                        <h4>Discover Services</h4>
+                        <pre><code>client.show_services()  # In Jupyter</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>syft-hub SDK</strong>
+                    <p>Run decentralised AI on private data</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="quickstart.html">Quickstart</a>
+                    <a href="ai-services.html">Concepts</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="authentication.html">Authentication</a>
+                    <a href="https://github.com/OpenMined/syft-nsai-sdk">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
