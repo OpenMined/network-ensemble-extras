@@ -13,7 +13,7 @@
     <div class="beta-banner">
         <div class="beta-container">
             <span class="beta-badge">BETA</span>
-            <span>syft-hub SDK is in beta. Payments are disabled during beta; enjoy $20 in free credits.</span>
+            <span>Syft-hub SDK is in alpha. Payments are disabled during alpha; enjoy $20 in free credits.</span>
         </div>
     </div>
     <!-- Header -->
@@ -25,10 +25,8 @@
             </a>
             <nav class="nav">
                 <a href="index.html" class="active">Home</a>
-                <a href="quickstart.html">Quickstart</a>
-                <a href="ai-services.html">Concepts</a>
-                <a href="authentication.html">Authentication</a>
-                <a href="get-syftbox.html" class="pill">Get SyftBox</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
                 <a href="https://github.com/OpenMined/syft-nsai-sdk" target="_blank" class="github-link">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -42,7 +40,7 @@
     <section class="hero">
         <div class="hero-container">
             <h1>syft-hub SDK</h1>
-            <p class="hero-description">Run decentralised AI on a network of private data and models — easy in Python.</p>
+            <p class="hero-description">Discover data sources, run federated AI queries on the network and get your unqiue insights with ease in Python! </p>
             
         </div>
     </section>
@@ -50,18 +48,20 @@
     <!-- Main Content -->
     <main class="main">
         <!-- Overview -->
-        <section class="content-section">
-            <div class="section-header">
+        <section class="content-section" style="width:80%; margin: 0 auto;">
+            <div class="section-header" >
                 <h2>Quickstart</h2>
                 <button class="button button-secondary" id="copy-all-quickstart-home" aria-label="Copy all quickstart code">Copy All</button>
             </div>
 
-            <div class="steps steps-2of3">
+            <div class="steps steps-2of3" style="width:100%; margin: 0 auto;">
                 <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h3>Install</h3>
-                        <p>Install the syft-hub SDK using pip:</p>
+                        <p><i>Prerequisites:</i> Install SyftBox from <a href="https://www.syftbox.net/" target="_blank">syftbox.net</a>
+                        
+                        <p>    Install the syft-hub SDK using pip:</p>
                         <pre><code>pip install syft-hub</code></pre>
                     </div>
                 </div>
@@ -83,8 +83,10 @@ client = Client()
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>Discover Available Data & Models</h3>
-                        <pre><code><span class="comment"># In Jupyter notebooks</span>
-client.show_services()</code></pre>
+                        <p>Scan the network and retrieve a list of available data sources and models. This might take a second, as it is verifying the availability of the services:</p>
+                        <pre><code>client.show_services()</code></pre>
+                        <br>
+                        <video src="../src/assets/services_show.mov" style="width: 85%; height: auto; border-radius: 8px;" autoplay="true" loop="true" muted="true" controls="true" alt="Federated Pipeline Diagram"></video>
                     </div>
                 </div>
 
@@ -94,7 +96,8 @@ client.show_services()</code></pre>
                
                     <div class="step-content">
                         <h3>Run Your First Query</h3>
-                        <p>Create a pipeline and execute a federated query:</p>
+                        <img src="../src/assets/query_submission.png" style="width: 85%; height: auto; border-radius: 8px;" alt="Federated Pipeline Diagram">
+                        <p>Create a pipeline and add at least one preferred data source that you would like to fetch information from and an LLM to synthesize the response. Then, execute a federated query:</p>
                         <pre><code><span class="comment"># Load a data source</span>
 data_source = client.load_service(<span class="string">"irina@openmined.org/openmined-blog"</span>)
 
@@ -111,45 +114,44 @@ pipeline = client.pipeline(
 response = pipeline.run(messages=[
     {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"What is federated learning?"</span>}
 ])</code></pre>
+<br>
+<video src="../src/assets/pipeline definition.mov" style="width: 85%; height: auto; border-radius: 8px;"  autoplay="true" loop="true" muted="true" alt="Federated Pipeline Diagram"></video>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Key Concepts -->
+        <!-- API Reference -->
         <section class="content-section">
             <div class="section-header">
-                <h2>Build with syft-hub SDK</h2>
-                <p>Understanding the SyftHub ecosystem</p>
+                <h2>API Reference</h2>
+                <p>Essential API documentation for building with syft-hub SDK</p>
             </div>
 
             <div class="concepts-grid">
                 <div class="concept-card">
-                    <h3>🤖 AI Services</h3>
-                    <p>Discover, test, and compose AI services including models, data sources, and search capabilities.</p>
-                    <a href="ai-services.html" class="concept-link">Explore services →</a>
+                    <h3>🔧 Client API</h3>
+                    <p>Initialize clients, discover services, and create pipelines for data processing and AI inference.</p>
+                    <a href="api-client.html" class="concept-link">View Client API →</a>
                 </div>
 
                 <div class="concept-card">
-                    <h3>🔍 Federated RAG</h3>
-                    <p>Query multiple data sources simultaneously while preserving privacy and data ownership.</p>
-                    <a href="ai-services.html#search" class="concept-link">Learn about search →</a>
+                    <h3>🌐 Service API</h3>
+                    <p>Interact with chat models and search services for AI-powered queries and data retrieval.</p>
+                    <a href="api-services.html" class="concept-link">View Service API →</a>
                 </div>
                 
                 <div class="concept-card">
-                    <h3>🏷️ Attribution Tracking</h3>
-                    <p>Transparent tracking of data sources, model contributions, and costs for every query.</p>
-                    <a href="ai-services.html#attribution" class="concept-link">See attribution →</a>
+                    <h3>⚡ Pipeline API</h3>
+                    <p>Build and execute federated RAG pipelines combining multiple data sources and models.</p>
+                    <a href="api-pipelines.html" class="concept-link">View Pipeline API →</a>
                 </div>
 
                 <div class="concept-card">
-                    <h3>🔐 Payments</h3>
-                    <p>Secure account management for accessing services, tracking usage, and managing costs.</p>
-                    <a href="authentication.html" class="concept-link">Learn more →</a>
+                    <h3>🔐 Authentication API</h3>
+                    <p>Manage accounts, payments, and access credentials for syft-hub services.</p>
+                    <a href="api-authentication.html" class="concept-link">View Auth API →</a>
                 </div>
-
-            
-
             </div>
         </section>
         

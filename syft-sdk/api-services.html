@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service API - syft-hub SDK Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">syft-hub SDK is in beta. Payments are disabled during beta; enjoy $20 in free credits.</span>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img width="32" height="32" src="syftbox-logo.svg" alt="SyftHub Logo">
+                <span>syft-hub SDK</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="api-reference.html" class="active">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-nsai-sdk" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Service API</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Service API</h1>
+            <p class="lead">Data sources, model endpoints, and service management APIs</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-reference.html" class="nav-pill">API Reference</a>
+            <a href="api-client.html" class="nav-pill">Client</a>
+            <a href="api-authentication.html" class="nav-pill">Authentication</a>
+            <a href="api-services.html" class="nav-pill active">Services</a>
+            <a href="api-pipelines.html" class="nav-pill">Pipelines</a>
+        </div>
+        <!-- Document Content -->
+        <div class="doc-content">
+            <!-- Table of Contents -->
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#service-interaction">Service Interaction Methods</a></li>
+                    <li><a href="#async-methods">Async Methods</a></li>
+                    <li><a href="#service-information">Service Information</a></li>
+                    <li><a href="#chat-response">ChatResponse</a></li>
+                    <li><a href="#search-response">SearchResponse</a></li>
+                    <li><a href="#document-result">DocumentResult</a></li>
+                </ul>
+            </div>
+
+            <!-- Service Class -->
+            <div class="api-class">
+                <h2 class="api-class-title">syft_hub.Service</h2>
+                <p class="api-class-description">Object-oriented interface for interacting with SyftBox services (both data and model services).</p>
+
+                <div class="api-section">
+                    <h3 id="properties">Properties</h3>
+                    
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>name: str</code>
+                        </div>
+                        <p class="api-method-description">The service's display name without the datasite prefix, providing a clean identifier for the specific service functionality.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>datasite: str</code>
+                        </div>
+                        <p class="api-method-description">The email address of the datasite (data node) that hosts and owns this service, identifying who is providing the service on the network. This information is crucial for understanding service provenance, trust relationships, and payment routing.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>full_name: str</code>
+                        </div>
+                        <p class="api-method-description">The complete service identifier in the format datasite/name.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>supports_chat: bool</code>
+                        </div>
+                        <p class="api-method-description">Boolean flag indicating whether this service provides chat/conversation capabilities.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>supports_search: bool</code>
+                        </div>
+                        <p class="api-method-description">Boolean flag indicating whether this service provides search/retrieval capabilities.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>cost: float</code>
+                        </div>
+                        <p class="api-method-description">The cost per request for using this service, expressed in USD as a floating-point number.</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="service-interaction">Service Interaction Methods</h3>
+                    
+                    <div class="api-method">
+                        <h4>Search</h4><br>
+                        <div class="api-method-signature">
+                            <code>search(message: str, **kwargs) -> SearchResponse</code>
+                        </div>
+                        <p class="api-method-description">Perform search against this service's indexed data synchronously, returning results immediately upon completion. This method blocks until the search is complete and is ideal for interactive applications where you need immediate access to search results. Only available on services with search capabilities.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">message</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Search query</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">limit</span>
+                                    <span class="param-type">int</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Maximum number of results to return</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">similarity_threshold</span>
+                                    <span class="param-type">float</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Minimum similarity threshold for results</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Load a data service</span>
+openmined_data = client.load_service(<span class="string">"irina@openmined.org/openmined-about"</span>)
+
+<span class="comment"># Basic search</span>
+results = openmined_data.search(<span class="string">"attribution-based control"</span>)
+
+<span class="comment"># Search with parameters</span>
+results = openmined_data.search(
+    message=<span class="string">"machine learning"</span>,
+    limit=<span class="number">10</span>,
+    similarity_threshold=<span class="number">0.8</span>
+)
+
+<span class="comment"># Access results</span>
+<span class="keyword">for</span> result <span class="keyword">in</span> results.results:
+    <span class="keyword">print</span>(result.content, result.score)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Chat</h4><br>
+                        <div class="api-method-signature">
+                            <code>chat(messages: List[Dict[str, str]], **kwargs) -> ChatResponse</code>
+                        </div>
+                        <p class="api-method-description">Send conversational messages to this AI service and receive a response synchronously, blocking until the model completes its response generation. This method is perfect for real-time chat applications and interactive AI assistants where immediate responses are required. Only available on services with chat capabilities.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">messages</span>
+                                    <span class="param-type">List[Dict]</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">List of message dictionaries with <code>role</code> and <code>content</code></div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">temperature</span>
+                                    <span class="param-type">float</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Sampling temperature (0.0 to 1.0)</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">max_tokens</span>
+                                    <span class="param-type">int</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Maximum tokens in response</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Load a chat service</span>
+claude_llm = client.load_service(<span class="string">"aggregator@openmined.org/claude-sonnet-3.5"</span>)
+
+<span class="comment"># Basic chat</span>
+response = claude_llm.chat([
+    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"What's up bro?"</span>}
+])
+
+<span class="comment"># Chat with parameters</span>
+response = claude_llm.chat(
+    messages=[
+        {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"You are a helpful assistant"</span>},
+        {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Explain quantum computing"</span>}
+    ],
+    temperature=<span class="number">0.7</span>,
+    max_tokens=<span class="number">200</span>
+)
+
+<span class="keyword">print</span>(response.content)</code></pre>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+                <div class="api-section">
+                    <h3 id="async-methods">Async Methods</h3>
+                    
+                    <div class="api-method">
+                        <h4>Search Async</h4><br>
+                        <div class="api-method-signature">
+                            <code>async search_async(message: str, **kwargs) -> SearchResponse</code>
+                        </div>
+                        <p class="api-method-description">Perform a semantic search against this service's data asynchronously, allowing your application to continue processing while the search executes in the background. This method is ideal for applications that need to handle multiple concurrent operations or when building responsive UIs that shouldn't block on search operations.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Async search</span>
+results = <span class="keyword">await</span> openmined_data.search_async(
+    message=<span class="string">"attribution-based control"</span>,
+    limit=<span class="number">10</span>
+)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Chat Async</h4><br>
+                        <div class="api-method-signature">
+                            <code>async chat_async(messages: List[Dict[str, str]], **kwargs) -> ChatResponse</code>
+                        </div>
+                        <p class="api-method-description">Send conversational messages to this AI service asynchronously, enabling non-blocking communication that allows your application to handle other tasks while waiting for the response. This approach is essential for scalable applications that need to manage multiple concurrent conversations or long-running model interactions.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Async chat</span>
+response = <span class="keyword">await</span> claude_llm.chat_async([
+    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Hello!"</span>}
+])</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="service-information">Service Information</h3>
+                    
+                    <div class="api-method">
+                        <h4>Show</h4><br>
+                        <div class="api-method-signature">
+                            <code>show() -> None</code>
+                        </div>
+                        <p class="api-method-description">Display detailed service information in an interactive widget optimized for Jupyter notebooks, showing capabilities, costs, endpoints, and usage examples.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Display service details</span>
+service.show()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Show Example</h4><br>
+                        <div class="api-method-signature">
+                            <code>show_example() -> None</code>
+                        </div>
+                        <p class="api-method-description">Display practical, runnable code examples specifically tailored to this service's capabilities, for a quick start.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Show usage examples</span>
+service.show_example()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response Classes -->
+            <div class="api-class">
+                <h2 class="api-class-title">Response Classes</h2>
+                <p class="api-class-description">Response objects returned by service operations.</p>
+
+                <div class="api-section">
+                    <h3 id="chat-response">ChatResponse</h3>
+                    
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>content: str</code>
+                        </div>
+                        <p class="api-method-description">The actual text content generated by the AI model in response to your chat messages, containing the synthesized answer or completion.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>cost: float</code>
+                        </div>
+                        <p class="api-method-description">The total cost incurred for this chat request.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>usage: ChatUsage</code>
+                        </div>
+                        <p class="api-method-description">Detailed token consumption metrics including input tokens, output tokens, and total tokens used during the chat interaction. </p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="search-response">SearchResponse</h3>
+                    
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>results: List[DocumentResult]</code>
+                        </div>
+                        <p class="api-method-description">An ordered list of search results containing document content and relevance scores, ranked by similarity to your query. Each result includes the matched text, similarity score, and metadata.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>query: str</code>
+                        </div>
+                        <p class="api-method-description">The exact search query string that was submitted to the service.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>cost: float</code>
+                        </div>
+                        <p class="api-method-description">The total cost charged for performing this search operation.</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="document-result">DocumentResult</h3>
+                    
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>content: str</code>
+                        </div>
+                        <p class="api-method-description">The actual text content from the matched document, which may be a snippet or the full document depending on the service configuration.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>score: float</code>
+                        </div>
+                        <p class="api-method-description">A normalized similarity score between 0.0 and 1.0 indicating how closely this result matches your search query, with 1.0 being a perfect match. Use this score to filter results, implement relevance thresholds, or rank results for display to users.</p>
+                        <p>Note that the distance metric might differ across nodes on the network and different embedding models can be used by the services. As a result, the score might not be comparable across services.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <div class="api-method-signature">
+     
+                            <code>metadata: Dict[str, Any]</code>
+                        </div>
+                        <p class="api-method-description">A dictionary containing additional metadata about the source document, such as filename, creation date, datasite origin, document type, and other contextual information.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Pages -->
+            <div class="related-pages">
+                <h3>Related Documentation</h3>
+                <div class="related-grid">
+                    <a href="api-client.html" class="related-link">
+                        <span class="related-icon">🔧</span>
+                        <div>
+                            <strong>Client API</strong>
+                            <p>Client initialization and discovery</p>
+                        </div>
+                    </a>
+                    <a href="api-pipelines.html" class="related-link">
+                        <span class="related-icon">⚡</span>
+                        <div>
+                            <strong>Pipeline API</strong>
+                            <p>Chaining services together</p>
+                        </div>
+                    </a>
+                    <a href="ai-services.html" class="related-link">
+                        <span class="related-icon">📚</span>
+                        <div>
+                            <strong>Concepts</strong>
+                            <p>Understanding service types</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>syft-hub SDK</strong>
+                    <p>Run decentralised AI on private data</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="quickstart.html">Quickstart</a>
+                    <a href="ai-services.html">Concepts</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="authentication.html">Authentication</a>
+                    <a href="https://github.com/OpenMined/syft-nsai-sdk">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

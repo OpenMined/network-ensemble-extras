@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication API - syft-hub SDK Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">syft-hub SDK is in beta. Payments are disabled during beta; enjoy $20 in free credits.</span>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img width="32" height="32" src="syftbox-logo.svg" alt="SyftHub Logo">
+                <span>syft-hub SDK</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="api-reference.html" class="active">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-nsai-sdk" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Authentication API</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Authentication API</h1>
+            <p class="lead">Account management, authentication, and payment system for SyftBox services</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-reference.html" class="nav-pill">API Reference</a>
+            <a href="api-client.html" class="nav-pill">Client</a>
+            <a href="api-authentication.html" class="nav-pill active">Authentication</a>
+            <a href="api-services.html" class="nav-pill">Services</a>
+            <a href="api-pipelines.html" class="nav-pill">Pipelines</a>
+        </div>
+        <!-- Document Content -->
+        <div class="doc-content">
+            <!-- Table of Contents -->
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#quick-start">Quick Start</a></li>
+                    <li><a href="#account-registration">Account Registration</a></li>
+                    <li><a href="#account-connection">Account Connection</a></li>
+                    <li><a href="#account-status">Account Status</a></li>
+                    <li><a href="#balance-payments">Balance and Payments</a></li>
+                    <li><a href="#credential-validation">Credential Validation</a></li>
+                    <li><a href="#configuration-management">Configuration Management</a></li>
+                    <li><a href="#error-handling">Error Handling</a></li>
+                    <li><a href="#widget-display">Widget Display</a></li>
+                </ul>
+            </div>
+
+            <!-- AccountingClient Class -->
+            <div class="api-class">
+                <h2 class="api-class-title">client.accounting_client</h2>
+                <p class="api-class-description">Access the accounting client for payment management and authentication with SyftBox services.</p>
+
+                <div class="api-section">
+                    <h3 id="quick-start">Quick Start</h3>
+                    <div class="api-method">
+                        <h4>Is Configured</h4><br>
+                        <div class="api-method-signature">
+                            <code>client.accounting_client.is_configured() -> bool</code>
+                        </div>
+                        <p class="api-method-description">Check if accounting credentials are properly configured and the client is ready to handle payments and authentication. This method validates that all necessary configuration is in place without making network requests.</p>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="keyword">from</span> syftbox <span class="keyword">import</span> Client
+
+<span class="comment"># Initialize client - automatically discovers saved credentials</span>
+client = Client()
+
+<span class="comment"># Check if accounting is configured</span>
+<span class="keyword">if</span> client.accounting_client.is_configured():
+    <span class="keyword">print</span>(<span class="string">"✓ Accounting configured"</span>)
+    client.accounting_client.show()  <span class="comment"># Display status widget</span>
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"❌ No accounting configuration found"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="account-registration">Account Registration</h3>
+                    
+                    <div class="api-method">
+                        <h4>Register Accounting</h4><br>
+                        <div class="api-method-signature">
+                            <code>register_accounting(email: str, password: str = None, organization: str = None) -> UserAccount</code>
+                        </div>
+                        <p class="api-method-description">Create a new accounting account that enables access to paid AI services and provides usage tracking across the network. The account includes initial credits and allows you to monitor costs across all your service interactions.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">email</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Email address for the new account</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">password</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Account password. Auto-generated if not provided</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">organization</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Organization name for the account</div>
+                            </div>
+                        </div>
+
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>UserAccount</code> - Account object with email, password, and initial balance</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Register with email - password will be generated if not provided</span>
+user_account = client.accounting_client.register_accounting(
+    email=<span class="string">"your.email@example.com"</span>,
+    password=<span class="string">"secure_password"</span>,  <span class="comment"># Optional - auto-generated if not provided</span>
+    organization=<span class="string">"YourOrganization"</span>  <span class="comment"># Optional</span>
+)
+
+<span class="keyword">print</span>(f<span class="string">"Account created: {user_account.email}"</span>)
+<span class="keyword">print</span>(f<span class="string">"Password: {user_account.password}"</span>)  <span class="comment"># Save this securely!</span>
+<span class="keyword">print</span>(f<span class="string">"Balance: ${user_account.balance}"</span>)</code></pre>
+                                <br></br>
+                            <p style="color: red;"><strong>Important:</strong> Save the generated password securely - it cannot be recovered. If you lose it, contact support@openmined.org.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="account-connection">Account Connection</h3>
+                    
+                    <div class="api-method">
+                        <h4>Configure</h4><br>
+                        <div class="api-method-signature">
+                            <code>configure(accounting_url: str, email: str, password: str) -> None</code>
+                        </div>
+                        <p class="api-method-description">Connect to the accounting system using existing credentials.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">email</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Account email address</div>
+                            </div>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">password</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Account password</div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Method 1: Configure directly</span>
+client.accounting_client.configure(
+    email=<span class="string">"your.email@example.com"</span>,
+    password=<span class="string">"your_password"</span>
+)
+
+<span class="comment"># Method 2: Use connect_accounting alias</span>
+client.accounting_client.connect_accounting(
+    email=<span class="string">"your.email@example.com"</span>,
+    password=<span class="string">"your_password"</span>
+)
+
+<span class="comment"># Display connection status</span>
+client.accounting_client.show()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Connect Accounting</h4><br>
+                        <div class="api-method-signature">
+                            <code>connect_accounting(accounting_url: str, email: str, password: str) -> None</code>
+                        </div>
+                        <p class="api-method-description">Convenient alias for the configure() method that provides the same functionality with a more descriptive name.</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="account-status">Account Status</h3>
+                    
+                    <div class="api-method">
+                        <h4>Show</h4><br>
+                        <div class="api-method-signature">
+                            <code>show() -> None</code>
+                        </div>
+                        <p class="api-method-description">Display an interactive status widget, showing account details, balance, service URL, and common operations. </p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Display interactive status widget (Jupyter environments)</span>
+client.accounting_client.show()
+
+<span class="comment"># Get basic configuration info</span>
+<span class="keyword">print</span>(f<span class="string">"Configured: {client.accounting_client.is_configured()}"</span>)
+<span class="keyword">print</span>(f<span class="string">"Email: {client.accounting_client.get_email()}"</span>)
+<span class="keyword">print</span>(f<span class="string">"Service URL: {client.accounting_client.accounting_url}"</span>)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Get Email</h4><br>
+                        <div class="api-method-signature">
+                            <code>get_email() -> str</code>
+                        </div>
+                        <p class="api-method-description">Retrieve the email address currently configured for this accounting client, which serves as your unique identifier across the payment system.</p>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Get Account Info</h4><br>
+                        <div class="api-method-signature">
+                            <code>get_account_info() -> Dict[str, Any]</code>
+                        </div>
+                        <p class="api-method-description">Retrieve comprehensive account information including current balance, account ID, usage statistics, and billing history through an asynchronous operation.</p>
+                        
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>Dict</code> - Account information including balance and account ID</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Get detailed account information (async)</span>
+import asyncio
+info = await client.accounting_client.get_account_info()
+<span class="keyword">print</span>(f<span class="string">"Balance: ${info['balance']}"</span>)
+<span class="keyword">print</span>(f<span class="string">"Account ID: {info['account_id']}"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="balance-payments">Balance and Payments</h3>
+                    
+                    <div class="api-method">
+                        <h4>Get Account Balance</h4><br>
+                        <div class="api-method-signature">
+                            <code>get_account_balance() -> float</code>
+                        </div>
+                        <p class="api-method-description">Retrieve your current account balance synchronously, blocking until the balance is fetched from the accounting service. </p>
+                        
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>float</code> - Current account balance in USD</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Get current balance (synchronous)</span>
+balance = client.accounting_client.get_account_balance()
+<span class="keyword">print</span>(f<span class="string">"Available Balance: ${balance}"</span>)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Get Account Balance Async</h4><br>
+                        <div class="api-method-signature">
+                            <code>_get_account_balance_async() -> float</code>
+                        </div>
+                        <p class="api-method-description">Retrieve your current account balance asynchronously, allowing your application to continue processing while the balance is fetched in the background. This approach is better for applications that need to check balances frequently or handle multiple concurrent operations without blocking the main thread.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Get current balance (asynchronous)</span>
+balance = await client.accounting_client._get_account_balance_async()
+<span class="keyword">print</span>(f<span class="string">"Available Balance: ${balance}"</span>)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Create Transaction Token</h4><br>
+                        <div class="api-method-signature">
+                            <code>create_transaction_token(recipient_email: str) -> str</code>
+                        </div>
+                        <p class="api-method-description">Generate a secure transaction token that authorizes payment to a specific service provider, enabling you to pay for AI model usage or data access in a controlled manner. This token-based approach ensures secure, traceable payments while maintaining privacy and preventing unauthorized charges.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">recipient_email</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-required">required</span>
+                                </div>
+                                <div class="param-description">Email of the service provider to pay</div>
+                            </div>
+                        </div>
+
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>str</code> - Transaction token for payment authorization</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Create transaction token for payments</span>
+token = await client.accounting_client.create_transaction_token(
+    recipient_email=<span class="string">"service@example.com"</span>
+)
+<span class="keyword">print</span>(f<span class="string">"Transaction token: {token}"</span>)
+
+<span class="comment"># Complete transaction workflow</span>
+<span class="comment"># Check balance before operation</span>
+initial_balance = client.accounting_client.get_account_balance()
+<span class="keyword">print</span>(f<span class="string">"Current Balance: ${initial_balance}"</span>)
+
+<span class="comment"># Create transaction token for service payment</span>
+service_email = <span class="string">"ai-service@example.com"</span>
+transaction_token = await client.accounting_client.create_transaction_token(
+    recipient_email=service_email
+)
+
+<span class="comment"># Use the token in your service requests</span>
+response = await some_ai_service.query(
+    message=<span class="string">"Your query here"</span>,
+    payment_token=transaction_token
+)
+
+<span class="comment"># Check remaining balance</span>
+final_balance = client.accounting_client.get_account_balance()
+<span class="keyword">print</span>(f<span class="string">"Remaining Balance: ${final_balance}"</span>)
+<span class="keyword">print</span>(f<span class="string">"Transaction Cost: ${initial_balance - final_balance}"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="credential-validation">Credential Validation</h3>
+                    
+                    <div class="api-method">
+                        <h4>Validate Credentials</h4><br>
+                        <div class="api-method-signature">
+                            <code>validate_credentials() -> bool</code>
+                        </div>
+                        <p class="api-method-description">Verify that your stored credentials are still valid and that you can successfully authenticate with the accounting service. This asynchronous operation checks credential freshness, account status, and service connectivity, helping you detect and resolve authentication issues before they impact your workflow.</p>
+                        
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>bool</code> - True if credentials are valid, False otherwise</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Test if credentials are valid</span>
+is_valid = await client.accounting_client.validate_credentials()
+<span class="keyword">if</span> is_valid:
+    <span class="keyword">print</span>(<span class="string">"✓ Credentials are valid"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"❌ Invalid credentials"</span>)
+
+<span class="comment"># Check if client is configured</span>
+<span class="keyword">if</span> client.accounting_client.is_configured():
+    email = client.accounting_client.get_email()
+    <span class="keyword">print</span>(f<span class="string">"Configured for: {email}"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"No configuration found"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="configuration-management">Configuration Management</h3>
+                    
+                    <div class="api-method">
+                        <h4>Save Credentials</h4><br>
+                        <div class="api-method-signature">
+                            <code>save_credentials(filepath: str = None) -> None</code>
+                        </div>
+                        <p class="api-method-description">Securely save your authentication credentials to a local configuration file with strict permissions, enabling automatic authentication in future sessions. This method requires explicit user consent and encrypts sensitive data before storage, providing a balance between convenience and security for development workflows.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">filepath</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Custom path for config file. Defaults to <code>~/.syftbox/accounting.json</code></div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Save credentials to config file (requires user consent)</span>
+client.accounting_client.save_credentials()  <span class="comment"># Saves to ~/.syftbox/accounting.json</span>
+<span class="comment"># Or specify custom path</span>
+client.accounting_client.save_credentials(<span class="string">"/path/to/config.json"</span>)</code></pre>
+
+                            <p><strong>Security Note:</strong> Config files are saved with restrictive permissions (0o600) and contain sensitive data. Only save credentials with explicit user consent.</p>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Load From Config</h4><br>
+                        <div class="api-method-signature">
+                            <code>@classmethod</code><br>
+                            <code>load_from_config(filepath: str = None) -> AccountingClient</code>
+                        </div>
+                        <p class="api-method-description">Load previously saved credentials from the local configuration file, automatically establishing authentication without requiring manual credential entry. This class method creates a new AccountingClient instance with stored credentials, streamlining the setup process for recurring use of the same account.</p>
+                        
+                        <div class="api-parameters">
+                            <h4>Parameters</h4>
+                            <div class="param-item">
+                                <div class="param-header">
+                                    <span class="param-name">filepath</span>
+                                    <span class="param-type">str</span>
+                                    <span class="param-optional">optional</span>
+                                </div>
+                                <div class="param-description">Path to config file. Defaults to <code>~/.syftbox/accounting.json</code></div>
+                            </div>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Load from saved config</span>
+accounting_client = AccountingClient.load_from_config()
+<span class="comment"># Or from custom path</span>
+accounting_client = AccountingClient.load_from_config(<span class="string">"/path/to/config.json"</span>)
+
+client = Client(accounting_client=accounting_client)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>From Environment</h4><br>
+                        <div class="api-method-signature">
+                            <code>@classmethod</code><br>
+                            <code>from_environment() -> AccountingClient</code>
+                        </div>
+                        <p class="api-method-description">Create an AccountingClient instance using credentials stored in environment variables, enabling secure credential management in production environments and CI/CD pipelines. This method follows standard practices for secret management by keeping sensitive data out of code repositories.</p>
+                        
+                        <div class="api-example">
+                            <h4>Environment Variables</h4>
+                            <pre><code><span class="comment"># Set environment variables in your shell or .env file</span>
+export SYFTBOX_ACCOUNTING_EMAIL=your.email@example.com
+export SYFTBOX_ACCOUNTING_PASSWORD=your_secure_password
+export SYFTBOX_ACCOUNTING_URL=https://your-accounting-service.com</code></pre>
+
+                            <pre><code><span class="keyword">from</span> syftbox <span class="keyword">import</span> Client
+<span class="keyword">from</span> syftbox.accounting <span class="keyword">import</span> AccountingClient
+
+<span class="comment"># Method 1: Load via AccountingClient class method</span>
+accounting_client = AccountingClient.from_environment()
+client = Client(accounting_client=accounting_client)
+
+<span class="comment"># Method 2: Auto-discovery during client setup</span>
+client = Client()  <span class="comment"># Automatically tries environment variables</span>
+accounting_client, is_configured = AccountingClient.setup_accounting_discovery()
+
+<span class="comment"># Verify authentication</span>
+<span class="keyword">print</span>(accounting_client)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Setup Accounting Discovery</h4><br>
+                        <div class="api-method-signature">
+                            <code>@classmethod</code><br>
+                            <code>setup_accounting_discovery() -> Tuple[AccountingClient, bool]</code>
+                        </div>
+                        <p class="api-method-description">Automatically discover and load credentials using a fallback strategy that first tries saved configuration files, then environment variables, providing the most convenient authentication setup. </p>
+                        
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>Tuple[AccountingClient, bool]</code> - Accounting client and configuration status</p>
+                        </div>
+
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="comment"># Auto-discovery: tries config file, then environment variables</span>
+accounting_client, is_configured = AccountingClient.setup_accounting_discovery()
+<span class="keyword">if</span> is_configured:
+    <span class="keyword">print</span>(<span class="string">"✓ Credentials loaded automatically"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"❌ No saved credentials found"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3 id="error-handling">Error Handling</h3>
+                    
+                    <div class="api-method">
+                        <h4>Authentication Error</h4><br>
+                        <div class="api-method-signature">
+                            <code>AuthenticationError</code>
+                        </div>
+                        <p class="api-method-description">Handle authentication failures, invalid credentials, and connection issues with the accounting service, providing specific error messages to help diagnose and resolve authentication problems. This exception type helps distinguish authentication issues from other types of errors in your application logic.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="keyword">from</span> syftbox.core.exceptions <span class="keyword">import</span> AuthenticationError, PaymentError
+
+<span class="keyword">try</span>:
+    client.accounting_client.configure(
+        accounting_url=<span class="string">"https://service.com"</span>,
+        email=<span class="string">"user@example.com"</span>,
+        password=<span class="string">"password"</span>
+    )
+<span class="keyword">except</span> AuthenticationError <span class="keyword">as</span> e:
+    <span class="keyword">print</span>(f<span class="string">"Authentication failed: {e}"</span>)
+    <span class="comment"># Check credentials or register new account</span></code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Payment Error</h4><br>
+                        <div class="api-method-signature">
+                            <code>PaymentError</code>
+                        </div>
+                        <p class="api-method-description">Handle payment-related errors such as insufficient funds, failed transactions, or payment service unavailability, allowing your application to gracefully respond to billing issues. This exception type provides detailed error information to help users understand and resolve payment problems.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="keyword">try</span>:
+    balance = client.accounting_client.get_account_balance()
+    <span class="keyword">if</span> balance < 5.0:
+        <span class="keyword">print</span>(<span class="string">"Warning: Low balance"</span>)
+    
+    token = await client.accounting_client.create_transaction_token(
+        recipient_email=<span class="string">"service@example.com"</span>
+    )
+<span class="keyword">except</span> PaymentError <span class="keyword">as</span> e:
+    <span class="keyword">print</span>(f<span class="string">"Payment error: {e}"</span>)
+    <span class="comment"># Handle insufficient balance or service unavailability</span></code></pre>
+                        </div>
+                    </div>
+
+                    <div class="api-method">
+                        <h4>Service Exception</h4><br>
+                        <div class="api-method-signature">
+                            <code>ServiceException</code>
+                        </div>
+                        <p class="api-method-description">Handle situations where the accounting service is temporarily unavailable, experiencing outages, or unreachable due to network issues. This exception allows your application to implement retry logic, fallback behavior, or graceful degradation when payment services are disrupted.</p>
+                        
+                        <div class="api-example">
+                            <h4>Example</h4>
+                            <pre><code><span class="keyword">try</span>:
+    <span class="keyword">from</span> syft_accounting_sdk <span class="keyword">import</span> ServiceException
+<span class="keyword">except</span> ImportError:
+    <span class="keyword">print</span>(<span class="string">"syft-accounting-sdk not installed"</span>)
+    <span class="keyword">print</span>(<span class="string">"Install with: pip install syft-accounting-sdk"</span>)
+
+<span class="comment"># Check if accounting features are available</span>
+<span class="keyword">if</span> hasattr(client, <span class="string">'accounting_client'</span>) <span class="keyword">and</span> client.accounting_client:
+    is_valid = await client.accounting_client.validate_credentials()
+    <span class="keyword">if</span> <span class="keyword">not</span> is_valid:
+        <span class="keyword">print</span>(<span class="string">"Invalid credentials or service unavailable"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Accounting client not available"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Pages -->
+            <div class="related-pages">
+                <h3>Related Documentation</h3>
+                <div class="related-grid">
+                    <a href="api-client.html" class="related-link">
+                        <span class="related-icon">🔧</span>
+                        <div>
+                            <strong>Client API</strong>
+                            <p>Core client functionality</p>
+                        </div>
+                    </a>
+                    <a href="api-services.html" class="related-link">
+                        <span class="related-icon">🌐</span>
+                        <div>
+                            <strong>Service API</strong>
+                            <p>Working with data and AI services</p>
+                        </div>
+                    </a>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>syft-hub SDK</strong>
+                    <p>Run decentralised AI on private data</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="quickstart.html">Quickstart</a>
+                    <a href="ai-services.html">Concepts</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="authentication.html">Authentication</a>
+                    <a href="https://github.com/OpenMined/syft-nsai-sdk">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
