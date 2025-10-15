@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting & Pricing - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.30 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Accounting & Pricing</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Accounting & Pricing</h1>
+            <p class="lead">This guide explains how usage tracking, billing, and pricing work for your router services. Learn about OpenMined's hosted accounting service and how to implement monetization.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-endpoints.html" class="nav-pill">Endpoints</a>
+            <a href="api-authentication.html" class="nav-pill">Authentication</a>
+            <a href="api-accounting.html" class="nav-pill active">Accounting</a>
+            <a href="api-code-structure.html" class="nav-pill">Code Structure</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>Overview</h2>
+            <p>Syft Router accounting uses OpenMined's hosted accounting service to handle billing and usage tracking for your router. The system provides comprehensive functionality for monetizing your AI services.</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Usage Tracking</h3>
+                    <p>Monitor requests, tokens, and performance across all your services with real-time analytics and detailed reporting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Automated Billing</h3>
+                    <p>Users are charged based on their usage with automatic payment processing and built-in fraud protection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Analytics</h3>
+                    <p>View usage patterns and revenue through detailed dashboards with real-time updates and trend analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Access Control</h3>
+                    <p>The system enforces rate limits and quotas to maintain service quality and prevent abuse automatically.</p>
+                </div>
+            </div>
+
+            <h2>Pricing Models</h2>
+
+            <h3>Per-Request Pricing</h3>
+            <p>This model charges users a fixed amount for each API call, making costs predictable for both you and your users:</p>
+
+            <pre><code>{
+  "pricing_type": "per_request",
+  "amount": 0.01,
+  "currency": "USD",
+  "description": "$0.01 per search query"
+}</code></pre>
+
+            <div class="info-box">
+                <strong>✅ This pricing model works best for:</strong>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Search services</strong> - Each query has similar computational cost</li>
+                    <li><strong>Simple chat responses</strong> - Fixed interaction patterns</li>
+                    <li><strong>Predictable workloads</strong> - Consistent resource usage per request</li>
+                    <li><strong>Fixed-cost operations</strong> - Image processing, data analysis, etc.</li>
+                </ul>
+            </div>
+
+            <h3>Per-Token Pricing</h3>
+            <div class="info-box" style="background: var(--color-bg-secondary); border-left: 4px solid var(--color-accent);">
+                <strong>🚧 Coming Soon</strong>
+                <p>Per-token pricing is not currently supported. We will add this feature in a future beta version to enable more granular billing for language model usage.</p>
+            </div>
+
+            <h2>Implementing Accounting</h2>
+            <p>The accounting system integrates with your router services through OpenMined's hosted accounting service. Here's how to implement it properly:</p>
+
+            <h3>Basic Integration</h3>
+            <p>Here's a real example from a CustomChatService showing proper accounting integration:</p>
+
+            <pre><code># Real example from CustomChatService showing proper accounting integration
+class CustomChatService(ChatService):
+    def __init__(self, config: RouterConfig):
+        super().__init__(config)
+        # This connects to OpenMined's hosted accounting service
+        self.accounting_client: UserClient = self.config.accounting_client()
+        logger.info(f"Initialized accounting client: {self.accounting_client}")
+        self.app_name = self.config.project.name
+        
+        # Initialize your language model client
+        self.client = OpenAI(
+            api_key=config.get('openai_api_key'),
+            base_url=config.get('base_url', 'https://api.openai.com/v1')
+        )</code></pre>
+
+            <h3>Transaction Handling</h3>
+            <p>The core of the accounting system is the transaction pattern. Here's how it works:</p>
+
+            <pre><code>def generate_chat(
+    self,
+    model: str,
+    messages: List[Message],
+    user_email: EmailStr,
+    transaction_token: Optional[str] = None,
+    options: Optional[GenerationOptions] = None,
+) -> ChatResponse:
+    # Prepare request payload for your language model
+    payload = {
+        "model": model or self.default_model,
+        "messages": [{"role": msg.role, "content": msg.content} for msg in messages],
+        "stream": False,
+    }
+    
+    # Handle payment transaction - this is where the accounting magic happens!
+    # The transaction is created first, then confirmed only if the AI request succeeds.
+    query_cost = 0.0
+    if self.pricing > 0 and transaction_token:
+        with self.accounting_client.delegated_transfer(
+            user_email,                    # Who is being charged
+            amount=self.pricing,           # How much to charge
+            token=transaction_token,       # Payment authorization from user
+            app_name=self.app_name,        # Your router name for billing
+            app_ep_path="/chat",           # Which endpoint was used
+        ) as payment_txn:
+            # Only make the expensive API call inside the transaction context
+            response = self.client.chat.completions.create(**payload)
+            
+            # Only confirm payment if we got a valid response
+            # This ensures users are only charged for successful requests!
+            if response.choices:
+                payment_txn.confirm()  # This actually charges the user
+            query_cost = self.pricing
+            
+    elif self.pricing > 0 and not transaction_token:
+        raise ValueError(
+            "Transaction token is required for paid services. Please provide a transaction token."
+        )
+    else:
+        # Free service - no payment needed
+        response = self.client.chat.completions.create(**payload)</code></pre>
+
+            <h3>Usage Tracking</h3>
+            <p>Always return detailed usage information for analytics and billing transparency:</p>
+
+            <pre><code>    # Convert response to SyftBox format with usage tracking
+    choice = response.choices[0]
+    usage = ChatUsage(
+        prompt_tokens=response.usage.prompt_tokens,
+        completion_tokens=response.usage.completion_tokens,
+        total_tokens=response.usage.total_tokens,
+    )
+    
+    return ChatResponse(
+        id=UUID(response.id),
+        model=response.model,
+        message=Message(role="assistant", content=choice.message.content),
+        usage=usage,
+        provider_info={"provider": "openai", "finish_reason": choice.finish_reason},
+        cost=query_cost,  # This gets tracked for analytics
+    )</code></pre>
+
+            <h2>How the Accounting System Works</h2>
+            <p>OpenMined's hosted accounting service handles all the billing complexity with a sophisticated transaction flow:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Transaction Creation</h4>
+                        <p>When a paid request comes in, a transaction is created but not yet charged. This reserves the user's balance without actually deducting money.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Service Execution</h4>
+                        <p>Your router processes the request (chat, search, etc.) within the transaction context. This ensures payment is tied to successful service delivery.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Conditional Payment</h4>
+                        <p>Payment is only confirmed if the service request was successful. Failed requests automatically release the reserved balance.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Usage Tracking</h4>
+                        <p>All usage data (tokens, cost, response time, metadata) is automatically recorded in the accounting system for analytics.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Analytics</h4>
+                        <p>Data flows into dashboards for monitoring and optimization, giving you insights into usage patterns and revenue.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Key Benefits</h3>
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Fair Billing</h4>
+                    <p>Users are never charged for failed requests, ensuring fair billing practices</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Automatic Recovery</h4>
+                    <p>The system handles retries and error recovery automatically</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Built-in Security</h4>
+                    <p>Fraud protection and rate limiting keep your service secure</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-time Monitoring</h4>
+                    <p>Get real-time usage monitoring and alerts for your services</p>
+                </div>
+            </div>
+
+            <h2>Viewing Usage and Balances</h2>
+            <p>You can monitor your router's performance and earnings through the SyftBox dashboard with comprehensive analytics:</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>📊 Usage Analytics</h4>
+                    <p>View request counts, token usage, response times, and error rates with detailed breakdowns by service and time period.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💰 Revenue Tracking</h4>
+                    <p>The dashboard shows earnings from your router services over time with trend analysis and forecasting.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>👥 User Activity</h4>
+                    <p>Monitor which users are accessing your services most frequently and their usage patterns.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💳 Balance Information</h4>
+                    <p>The dashboard displays your current account balance and complete transaction history.</p>
+                </div>
+            </div>
+
+            <p>The SyftBox UI updates all this information in real-time, so you have complete visibility into your router's performance and profitability.</p>
+
+            <h2>Pricing Configuration</h2>
+
+            <h3>Setting Router Pricing</h3>
+            <p>Configure pricing through the dashboard when publishing your router:</p>
+
+            <pre><code># Example pricing configuration
+{
+  "router_name": "my-ai-router",
+  "services": {
+    "chat": {
+      "pricing_type": "per_request",
+      "amount": 0.02,
+      "currency": "USD",
+      "description": "Premium AI chat with GPT-4"
+    },
+    "search": {
+      "pricing_type": "per_request", 
+      "amount": 0.01,
+      "currency": "USD",
+      "description": "Vector search in document collection"
+    }
+  },
+  "free_tier": {
+    "chat": 10,      # 10 free requests per day
+    "search": 20     # 20 free requests per day
+  }
+}</code></pre>
+
+            <h3>Dynamic Pricing</h3>
+            <p>You can implement dynamic pricing based on various factors:</p>
+
+            <pre><code>def calculate_dynamic_pricing(self, request_complexity, user_tier, time_of_day):
+    """Calculate pricing based on request complexity and user tier."""
+    base_price = 0.01
+    
+    # Adjust for request complexity
+    if request_complexity == "high":
+        base_price *= 2.0
+    elif request_complexity == "premium":
+        base_price *= 3.0
+    
+    # User tier discounts
+    if user_tier == "pro":
+        base_price *= 0.8
+    elif user_tier == "enterprise":
+        base_price *= 0.6
+    
+    # Peak hours pricing
+    if 9 <= time_of_day <= 17:  # Business hours
+        base_price *= 1.2
+    
+    return round(base_price, 4)</code></pre>
+
+            <h2>Error Handling and Edge Cases</h2>
+
+            <h3>Transaction Failures</h3>
+            <p>Handle various transaction failure scenarios gracefully:</p>
+
+            <pre><code>def handle_transaction_errors(self, error, user_email, transaction_token):
+    """Handle different types of transaction errors."""
+    
+    if "insufficient_balance" in str(error):
+        return {
+            "error": "insufficient_balance",
+            "message": "Insufficient balance. Please add funds to your account.",
+            "required_balance": self.pricing,
+            "user_balance": self.get_user_balance(user_email)
+        }
+    
+    elif "invalid_token" in str(error):
+        return {
+            "error": "invalid_transaction_token",
+            "message": "Transaction token is invalid or expired. Please refresh and try again."
+        }
+    
+    elif "service_unavailable" in str(error):
+        return {
+            "error": "accounting_service_unavailable", 
+            "message": "Billing service temporarily unavailable. Please try again later."
+        }
+    
+    else:
+        # Log unexpected errors for debugging
+        logger.error(f"Unexpected transaction error: {error}")
+        return {
+            "error": "transaction_failed",
+            "message": "Transaction could not be processed. Please contact support."
+        }</code></pre>
+
+            <h3>Free Service Fallback</h3>
+            <p>Implement fallback to free service when billing is unavailable:</p>
+
+            <pre><code>def generate_with_fallback(self, request, user_email, transaction_token):
+    """Generate response with fallback to free service if billing fails."""
+    
+    try:
+        # Try paid service first
+        if self.pricing > 0 and transaction_token:
+            return self.generate_paid_response(request, user_email, transaction_token)
+        else:
+            return self.generate_free_response(request, user_email)
+    
+    except AccountingError as e:
+        logger.warning(f"Billing failed, falling back to free service: {e}")
+        
+        # Check if user is within free tier limits
+        if self.check_free_tier_limit(user_email):
+            return self.generate_free_response(request, user_email)
+        else:
+            raise ValueError("Service requires payment but billing is unavailable")</code></pre>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="api-authentication.html" class="guide-card">
+                        <h4>Authentication</h4>
+                        <p>Learn about user tier management and access control</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="guide-custom-chat.html" class="guide-card">
+                        <h4>Custom Chat Router</h4>
+                        <p>Implement accounting in your custom chat services</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

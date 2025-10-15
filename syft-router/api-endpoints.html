@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endpoints - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Endpoints</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Router Endpoints</h1>
+            <p class="lead">Complete API reference for all router endpoints accessible through the SyftBox relay system. Learn how to interact with chat, search, and health endpoints securely without opening firewalls.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-endpoints.html" class="nav-pill active">Endpoints</a>
+            <a href="api-authentication.html" class="nav-pill">Authentication</a>
+            <a href="api-accounting.html" class="nav-pill">Accounting</a>
+            <a href="api-code-structure.html" class="nav-pill">Code Structure</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>How Router APIs Work</h2>
+            <p>Each router runs on its own port (<code>http://localhost:[ROUTER_PORT]/</code>), but this is not a regular FastAPI server accessible to the public. Instead, Syft runs relays which are responsible for forwarding messages between users and routers.</p>
+            
+            <p>As communication is encrypted, these relays are blind to the messages exchanged, but it allows us to easily address services over the network in a unified way, just by knowing the email and the name of the router we want to query.</p>
+
+            <div class="info-box">
+                <strong>🔐 Secure Communication</strong>
+                <p>All router endpoints are accessed through the SyftBox relay system, which routes requests based on the <code>x-syft-url</code> parameter. This allows secure communication without opening firewalls.</p>
+            </div>
+
+            <h2>Core Service Endpoints</h2>
+
+            <h3>Chat Endpoint</h3>
+            <p>Send chat messages to a router's chat service through the SyftBox relay.</p>
+
+            <div class="api-section">
+                <div class="api-method">
+                    <strong>POST</strong> <code>https://syftbox.net/api/v1/send/</code>
+                </div>
+
+                <h4>Request Headers</h4>
+                <ul>
+                    <li><code>x-syft-from</code>: Your email address (sender identification)</li>
+                    <li><code>x-syft-url</code>: Target router endpoint in format <code>syft://owner_email/app_data/router_name/rpc/chat</code></li>
+                    <li><code>timeout</code>: Request timeout in milliseconds (default: 5000)</li>
+                </ul>
+
+                <h4>Request Body</h4>
+                <pre><code>{
+  "message": "string (required) - The user's message",
+  "conversation_id": "string (optional) - Conversation identifier",
+  "model": "string (optional) - Specific model to use",
+  "temperature": "number (optional) - Response randomness (0.0-1.0)",
+  "max_tokens": "number (optional) - Maximum response length",
+  "suffix-sender": "boolean (optional) - Include sender in response",
+  "x-syft-url": "string (required) - Target router syft:// URL"
+}</code></pre>
+
+                <h4>Example Request</h4>
+                <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -H "timeout: 5000" \
+  -d '{
+    "message": "What is machine learning?",
+    "conversation_id": "conv_123",
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/chat"
+  }'</code></pre>
+
+                <h4>Response (HTTP 202 Accepted)</h4>
+                <p>The SyftBox relay returns a polling response for async processing:</p>
+                <pre><code>{
+  "request_id": "req_abc123",
+  "status": "accepted",
+  "data": {
+    "poll_url": "/api/v1/requests/req_abc123/status",
+    "message": "Request queued for processing"
+  }
+}</code></pre>
+
+                <h4>Final Response (after polling)</h4>
+                <pre><code>{
+  "status": "success",
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "response": "Machine learning is a subset of artificial intelligence...",
+    "conversation_id": "conv_123",
+    "model_used": "gpt-3.5-turbo",
+    "tokens_used": 150,
+    "processing_time": 1.2
+  }
+}</code></pre>
+            </div>
+
+            <h3>Search Endpoint</h3>
+            <p>Query a router's document search service through the SyftBox relay.</p>
+
+            <div class="api-section">
+                <div class="api-method">
+                    <strong>POST</strong> <code>https://syftbox.net/api/v1/send/</code>
+                </div>
+
+                <h4>Request Body</h4>
+                <pre><code>{
+  "query": "string (required) - Search query",
+  "limit": "number (optional) - Max results to return (default: 5)",
+  "filters": "object (optional) - Metadata filters",
+  "search_type": "string (optional) - 'vector', 'keyword', or 'hybrid'",
+  "suffix-sender": "boolean (optional) - Include sender in response",
+  "x-syft-url": "string (required) - Target router syft:// URL"
+}</code></pre>
+
+                <h4>Example Request</h4>
+                <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -H "timeout: 5000" \
+  -d '{
+    "query": "machine learning concepts",
+    "limit": 5,
+    "filters": {"category": "technical"},
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/search"
+  }'</code></pre>
+
+                <h4>Response (after polling)</h4>
+                <pre><code>{
+  "status": "success",
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "query": "machine learning concepts",
+    "results": [
+      {
+        "content": "Machine learning is a method of data analysis...",
+        "score": 0.95,
+        "metadata": {
+          "source": "ml-guide.pdf",
+          "page": 1,
+          "category": "technical"
+        },
+        "id": "doc_123"
+      }
+    ],
+    "total_results": 1,
+    "processing_time": 0.3
+  }
+}</code></pre>
+            </div>
+
+            <h2>Health and Status Endpoints</h2>
+
+            <h3>Health Check</h3>
+            <p>Check overall router health through the SyftBox relay system.</p>
+
+            <div class="api-section">
+                <h4>Example Request</h4>
+                <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -H "timeout: 5000" \
+  -d '{
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/health"
+  }'</code></pre>
+
+                <h4>Response (after polling)</h4>
+                <pre><code>{
+  "status": "success",
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "status": "healthy",
+    "services": {
+      "chat": "running",
+      "search": "running"
+    },
+    "uptime": "2h 45m",
+    "version": "1.0.0",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}</code></pre>
+            </div>
+
+            <h3>Service Status</h3>
+            <p>Check specific service status through the relay.</p>
+
+            <div class="api-section">
+                <h4>Example Request</h4>
+                <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "service": "chat",
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/status"
+  }'</code></pre>
+
+                <h4>Response (after polling)</h4>
+                <pre><code>{
+  "status": "success",
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "service": "chat",
+    "status": "running",
+    "last_request": "2024-01-15T10:30:00Z",
+    "response_time_avg": "150ms",
+    "error_rate": "0.1%",
+    "requests_today": 142
+  }
+}</code></pre>
+            </div>
+
+            
+
+            <h2>Router Information Endpoints</h2>
+
+            <h3>Router Metadata</h3>
+            <p>Get router information and capabilities through the SyftBox relay.</p>
+
+            <div class="api-section">
+                <h4>Example Request</h4>
+                <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/info"
+  }'</code></pre>
+
+                <h4>Response (after polling)</h4>
+                <pre><code>{
+  "status": "success",
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "name": "my-ai-router",
+    "version": "1.0.0",
+    "description": "AI-powered chat and search router",
+    "author": "router_owner@example.com",
+    "services": {
+      "chat": {
+        "enabled": true,
+        "models": ["gpt-3.5-turbo", "gpt-4"],
+        "pricing": {
+          "per_request": 0.01,
+          "per_token": 0.0001
+        }
+      },
+      "search": {
+        "enabled": true,
+        "collection_size": 10000,
+        "pricing": {
+          "per_request": 0.005
+        }
+      }
+    },
+    "published": true,
+    "tags": ["chat", "search", "ai"]
+  }
+}</code></pre>
+            </div>
+
+            <h2>Error Responses</h2>
+            <p>SyftBox relay responses follow a consistent format. Errors can occur at the relay level or from the target router.</p>
+
+            <h3>Common Error Types</h3>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Relay Errors (HTTP 4xx/5xx)</h4>
+                    <pre style="font-size: 0.8rem; background: var(--color-bg-code); padding: 1rem; border-radius: 6px; margin-top: 1rem;"><code>{
+  "error": "invalid_request",
+  "message": "Missing required field: x-syft-url",
+  "code": 400,
+  "timestamp": "2024-01-15T10:30:00Z"
+}</code></pre>
+                </div>
+                <div class="feature-card">
+                    <h4>Authentication Errors (HTTP 401)</h4>
+                    <pre style="font-size: 0.8rem; background: var(--color-bg-code); padding: 1rem; border-radius: 6px; margin-top: 1rem;"><code>{
+  "error": "unauthorized",
+  "message": "Invalid or expired SyftBox token",
+  "code": 401,
+  "timestamp": "2024-01-15T10:30:00Z"
+}</code></pre>
+                </div>
+                <div class="feature-card">
+                    <h4>Router Not Found (HTTP 404)</h4>
+                    <pre style="font-size: 0.8rem; background: var(--color-bg-code); padding: 1rem; border-radius: 6px; margin-top: 1rem;"><code>{
+  "status": "ERROR",
+  "message": "No request found or router unavailable",
+  "request_id": "req_abc123"
+}</code></pre>
+                </div>
+                <div class="feature-card">
+                    <h4>Polling Timeout (HTTP 500)</h4>
+                    <pre style="font-size: 0.8rem; background: var(--color-bg-code); padding: 1rem; border-radius: 6px; margin-top: 1rem;"><code>{
+  "error": "No response exists. Polling timed out",
+  "message": "Router did not respond within timeout period",
+  "code": 500
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Router Errors (Wrapped in Success Response)</h3>
+            <p>When the router itself returns an error, it's wrapped in a successful polling response:</p>
+            <pre><code>{
+  "status": "success",
+  "status_code": 500,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "error": "service_unavailable",
+    "message": "Chat service is currently offline",
+    "service": "chat",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}</code></pre>
+
+            <h2>Advanced Features</h2>
+
+            <h3>Custom Endpoints</h3>
+            <p>Routers can implement custom endpoints beyond chat and search. Access any custom endpoint using the SyftBox relay pattern:</p>
+            <pre><code># Custom endpoint example: document upload
+curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "document": "base64_encoded_content",
+    "filename": "document.pdf",
+    "metadata": {"category": "research"},
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/upload"
+  }'</code></pre>
+
+            <h3>Batch Processing</h3>
+            <p>For routers that support batch operations, send multiple items in a single request:</p>
+            <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "queries": [
+      {"query": "machine learning", "id": "q1"},
+      {"query": "deep learning", "id": "q2"}
+    ],
+    "limit": 3,
+    "suffix-sender": "true",
+    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/batch_search"
+  }'</code></pre>
+
+            <h2>Direct Router Access (Development Only)</h2>
+            <p>While the SyftBox relay system is the primary access method, routers also run locally and can be accessed directly for development and testing:</p>
+
+            <pre><code># Direct chat request (local development only)
+curl -X POST http://localhost:8001/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello locally!"}'
+
+# Health check
+curl http://localhost:8001/health
+
+# API documentation
+open http://localhost:8001/docs</code></pre>
+
+            <div class="info-box">
+                <strong>⚠️ Development Only</strong>
+                <p>Direct router access is only available for local development and testing. Production traffic must go through the SyftBox relay system.</p>
+            </div>
+
+            <h2>Polling Mechanism</h2>
+            <p>The SyftBox relay uses an asynchronous request-response pattern with polling:</p>
+
+            <ol>
+                <li><strong>Initial Request</strong>: Returns HTTP 202 with a <code>request_id</code> and <code>poll_url</code></li>
+                <li><strong>Polling Phase</strong>: Client polls the <code>poll_url</code> until response is ready</li>
+                <li><strong>Final Response</strong>: Returns the actual router response</li>
+            </ol>
+
+            <h3>Manual Polling Example</h3>
+            <pre><code># Step 1: Send initial request
+RESPONSE=$(curl -s -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "message": "Hello!",
+    "suffix-sender": "true",
+    "x-syft-url": "syft://owner@example.com/app_data/router/rpc/chat"
+  }')
+
+# Step 2: Extract poll URL
+POLL_URL=$(echo $RESPONSE | jq -r '.data.poll_url')
+
+# Step 3: Poll for result
+while true; do
+  RESULT=$(curl -s "https://syftbox.net${POLL_URL}")
+  STATUS=$(echo $RESULT | jq -r '.status // "pending"')
+  
+  if [ "$STATUS" != "pending" ]; then
+    echo $RESULT | jq '.body'
+    break
+  fi
+  
+  sleep 1
+done</code></pre>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="api-authentication.html" class="guide-card">
+                        <h4>Authentication</h4>
+                        <p>Learn about guest vs authenticated access patterns</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="api-accounting.html" class="guide-card">
+                        <h4>Accounting</h4>
+                        <p>Usage tracking and billing for your router services</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

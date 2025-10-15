@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="api-reference.html">API Reference</a>
+            <span class="separator">›</span>
+            <span>Authentication</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Authentication</h1>
+            <p class="lead">Understand guest vs authenticated access and implement authentication for your router. Learn about rate limits, token management, and access control patterns.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="api-endpoints.html" class="nav-pill">Endpoints</a>
+            <a href="api-authentication.html" class="nav-pill active">Authentication</a>
+            <a href="api-accounting.html" class="nav-pill">Accounting</a>
+            <a href="api-code-structure.html" class="nav-pill">Code Structure</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>Authentication Overview</h2>
+            <p>Syft LLM Routers offer flexible access control to accommodate different use cases. You can choose between open access for public services or token-based authentication for premium features and higher limits.</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Guest Mode</h3>
+                    <p>Open access with rate limits for public demos, free tier services, and educational content.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Authenticated Mode</h3>
+                    <p>Token-based access with user tracking, higher limits, and access to premium features.</p>
+                </div>
+            </div>
+
+            <h2>Guest Mode Access</h2>
+            
+            <h3>When to Use Guest Mode</h3>
+            <p>Guest mode is perfect for scenarios where you want to provide immediate access without requiring users to sign up or authenticate:</p>
+            <ul>
+                <li><strong>Public demos and showcases</strong> - Allow users to try your service instantly</li>
+                <li><strong>Free tier services</strong> - Offer basic functionality without barriers</li>
+                <li><strong>Educational content</strong> - Enable learning without registration friction</li>
+            </ul>
+
+            <p>This mode removes barriers to entry while still protecting your router from abuse through reasonable rate limits.</p>
+
+            <h3>Guest Mode Limitations</h3>
+            <p>To prevent abuse and ensure fair usage, guest mode comes with built-in restrictions that encourage users to authenticate for better service:</p>
+
+            <div class="info-box">
+                <strong>Rate Limits for Guest Users:</strong>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>10 requests per minute</strong></li>
+                    <li><strong>100 requests per day</strong></li>
+                    <li><strong>Basic feature access only</strong></li>
+                    <li><strong>No conversation history</strong></li>
+                    <li><strong>No premium models</strong></li>
+                </ul>
+            </div>
+
+            <p>These limits are designed to allow meaningful testing while encouraging conversion to authenticated access for regular use.</p>
+
+            <h3>Using Guest Mode</h3>
+            <p>Guest access is as simple as making a direct API call. No tokens, no setup, no authentication headers required.</p>
+
+            <pre><code># Guest access - no auth headers needed
+curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: guest@syftbox.net" \
+  -d '{
+    "message": "What is machine learning?",
+    "suffix-sender": "true",
+    "timeout": "5000",
+    "x-syft-url": "syft://your_email@example.com/app_data/my_router/rpc/chat"
+  }'</code></pre>
+
+            <p>Notice how clean this is - just include your message and routing information, and you're ready to go. The <code>x-syft-url</code> parameter tells the system which router should handle your request.</p>
+
+            <h2>Authenticated Mode</h2>
+            <p>For users who need more robust access or want to build production applications, authenticated mode provides significantly enhanced capabilities and fewer restrictions.</p>
+
+            <h3>Benefits of Authentication</h3>
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Higher Rate Limits</h4>
+                    <p>1000+ requests per day instead of the 100 guest limit</p>
+                </div>
+                <div class="feature-card">
+                    <h4>User Tracking</h4>
+                    <p>Conversation history and personalized preferences stored securely</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Paid Services</h4>
+                    <p>Access to advanced models and premium router capabilities</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Analytics</h4>
+                    <p>Detailed usage statistics and billing information</p>
+                </div>
+            </div>
+
+            <p>Authentication unlocks the full potential of the router system, including access to premium models and persistent conversation management.</p>
+
+            <h3>Authentication Flow</h3>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Obtain Accounting Token</h4>
+                        <p>Getting started with authentication is straightforward. Users automatically receive their token when they first connect to the Syft LLM Router dashboard.</p>
+                        <p>The token will be stored under <code>~/.syftbox/accounting_config.json</code> for easy access by your applications.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Use Access Token</h4>
+                        <p>Once you have your token, using it is just a matter of adding the Authorization header to your requests. The system will automatically recognize you and apply your account's limits and preferences.</p>
+                        
+                        <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "message": "What is machine learning?",
+    "suffix-sender": "true",
+    "timeout": "5000",
+    "x-syft-url": "syft://your_email@example.com/app_data/my_router/rpc/chat"
+  }'</code></pre>
+                        
+                        <p>The key difference here is the <code>Authorization: Bearer</code> header containing your JWT token. This single addition transforms your request from guest access to full authenticated access with all its benefits.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Token Management</h2>
+            
+            <h3>Token Storage</h3>
+            <p>SyftBox automatically stores your authentication token in a secure configuration file:</p>
+            <pre><code># Location of token file
+~/.syftbox/accounting_config.json
+
+# Example token structure (truncated for security)
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+  "user_email": "user@example.com",
+  "expires_at": "2024-12-31T23:59:59Z",
+  "created_at": "2024-01-01T00:00:00Z"
+}</code></pre>
+
+            <h3>Reading Tokens in Your Application</h3>
+            <p>Here's how to read and use the stored token in your applications:</p>
+
+            <pre><code>import json
+import os
+from pathlib import Path
+
+def get_syftbox_token():
+    """Read the SyftBox authentication token from config file."""
+    config_path = Path.home() / ".syftbox" / "accounting_config.json"
+    
+    if not config_path.exists():
+        raise FileNotFoundError("SyftBox token not found. Please log in to SyftBox first.")
+    
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+    
+    return config.get('token')
+
+def make_authenticated_request(message, router_url):
+    """Make an authenticated request to a Syft router."""
+    import requests
+    
+    token = get_syftbox_token()
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}",
+        "x-syft-from": "user@example.com"
+    }
+    
+    data = {
+        "message": message,
+        "suffix-sender": "true",
+        "x-syft-url": router_url
+    }
+    
+    response = requests.post(
+        "https://syftbox.net/api/v1/send/",
+        headers=headers,
+        json=data
+    )
+    
+    return response.json()
+
+# Usage example
+result = make_authenticated_request(
+    "Hello with authentication!",
+    "syft://router_owner@example.com/app_data/my_router/rpc/chat"
+)</code></pre>
+
+            <h3>Token Expiration and Renewal</h3>
+            <p>SyftBox tokens have expiration dates for security. The system handles renewal automatically:</p>
+            <ul>
+                <li><strong>Automatic renewal</strong>: SyftBox refreshes tokens before they expire</li>
+                <li><strong>Graceful degradation</strong>: If renewal fails, the system falls back to guest mode</li>
+                <li><strong>Manual refresh</strong>: You can manually refresh tokens through the dashboard</li>
+            </ul>
+
+            <h2>Rate Limiting Details</h2>
+            
+            <h3>Platform Rate Limits</h3>
+            <p>The SyftBox platform implements rate limiting at multiple levels:</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Guest Users</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>10 requests/minute</li>
+                        <li>100 requests/day</li>
+                        <li>Basic endpoints only</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Authenticated Users</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Based on subscription tier</li>
+                        <li>1000+ requests/day</li>
+                        <li>Access to premium endpoints</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Per-Router Limits</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Set by individual router owners</li>
+                        <li>Can be more restrictive</li>
+                        <li>Returned in response headers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Rate Limit Response Headers</h3>
+            <p>When rate limits are hit, the system returns informative headers:</p>
+            <pre><code>{
+  "status": "success",
+  "status_code": 429,
+  "headers": {
+    "x-ratelimit-limit": "100",
+    "x-ratelimit-remaining": "0",
+    "x-ratelimit-reset": "1642262400",
+    "retry-after": "60"
+  },
+  "body": {
+    "error": "rate_limit_exceeded",
+    "message": "Too many requests. Try again in 60 seconds.",
+    "retry_after": 60
+  }
+}</code></pre>
+
+            <h2>Access Control Patterns</h2>
+
+            <h3>Service-Level Authentication</h3>
+            <p>Different router services can have different authentication requirements:</p>
+            <pre><code>class RouterConfig:
+    def __init__(self):
+        self.auth_requirements = {
+            "chat": {
+                "guest_allowed": True,
+                "rate_limit_guest": {"per_minute": 5, "per_day": 50},
+                "rate_limit_auth": {"per_minute": 100, "per_day": 1000}
+            },
+            "search": {
+                "guest_allowed": True,
+                "rate_limit_guest": {"per_minute": 10, "per_day": 100},
+                "rate_limit_auth": {"per_minute": 200, "per_day": 2000}
+            },
+            "upload": {
+                "guest_allowed": False,  # Authenticated only
+                "rate_limit_auth": {"per_minute": 10, "per_day": 100}
+            }
+        }</code></pre>
+
+            <h3>User Tier Management</h3>
+            <p>Authenticated users can have different access tiers:</p>
+            <ul>
+                <li><strong>Free Tier</strong>: Basic authenticated access with standard limits</li>
+                <li><strong>Pro Tier</strong>: Higher limits and premium model access</li>
+                <li><strong>Enterprise Tier</strong>: Custom limits and priority support</li>
+            </ul>
+
+            <h2>Security Best Practices</h2>
+
+            <h3>Token Security</h3>
+            <div class="info-box">
+                <strong>🔒 Security Guidelines</strong>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Never log tokens</strong> in your application logs</li>
+                    <li><strong>Use HTTPS only</strong> for all authenticated requests</li>
+                    <li><strong>Store tokens securely</strong> using appropriate file permissions</li>
+                    <li><strong>Implement token rotation</strong> in long-running applications</li>
+                </ul>
+            </div>
+
+            <h3>Error Handling</h3>
+            <p>Implement robust error handling for authentication failures:</p>
+            <pre><code>def handle_auth_response(response):
+    """Handle authentication-related errors gracefully."""
+    if response.status_code == 401:
+        # Token expired or invalid
+        print("Authentication failed. Please log in to SyftBox again.")
+        return None
+    elif response.status_code == 429:
+        # Rate limit exceeded
+        retry_after = response.headers.get('retry-after', 60)
+        print(f"Rate limit exceeded. Retry in {retry_after} seconds.")
+        return None
+    elif response.status_code == 403:
+        # Access denied (insufficient permissions)
+        print("Access denied. This service requires a higher tier subscription.")
+        return None
+    
+    return response.json()</code></pre>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="api-accounting.html" class="guide-card">
+                        <h4>Accounting & Pricing</h4>
+                        <p>Learn about billing and usage tracking for authenticated users</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="api-endpoints.html" class="guide-card">
+                        <h4>Endpoints</h4>
+                        <p>Explore all available router endpoints and their usage</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -14,6 +14,12 @@ class SiteHeader extends HTMLElement {
   }
 
   connectedCallback() {
+    // Check for saved theme on initial load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' && !document.documentElement.hasAttribute('data-theme')) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    
     this.render();
     this.addEventListeners();
   }
@@ -35,24 +41,34 @@ class SiteHeader extends HTMLElement {
     // Define theme-specific CSS variables
     const themeVars = {
       light: {
+        '--header-bg': 'rgba(255, 255, 255, 0.95)',
+        '--header-border': 'rgba(0, 0, 0, 0.08)',
         '--section-bg': '#F9FAFB',
         '--section-bg-alt': '#F3F4F6',
         '--card-border': '#E5E7EB',
+        '--card-bg': '#FFFFFF',
         '--text-primary': '#17161D',
+        '--text-secondary': '#4A5568',
         '--primary': '#6976AE',
         '--secondary': '#937098',
         '--glass-light': 'rgba(255, 255, 255, 0.8)',
-        '--gray-light': '#9CA3AF'
+        '--gray-light': '#9CA3AF',
+        '--shadow': '0 1px 3px rgba(0,0,0,0.05)'
       },
       dark: {
+        '--header-bg': 'rgba(46, 43, 59, 0.95)',
+        '--header-border': 'rgba(255, 255, 255, 0.1)',
         '--section-bg': '#2E2B3B',
         '--section-bg-alt': '#17161D',
         '--card-border': '#4B5563',
+        '--card-bg': '#2E2B3B',
         '--text-primary': '#ffffff',
+        '--text-secondary': '#D1D5DB',
         '--primary': '#BB86FC',
         '--secondary': '#32d5e8',
-        '--glass-light': 'rgba(255, 255, 255, 0.1)',
-        '--gray-light': '#9CA3AF'
+        '--glass-light': 'rgba(23, 22, 29, 0.5)',
+        '--gray-light': '#9CA3AF',
+        '--shadow': '0 1px 3px rgba(0,0,0,0.3)'
       }
     };
 
@@ -86,15 +102,15 @@ class SiteHeader extends HTMLElement {
         }
         
         header {
-          background: linear-gradient(135deg, var(--section-bg), var(--section-bg-alt));
-          padding: 1.5rem 0;
+          background: var(--header-bg);
+          padding: 1rem 0;
           position: sticky;
           top: 0;
           z-index: 100;
           -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
-          border-bottom: 1px solid var(--card-border);
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          border-bottom: 1px solid var(--header-border);
+          box-shadow: var(--shadow);
         }
         
         .container {
@@ -113,7 +129,7 @@ class SiteHeader extends HTMLElement {
         .header-left {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 15rem;
         }
 
         .logo-container {
@@ -132,8 +148,9 @@ class SiteHeader extends HTMLElement {
 
         .logo-text {
           color: var(--primary, #BB86FC);
-          font-size: 1.5rem;
-          font-weight: 400;
+          font-family: 'Rubik', sans-serif;
+          font-size: 1.375rem;
+          font-weight: 500;
           text-decoration: none;
           transition: opacity 0.3s ease;
         }
@@ -147,15 +164,17 @@ class SiteHeader extends HTMLElement {
           list-style: none;
           margin: 0;
           padding: 0;
-          gap: 2rem;
+          gap: 1.75rem;
         }
         
         .nav-links a {
-          color: var(--text-primary);
+          color: var(--text-secondary);
+          font-family: 'Roboto', sans-serif;
           text-decoration: none;
           font-weight: 500;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
+          font-size: 0.9375rem;
+          padding: 0.5rem 0.75rem;
+          border-radius: 6px;
           transition: all 0.3s ease;
         }
         
@@ -281,21 +300,21 @@ class SiteHeader extends HTMLElement {
                 <li><a href="/" ${
                   currentPage === "home" ? 'class="active"' : ""
                 }>Home</a></li>
+                <li><a href="/about.html" ${
+                  currentPage === "about"
+                    ? 'class="active"'
+                    : ""
+                }>About</a></li>
+                <li><a href="/protocol.html" ${
+                  currentPage === "protocol"
+                    ? 'class="active"'
+                    : ""
+                }>Protocol</a></li>
                 <li><a href="/for-publishers.html" ${
                   currentPage === "publishers"
                     ? 'class="active"'
                     : ""
-                }>For Publishers</a></li>
-                <li><a href="/sensitive-assets.html" ${
-                  currentPage === "sensitive-assets"
-                    ? 'class="active"'
-                    : ""
-                }>For Sensitive Assets</a></li>
-                <li><a href="/docs.html" ${
-                  currentPage === "docs"
-                    ? 'class="active"'
-                    : ""
-                }>About Technology</a></li>
+                }>Syft for Publishers</a></li>
               </ul>
             </div>
               
@@ -345,12 +364,14 @@ class SiteHeader extends HTMLElement {
       });
     }
 
-    // Listen for theme changes
-    document.addEventListener('themeChanged', this.handleThemeChange.bind(this));
+    // Listen for theme changes - bind once for proper removal
+    this.boundHandleThemeChange = this.handleThemeChange.bind(this);
+    window.addEventListener('themeChanged', this.boundHandleThemeChange);
   }
 
   handleThemeChange() {
     this.render();
+    this.addEventListeners(); // Re-add event listeners after re-render
   }
 
   removeEventListeners() {
@@ -358,7 +379,9 @@ class SiteHeader extends HTMLElement {
     if (toggle) {
       toggle.removeEventListener("click", this.toggleMobileMenu);
     }
-    document.removeEventListener('themeChanged', this.handleThemeChange.bind(this));
+    if (this.boundHandleThemeChange) {
+      window.removeEventListener('themeChanged', this.boundHandleThemeChange);
+    }
   }
 }
 

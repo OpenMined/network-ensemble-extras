@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Load theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
+    <title>About | Network-Sourced AI - The Future of Intelligent Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Roboto:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <script src="./src/components/site-header.js"></script>
+    <script src="./src/components/site-footer.js"></script>
+    <script src="./src/components/back-to-top.js"></script>
+  </head>
+  <body>
+    <site-header
+      logo-src="./src/assets/openmined.png"
+      logo-text="OpenMined"
+      current-page="about"
+    >
+    </site-header>
+    
+    <back-to-top theme="secondary" position="bottom-right" show-after="200"></back-to-top>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </button>
+
+    <main>
+      <!-- Hero Section
+      <section class="hero" style="background: var(--color-bg-light); padding: 10rem 0 12rem 0; position: relative; overflow: hidden;">
+        <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 40%, rgba(105, 118, 174, 0.03) 0%, transparent 50%);"></div>
+       <div class="container">
+          <div style="max-width: 1400px; margin: 0 auto; padding: 0; position: relative; z-index: 1; text-align: center;">
+            <h1 style="font-family: 'Rubik', sans-serif; font-size: 3.25rem; font-weight: 500; line-height: 1.15; margin-bottom: 2.5rem; background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em;">Beyond the Data Wall</h1>
+            <h2 style="font-family: 'Rubik', sans-serif; font-size: 1.5rem; color: #2D3748; margin-bottom: 2.5rem; line-height: 1.45; font-weight: 400;">
+              Network-Sourced AI and the Future of Shared Intelligence
+            </h2>
+          </div>
+        </div> 
+      </section> -->
+
+      <!-- Manifesto Content -->
+      <section class="manifesto" style="padding: 6rem 0; background: linear-gradient(180deg, var(--background-primary) 0%, var(--background-secondary) 100%);">
+        <div class="container">
+          <div style="max-width: 750px; margin: 0 auto; font-weight: 300;">
+            
+            <!-- Section 1: The Great Data Paradox -->
+            <article style="margin-bottom: 6rem; position: relative;">
+              <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--primary-color), var(--accent-color)); border-radius: 2px; opacity: 0.3;"></div>
+              <header style="margin-bottom: 3rem;">
+                <h3 style="font-family: 'Rubik', sans-serif; font-size: 2.25rem; font-weight: 500; margin-bottom: 1rem; color: var(--color-accent); letter-spacing: -0.01em; background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">The Data Paradox of AI</h3>
+                <div style="width: 80px; height: 3px; background: var(--accent-color); border-radius: 2px; margin-bottom: 2rem;"></div>
+              </header>
+              
+              <div style="font-size: 1.1rem; line-height: 2.1; color: var(--text-primary); font-weight: 300;">
+                <p style="margin-bottom: 3.5rem; font-size: 1.15rem; font-weight: 400; color: var(--text-primary);">
+                  Recent statements from AI leaders such as Ilya Sutskever and Elon Musk have suggested that we have reached "peak data," the point at which all useful human data for AI training has already been consumed. In practice, the numbers tell a very different story.
+                </p>
+                <p style="margin-bottom: 3.5rem;">
+                  Today's largest AI models train on datasets measured in the hundreds of terabytes, an amount that could fit on a few dozen commercial hard drives. Meanwhile, the world has already digitized an estimated <strong style="color: var(--primary-color);">180 to 200 zettabytes</strong> of information, more than a million times the volume of data used to train GPT-4.
+                </p>
+                <p style="margin-bottom: 3.5rem;">
+                  Some of the most valuable datasets, including medical records, financial transactions, and scientific research, are confined within institutional and proprietary silos. At the same time, publishers and content owners are opting out of web scraping or implementing restrictive licensing to protect themselves from unauthorized use by AI systems. As a result, much of the world's most accurate, curated, and up-to-date information is excluded from AI. <em style="color: var(--primary-color);">This is not a problem of scarcity; it is a problem of access.</em>
+                </p>
+              </div>
+              
+              <!-- <blockquote style="background: var(--background-primary); padding: 2.5rem; border-radius: 16px; margin: 3rem 0; border-left: 6px solid var(--primary-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: var(--primary-color); opacity: 0.05; border-radius: 50%;"></div>
+                <p style="font-size: 1.15rem; line-height: 1.9; margin: 0; font-style: italic; color: var(--text-primary); font-weight: 400; position: relative;">
+                  "The real crisis isn't that we lack data — it's that we've created a system where sharing data means losing control of it forever."
+                </p>
+              </blockquote> -->
+            </article>
+
+            <!-- Section 2: The Broken Information Marketplace -->
+            <article style="margin-bottom: 6rem; position: relative;">
+              <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent-color), var(--primary-color)); border-radius: 2px; opacity: 0.3;"></div>
+              <header style="margin-bottom: 3rem;">
+                <h3 style="font-family: 'Rubik', sans-serif; font-size: 2.25rem; font-weight: 500; margin-bottom: 1rem; color: var(--color-accent); letter-spacing: -0.01em; background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">The Broken Information Marketplace</h3>
+                <div style="width: 80px; height: 3px; background: var(--accent-color); border-radius: 2px; margin-bottom: 2rem;"></div>
+              </header>
+              
+              <div style="font-size: 1.1rem; line-height: 2.1; color: var(--text-primary); font-weight: 300;">
+                <p style="margin-bottom: 3.5rem;">
+                  When a publisher's content is scraped for AI training, it ends up competing with the very systems it helped create. If a hospital shares medical data, it often loses control over how that data is used. If researchers contribute with their work, they might fail to receive either attribution or compensation.
+                </p>
+                <p style="margin-bottom: 3.5rem;">
+                  It is therefore unsurprising that even the largest technology firms, including Meta, Apple, and Google, do not sell their data. They protect it as a competitive advantage. In a market that penalizes sharing and rewards exclusivity, this is a rational strategy. Moreover, this very exclusivity has driven the disintermediation of data owners, leaving them with limited control or participation in how their work is used.                </p>
+                <p style="margin-bottom: 3rem;">
+                  The challenge is to redesign this marketplace: data owners must be able to participate in AI, but preserve control, be appropriately attributed and compensated. That is the premise of <b>Attribution-Based Control (ABC)</b>.
+                  <br></br>
+                  ABC transforms data from a one-time transaction into an ongoing asset. Like musicians earning royalties each time their song plays, data owners can generate continuous revenue streams while maintaining granular control over how their information is used. Data owners decide which AI predictions their data supports. AI users choose which data sources contribute to their results.
+                </p>
+              </div>
+            </article>
+
+            <!-- Section 4: Technology -->
+            <article style="margin-bottom: 6rem; position: relative;">
+              <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent-color), var(--primary-color)); border-radius: 2px; opacity: 0.3;"></div>
+              <header style="margin-bottom: 3rem;">
+                <h3 style="font-family: 'Rubik', sans-serif; font-size: 2.25rem; font-weight: 500; margin-bottom: 1rem; color: var(--color-accent); letter-spacing: -0.01em; background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">The Technology Is Ready</h3>
+                <div style="width: 80px; height: 3px; background: var(--accent-color); border-radius: 2px; margin-bottom: 2rem;"></div>
+              </header>
+              
+              <div style="font-size: 1.1rem; line-height: 2.1; color: var(--text-primary); font-weight: 300;">
+                <p style="margin-bottom: 3.5rem;">
+                  Attribution-Based Control is achievable today, using the latest developments in model architectures, privacy technologies, and systems.
+                </p>
+                <p style="margin-bottom: 3.5rem;">
+                  Model-partitioning approaches such as <strong style="color: var(--primary-color);">Mixture of Experts (MoE)</strong> and <strong style="color: var(--primary-color);">Retrieval-Augmented Generation (RAG)</strong> allow data sources to remain mathematically distinct within large AI systems. Privacy-preserving infrastructure, including secure enclaves and homomorphic encryption, ensures that access to data does not reduce one's ability to preserve privacy and enforceable control over their assets.
+                </p>
+                <p style="margin-bottom: 3.5rem;">
+                  In an AI system built on these principles, user queries are sent securely to participating data sources. Each source determines whether to respond, under what terms, and for what purposes. The responses are combined without exposing raw data to any participant.
+                </p>
+                <p style="margin-bottom: 3rem; font-size: 1.15rem; font-weight: 400; color: var(--text-primary);">
+                  The result is a functional data economy. Data sources are directly attributable and can enable usage-based revenue models. AI developers gain access to exponentially larger, higher-quality datasets. Users gain transparency and the ability to choose which sources they trust.
+                </p>
+              </div>
+            </article>
+
+            <!-- Section 5: The Choice -->
+            <article style="margin-bottom: 6rem; position: relative;">
+              <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--primary-color), var(--accent-color)); border-radius: 2px; opacity: 0.3;"></div>
+              <header style="margin-bottom: 3rem;">
+                <h3 style="font-family: 'Rubik', sans-serif; font-size: 2.25rem; font-weight: 500; margin-bottom: 1rem; color: var(--color-accent); letter-spacing: -0.01em; background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">The Choice Before Us</h3>
+                <div style="width: 80px; height: 3px; background: var(--accent-color); border-radius: 2px; margin-bottom: 2rem;"></div>
+              </header>
+              
+              <div style="font-size: 1.1rem; line-height: 2.1; color: var(--text-primary); font-weight: 300;">
+                <p style="margin-bottom: 3.5rem;">
+                  Just as ARPANET transformed isolated mainframes into the connected internet, Attribution-Based Control could turn today's siloed AI systems into a collaborative intelligence network.
+                </p>
+                <p style="margin-bottom: 3.5rem;">
+                  Imagine medical AI trained on data from every hospital, financial models informed by global market activity, scientific AI capable of reasoning across decades of validated research, and LLMs responsibly enriched with the world's books and journalistic work. Instead of models trained on hundreds of terabytes, we could have systems that learn from zettabytes of real-world data, representing a paradigm shift rather than an incremental gain.
+                </p>
+                <p style="margin-bottom: 4rem;">
+                  Major technology companies already recognize this opportunity and are building proprietary, closed implementations of such marketplaces. If a single firm controls the gateway to the world's data, it will define the rules for access, pricing, and attribution, repeating the centralization seen in previous digital markets.
+                </p>
+              </div>
+
+              <!-- ARPANET Callout -->
+              <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); padding: 4rem; border-radius: 20px; margin: 4rem 0; position: relative; overflow: hidden; box-shadow: 0 16px 64px rgba(0,0,0,0.2);">
+                <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 100px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+                <div style="position: relative;">
+                  <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 16px; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-network-wired" style="font-size: 24px;"></i>
+                  </div>
+                  <h5 style="font-size: 1.5rem; margin-bottom: 2rem; font-weight: 700;">Our approach is to build an open protocol instead. </h5>
+                  <p style="font-size: 1.15rem; line-height: 1.9; margin: 0; opacity: 0.95; font-weight: 300;">
+                  Like TCP/IP for the internet or HTTP for the web, this protocol establishes shared standards that benefit the entire ecosystem. We are collaborating with publishers, research institutions, and governments to ensure that openness, fairness, and interoperability are embedded from the start.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Final Section: Call to Action -->
+            <article style="position: relative; text-align: left;">
+              <div style="position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--primary-color), var(--accent-color)); border-radius: 2px; opacity: 0.3;"></div>
+              <header style="margin-bottom: 3rem;">
+                <h3 style="font-family: 'Rubik', sans-serif; font-size: 2.25rem; font-weight: 500; margin-bottom: 1rem; color: var(--color-accent); letter-spacing: -0.01em; background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">The Opportunity</h3>
+                <div style="width: 80px; height: 3px; background: var(--accent-color); border-radius: 2px; margin: 0 auto 2rem;"></div>
+              </header>
+              
+              <div style="font-size: 1.1rem; line-height: 2.1; color: var(--text-primary); font-weight: 300; max-width: 700px; margin: 0 auto;">
+                <p style="margin-bottom: 3.5rem; font-size: 1.15rem;">
+                  The window to act is now. AI development is approaching a turning point: public data sources are reaching their limits and increasingly withdrawing from unrestricted crawler access, while data owners across industries are holding onto their confined data resources. This is not a crisis, but an opportunity to redefine how AI is built and who participates in it. If you have ideas, questions or would like to learn more, please get in touch.
+                </p>
+               
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact">
+        <div class="container">
+          <div class="contact-content">
+            <h2 class="contact-title">Ready to implement ABC?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-secondary);">
+              Join us in building the future of collaborative AI where data owners, developers, and users all benefit.
+            </p>
+
+            <form method="POST" id="contact-form" class="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-input"
+                  name="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <button type="submit" class="submit-btn">Get Started</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script
+      type="text/javascript"
+      id="hs-script-loader"
+      async
+      defer
+      src="https://js.hs-scripts.com/6487402.js"
+    ></script>
+    <script type="module" src="./src/scripts/index.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference, only set if exists
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+      
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Dispatch theme change event for components
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+      }
+    </script>
+  </body>
+</html>

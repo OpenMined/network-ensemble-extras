@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Search Router Guide - Syft Router Documentation</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-container">
+            <span class="notice-text">Notice: Syft Router is in ALPHA. A major update will arrive mid-November — stay connected for updates.</span>
+        </div>
+    </div>    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <img width="32" height="32" src="../src/assets/openmined.png" alt="OpenMined Logo">
+                <span>Syft Router</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                
+                <a href="guides.html">Guides</a>
+                <a href="api-reference.html">API Reference</a>
+                <a href="../protocol.html">Protocol</a>
+                <a href="https://github.com/OpenMined/syft-llm-router" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="doc-layout">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            
+            <span class="separator">›</span>
+            <a href="guides.html">Guides</a>
+            <span class="separator">›</span>
+            <span>Custom Search Router</span>
+        </nav>
+
+        <!-- Document Header -->
+        <div class="doc-header">
+            <h1>Custom Search Router Guide</h1>
+            <p class="lead">Connect your existing vector database to your router and make its powerful search services available to users of the SyftBox network. Keep full control over your data and search capabilities.</p>
+        </div>
+
+        <!-- Navigation Pills -->
+        <div class="nav-pills">
+            <a href="guide-default-router.html" class="nav-pill">Default Router</a>
+            <a href="guide-custom-chat.html" class="nav-pill">Custom Chat</a>
+            <a href="guide-custom-search.html" class="nav-pill active">Custom Search</a>
+            <a href="guide-router-status.html" class="nav-pill">Router Status</a>
+        </div>
+
+        <!-- Document Content -->
+        <div class="doc-content">
+            <h2>What is a Custom Search Router?</h2>
+            <p>A Custom Search Router is perfect for users who already have vector databases running and want to keep using their existing infrastructure. Instead of starting from scratch, you're bringing your own search capabilities to the SyftBox network while maintaining full control.</p>
+            
+            <p>This approach is ideal for:</p>
+            <ul>
+                <li>Implementing specialized retrieval strategies for your domain</li>
+                <li>Custom ranking algorithms based on your business logic</li>
+                <li>Combining multiple data sources into a single search experience</li>
+                <li>Building production-grade RAG systems at scale</li>
+            </ul>
+
+            <h2>Supported Vector Databases</h2>
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Weaviate</h3>
+                    <p>Open-source vector database with hybrid search and GraphQL API</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌲</div>
+                    <h3>Pinecone</h3>
+                    <p>Managed vector database with high performance and scalability</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Qdrant</h3>
+                    <p>Vector database with advanced filtering and payload storage</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔵</div>
+                    <h3>ChromaDB</h3>
+                    <p>Embedded vector database for local development and testing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍃</div>
+                    <h3>Milvus</h3>
+                    <p>Cloud-native vector database for massive scale deployments</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Custom</h3>
+                    <p>Any vector database with a Python client or REST API</p>
+                </div>
+            </div>
+
+            <h2>Creating a Custom Search Router</h2>
+            
+            <h3>Step 1: Generate Template</h3>
+            <p>First, create the router template through the SyftBox dashboard:</p>
+            <ol>
+                <li>Dashboard → "Create Router"</li>
+                <li>Name: <code>my-vector-search</code> (choose a descriptive name)</li>
+                <li>Type: <strong>Custom</strong> ✓ (for full control)</li>
+                <li>Services: <strong>Search Service</strong> ✓</li>
+                <li>Click "Create"</li>
+            </ol>
+
+            <h3>Step 2: Project Structure</h3>
+            <p>Once created, you'll find this structure in your SyftBox apps directory:</p>
+            
+            <pre><code>my-vector-search/
+├── server.py            # Main FastAPI server (handles routing)
+├── search_service.py    # Template for your custom implementation
+├── spawn_services.py    # Monitors service health and status
+├── pyproject.toml       # Where you'll add your vector DB dependencies
+└── run.sh               # Script that starts everything up</code></pre>
+
+            <h3>Step 3: Open Your Project</h3>
+            <p>Navigate to your router directory and open it in your IDE:</p>
+            <pre><code>cd ~/SyftBox/apps/my-vector-search
+cursor .  # or code . for VS Code</code></pre>
+
+            <h2>Implementation Example: Weaviate</h2>
+            <p>Here's a complete example showing how to integrate Weaviate vector database:</p>
+
+            <h3>1. Update search_service.py</h3>
+            <pre><code>import weaviate
+from typing import List, Dict, Any
+from uuid import UUID
+
+class SearchService:
+    def __init__(self, config: dict):
+        self.accounting_client: UserClient = self.config.accounting_client()
+        logger.info(f"Initialized accounting client: {self.accounting_client}")
+        logger.info("Initialized custom search service")
+        self.app_name = self.config.project.name
+
+        # Initialize Weaviate client - this connects to your vector database
+        self.client = weaviate.Client(
+            url=config.get('weaviate_url', 'http://localhost:8080'),
+            auth_client_secret=weaviate.AuthApiKey(
+                api_key=config.get('weaviate_api_key')
+            ) if config.get('weaviate_api_key') else None
+        )
+        # The collection where your documents are stored
+        self.collection_name = config.get('collection_name', 'Documents')
+    
+    def search_documents(
+        self,
+        user_email: EmailStr,
+        query: str,
+        options: Optional[SearchOptions] = None,
+        transaction_token: Optional[str] = None,
+    ) -> SearchResponse:
+        # 1. Prepare the search payload
+        limit = options.limit if options else 10
+        
+        # 2. Build the Weaviate query
+        where_filter = None
+        if options and options.filters:
+            # Build Weaviate filter from options
+            where_filter = self._build_filter(options.filters)
+        
+        # 3. Handle payment transaction if pricing is set
+        query_cost = 0.0
+        if self.pricing > 0 and transaction_token:
+            with self.accounting_client.delegated_transfer(
+                user_email,
+                amount=self.pricing,
+                token=transaction_token,
+                app_name=self.app_name,
+                app_ep_path="/search",
+            ) as payment_txn:
+                # Perform vector search
+                results = self._execute_search(query, limit, where_filter)
+                # Only confirm payment if we got results
+                if results:
+                    payment_txn.confirm()
+                query_cost = self.pricing
+        else:
+            # Free service
+            results = self._execute_search(query, limit, where_filter)
+
+        # 4. Convert results to SyftBox format
+        documents = [
+            DocumentResult(
+                id=str(result["_additional"]["id"]),
+                score=result["_additional"]["distance"],
+                content=result.get("content", ""),
+                metadata={
+                    "source": result.get("source"),
+                    "page": result.get("page"),
+                    "category": result.get("category"),
+                }
+            )
+            for result in results
+        ]
+
+        # 5. Return SearchResponse
+        return SearchResponse(
+            id=UUID.uuid4(),
+            query=query,
+            results=documents,
+            provider_info={"provider": "weaviate", "results_count": len(documents)},
+            cost=query_cost,
+        )
+    
+    def _execute_search(self, query: str, limit: int, where_filter: Dict = None):
+        """Execute the actual vector search"""
+        query_builder = (
+            self.client.query
+            .get(self.collection_name, ["content", "source", "page", "category"])
+            .with_near_text({"concepts": [query]})
+            .with_limit(limit)
+            .with_additional(["id", "distance"])
+        )
+        
+        if where_filter:
+            query_builder = query_builder.with_where(where_filter)
+        
+        result = query_builder.do()
+        
+        return result.get("data", {}).get("Get", {}).get(self.collection_name, [])</code></pre>
+
+            <h3>2. Add Dependencies</h3>
+            <p>Update your <code>pyproject.toml</code>:</p>
+            <pre><code>[project]
+dependencies = [
+    "weaviate-client>=3.24.0",  # For Weaviate
+    # Or for other vector DBs:
+    # "pinecone-client>=2.2.0",  # Pinecone
+    # "qdrant-client>=1.6.0",    # Qdrant
+    # "chromadb>=0.4.15",        # ChromaDB
+    # "pymilvus>=2.3.0",         # Milvus
+]</code></pre>
+
+            <h3>3. Configure Your Vector Database</h3>
+            <p>Set up environment variables in a <code>.env</code> file:</p>
+            <pre><code># Weaviate Configuration
+WEAVIATE_URL=https://your-cluster.weaviate.network
+WEAVIATE_API_KEY=your-api-key-here
+COLLECTION_NAME=Documents
+
+# Router Settings
+ROUTER_NAME=my-vector-search
+ROUTER_PORT=8002
+LOG_LEVEL=INFO</code></pre>
+
+            <h2>Alternative Implementations</h2>
+
+            <h3>Pinecone</h3>
+            <pre><code>import pinecone
+from pinecone import Pinecone, ServerlessSpec
+
+class SearchService:
+    def __init__(self, config: dict):
+        # Initialize Pinecone
+        pc = Pinecone(api_key=config.get('pinecone_api_key'))
+        self.index = pc.Index(config.get('index_name', 'documents'))
+    
+    def search_documents(self, query: str, ...):
+        # Generate query embedding
+        query_embedding = self.embed_text(query)
+        
+        # Search in Pinecone
+        results = self.index.query(
+            vector=query_embedding,
+            top_k=limit,
+            include_metadata=True
+        )
+        # Process and return results</code></pre>
+
+            <h3>Qdrant</h3>
+            <pre><code>from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, VectorParams
+
+class SearchService:
+    def __init__(self, config: dict):
+        self.client = QdrantClient(
+            url=config.get('qdrant_url', 'http://localhost:6333'),
+            api_key=config.get('qdrant_api_key')
+        )
+        self.collection_name = config.get('collection_name', 'documents')
+    
+    def search_documents(self, query: str, ...):
+        # Generate query embedding
+        query_vector = self.embed_text(query)
+        
+        # Search in Qdrant
+        results = self.client.search(
+            collection_name=self.collection_name,
+            query_vector=query_vector,
+            limit=limit
+        )
+        # Process and return results</code></pre>
+
+            <h3>Hybrid Search Implementation</h3>
+            <p>Combine vector search with keyword search for better results:</p>
+            <pre><code>def hybrid_search(self, query: str, limit: int):
+    """Combine vector and keyword search"""
+    
+    # 1. Vector search
+    vector_results = self.vector_search(query, limit * 2)
+    
+    # 2. Keyword search
+    keyword_results = self.keyword_search(query, limit * 2)
+    
+    # 3. Merge and re-rank results
+    merged_results = self.merge_results(
+        vector_results, 
+        keyword_results,
+        vector_weight=0.7,
+        keyword_weight=0.3
+    )
+    
+    # 4. Return top results
+    return merged_results[:limit]</code></pre>
+
+            <h2>Adding Documents to Your Database</h2>
+            <p>Implement document ingestion in your search service:</p>
+            
+            <pre><code>def add_documents(self, documents: List[Dict], embeddings: List[List[float]]):
+    """Add documents to your vector database"""
+    
+    # Example for Weaviate
+    batch = self.client.batch.configure(batch_size=100)
+    
+    for doc, embedding in zip(documents, embeddings):
+        properties = {
+            "content": doc["content"],
+            "source": doc.get("source", ""),
+            "metadata": doc.get("metadata", {})
+        }
+        
+        batch.add_data_object(
+            data_object=properties,
+            class_name=self.collection_name,
+            vector=embedding
+        )
+    
+    batch.flush()</code></pre>
+
+            <h2>Testing Your Router</h2>
+            
+            <h3>Via Dashboard</h3>
+            <ol>
+                <li>Go to router list in your dashboard</li>
+                <li>Select your router from the dropdown</li>
+                <li>Send test queries:
+                    <ul>
+                        <li>"machine learning concepts"</li>
+                        <li>"how to implement RAG"</li>
+                        <li>"vector database comparison"</li>
+                    </ul>
+                </li>
+                <li>Verify results from your vector database</li>
+            </ol>
+
+            <h3>Via API</h3>
+            <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -H "x-syft-from: user@example.com" \
+  -d '{
+    "query": "machine learning concepts",
+    "limit": 5,
+    "filters": {"category": "technical"},
+    "suffix-sender": "true",
+    "x-syft-url": "syft://&lt;your_email&gt;/app_data/my_vector_search/rpc/search"
+  }'</code></pre>
+
+            <h2>Performance Optimization</h2>
+            
+            <h3>Caching</h3>
+            <pre><code>from functools import lru_cache
+import hashlib
+
+@lru_cache(maxsize=1000)
+def cached_search(self, query_hash: str, limit: int):
+    """Cache frequent searches"""
+    # Your search implementation
+    pass
+
+def search_documents(self, query: str, limit: int):
+    # Create hash of query for caching
+    query_hash = hashlib.md5(query.encode()).hexdigest()
+    return self.cached_search(query_hash, limit)</code></pre>
+
+            <h3>Batch Processing</h3>
+            <pre><code>async def batch_search(self, queries: List[str]):
+    """Process multiple queries efficiently"""
+    import asyncio
+    
+    tasks = [
+        self.async_search(query) 
+        for query in queries
+    ]
+    
+    results = await asyncio.gather(*tasks)
+    return results</code></pre>
+
+            <h2>Publishing Your Router</h2>
+            <p>Once your search router is working perfectly:</p>
+            
+            <ol>
+                <li><strong>Test thoroughly</strong>: Ensure reliable search across different queries</li>
+                <li><strong>Add metadata</strong>: Go to router details → "Publish"</li>
+                <li><strong>Set pricing</strong>: Configure per-search pricing</li>
+                <li><strong>Publish</strong>: Make available to network users</li>
+            </ol>
+
+            <pre><code>Summary: "Advanced vector search with Weaviate"
+Description: "High-performance semantic search with custom ranking"
+Tags: ["search", "vector", "rag", "weaviate"]
+Pricing:
+  Search: $0.01 per request</code></pre>
+
+            <h2>Monitoring & Troubleshooting</h2>
+            
+            <h3>View Logs</h3>
+            <pre><code>tail -f ~/SyftBox/apps/my-vector-search/logs/app.log</code></pre>
+
+            <h3>Common Issues</h3>
+            <ul>
+                <li><strong>Vector DB connection problems</strong>: Check URL and API keys</li>
+                <li><strong>Network timeouts</strong>: Increase timeout values for slow queries</li>
+                <li><strong>Authentication errors</strong>: Verify API credentials are valid</li>
+                <li><strong>Empty results</strong>: Check collection names and data indexing</li>
+                <li><strong>Performance issues</strong>: Implement caching and optimize queries</li>
+            </ul>
+
+            <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
+                <h3>Next Steps</h3>
+                <div class="guides-grid">
+                    <a href="api-accounting.html" class="guide-card">
+                        <h4>Accounting & Pricing</h4>
+                        <p>Set up pricing and track usage for your search service</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                    <a href="api-code-structure.html" class="guide-card">
+                        <h4>Code Structure</h4>
+                        <p>Deep dive into router architecture and customization</p>
+                        <span class="arrow">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <strong>Syft Router</strong>
+                    <p>Connect data providers with AI consumers</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="guides.html">Guides</a>
+                    <a href="api-reference.html">API Reference</a>
+                    <a href="../protocol.html">Protocol</a>
+                    <a href="https://github.com/OpenMined/syft-llm-router">GitHub</a>
+                    <a href="https://openmined.org">OpenMined</a>
+                    <a href="https://slack.openmined.org">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 OpenMined. Built for a better internet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy to clipboard functionality
+        (function() {
+            function copyTextToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textarea);
+                return Promise.resolve();
+            }
+
+            document.querySelectorAll('pre').forEach(function(pre) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'code-copy-wrap';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-icon-btn';
+                btn.setAttribute('aria-label', 'Copy code');
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                wrapper.appendChild(btn);
+
+                btn.addEventListener('click', function() {
+                    var code = pre.querySelector('code');
+                    var text = code ? code.textContent.trim() : pre.textContent.trim();
+                    copyTextToClipboard(text).then(function() {
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+                        setTimeout(function(){
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"></path></svg>';
+                        }, 1200);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

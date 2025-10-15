@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Load theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      })();
+    </script>
     <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
-    <title>For Publishers | OpenMined - Protect Your Content, Get Paid for AI Usage</title>
+    <title>Syft For Publishers [Beta] | OpenMined - Protect Your Content, Get Paid for AI Usage</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&family=Roboto:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -65,18 +74,18 @@
 
     <main>
       <!-- Hero Section -->
-      <section class="hero">
+      <section class="hero" style="padding: 2rem 0; margin-bottom: 3rem;">
         <div class="container">
           <div class="hero-content">
             <div class="hero-text">
-              <h1>A Broken Information Economy</h1>
-              <p class="hero-subtitle">
+              <h1 style="font-size: 2.5rem; margin-top: 2rem; margin-bottom: 2rem; line-height: 1.2;">An Alternative Architecture for AI</h1>
+              <p class="hero-subtitle" style="font-size: 1.1rem; margin: 0 0 2rem 0; line-height: 1.5;">
                 For centuries, publishers, authors, journalists, and educators have created the raw material 
                 for how societies learn and grow. But today, that knowledge is being quietly absorbed into 
-                AI systems — where lack of attribution creates a deep concern about the future of our information economy.
+                AI systems — where lack of attribution and compensation creates a deep concern about the future of our information economy. 
               </p>
-              <p class="hero-subtitle">
-                This leaves compensation, control and your relationship with your audience at risk.
+              <p class="hero-subtitle" style="font-size: 1.1rem; margin: 0 0 2rem 0; line-height: 1.5;">
+                We are exploring alternative architectures to make AI inclusive and fair, with significant incentives for both AI providers and data owners.
               </p>
               
               <div class="hero-buttons">
@@ -88,9 +97,9 @@
                 </button>
                 <button
                   class="btn btn-secondary"
-                  onclick="document.querySelector('.vision').scrollIntoView({behavior: 'smooth'})"
+                  onclick="window.location.href='./protocol.html'"
                 >
-                  See the Solution
+                  More about the Solution
                 </button>
               </div>
             </div>
@@ -99,82 +108,175 @@
       </section>
 
       <!-- Publisher Solution Section -->
-      <section class="vision">
-        <div class="container">
-          <div class="vision-content">
-            <h2>Attribution-Based Control for Publishers</h2>
-            <p class="vision-intro">
-              We're building attribution-based control — where you decide when, how, and if your 
-              content contributes to AI systems, and you get compensated for every use.
+      <section style="background: var(--color-bg-light); padding: 3rem 0; ">
+        <div class="container" style="max-width: 1000px;">
+          <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--color-accent); font-weight: 500; letter-spacing: -0.5px;">Attribution-Based Control for Publishers</h2>
+            <p style="font-size: 1rem; line-height: 1.6; max-width: 700px; margin: 0 auto; color: var(--text-primary); font-weight: 300;">
+              We're building attribution-based control where you decide the terms on how your content is used (and if it is used at all) in AI systems, whereas AI users - readers - can choose which sources they want to use when they ask a question.
             </p>
-            
-            <div class="vision-principles">
-              <div class="principle">
-                <h3>🔒 Complete Content Control</h3>
-                <p>End users' or AI systems' queries are answered only with your explicit permission.</p>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+            <div style="background: var(--card-bg); border: 1px solid var(--color-secondary-contrast); padding: 1.5rem; border-radius: 8px; box-shadow: var(--shadow);">
+              <div style="margin-bottom: 1rem;">
+                <div style="width: 36px; height: 36px; border-radius: 6px; background: var(--color-secondary-contrast); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+                  <i class="fas fa-lock" style="font-size: 1rem; color: var(--color-secondary);"></i>
+                </div>
+                <h3 style="font-size: 1.1rem; margin: 0; font-weight: 500; color: var(--color-secondary);">Content Control</h3>
               </div>
-              <div class="principle">
-                <h3>💰 Direct Revenue from AI</h3>
-                <p>Set your own pricing per query, per token, or per subscription. Earn immediately every time your content powers an AI response.</p>
+              <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; color: var(--text-primary); font-weight: 300;">
+                End users' or AI systems' queries are answered only with your explicit permission.
+              </p>
+            </div>
+            <div style="background: var(--card-bg); border: 1px solid var(--color-accent-contrast); padding: 1.5rem; border-radius: 8px; box-shadow: var(--shadow);">
+              <div style="margin-bottom: 1rem;">
+                <div style="width: 36px; height: 36px; border-radius: 6px; background: var(--color-accent-contrast); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+                  <i class="fas fa-dollar-sign" style="font-size: 1rem; color: var(--color-accent);"></i>
+                </div>
+                <h3 style="font-size: 1.1rem; margin: 0; font-weight: 500; color: var(--color-accent);">Direct Revenue from AI</h3>
               </div>
-              <div class="principle">
-                <h3>📊 Guaranteed Brand Attribution</h3>
-                <p>Every AI response ships with the sources, driving traffic and recognition back to your platform.</p>
+              <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; color: var(--text-primary); font-weight: 300;">
+                Set your own pricing per query and earn immediately every time your content powers an AI response.
+              </p>
+            </div>
+            <div style="background: var(--card-bg); border: 1px solid var(--color-secondary-contrast); padding: 1.5rem; border-radius: 8px; box-shadow: var(--shadow);">
+              <div style="margin-bottom: 1rem;">
+                <div style="width: 36px; height: 36px; border-radius: 6px; background: var(--color-secondary-contrast); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+                  <i class="fas fa-chart-line" style="font-size: 1rem; color: var(--color-secondary);"></i>
+                </div>
+                <h3 style="font-size: 1.1rem; margin: 0; font-weight: 500; color: var(--color-secondary);">Brand Attribution</h3>
               </div>
-              <div class="principle">
-                <h3>🎯 Audience Relationship Protection</h3>
-                <p>Maintain direct relationships with your audience while expanding your reach through AI. No middleman, no data loss.</p>
+              <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; color: var(--text-primary); font-weight: 300;">
+                Every AI response ships with the sources, driving traffic and recognition back to your platform.
+              </p>
+            </div>
+            <div style="background: var(--card-bg); border: 1px solid var(--color-accent-contrast); padding: 1.5rem; border-radius: 8px; box-shadow: var(--shadow);">
+              <div style="margin-bottom: 1rem;">
+                <div style="width: 36px; height: 36px; border-radius: 6px; background: var(--color-accent-contrast); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+                  <i class="fas fa-users" style="font-size: 1rem; color: var(--color-accent);"></i>
+                </div>
+                <h3 style="font-size: 1.1rem; margin: 0; font-weight: 500; color: var(--color-accent);">Audience Relationship Protection</h3>
               </div>
+              <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; color: var(--text-primary); font-weight: 300;">
+                Maintain direct relationships with your audience while expanding your reach through AI. No middleman, no data loss.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Beta Program Section -->
+      <section style="background: var(--color-bg); padding: 2rem 0;">
+        <div class="container" style="max-width: 1000px;">
+          <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-primary); font-weight: 500; letter-spacing: -0.5px;">Join Our Publisher Beta Program</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0 auto; color: var(--text-primary); font-weight: 300;">
+              We’re welcoming publishers to our pilot program to explore with us how this technology can empower and protect their content. We will be hands-on, supoprting with education and setup.
+            </p>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 2rem;">
+            <!-- What We Offer -->
+            <div style="background: var(--card-bg); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-lg); border: 1px solid var(--color-secondary-contrast);">
+              <div style="margin-bottom: 1.5rem;">
+                <div style="width: 48px; height: 48px; border-radius: 8px; background: var(--color-secondary-contrast); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                  <i class="fas fa-handshake" style="font-size: 1.25rem; color: var(--color-secondary);"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; margin: 0; font-weight: 600; color: var(--color-secondary);">What You Do</h3>
+              </div>
+              <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-check-circle" style="color: var(--color-secondary); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Setup the software with us (under 30 minutes)</span>
+                </li>
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-check-circle" style="color: var(--color-secondary); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Join a short educational session</span>
+                </li>
 
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-check-circle" style="color: var(--color-secondary); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Provide feedback to help refine attribution, policy, and monetization to your needs</span>
+                </li>
+
+              </ul>
+            </div>
+
+            <!-- What You Get -->
+            <div style="background: var(--card-bg); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-lg); border: 1px solid var(--color-accent-contrast);">
+              <div style="margin-bottom: 1.5rem;">
+                <div style="width: 48px; height: 48px; border-radius: 8px; background: var(--color-accent-contrast); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                  <i class="fas fa-trophy" style="font-size: 1.25rem; color: var(--color-accent);"></i>
+                </div>
+                <h3 style="font-size: 1.3rem; margin: 0; font-weight: 600; color: var(--color-accent);">What You Get</h3>
+              </div>
+              <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-star" style="color: var(--color-accent); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Deep insights into AI model constraints and emerging architecture alternatives.</span>
+                </li>
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-star" style="color: var(--color-accent); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Tools to re-engage your audiences — enabling your content to appear in leading AI assistants (ChatGPT, Claude) with traffic and trust benefits. </span>
+                </li>
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-star" style="color: var(--color-accent); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Shape the future: influence how attribution, compensation, and control are built into AI systems, before standards against the benefit of the publishers emerge.</span>
+                </li>
+                
+                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+                  <i class="fas fa-star" style="color: var(--color-accent); margin-right: 0.75rem; margin-top: 0.1rem; font-size: 0.9rem;"></i>
+                  <span>Potential new revenue streams from AI usage of your content, if the pilot proves successful.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+         
+        </div>
+      </section>
 
       <!-- Why This Matters Now Section -->
-      <section class="why-now">
-        <div class="container">
-          <div class="why-now-content">
-            <h2> </h2>
-            <h2> </h2>
-            <h3> <br></h3>
-            <h2>Why This Matters Now</h2>
-            <p class="why-now-intro">
+      <section style="background: var(--color-bg-light); padding: 2rem 0;">
+        <div class="container" style="max-width: 1000px;">
+          <div style="text-align: center; margin-bottom: 3rem; margin-top: 3rem;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-primary); font-weight: 500; letter-spacing: -0.5px;">Why This Matters Now</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0 auto; color: var(--text-primary); font-weight: 300;">
               In every information revolution, the rules are written early. Right now, companies are racing 
               to define how AI systems access and distribute knowledge. If they succeed first, we risk 
               building a future where a handful of players control the plumbing of intelligence.
             </p>
+          </div>
+          
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <div class="timeline-content">
+                <h3>The Web Revolution</h3>
+                <p>We use HTTP and TCP/IP because they were there first</p>
+              </div>
+            </div>
             
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-icon">
-                  <i class="fas fa-globe"></i>
-                </div>
-                <div class="timeline-content">
-                  <h3>The Web Revolution</h3>
-                  <p>We use HTTP and TCP/IP because they were there first</p>
-                </div>
+            <div class="timeline-item">
+              <div class="timeline-icon">
+                <i class="fas fa-mobile-alt"></i>
               </div>
-              
-              <div class="timeline-item">
-                <div class="timeline-icon">
-                  <i class="fas fa-mobile-alt"></i>
-                </div>
-                <div class="timeline-content">
-                  <h3>The Mobile Revolution</h3>
-                  <p>We live with closed platforms because no open alternative was ready in time</p>
-                </div>
+              <div class="timeline-content">
+                <h3>The Mobile Revolution</h3>
+                <p>We live with closed platforms because no open alternative was ready in time</p>
               </div>
-              
-              <div class="timeline-item current">
-                <div class="timeline-icon">
-                  <i class="fas fa-brain"></i>
-                </div>
-                <div class="timeline-content">
-                  <h3>The AI Revolution</h3>
-                  <p><strong>Now:</strong> We can define a more open, pluralistic foundation — one where publishers remain visible and valuable, AI becomes more accurate and trusted, and knowledge becomes a shared resource, not a privatized asset.</p>
-                </div>
+            </div>
+            
+            <div class="timeline-item current" style="padding-bottom: 5rem;">
+              <div class="timeline-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="timeline-content">
+                <h3>The AI Revolution</h3>
+                <p><strong>Now:</strong> Together, we can help define an open and pluralistic foundation: one where publishers stay visible and valued, AI systems become more accurate and trustworthy, and knowledge remains a shared resource.</p>
               </div>
             </div>
           </div>
@@ -186,9 +288,10 @@
         <div class="container">
           <div class="contact-content">
             <h2 class="contact-title">Join the Beta</h2>
-            <p class="contact-subtitle">
-              Be among the first publishers to protect your content and earn from AI usage. 
-              We're working with select publishers to test and refine our technology.
+            <p class="contact-subtitle" style="font-size: 1.0rem;">
+              We welcome publishers to try out the solution and work together to define the alternative architecture for the future.
+              <br><br>
+              If you are interested in joining our beta, please let us know.
             </p>
        
             <form method="POST" id="contact-form" class="contact-form">
@@ -236,7 +339,7 @@
         localStorage.setItem('theme', newTheme);
         
         // Dispatch theme change event for components
-        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
       }
     </script>
   </body>
