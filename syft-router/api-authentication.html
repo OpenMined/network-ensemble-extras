@@ -307,69 +307,7 @@ result = make_authenticated_request(
   }
 }</code></pre>
 
-            <h2>Access Control Patterns</h2>
-
-            <h3>Service-Level Authentication</h3>
-            <p>Different router services can have different authentication requirements:</p>
-            <pre><code>class RouterConfig:
-    def __init__(self):
-        self.auth_requirements = {
-            "chat": {
-                "guest_allowed": True,
-                "rate_limit_guest": {"per_minute": 5, "per_day": 50},
-                "rate_limit_auth": {"per_minute": 100, "per_day": 1000}
-            },
-            "search": {
-                "guest_allowed": True,
-                "rate_limit_guest": {"per_minute": 10, "per_day": 100},
-                "rate_limit_auth": {"per_minute": 200, "per_day": 2000}
-            },
-            "upload": {
-                "guest_allowed": False,  # Authenticated only
-                "rate_limit_auth": {"per_minute": 10, "per_day": 100}
-            }
-        }</code></pre>
-
-            <h3>User Tier Management</h3>
-            <p>Authenticated users can have different access tiers:</p>
-            <ul>
-                <li><strong>Free Tier</strong>: Basic authenticated access with standard limits</li>
-                <li><strong>Pro Tier</strong>: Higher limits and premium model access</li>
-                <li><strong>Enterprise Tier</strong>: Custom limits and priority support</li>
-            </ul>
-
-            <h2>Security Best Practices</h2>
-
-            <h3>Token Security</h3>
-            <div class="info-box">
-                <strong>🔒 Security Guidelines</strong>
-                <ul style="margin-top: 1rem;">
-                    <li><strong>Never log tokens</strong> in your application logs</li>
-                    <li><strong>Use HTTPS only</strong> for all authenticated requests</li>
-                    <li><strong>Store tokens securely</strong> using appropriate file permissions</li>
-                    <li><strong>Implement token rotation</strong> in long-running applications</li>
-                </ul>
-            </div>
-
-            <h3>Error Handling</h3>
-            <p>Implement robust error handling for authentication failures:</p>
-            <pre><code>def handle_auth_response(response):
-    """Handle authentication-related errors gracefully."""
-    if response.status_code == 401:
-        # Token expired or invalid
-        print("Authentication failed. Please log in to SyftBox again.")
-        return None
-    elif response.status_code == 429:
-        # Rate limit exceeded
-        retry_after = response.headers.get('retry-after', 60)
-        print(f"Rate limit exceeded. Retry in {retry_after} seconds.")
-        return None
-    elif response.status_code == 403:
-        # Access denied (insufficient permissions)
-        print("Access denied. This service requires a higher tier subscription.")
-        return None
-    
-    return response.json()</code></pre>
+            
 
             <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
                 <h3>Next Steps</h3>

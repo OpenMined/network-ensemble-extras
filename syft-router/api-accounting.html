@@ -69,23 +69,19 @@
 
             <div class="features-grid" style="margin: 2rem 0;">
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Usage Tracking</h3>
+                    <h3>📊 Usage Tracking</h3>
                     <p>Monitor requests, tokens, and performance across all your services with real-time analytics and detailed reporting.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>Automated Billing</h3>
+                    <h3>💰 Automated Billing</h3>
                     <p>Users are charged based on their usage with automatic payment processing and built-in fraud protection.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Analytics</h3>
+                    <h3>📈 Analytics</h3>
                     <p>View usage patterns and revenue through detailed dashboards with real-time updates and trend analysis.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Access Control</h3>
+                    <h3>🔒 Access Control</h3>
                     <p>The system enforces rate limits and quotas to maintain service quality and prevent abuse automatically.</p>
                 </div>
             </div>
@@ -250,50 +246,6 @@ class CustomChatService(ChatService):
                 </div>
             </div>
 
-            <h3>Key Benefits</h3>
-            <div class="features-grid" style="margin: 2rem 0;">
-                <div class="feature-card">
-                    <h4>Fair Billing</h4>
-                    <p>Users are never charged for failed requests, ensuring fair billing practices</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Automatic Recovery</h4>
-                    <p>The system handles retries and error recovery automatically</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Built-in Security</h4>
-                    <p>Fraud protection and rate limiting keep your service secure</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Real-time Monitoring</h4>
-                    <p>Get real-time usage monitoring and alerts for your services</p>
-                </div>
-            </div>
-
-            <h2>Viewing Usage and Balances</h2>
-            <p>You can monitor your router's performance and earnings through the SyftBox dashboard with comprehensive analytics:</p>
-
-            <div class="features-grid" style="margin: 2rem 0;">
-                <div class="feature-card">
-                    <h4>📊 Usage Analytics</h4>
-                    <p>View request counts, token usage, response times, and error rates with detailed breakdowns by service and time period.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>💰 Revenue Tracking</h4>
-                    <p>The dashboard shows earnings from your router services over time with trend analysis and forecasting.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>👥 User Activity</h4>
-                    <p>Monitor which users are accessing your services most frequently and their usage patterns.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>💳 Balance Information</h4>
-                    <p>The dashboard displays your current account balance and complete transaction history.</p>
-                </div>
-            </div>
-
-            <p>The SyftBox UI updates all this information in real-time, so you have complete visibility into your router's performance and profitability.</p>
-
             <h2>Pricing Configuration</h2>
 
             <h3>Setting Router Pricing</h3>
@@ -321,89 +273,6 @@ class CustomChatService(ChatService):
     "search": 20     # 20 free requests per day
   }
 }</code></pre>
-
-            <h3>Dynamic Pricing</h3>
-            <p>You can implement dynamic pricing based on various factors:</p>
-
-            <pre><code>def calculate_dynamic_pricing(self, request_complexity, user_tier, time_of_day):
-    """Calculate pricing based on request complexity and user tier."""
-    base_price = 0.01
-    
-    # Adjust for request complexity
-    if request_complexity == "high":
-        base_price *= 2.0
-    elif request_complexity == "premium":
-        base_price *= 3.0
-    
-    # User tier discounts
-    if user_tier == "pro":
-        base_price *= 0.8
-    elif user_tier == "enterprise":
-        base_price *= 0.6
-    
-    # Peak hours pricing
-    if 9 <= time_of_day <= 17:  # Business hours
-        base_price *= 1.2
-    
-    return round(base_price, 4)</code></pre>
-
-            <h2>Error Handling and Edge Cases</h2>
-
-            <h3>Transaction Failures</h3>
-            <p>Handle various transaction failure scenarios gracefully:</p>
-
-            <pre><code>def handle_transaction_errors(self, error, user_email, transaction_token):
-    """Handle different types of transaction errors."""
-    
-    if "insufficient_balance" in str(error):
-        return {
-            "error": "insufficient_balance",
-            "message": "Insufficient balance. Please add funds to your account.",
-            "required_balance": self.pricing,
-            "user_balance": self.get_user_balance(user_email)
-        }
-    
-    elif "invalid_token" in str(error):
-        return {
-            "error": "invalid_transaction_token",
-            "message": "Transaction token is invalid or expired. Please refresh and try again."
-        }
-    
-    elif "service_unavailable" in str(error):
-        return {
-            "error": "accounting_service_unavailable", 
-            "message": "Billing service temporarily unavailable. Please try again later."
-        }
-    
-    else:
-        # Log unexpected errors for debugging
-        logger.error(f"Unexpected transaction error: {error}")
-        return {
-            "error": "transaction_failed",
-            "message": "Transaction could not be processed. Please contact support."
-        }</code></pre>
-
-            <h3>Free Service Fallback</h3>
-            <p>Implement fallback to free service when billing is unavailable:</p>
-
-            <pre><code>def generate_with_fallback(self, request, user_email, transaction_token):
-    """Generate response with fallback to free service if billing fails."""
-    
-    try:
-        # Try paid service first
-        if self.pricing > 0 and transaction_token:
-            return self.generate_paid_response(request, user_email, transaction_token)
-        else:
-            return self.generate_free_response(request, user_email)
-    
-    except AccountingError as e:
-        logger.warning(f"Billing failed, falling back to free service: {e}")
-        
-        # Check if user is within free tier limits
-        if self.check_free_tier_limit(user_email):
-            return self.generate_free_response(request, user_email)
-        else:
-            raise ValueError("Service requires payment but billing is unavailable")</code></pre>
 
             <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
                 <h3>Next Steps</h3>

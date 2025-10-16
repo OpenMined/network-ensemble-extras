@@ -74,6 +74,127 @@
                 <p>All router endpoints are accessed through the SyftBox relay system, which routes requests based on the <code>x-syft-url</code> parameter. This allows secure communication without opening firewalls.</p>
             </div>
 
+            <h2>Request Structure and Parameters</h2>
+            <p>All SyftBox relay requests follow a consistent structure with specific query parameters and request patterns. Understanding these parameters is crucial for successful API interactions.</p>
+
+            <h3>Common Request Parameters</h3>
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Required Headers</h4>
+                    <ul style="margin-top: 0.5rem; font-size: 0.9rem;">
+                        <li><code>Content-Type: application/json</code></li>
+                        <li><code>x-syft-from</code>: Sender email identification</li>
+                        <li><code>timeout</code>: Request timeout (milliseconds)</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Required Body Fields</h4>
+                    <ul style="margin-top: 0.5rem; font-size: 0.9rem;">
+                        <li><code>x-syft-url</code>: Target syft:// endpoint URL</li>
+                        <li><code>x-syft-from</code>: Sender email (can be in header or body)</li>
+                        <li><code>suffix-sender</code>: Boolean for sender information</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Syft URL Format</h3>
+            <p>The syft:// URL format is the core addressing mechanism for routers:</p>
+            <pre><code>syft://[owner_email]/app_data/[router_name]/rpc/[endpoint]
+
+Examples:
+- syft://sender@openmined.org/app_data/mit-press-test/rpc/search
+- syft://aggregator@openmined.org/app_data/claude-sonnet-3.5/rpc/chat
+- syft://owner@example.com/app_data/my-router/rpc/health</code></pre>
+
+            <h3>Polling URL Parameters</h3>
+            <p>When polling for results, the following query parameters are automatically included:</p>
+            <pre><code>/api/v1/send/poll?[parameters]
+
+Parameter Details:
+- x-syft-request-id: Unique identifier for the specific request
+- x-syft-url: URL-encoded syft:// address (RFC 3986)
+- x-syft-from: Sender email address
+- x-syft-raw: Response format (false = JSON wrapped, true = raw)</code></pre>
+
+            <div class="info-box">
+                <strong>📋 Parameter Requirements</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li><code>x-syft-url</code> must be properly URL-encoded when used in query parameters</li>
+                    <li><code>suffix-sender</code> controls whether sender information is included in response metadata</li>
+                    <li><code>user_email</code> is service-specific and may be required for certain routers</li>
+                    <li><code>transaction_token</code> is used for authenticated requests and accounting</li>
+                </ul>
+            </div>
+
+            <h2>FastSyftBox JavaScript Client</h2>
+            <p>For JavaScript applications, the FastSyftBox library provides a simplified interface that abstracts away the polling mechanism and request formatting. This makes it much easier to interact with SyftBox routers from web applications.</p>
+
+            <h3>Installation</h3>
+            <pre><code>npm install fastsyftbox</code></pre>
+            
+            <p>Or include directly via CDN:</p>
+            <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/fastsyftbox@latest/dist/fastsyftbox.min.js"&gt;&lt;/script&gt;</code></pre>
+
+            <h3>Basic Usage</h3>
+            <p>The <code>syftFetch</code> function works similar to the standard <code>fetch</code> API but handles SyftBox routing automatically:</p>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Standard Fetch</h4>
+                    <pre style="font-size: 0.8rem; background: var(--color-bg-code); padding: 1rem; border-radius: 6px; margin-top: 1rem;"><code>const url = "http://somewebsite.com/api"
+const request = await fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({message: "Hello"})
+});</code></pre>
+                </div>
+                <div class="feature-card">
+                    <h4>SyftBox Fetch</h4>
+                    <pre style="font-size: 0.8rem; background: var(--color-bg-code); padding: 1rem; border-radius: 6px; margin-top: 1rem;"><code>const syftUrl = "syft://madhava@openmined.org/app_data/fastsyftbox/rpc/hello"
+const request = await syftFetch(syftUrl, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({message: "Hello"})
+});</code></pre>
+                </div>
+            </div>
+
+            <h3>What FastSyftBox Does Under the Hood</h3>
+            <ul>
+                <li><strong>Request Translation</strong>: Converts syft:// URLs to proper SyftBox relay endpoints</li>
+                <li><strong>Header Management</strong>: Automatically adds required <code>x-syft-*</code> headers</li>
+                <li><strong>Polling Automation</strong>: Waits for queued responses and polls until completion</li>
+                <li><strong>Error Handling</strong>: Manages timeouts and retry logic</li>
+                <li><strong>Response Processing</strong>: Extracts the actual router response from the relay wrapper</li>
+            </ul>
+
+            <h3>Configuration Options</h3>
+            <p>FastSyftBox can be configured for different environments:</p>
+            <pre><code>import { configureSyftBox, syftFetch } from 'fastsyftbox';
+
+// Configure for custom SyftBox relay
+configureSyftBox({
+    relayUrl: 'https://custom-relay.example.com',
+    defaultTimeout: 30000,
+    pollingInterval: 2000,
+    maxRetries: 5
+});
+
+// Use configured client
+const response = await syftFetch("syft://owner@example.com/app_data/router/rpc/chat", {
+    method: 'POST',
+    body: JSON.stringify({message: "Hello"})
+});</code></pre>
+
+            <div class="info-box">
+                <strong>📚 Learn More</strong>
+                <p>For complete documentation, examples, and source code, visit the <a href="https://github.com/OpenMined/fastsyftbox" target="_blank">FastSyftBox GitHub repository</a>.</p>
+            </div>
+
             <h2>Core Service Endpoints</h2>
 
             <h3>Chat Endpoint</h3>
@@ -378,7 +499,237 @@
   }
 }</code></pre>
 
-            <h2>Advanced Features</h2>
+            <h2>Polling Mechanism</h2>
+            <p>The SyftBox relay uses an asynchronous request-response pattern with polling to handle requests that may take time to process. This mechanism ensures reliable message delivery while accommodating variable processing times across different routers and services.</p>
+
+            <h3>How Polling Works</h3>
+            <ol>
+                <li><strong>Initial Request</strong>: Send your request to <code>https://syftbox.net/api/v1/send/</code>
+                    <ul>
+                        <li>Returns HTTP 202 (Accepted) immediately</li>
+                        <li>Includes <code>request_id</code> for tracking</li>
+                        <li>Provides <code>poll_url</code> for checking status</li>
+                    </ul>
+                </li>
+                <li><strong>Polling Phase</strong>: Continuously check the <code>poll_url</code>
+                    <ul>
+                        <li>Use the full polling URL: <code>https://syftbox.net{poll_url}</code></li>
+                        <li>Poll every 1-2 seconds until response is ready</li>
+                        <li>Handle timeout scenarios gracefully</li>
+                    </ul>
+                </li>
+                <li><strong>Final Response</strong>: Receive the actual router response
+                    <ul>
+                        <li>Contains the processed result from the target router</li>
+                        <li>Includes original request metadata and timing information</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Polling URL Structure</h3>
+            <p>The polling URL returned in the initial response contains all necessary parameters:</p>
+            <pre><code>/api/v1/send/poll?x-syft-request-id={request_id}&x-syft-url={encoded_syft_url}&x-syft-from={sender_email}&x-syft-raw=false</code></pre>
+
+            <div class="features-grid" style="margin: 2rem 0;">
+                <div class="feature-card">
+                    <h4>Query Parameters</h4>
+                    <ul style="margin-top: 0.5rem; font-size: 0.9rem;">
+                        <li><code>x-syft-request-id</code>: Unique request identifier</li>
+                        <li><code>x-syft-url</code>: URL-encoded target syft:// address</li>
+                        <li><code>x-syft-from</code>: Sender email address</li>
+                        <li><code>x-syft-raw</code>: Response format (false for JSON)</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Polling States</h4>
+                    <ul style="margin-top: 0.5rem; font-size: 0.9rem;">
+                        <li><strong>Pending</strong>: Request is being processed</li>
+                        <li><strong>Success</strong>: Response ready</li>
+                        <li><strong>Error</strong>: Request failed</li>
+                        <li><strong>Timeout</strong>: Processing time exceeded</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Complete Search + Chat Flow Example</h3>
+            <p>This example demonstrates a typical workflow combining search and chat services, showing the complete polling process for both requests:</p>
+
+            <h4>Step 1: Search Request</h4>
+            <pre><code># Initial search request
+curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "tell me about the recent satellite crash",
+    "user_email": "sarah.johnson@spacetech.org",
+    "suffix-sender": true,
+    "x-syft-url": "syft://data.provider@aerospace.net/app_data/space-news-index/rpc/search",
+    "x-syft-from": "guest@syftbox.net"
+  }'</code></pre>
+
+            <p><strong>Initial Response (HTTP 202):</strong></p>
+            <pre><code>{
+  "request_id": "a7f2d8e5-9b41-4c67-8d93-2e5f7a1b9c84",
+  "data": {
+    "poll_url": "/api/v1/send/poll?x-syft-request-id=a7f2d8e5-9b41-4c67-8d93-2e5f7a1b9c84&x-syft-url=syft%3A//data.provider@aerospace.net/app_data/space-news-index/rpc/search&x-syft-from=guest@syftbox.net&x-syft-raw=false"
+  },
+  "message": "Request has been accepted. Please check back later."
+}</code></pre>
+
+            <p><strong>Polling for Search Results:</strong></p>
+            <pre><code>GET https://syftbox.net/api/v1/send/poll?x-syft-request-id=a7f2d8e5-9b41-4c67-8d93-2e5f7a1b9c84&x-syft-url=syft%3A//data.provider@aerospace.net/app_data/space-news-index/rpc/search&x-syft-from=guest@syftbox.net&x-syft-raw=false</code></pre>
+
+            <p><strong>Final Search Response:</strong></p>
+            <pre><code>{
+  "request_id": "a7f2d8e5-9b41-4c67-8d93-2e5f7a1b9c84",
+  "data": {
+    "message": {
+      "body": {
+        "cost": 0,
+        "id": "3e9c8d72-5f41-4a8b-9d67-1c2e8f4a7b93",
+        "providerInfo": {
+          "provider": "vector_search"
+        },
+        "query": "tell me about the recent satellite crash",
+        "results": [
+          {
+            "content": "BREAKING: European Space Agency confirms the loss of the EuroSat-7 communications satellite following an unexpected collision with space debris. The incident occurred at 14:32 UTC on October 14, 2025, at an altitude of 850 kilometers above the Pacific Ocean. Initial telemetry data suggests the satellite's main communications array was severely damaged, rendering it inoperable.\n\nESA Mission Control in Darmstadt is working with international partners to track the resulting debris field.",
+            "embedding": null,
+            "id": "0",
+            "metadata": {
+              "filename": "eurosat-7-collision-incident-report.md",
+              "source": "European Space Agency",
+              "date": "2025-10-14",
+              "category": "incident_report"
+            },
+            "score": 0.8947263508300781
+          },
+          {
+            "content": "**Source:** [https://spaceflightnow.com/2025/10/14/satellite-debris-collision-analysis/](https://spaceflightnow.com/2025/10/14/satellite-debris-collision-analysis/)\n\n## Technical Analysis\n\nPreliminary analysis indicates the EuroSat-7 satellite collided with a fragment from the 2019 Indian anti-satellite test. The debris piece, catalogued as object 44692, was approximately 15cm in diameter and traveling at a relative velocity of 8.2 km/s.\n\n## Impact Assessment\n\nThe collision generated an estimated 200-400 new trackable debris pieces larger than 10cm. The European Space Operations Centre has issued collision avoidance advisories for 12 operational satellites in similar orbital planes.",
+            "embedding": null,
+            "id": "1",
+            "metadata": {
+              "filename": "technical-collision-analysis-oct-2025.md",
+              "source": "Spaceflight Now",
+              "date": "2025-10-14",
+              "category": "technical_analysis"
+            },
+            "score": 0.8234567123456789
+          },
+          {
+            "content": "The loss of EuroSat-7 represents a significant disruption to telecommunications infrastructure across Central and Eastern Europe. The satellite provided critical backup communications for emergency services and rural internet connectivity. Alternative routing through EuroSat-5 and EuroSat-9 is being implemented, though some service degradation is expected for 4-6 weeks.\n\nInsurance companies estimate preliminary losses at €340 million, making this one of the costliest space incidents of 2025.",
+            "embedding": null,
+            "id": "2",
+            "metadata": {
+              "filename": "eurosat-7-service-impact-assessment.md",
+              "source": "Satellite Industry Association",
+              "date": "2025-10-15",
+              "category": "economic_impact"
+            },
+            "score": 0.7891234567890123
+          }
+        ]
+      },
+      "created": "2025-10-16T09:15:22.341089Z",
+      "expires": "2025-10-17T09:15:22.260641Z",
+      "headers": {
+        "content-length": "2847",
+        "content-type": "application/json"
+      },
+      "id": "a7f2d8e5-9b41-4c67-8d93-2e5f7a1b9c84",
+      "method": "",
+      "sender": "data.provider@aerospace.net",
+      "status_code": 200,
+      "url": "syft://data.provider@aerospace.net/app_data/space-news-index/rpc/search"
+    }
+  }
+}</code></pre>
+
+            <h4>Step 2: Chat Request Using Search Results</h4>
+            <pre><code># Chat request with search context
+curl -X POST https://syftbox.net/api/v1/send/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "claude-3-haiku",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful AI assistant that can answer questions using both provided sources and your general knowledge.\n\nWhen sources are provided, use them as your primary information and supplement with your general knowledge when helpful. If you don'\''t know the answer from the sources, you can still use your general knowledge to provide a helpful response.\n\nWhen no sources are provided, rely on your general knowledge to answer the question comprehensively."
+      },
+      {
+        "role": "system", 
+        "content": "Here is relevant source context to help answer the user'\''s question:\n\n[eurosat-7-collision-incident-report.md]\nBREAKING: European Space Agency confirms the loss of the EuroSat-7 communications satellite following an unexpected collision with space debris. The incident occurred at 14:32 UTC on October 14, 2025, at an altitude of 850 kilometers above the Pacific Ocean. Initial telemetry data suggests the satellite'\''s main communications array was severely damaged, rendering it inoperable.\n\nESA Mission Control in Darmstadt is working with international partners to track the resulting debris field.\n\n[technical-collision-analysis-oct-2025.md]\n**Source:** [https://spaceflightnow.com/2025/10/14/satellite-debris-collision-analysis/](https://spaceflightnow.com/2025/10/14/satellite-debris-collision-analysis/)\n\n## Technical Analysis\n\nPreliminary analysis indicates the EuroSat-7 satellite collided with a fragment from the 2019 Indian anti-satellite test. The debris piece, catalogued as object 44692, was approximately 15cm in diameter and traveling at a relative velocity of 8.2 km/s.\n\n## Impact Assessment\n\nThe collision generated an estimated 200-400 new trackable debris pieces larger than 10cm.\n\n[eurosat-7-service-impact-assessment.md]\nThe loss of EuroSat-7 represents a significant disruption to telecommunications infrastructure across Central and Eastern Europe. The satellite provided critical backup communications for emergency services and rural internet connectivity. Insurance companies estimate preliminary losses at €340 million, making this one of the costliest space incidents of 2025."
+      },
+      {
+        "role": "user",
+        "content": "tell me about the recent satellite crash"
+      }
+    ],
+    "user_email": "sarah.johnson@spacetech.org",
+    "transaction_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4aGo2d20xazc1cWJscnYzZTdkODVhbiIsInNlbmRlckVtYWlsIjoic2FyYWguam9obnNvbkBzcGFjZXRlY2gub3JnIiwicmVjaXBpZW50RW1haWwiOiJhZ2dyZWdhdG9yQGFpLXJvdXRlci5jb20iLCJpYXQiOjE3Mjk2NTk3MjUsImV4cCI6MTcyOTc0NjEyNX0.9KjPnY8wLcQbWxBzVTYqS7m9VQgH5rlHZF2tI3oAZew",
+    "suffix-sender": true,
+    "x-syft-url": "syft://ai-router@spacetech.ai/app_data/claude-3-haiku/rpc/chat",
+    "x-syft-from": "guest@syftbox.net"
+  }'</code></pre>
+
+            <p><strong>Initial Chat Response (HTTP 202):</strong></p>
+            <pre><code>{
+  "request_id": "b9c4f7e2-1a8d-4e56-9f73-3b2e8c6d4a91",
+  "data": {
+    "poll_url": "/api/v1/send/poll?x-syft-request-id=b9c4f7e2-1a8d-4e56-9f73-3b2e8c6d4a91&x-syft-url=syft://ai-router@spacetech.ai/app_data/claude-3-haiku/rpc/chat&x-syft-from=guest@syftbox.net&x-syft-raw=false"
+  },
+  "message": "Request has been accepted. Please check back later."
+}</code></pre>
+
+            <p><strong>Polling Chat Request (Initial Attempts May Timeout):</strong></p>
+            <pre><code># First few polling attempts might return:
+{
+  "error": "timeout",
+  "message": "Polling timeout reached. The request may still be processing.",
+  "request_id": "b9c4f7e2-1a8d-4e56-9f73-3b2e8c6d4a91"
+}</code></pre>
+
+            <p><strong>Final Chat Response (After Successful Polling):</strong></p>
+            <pre><code>{
+  "request_id": "b9c4f7e2-1a8d-4e56-9f73-3b2e8c6d4a91",
+  "data": {
+    "message": {
+      "body": {
+        "cost": 0.18,
+        "finishReason": "stop",
+        "id": "5f2a9c1e-8d47-4b6c-9e83-2a5f7c1d8e94",
+        "logprobs": null,
+        "message": {
+          "content": "# EuroSat-7 Satellite Collision Analysis\n\nBased on the recent incident reports, here'\''s a comprehensive overview of the EuroSat-7 satellite crash:\n\n## Incident Overview\nOn October 14, 2025, at 14:32 UTC, the EuroSat-7 communications satellite was lost following a collision with space debris at 850 kilometers altitude above the Pacific Ocean. The European Space Agency confirmed the complete loss of the satellite after its main communications array was severely damaged.\n\n## Technical Details\n- **Collision Object**: A fragment from India'\''s 2019 anti-satellite test (catalogued as object 44692)\n- **Fragment Size**: Approximately 15cm in diameter\n- **Impact Velocity**: 8.2 km/s relative velocity\n- **Debris Generation**: 200-400 new trackable pieces larger than 10cm created\n\n## Impact Assessment\n**Service Disruption**: The loss significantly affects telecommunications across Central and Eastern Europe, particularly emergency services and rural internet connectivity.\n\n**Financial Impact**: Insurance companies estimate preliminary losses at €340 million, making this one of the costliest space incidents of 2025.\n\n**Orbital Safety**: The European Space Operations Centre has issued collision avoidance advisories for 12 operational satellites in similar orbital planes.\n\n## Recovery Efforts\nESA Mission Control in Darmstadt is coordinating with international partners to track the resulting debris field. Alternative routing through EuroSat-5 and EuroSat-9 is being implemented, though service degradation is expected for 4-6 weeks.\n\nThis incident highlights the growing concern of space debris and the Kessler Syndrome risk in increasingly congested orbital environments.",
+          "name": null,
+          "role": "assistant"
+        },
+        "model": "claude-3-haiku",
+        "providerInfo": {
+          "model": "claude-3-haiku",
+          "provider": "anthropic"
+        },
+        "usage": {
+          "completionTokens": 312,
+          "promptTokens": 847,
+          "totalTokens": 1159
+        }
+      },
+      "created": "2025-10-16T09:23:18.492847Z",
+      "expires": "2025-10-17T09:23:18.125643Z",
+      "headers": {
+        "content-length": "1847",
+        "content-type": "application/json"
+      },
+      "id": "b9c4f7e2-1a8d-4e56-9f73-3b2e8c6d4a91",
+      "method": "",
+      "sender": "ai-router@spacetech.ai",
+      "status_code": 200,
+      "url": "syft://ai-router@spacetech.ai/app_data/claude-3-haiku/rpc/chat"
+    }
+  }
+}</code></pre>
+
+<h2>Advanced Features</h2>
 
             <h3>Custom Endpoints</h3>
             <p>Routers can implement custom endpoints beyond chat and search. Access any custom endpoint using the SyftBox relay pattern:</p>
@@ -392,21 +743,6 @@ curl -X POST https://syftbox.net/api/v1/send/ \
     "metadata": {"category": "research"},
     "suffix-sender": "true",
     "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/upload"
-  }'</code></pre>
-
-            <h3>Batch Processing</h3>
-            <p>For routers that support batch operations, send multiple items in a single request:</p>
-            <pre><code>curl -X POST https://syftbox.net/api/v1/send/ \
-  -H "Content-Type: application/json" \
-  -H "x-syft-from: user@example.com" \
-  -d '{
-    "queries": [
-      {"query": "machine learning", "id": "q1"},
-      {"query": "deep learning", "id": "q2"}
-    ],
-    "limit": 3,
-    "suffix-sender": "true",
-    "x-syft-url": "syft://router_owner@example.com/app_data/my_router/rpc/batch_search"
   }'</code></pre>
 
             <h2>Direct Router Access (Development Only)</h2>
@@ -425,44 +761,9 @@ open http://localhost:8001/docs</code></pre>
 
             <div class="info-box">
                 <strong>⚠️ Development Only</strong>
-                <p>Direct router access is only available for local development and testing. Production traffic must go through the SyftBox relay system.</p>
+                <p>Direct router access is only available for local development and testing. Production traffic cannot reach the router directly, so it must go through the SyftBox relay system.</p>
             </div>
 
-            <h2>Polling Mechanism</h2>
-            <p>The SyftBox relay uses an asynchronous request-response pattern with polling:</p>
-
-            <ol>
-                <li><strong>Initial Request</strong>: Returns HTTP 202 with a <code>request_id</code> and <code>poll_url</code></li>
-                <li><strong>Polling Phase</strong>: Client polls the <code>poll_url</code> until response is ready</li>
-                <li><strong>Final Response</strong>: Returns the actual router response</li>
-            </ol>
-
-            <h3>Manual Polling Example</h3>
-            <pre><code># Step 1: Send initial request
-RESPONSE=$(curl -s -X POST https://syftbox.net/api/v1/send/ \
-  -H "Content-Type: application/json" \
-  -H "x-syft-from: user@example.com" \
-  -d '{
-    "message": "Hello!",
-    "suffix-sender": "true",
-    "x-syft-url": "syft://owner@example.com/app_data/router/rpc/chat"
-  }')
-
-# Step 2: Extract poll URL
-POLL_URL=$(echo $RESPONSE | jq -r '.data.poll_url')
-
-# Step 3: Poll for result
-while true; do
-  RESULT=$(curl -s "https://syftbox.net${POLL_URL}")
-  STATUS=$(echo $RESULT | jq -r '.status // "pending"')
-  
-  if [ "$STATUS" != "pending" ]; then
-    echo $RESULT | jq '.body'
-    break
-  fi
-  
-  sleep 1
-done</code></pre>
 
             <div class="next-steps" style="margin-top: 4rem; padding: 2rem; background: var(--color-bg-light); border-radius: 12px;">
                 <h3>Next Steps</h3>
