@@ -57,23 +57,14 @@ class SiteHeader extends HTMLElement {
         }
 
         .logo {
-          width: 3rem;
-          height: 3rem;
+          height: 2.45rem;
+          width: auto;
           border-radius: 8px;
           object-fit: contain;
         }
 
         .logo-text {
-          color: var(--primary, #BB86FC);
-          font-family: 'Rubik', sans-serif;
-          font-size: 1.375rem;
-          font-weight: 500;
-          text-decoration: none;
-          transition: opacity 0.3s ease;
-        }
-
-        .logo-text:hover {
-          opacity: 0.8;
+          display: none;
         }
         
         .nav-links {

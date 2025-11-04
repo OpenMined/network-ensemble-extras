@@ -15,6 +15,7 @@
     <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
     <title>OpenMined | Chat for Network Sourced AI.</title>
     <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
     <link rel="stylesheet" href="./src/styles/chat.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -58,7 +59,7 @@
       </div>
     </div>
     <site-header
-      logo-src="./src/assets/openmined.png"
+      logo-src="https://openmined.org/wp-content/uploads/2024/11/logo-1@2x.png"
       logo-text="OpenMined"
       current-page="chat"
     >
@@ -244,6 +245,32 @@
         </div>
       </div>
     </main>
+
+    <!-- Contact Section -->
+    <section class="contact">
+      <div class="container">
+        <div class="contact-content">
+          <h2 class="contact-title">Join the conversation</h2>
+          <p style="font-size: 1.0625rem; margin-bottom: 1.75rem; color: var(--text-secondary); line-height: 1.5;">
+            The future of AI depends on collaboration among those who share a common mission.<br><br>Join the conversation and help shape what comes next.
+          </p>
+
+          <form method="POST" id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input
+                type="email"
+                class="form-input"
+                name="email"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <button type="submit" class="submit-btn">Get Started</button>
+          </form>
+        </div>
+      </div>
+    </section>
 
     <site-footer></site-footer>
 

@@ -1,13 +1,13 @@
 /* main.css */
 :root {
   /* Light theme colors - High contrast and clean */
-  --color-primary: #17161D;
-  --color-text: #17161D;
-  --color-text-light: #464158;
+  --color-primary: #1F2937;
+  --color-text: #1F2937;
+  --color-text-light: #6B7280;
   --color-border: #E5E7EB;
-  --color-bg: #FCFCFD;
+  --color-bg: #FFFFFF;
   --color-bg-light: #FFFFFF;
-  --color-bg-alt: #F4F3F6;
+  --color-bg-alt: #F9FAFB;
   --color-bg-code: #0F172A;
 
   /* Typography Scale */
@@ -16,14 +16,14 @@
   --text-size-medium: 1.125rem;     /* 18px - For larger body text */
   --text-size-large: 1.25rem;       /* 20px - For introductory text */
 
-  /* Brand colors with better contrast */
-  --color-accent: #6976AE;
-  --color-accent-contrast: #DEE1ED;
-  --color-accent-strong: #373B7B;
+  /* Brand colors - Soft, muted tones inspired by openmined.org */
+  --color-accent: #9CA3DB;
+  --color-accent-contrast: #F0F2F8;
+  --color-accent-strong: #7B84C7;
 
-  --color-secondary: #937098;
-  --color-secondary-contrast: #E9E1EA;
-  --color-secondary-strong: #563B59;
+  --color-secondary: #B5A8D4;
+  --color-secondary-contrast: #F5F3F8;
+  --color-secondary-strong: #9A8BB8;
 
   --color-success: #53BEA9;
   --color-success-contrast: #DAF1ED;
@@ -41,15 +41,15 @@
   --color-danger-contrast: #F2D9DE;
   --color-danger-strong: #9B2737;
 
-  /* Enhanced shadows and overlays */
-  --overlay-weak: rgba(245, 247, 250, 0.72);
-  --overlay-strong: rgba(255, 255, 255, 0.82);
-  --shadow-accent-1: rgba(60, 80, 120, 0.10);
-  --shadow-accent-2: rgba(60, 80, 120, 0.13);
+  /* Enhanced shadows and overlays - Soft and subtle */
+  --overlay-weak: rgba(249, 250, 251, 0.95);
+  --overlay-strong: rgba(255, 255, 255, 0.98);
+  --shadow-accent-1: rgba(156, 163, 219, 0.10);
+  --shadow-accent-2: rgba(156, 163, 219, 0.15);
 
-  /* Gradients */
-  --gradient-start: #FCFCFD;
-  --gradient-end: #F4F3F6;
+  /* Gradients - Clean white gradients */
+  --gradient-start: #FFFFFF;
+  --gradient-end: #F9FAFB;
 
   /* Legacy color mappings for backward compatibility */
   --primary: var(--color-accent);
@@ -87,15 +87,15 @@
   --body-text: var(--color-text);
   --card-bg: var(--color-bg-light);
   --card-border: var(--color-border);
-  --section-bg: #F9FAFB;
-  --section-bg-alt: var(--color-bg-alt);
+  --section-bg: #FFFFFF;
+  --section-bg-alt: #F9FAFB;
   --text-primary: var(--color-primary);
   --text-secondary: #6B7280;
   --text-muted: #9CA3AF;
   --glass-light: rgba(255, 255, 255, 0.9);
   --glass-border-light: rgba(0, 0, 0, 0.08);
-  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
 }
 
 /* Dark theme - Enhanced contrast */
@@ -110,20 +110,20 @@
   --color-bg-alt: #1F1F23;
   --color-bg-code: #0F172A;
 
-  /* Dark theme brand colors */
-  --color-accent: #BB86FC;
-  --color-accent-contrast: #3B2A5C;
-  --color-accent-strong: #9C5AFC;
+  /* Dark theme brand colors - Soft, muted tones */
+  --color-accent: #B5BDEC;
+  --color-accent-contrast: #3A3D5C;
+  --color-accent-strong: #9CA3DB;
 
-  --color-secondary: #32D5E8;
-  --color-secondary-contrast: #1E3A3F;
-  --color-secondary-strong: #14B8CC;
+  --color-secondary: #C9C0E0;
+  --color-secondary-contrast: #4A4659;
+  --color-secondary-strong: #B5A8D4;
 
   /* Enhanced overlays for dark theme */
-  --overlay-weak: rgba(23, 22, 29, 0.72);
-  --overlay-strong: rgba(46, 43, 59, 0.82);
-  --shadow-accent-1: rgba(187, 134, 252, 0.15);
-  --shadow-accent-2: rgba(187, 134, 252, 0.25);
+  --overlay-weak: rgba(23, 22, 29, 0.85);
+  --overlay-strong: rgba(46, 43, 59, 0.95);
+  --shadow-accent-1: rgba(156, 163, 219, 0.20);
+  --shadow-accent-2: rgba(156, 163, 219, 0.28);
 
   /* Dark gradients */
   --gradient-start: #17161D;
@@ -171,12 +171,14 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  background: linear-gradient(135deg, var(--section-bg), var(--section-bg-alt));
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-bg);
   color: var(--body-text);
   line-height: 1.6;
   transition: background 0.3s ease, color 0.3s ease;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
