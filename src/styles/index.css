@@ -144,7 +144,7 @@
   left: -8%;
   width: 115%;
   height: 120%;
-  background-image: url('https://openmined.org/wp-content/uploads/2025/03/om_flow-bg3-2048x577.png');
+  background-image: url('../assets/om-flow-bg.png');
   background-size: 85% auto;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1456,7 +1456,7 @@
   left: -15%;
   width: 130%;
   height: 120%;
-  background-image: url('https://openmined.org/wp-content/uploads/2025/03/om_flow-bg3-2048x577.png');
+  background-image: url('../assets/om-flow-bg.png');
   background-size: 90% auto;
   background-position: left center;
   background-repeat: no-repeat;
