@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
         successContainer.id = "success-message";
         successContainer.className = "mt-3";
         const successMessage = result.inlineMessage || `<div class="alert alert-success text-center"> 
-          <h3 class="fw-medium text-success mb-2">Success!</h3> 
-          <p class="text-muted">We will reach out to you shortly.</p> 
+          <h3 class="fw-medium text-success mb-2">Thanks for joining.</h3> 
+          <p class="text-muted">We've received your email.</p> 
         </div>`;
         successContainer.innerHTML = successMessage;
         const submitButton = form.querySelector('button[type="submit"]');
